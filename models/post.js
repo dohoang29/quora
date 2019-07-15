@@ -17,8 +17,8 @@ var postSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Topic"
   },
-  dateCreated: Date,
-  dateModified: Date,
+  dateCreated: { type: Date, default: Date.now },
+  dateModified: { type: Date, default: Date.now },
   answers: [
     {
       type: mongoose.Schema.Types.ObjectId,
