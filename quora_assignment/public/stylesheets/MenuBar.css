@@ -1,0 +1,103 @@
+@font-face
+{
+	font-family: 'FugazOne-Regular';
+	src:url(fonts/FugazOne-Regular.ttf);
+}
+.outer
+{
+	background: #FFF none repeat scroll 0% 0%;
+position: fixed;
+top: 0px;
+left: 0px;
+width: 100%;
+min-height: 53px;
+box-sizing: border-box;
+z-index: 900;
+font-size: 14px;
+color: #FFF;
+border-top: 2px solid #B92B27;
+border-bottom: 1px solid #DDD;
+box-shadow: 0px 3px 2px -2px rgba(200, 200, 200, 0.2);
+}
+.area1
+{
+	width:10%;
+	font-size:30px;
+	color:#b92b27;
+	font-family:'FugazOne-Regular';
+	float:left;
+}
+.area2
+{
+	width:50%;
+	float:left;
+	padding-top:10px;
+}
+.area3
+{
+	padding-top:10px;
+	height:20px;
+	width:40%;
+	float:left;
+}
+.clearfix
+{
+	clear:both;
+}
+.search_box
+{
+	margin-top:2px;
+	width:460px;
+	border:1px solid #e2e2e2;
+	box-shadow:1px 1px 1px #e2e2e2 inset;
+	border-radius:2px;
+	height:28px;
+	background-color:#f4f4f4;
+	color:#484848;
+}
+.ask_link
+{
+	border:1px solid #e2e2e2;
+	box-shadow:1px 1px 1px #e2e2e2 inset;
+	border-radius:2px;
+	display:inline-block;
+	padding-top:3px;
+	padding-bottom:3px;
+	padding-left:10px;
+	padding-right:10px;
+	margin-left:-6px;
+	color:#686868;
+}
+.ask_link:hover
+{
+	text-decoration:none;
+	color:#686868;
+	border:1px solid #000;
+}
+.list
+{
+	margin-top:-10px;
+	font-size:21px;
+	color:#999;
+}
+.list i
+{
+	font-weight:bold;
+	color:#999;
+}
+.bar
+{
+	font-size:14px;
+	color:#999;
+}
+.image
+{
+	height:25px;
+	width:25px;
+	border-radius:50%;
+}
+.name 
+{
+	display:block;
+     padding-top:15px !important;
+}

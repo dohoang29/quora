@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Profile page</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/MenuBar.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/profilePageDsgn.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+</head>
+
+<body>
+    <div class="outer">
+        <!--header-->
+        <div class="container">
+
+            <div class="area1">
+                <a href="" style="color:#b92b27;text-decoration:none;">Quora</a>
+            </div>
+
+            <div class="area2">
+                <input type="text" placeholder="    Ask or Search" class="search_box" />
+                <a href="" class="ask_link">Ask Question</a>
+            </div>
+
+            <div class="area3">
+                <ul class="nav nav-pills list">
+                    <li><a href="/readpage"><i class="fa fa-file-text-o"></i> <span class="bar">Read</span></a></li>
+                    <li><a href="Answer.html"><i class="fa fa-pencil"></i> <span class="bar">Answer</span></a>
+                        <li>
+                            <li><a href="#"><i class="fa fa-bell-o"></i> <span class="bar">Notifications</span></a></li>
+                            <li>
+                                <a href="ProfilePage.html" class="name" data-toggle="popover" title="Popover Header" data-content="Some content inside"><img src="IMG_20150427_214234.jpg" alt="" class="image" /><span class="bar" style="color:#b92b27;">Rahul</span></a>
+                            </li>
+                </ul>
+            </div>
+            <script>
+                $(document).ready(function() {
+                    $('[data-toggle="popover"]').popover();
+                });
+            </script>
+            <div class="clearfix"></div>
+
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="side1">
+            <div class="inner1">
+                <div style="float:left"><img src="IMG_20150427_214234.jpg" alt="" class="profile_pic" /></div>
+                <div class="user_name" style="float:left">
+                    <b style="font-size:28px;" class="my_name">Rahul Upadhyay</b><a href="#" class="edit_link link_hover">Edit</a><br />
+                    <a href="" class="name_link link_hover">Add Profile Bio</a><br />
+                    <div class="mar_link"><a href="" class="name_link link_hover">Write a description about yourself</a></div>
+                    <div class="f_div">
+                        <button class="f_btn" type="button" disabled="disabled">Followers</button>
+                        <a href="" class="f_link link_hover">Facebook</a>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+
+                <div class="exlft">
+
+                    <div class="feed">
+                        Feeds
+                    </div>
+
+                    <div class="optn">
+                        <div>
+                            <button class="optn_btn" type="button" disabled="disabled">Answers <span style="color:#999;">0</span></button>
+                        </div>
+                        <div class="ques">
+                            <a href="#" class="optn_link">Questions<span style="color:#999" class="num"> 0</span></a>
+                        </div>
+                        <div class="ques">
+                            <a href="#" class="optn_link">Answers<span style="color:#999" class="num"> 0</span></a>
+                        </div>
+                        <div class="ques">
+                            <a href="#" class="optn_link">Posts<span style="color:#999" class="num"> 0</span></a>
+                        </div>
+                        <div class="ques">
+                            <a href="#" class="optn_link">All Activity<span style="color:#999" class="num"> 0</span></a>
+                        </div>
+                    </div>
+
+                    <div class="optn2">
+                        <div>
+                            <div class="op_cn">
+                                <a href="#" class="optn_link_n">Followers<span style="color:#999" class="num"> 0</span></a>
+                            </div>
+                            <div class="op_cn">
+                                <a href="#" class="optn_link_n">Following<span style="color:#999" class="num"> 0</span></a>
+                            </div>
+                            <div class="op_cn">
+                                <a href="#" class="optn_link_n">Edits<span style="color:#999" class="num"> 0</span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mid">
+                    RaAy
+                </div>
+
+                <div class="exrt">
+
+                    <div class="feed">
+                        Answers
+                    </div>
+
+                    <div class="exrt_cn">
+                        You haven't written any answers yet.<br />
+                        <a href="">Answer your first question</a>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="side3">
+            RaAy
+        </div>
+
+        <div class="side2">
+
+            <div class="ans">
+                Answer Views
+            </div>
+            <a href="" class="note_link">
+                <div class="note">
+                    Start writing answers to unlock this<br />section of your profile
+                </div>
+            </a>
+            <div class="about">
+                About Rahul<a href="" class="about_link link_hover">Edit</a>
+            </div>
+
+            <div>
+                <!--place a loop here to display req DIVs-->
+                <div class="cntnt">
+                    <!-- write image path-->
+                    <span style="float:left"><img src="IMG_20150427_214234.jpg" alt="" style="height:30px;width:30px;border-radius:3px;" /></span>
+
+                    <!--write topic name-->
+                    <span style="float:left;padding-left:10px;"><div><b>Topic</b><br />
+<!--Add bio link-->
+<a href="" class="bio_link link_hover">Add Bio</a></div></span>
+                </div>
+                <!--loop braces will end here-->
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="about">
+                Knows About<a href="" class="about_link1 link_hover">Edit</a>
+            </div>
+
+            <div>
+                <!--place a loop here to display req DIVs-->
+                <div class="cntnt">
+                    <!-- write image path-->
+                    <span style="float:left"><img src="IMG_20150427_214234.jpg" alt="" style="height:30px;width:30px;border-radius:3px;" /></span>
+
+                    <!--write topic name-->
+                    <span style="float:left;padding-left:10px;"><div><b>Topic</b><br />
+<!--Add bio link-->
+<a href="" class="bio_link link_hover">Add Bio</a></div></span>
+                </div>
+                <!--loop braces will end here-->
+            </div>
+            <div class="clearfix"></div>
+            <div style="margin-top:15px;"><a href="" class="bio_link link_hover">View More</a></div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

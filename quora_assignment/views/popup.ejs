@@ -1,0 +1,138 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<link rel="stylesheet" href="css/font-awesome.css" />
+<style>
+.mypop
+{
+	border:5px solid red;
+}
+.mypop:before
+{
+	content:'?';
+	font-weight: bold;
+	color:#fff;
+}
+.mypop:hover div
+{
+	display:block;
+}
+.mypop div
+{
+	display: none;
+	text-align: left;
+	background-color:red;
+	padding: 20px;
+	width: 300px;
+	position: absolute;
+	border-radius: 3px;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+	right: -4px;
+	color: #FFF;
+	font-size: 13px;
+	line-height: 1.4;
+}
+.mypop div:before
+{
+		position: absolute;
+	content:'';
+	width:0;
+	height: 0;
+	border:6px solid transparent;
+	border-bottom-color:red;
+	right:10px;
+	top:-12px;
+}
+
+.help-tip{
+	position: absolute;
+	top: 18px;
+	right: 18px;
+	text-align: center;
+	background-color: #BCDBEA;
+	border-radius: 50%;
+	width: 24px;
+	height: 24px;
+	font-size: 14px;
+	line-height: 26px;
+	cursor: default;
+}
+
+.help-tip:before{
+	content:'?';
+	font-weight: bold;
+	color:#fff;
+}
+
+.help-tip:hover p{
+	display:block;
+	transform-origin: 100% 0%;
+
+	-webkit-animation: fadeIn 0.3s ease-in-out;
+	animation: fadeIn 0.3s ease-in-out;
+
+}
+
+.help-tip p{
+	display: none;
+	text-align: left;
+	background-color: #1E2021;
+	padding: 20px;
+	width: 300px;
+	position: absolute;
+	border-radius: 3px;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+	right: -4px;
+	color: #FFF;
+	font-size: 13px;
+	line-height: 1.4;
+}
+
+.help-tip p:before{
+	position: absolute;
+	content:'';
+	width:0;
+	height: 0;
+	border:6px solid transparent;
+	border-bottom-color:#1E2021;
+	right:10px;
+	top:-12px;
+}
+
+.help-tip p:after{
+	width:100%;
+	height:40px;
+	content:'';
+	position: absolute;
+	top:-40px;
+	left:0;
+}
+</style>
+</head>
+
+<body>
+<div class="col">
+<i class="fa fa-arrow-up"></i>
+</div>
+
+<div class="help-tip">
+				<p>This is the inline help tip! You can explain to your users what this section of your web app is about.</p>
+			</div>
+
+			<p>This is a demo for Tutorialzine’s simple CSS help tips. Try it by hovering over 
+the icon on the right (or tapping it).</p>
+
+			<p>In this section you would have some settings controls or other features of your web app that need explaining. Users can have a good idea of what these settings are about simply by hovering over the icon.</p>
+
+		
+
+<div class="mypop">
+<div>
+my popover
+</div>
+this is new popup
+</div>        
+</body>
+</html>
