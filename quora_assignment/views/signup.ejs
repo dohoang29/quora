@@ -11,7 +11,12 @@
     <style>
         body {
             padding-top: 80px;
-            background-image: url('/images/img00.png')
+            background-image: url(/images/img00.png);
+            background-size: cover;
+            margin: 0;
+            /* text-align: center; */
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            width: 100%;
         }
         
         .col-sm-6 {
@@ -37,6 +42,7 @@
 
                     <!-- LOGIN FORM -->
                     <form action="/signup" method="post">
+
                         <div class="form-group">
                             <label>Email</label>
                             <input type="text" class="form-control" name="email">
