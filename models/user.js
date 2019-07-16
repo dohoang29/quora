@@ -12,7 +12,7 @@ var userSchema = new mongoose.Schema({
   following: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Post"
+      ref: "Question"
     }
   ],
   dateCreated: { type: Date, default: Date.now },

@@ -1,0 +1,34 @@
+<% include partials/header.ejs %>
+
+<div class="container area">
+  <div class="row">
+    <% include partials/topic.ejs %>
+    <div class="col-7">
+      <div class="card add-question-card">
+        <div class="card-body">
+          <div class="card-subtitle text-muted">
+            <img
+              src="images/IMG_20150427_214234.jpg"
+              alt="avatar"
+              class="add-ques-image"
+            />
+            User Name
+          </div>
+          <a
+            href="#addQuestionModal"
+            class="add-question-link"
+            data-toggle="modal"
+            data-target="#addQuestionModal"
+            ><h3 class="topic-title text-muted mt-1">
+              <strong>What is your question?</strong>
+            </h3></a
+          >
+          <% include addQuestion.ejs %>
+        </div>
+      </div>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
+
+<% include partials/footer.ejs %>

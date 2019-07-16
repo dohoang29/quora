@@ -5,8 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Quora</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="custom.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="css/MenuBar.css" />
+    <link rel="stylesheet" type="text/css" href="css/answerPageDsgn.css" />
+    <link rel="stylesheet" type="text/css" href="css/custom.css" />
+    
   </head>
   <body>
-    
+    <div class="outer">
+      <!--header-->
+      <div class="container ">
+        <nav class="navbar p-0">
+          <a href="#" class="navbar-brand logo">Quora</a>
+          <div class="nav-item navi-button">
+            <ul class="nav nav-pills">
+              <li class="nav-item w-3">
+                <a href="#" class="nav-link section-link nav-active"
+                  ><i class="fa fa-file-text-o navi-icon"></i>
+                  <span class="bar">Home</span></a
+                >
+              </li>
+              <li class="nav-item w-3">
+                <a href="#" class="nav-link section-link"
+                  ><i class="fa fa-pencil navi-icon"></i>
+                  <span class="bar">Answer</span></a
+                >
+              </li>
+              <li class="nav-item w-4">
+                <a href="#" class="nav-link section-link"
+                  ><i class="fa fa-bell-o navi-icon"></i>
+                  <span class="bar">Notifications</span></a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="form-inline my-2 my-lg-0 search-area">
+            <input
+              type="text"
+              placeholder="&#xF002;   Search Quora"
+              class="search-box form-control mr-sm-2 fa"
+            />
+          </div>
+          <div class="nav-item user-area">
+            <a
+              href="#"
+              class="nav-link"
+              data-toggle="popover"
+              data-placement="bottom"
+              title="Popover Header"
+              data-content="Some content inside"
+              ><img
+                src="images/IMG_20150427_214234.jpg"
+                alt="avatar"
+                class="image"
+              />
+              <button class="question-btn" data-toggle="modal"
+              data-target="#addQuestionModal">
+                  Add Question
+              </button>
+              
+              </a
+            >
+          </div>
+        </nav>
+      </div>
+    </div>
+

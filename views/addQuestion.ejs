@@ -1,0 +1,75 @@
+<div
+  class="modal fade"
+  id="addQuestionModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="addQuestionModalTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addQuestionModalLongTitle">
+          Add Question
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section-topic">
+          <div class="form-group">
+            <label for="chooseTopic">Choose topic for your question:</label>
+            <select class="form-control" id="chooseTopic">
+              <% topics.forEach((topic)=>{ %>
+              <option><%= topic.title %></option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="form-group">
+            <div class="card-subtitle text-muted">
+              <img
+                src="images/IMG_20150427_214234.jpg"
+                alt="avatar"
+                class="add-ques-image"
+              />
+              User Name askes
+              <span class="dropdown">
+                <button
+                  class="btn dropdown-toggle"
+                  type="button"
+                  id="privacyMenu"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Chooose privacy
+                </button>
+                <div class="dropdown-menu" aria-labelledby="privacyMenu">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-section-question"></div>
+        <div class="modal-section-link"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

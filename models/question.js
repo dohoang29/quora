@@ -1,10 +1,6 @@
 var mongoose = require("mongoose");
 
-var postSchema = new mongoose.Schema({
-  postType: {
-    type: String,
-    enum: ["answer", "question"]
-  },
+var questionSchema = new mongoose.Schema({
   topic: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -13,16 +9,12 @@ var postSchema = new mongoose.Schema({
   ],
   url: String,
   title: String,
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Topic"
-  },
   dateCreated: { type: Date, default: Date.now },
   dateModified: { type: Date, default: Date.now },
   answers: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Post"
+      ref: "Answer"
     }
   ],
   followers: [
@@ -32,13 +24,7 @@ var postSchema = new mongoose.Schema({
     }
   ],
   upVoted: Number,
-  comments: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Comment"
-    }
-  ],
   isActive: Boolean
 });
 
-module.exports = mongoose.model("Post", postSchema);
+module.exports = mongoose.model("Question", questionSchema);
