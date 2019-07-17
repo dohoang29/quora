@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <style>
+        .button-register {
+            background-color: #507cc0;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-right: 140px;
+            border-radius: 5px;
+        }
+        
+        form {
+            background-color: #CD5C5C;
+            width: 300px;
+            margin: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="signupForm">
+            <div class="logo"><img src="/images/logo.png"></div>
+            <div class="tagline">
+                <h3>
+                    <br>The best answer to any question<br>
+                </h3>
+                <% include ./partials/messages %>
+            </div>
+
+            <div><strong><br>Update Password</strong>
+                <form action="/users/reset/<%= token %>" method="POST">
+                    <input type="password" name="password " placeholder="New Password ">
+                    <br>
+                    <input type="password" name="confirm" placeholder="Confirm Password ">
+                    <button type="submit" class="button-register ">Update Password</button>
+                </form>
+            </div>
+
+
+            <div class="footerNav "></div>
+        </div>
+    </div>
+</body>
+
+</html>
