@@ -9,6 +9,7 @@ var questionSchema = new mongoose.Schema({
   ],
   url: String,
   title: String,
+  privacy: String,
   dateCreated: { type: Date, default: Date.now },
   dateModified: { type: Date, default: Date.now },
   answers: [

@@ -6,10 +6,13 @@
   aria-labelledby="addQuestionModalTitle"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="addQuestionModalLongTitle">
+      <div class="modal-header custom-modal-background">
+        <h5
+          class="modal-title custom-modal-title modal-title-active"
+          id="addQuestionModalLongTitle"
+        >
           Add Question
         </h5>
         <button
@@ -18,58 +21,72 @@
           data-dismiss="modal"
           aria-label="Close"
         >
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true" class="custom-modal-close">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <div class="modal-section-topic">
-          <div class="form-group">
-            <label for="chooseTopic">Choose topic for your question:</label>
-            <select class="form-control" id="chooseTopic">
-              <% topics.forEach((topic)=>{ %>
-              <option><%= topic.title %></option>
-              <% }) %>
-            </select>
-          </div>
-          <div class="form-group">
-            <div class="card-subtitle text-muted">
-              <img
-                src="images/IMG_20150427_214234.jpg"
-                alt="avatar"
-                class="add-ques-image"
-              />
-              User Name askes
-              <span class="dropdown">
-                <button
-                  class="btn dropdown-toggle"
-                  type="button"
-                  id="privacyMenu"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Chooose privacy
-                </button>
-                <div class="dropdown-menu" aria-labelledby="privacyMenu">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </span>
+      <form action="/feed" method="POST">
+        <div class="modal-body">
+          <div class="modal-section-topic">
+            <div class="form-group">
+              <label for="chooseTopic">Choose topic for your question:</label>
+              <select class="topic-form w-100" name="topic" id="chooseTopic">
+                <% topics.forEach((topic)=>{ %>
+                <option value="<%= topic._id %>"> <%= topic.title %></option>
+                <% }) %>
+              </select>
             </div>
           </div>
+          <div class="modal-section-question">
+            <div class="form-group">
+              <div class="card-subtitle text-muted">
+                <img
+                  src="images/IMG_20150427_214234.jpg"
+                  alt="avatar"
+                  class="add-ques-image"
+                />
+                User Name askes
+                <span class="form-group">
+                  <select class="topic-form w-20" id="chooseTopic" name="privacy">
+                    <option value="public"> Public </option>
+                    <option value="Limited"> Limited </option>
+                    <option value="Private"> Private </option>
+                  </select>
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control custom-question-input"
+                id="addQuestion"
+                name="question"
+                placeholder='Start your question with "What","How","Why",etc.'
+              />
+            </div>
+          </div>
+          <div class="modal-section-link">
+            <input
+              type="url"
+              class="form-control fa custom-link-input"
+              id="addLink"
+              name="link"
+              placeholder="&#xf0c1; Optional: include a link that gives context"
+            />
+          </div>
         </div>
-        <div class="modal-section-question"></div>
-        <div class="modal-section-link"></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Close
-        </button>
-        <button type="button" class="btn btn-primary">
-          Save changes
-        </button>
-      </div>
+        <div class="modal-footer custom-modal-background">
+          <button
+            type="button"
+            class="btn btn-secondary cancel-button"
+            data-dismiss="modal"
+          >
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary add-question-button">
+            Add Question
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
