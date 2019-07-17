@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 
 var topicSchema = new mongoose.Schema({
     title: String,
+    image: String,
     followers:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
