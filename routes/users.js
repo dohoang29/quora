@@ -7,6 +7,7 @@ var nodemailer = require("nodemailer");
 var crypto = require("crypto");
 // Load User model
 const User = require('../models/User');
+const config = require('../config/mailler');
 const {
     forwardAuthenticated
 } = require('../config/auth');
@@ -145,13 +146,13 @@ router.post('/forgot', function(req, res, next) {
             var smtpTransport = nodemailer.createTransport({
                 service: 'Gmail',
                 auth: {
-                    user: 'dinhhoannguyen999@gmail.com',
-                    pass: '*'
+                    user: config.MAIL_USER,
+                    pass: config.MAIL_PASS
                 }
             });
             var mailOptions = {
                 to: user.email,
-                from: 'dinhhoannguyen999@gmail.com',
+                from: config.MAIL_USER,
                 subject: 'Quora Password Reset',
                 text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                     'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
@@ -160,7 +161,7 @@ router.post('/forgot', function(req, res, next) {
             };
             smtpTransport.sendMail(mailOptions, function(err) {
                 console.log('mail sent');
-                req.flash('success', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+                req.flash('success_msg', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
                 done(err, 'done');
             });
         }
@@ -183,6 +184,11 @@ router.get('/reset/:token', function(req, res) {
 });
 
 router.post('/reset/:token', function(req, res) {
+    const {
+        password,
+        password2
+    } = req.body;
+    let errors = [];
     async.waterfall([
         function(done) {
             User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
@@ -190,11 +196,10 @@ router.post('/reset/:token', function(req, res) {
                     req.flash('error', 'Password reset token is invalid or has expired.');
                     return res.redirect('back');
                 }
-                if (req.body.password === req.body.confirm) {
-                    user.setPassword(req.body.password, function(err) {
+                if (password === password2) {
+                    user.setPassword(password, function(err) {
                         user.resetPasswordToken = undefined;
                         user.resetPasswordExpires = undefined;
-
                         user.save(function(err) {
                             req.logIn(user, function(err) {
                                 done(err, user);
@@ -211,13 +216,13 @@ router.post('/reset/:token', function(req, res) {
             var smtpTransport = nodemailer.createTransport({
                 service: 'Gmail',
                 auth: {
-                    user: 'dinhhoannguyen999@gmail.com',
-                    pass: '*'
+                    user: config.MAIL_USER,
+                    pass: config.MAIL_PASS
                 }
             });
             var mailOptions = {
                 to: user.email,
-                from: 'dinhhoannguyen999@gmail.com',
+                from: config.MAIL_USER,
                 subject: 'Your password has been changed',
                 text: 'Hello,\n\n' +
                     'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'

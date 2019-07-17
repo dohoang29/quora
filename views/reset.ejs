@@ -8,7 +8,7 @@
             background-color: #507cc0;
             margin-top: 20px;
             margin-bottom: 20px;
-            margin-right: 140px;
+            margin-right: 130px;
             border-radius: 5px;
         }
         
@@ -31,12 +31,11 @@
                 </h3>
                 <% include ./partials/messages %>
             </div>
-
-            <div><strong><br>Update Password</strong>
+            <div><strong><br>Hello xxx please update password</strong>
                 <form action="/users/reset/<%= token %>" method="POST">
                     <input type="password" name="password " placeholder="New Password ">
-                    <br>
-                    <input type="password" name="confirm" placeholder="Confirm Password ">
+
+                    <input type="password" name="password2" placeholder="Confirm Password ">
                     <button type="submit" class="button-register ">Update Password</button>
                 </form>
             </div>
