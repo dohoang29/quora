@@ -1,8 +1,8 @@
-const express    = require("express");
-const ip         = require("ip");
+const express = require("express");
+const ip = require("ip");
 const bodyParser = require("body-parser");
-const mongoose   = require("mongoose");
-const passport   = require("passport");
+const mongoose = require("mongoose");
+const passport = require("passport");
 //const LocalStrategy = require("passport-local");
 
 
@@ -24,7 +24,7 @@ const accountsRoutes = require("./routes/accounts"),
   searchRoutes = require("./routes/search"),
   topicsRoutes = require("./routes/topics");
 
-mongoose.connect("mongodb://localhost/quora");
+mongoose.connect("mongodb+srv://hoang:Uxgyr9RspAYQkUtD@cluster0-7nvfn.mongodb.net/test");
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,7 +37,7 @@ var topicSchema = new mongoose.Schema({
   isActive: Boolean
 });
 
-var topic = mongoose.model("Topic", topicSchema);
+var Topic = mongoose.model("Topic", topicSchema);
 
 
 
@@ -49,20 +49,20 @@ var topic = mongoose.model("Topic", topicSchema);
 // app.use("/search/",searchRoutes);
 // app.use("/topics/",topicsRoutes);
 
-app.get("/",(req,res)=>{
+app.get("/", (req, res) => {
   res.render("partials/header");
 });
-app.get("/feed",(req,res)=>{
-  topic.find({},(err,topics)=>{
-    if(err){
+app.get("/feed", (req, res) => {
+  topic.find({}, (err, topics) => {
+    if (err) {
       console.log(err);
     }
-    else{
-      res.render("feed",{topics:topics});
+    else {
+      res.render("feed", { topics: topics });
     }
   });
 });
-app.post("/feed/new",(req,res)=>{
+app.post("/feed/new", (req, res) => {
 
 });
 app.listen(port, ipAdress, () => {
