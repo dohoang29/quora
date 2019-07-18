@@ -183,6 +183,9 @@ router.get('/reset/:token', function(req, res) {
 });
 
 router.post('/reset/:token', function(req, res) {
+    const {
+        password
+    } = req.body;
     async.waterfall([
             function(done) {
                 User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
@@ -191,18 +194,25 @@ router.post('/reset/:token', function(req, res) {
                         return res.redirect('back');
                     }
                     if (req.body.password === req.body.confirm) {
+
                         console.log('ok =');
-                        user.passport = req.body.password;
-                        console.log('ok1');
+                        // bcrypt.genSalt(10, (err, salt) => {
+                        //     bcrypt.hash(req.body.password, salt, (err, hash) => {
+                        //         req.body.passport = hash;
+                        //         console.log(hash);
+                        //         console.log(req.body.hash);
                         user.resetPasswordToken = undefined;
                         user.resetPasswordExpires = undefined;
-                        console.log('ok2');
-                        user.save(function(err) {
-                            req.logIn(user, function(err) {
-                                done(err, user);
-                                console.log('ok3');
-                            });
-                        });
+                        user.password = bcrypt.hashSync(req.body.password, 10);
+                        console.log('password' + user.password + 'and the user is' + user)
+                        user.save()
+                            .then(user => {
+                                req.flash(
+                                    'success_msg',
+                                    'You are now reseted password and can log in'
+                                );
+                                res.redirect('/users/login');
+                            })
 
                     } else {
                         req.flash("error", "Passwords do not match.");
@@ -222,11 +232,11 @@ router.post('/reset/:token', function(req, res) {
                     to: user.email,
                     from: config.MAIL_USER,
                     subject: 'Your password has been changed',
-                    text: 'Hello,\n\n' +
-                        'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+                    text: 'Hello,  \n' + user.firstname +
+                        ' .This is a confirmation that the password ' + (user.passport) + ' for your account ' + user.email + ' has just been changed.\n'
                 };
                 smtpTransport.sendMail(mailOptions, function(err) {
-                    req.flash('success', 'Success! Your password has been changed.');
+                    req.flash('success_msg', 'Success! Your password has been changed.');
                     done(err);
                 });
             }
@@ -235,4 +245,5 @@ router.post('/reset/:token', function(req, res) {
             res.redirect('/dashboard');
         });
 });
+
 module.exports = router;
