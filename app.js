@@ -24,7 +24,7 @@ const indexRoutes = require("./routes/index"),
   //searchRoutes = require("./routes/search"),
   topicRoutes = require("./routes/topics");
 
-mongoose.connect("mongodb://localhost/quora");
+mongoose.connect("mongodb+srv://hoang:Uxgyr9RspAYQkUtD@cluster0-7nvfn.mongodb.net/test");
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
