@@ -1,10 +1,18 @@
-
-<img
-  class="mr-2 topic-image"
-  src="<%= topic.image %>"
-  alt="<%= topic.title %>"
-/>
-<div class="media-body">
-  <p class="mt-0 mb-1 topic-title"><%= topic.title %></p>
+<% include partials/header.ejs %>
+<div class="col-7">
+    <div class="card">
+        <div class="card-body">
+            <img
+            class="mr-2 main-topic-img"
+            src="<%= topic.image %>"
+            alt="<%= topic.title %>"
+            />
+            <div class="topic-title-wrap">
+                <p class="main-topic-title"><%= topic.title %></p>
+                <a class="main-topic-link" href="#"><i class="fa fa-plus-circle"></i><strong>Follow</strong></a>
+                <a class="main-topic-link active" href="#"><i class="fa fa-check-circle"></i><strong>Follow</strong></a>
+            </div>
+        </div>
+    </div>
 </div>
 <% include partials/footer.ejs %>

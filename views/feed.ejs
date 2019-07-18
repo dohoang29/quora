@@ -1,28 +1,76 @@
-<% include partials/header.ejs %>    
-    <div class="col-7">
-      <div class="card add-question-card">
-        <div class="card-body">
-          <div class="card-subtitle text-muted">
-            <img
-              src="/images/IMG_20150427_214234.jpg"
-              alt="avatar"
-              class="add-ques-image"
-            />
-            User Name
-          </div>
-          <a
-            href="#addQuestionModal"
-            class="add-question-link"
-            data-toggle="modal"
-            data-target="#addQuestionModal"
-            ><h3 class="topic-title text-muted mt-1">
-              <strong>What is your question?</strong>
-            </h3></a
-          >
-          <% include addQuestion.ejs %>
-        </div>
+<% include partials/header.ejs %>
+<div class="col-7">
+  <div class="card add-question-card mb-2">
+    <div class="card-body">
+      <div class="card-subtitle text-muted">
+        <img
+          src="/images/IMG_20150427_214234.jpg"
+          alt="avatar"
+          class="add-ques-image"
+        />
+        User Name
+      </div>
+      <a
+        href="#addQuestionModal"
+        class="add-question-link"
+        data-toggle="modal"
+        data-target="#addQuestionModal"
+        ><h3 class="topic-title text-muted mt-1">
+          <strong>What is your question?</strong>
+        </h3></a
+      >
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <img
+        class="mr-2 topic-image"
+        src="/images/question-icon.png"
+        alt="Question for you"
+      />
+      <strong>What is your question?</strong>
+    </div>
+    <% questions.forEach((question)=>{ %>
+    <div class="card-body question-card">
+      <div class="card-subtitle text-muted">
+        <p class="question-topic">
+            <% question.topic.forEach((topic)=>{ %>
+                Question added · <a class="number-answer-link" href="/topic/<%= topic.id %>">
+            
+                <%= topic.title %>
+            <% }) %>
+          </a>
+        </p>
+      </div>
+      <a class="" href="#">
+        <h3 class="question-title mt-1">
+          <strong><%= question.title %></strong>
+        </h3>
+      </a>
+      <div class="question-more-info">
+        <p>
+          <strong>
+            <a class="number-answer-link" href="#">
+              <%if(question.answer == null ){%>
+                <%= 0 %> 
+              <%}else{%>
+                <%=question.answer.length%>
+              <%}%>
+              Answers 
+            </a>
+          </strong>
+          · Last followed 10m ago
+        </p>
+      </div>
+      <div class="answer-btn-wrapper">
+        <a href="#" class="answer-button">
+          <i class="fa fa-edit answer-icon"></i>
+          <strong>Answer</strong>
+        </a>
       </div>
     </div>
-    
+    <% }) %>
+  </div>
+</div>
 
 <% include partials/footer.ejs %>

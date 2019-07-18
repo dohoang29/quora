@@ -3,13 +3,7 @@ const router = express.Router();
 const Topic = require("../models/topic");
 
 router.get("/", (req, res) => {
-    Topic.find({}, (err, topics) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.render("partials/header", { topics: topics });
-      }
-    });
-  });
+  res.redirect("feed");
+});
 
-  module.exports = router;
+module.exports = router;

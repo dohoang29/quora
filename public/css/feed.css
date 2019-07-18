@@ -11,7 +11,7 @@ body{
     width:20%;
 }
 .area{
-    padding-top:80px;
+    padding-top:100px;
 }
 .topic-image{
     width:auto;
@@ -24,11 +24,19 @@ body{
     margin-bottom: 0%;
     padding-top: 5px;
     font-family:Georgia;
-    display:inline-block
+    display:inline-block;
+}
+.fs-13{
+    font-size: 13px;
 }
 .topic-link{
-	width:100%;
+    width:100%;
+    padding:10px;
 }
+.link-active{
+    background: #e6e6e6;
+}
+
 .topic-link:hover{
     text-decoration: none;
 }
@@ -140,4 +148,66 @@ body{
 .add-question-button:hover{
     background-color: #b92b27;
     border-color: #b92b27;
+}
+
+.question-topic{
+    margin:0;
+    font-size: 13px;
+    color: #949494;
+}
+
+.question-title{
+    font-size:1.5rem;
+    width: 100%;
+    color: #333;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    font-family:Georgia;
+    display:inline-block
+}
+
+.question-more-info p{
+    margin-bottom: 40px;
+    color: #949494;
+}
+
+.number-answer-link{
+    text-decoration: none;
+    color: #949494;
+}
+
+.number-answer-link:hover{
+    text-decoration: none;
+    color: #949494;
+    border-bottom: 1px solid #949494;
+    border-bottom: 1px solid ;
+}
+.answer-button{
+    text-decoration: none;
+    color: rgb(92, 92, 92);
+    font-size: 15px;
+}
+.answer-button:hover{
+    text-decoration: none;
+    color: #333;
+}
+.answer-btn-wrapper{
+    padding:10px;
+    position: absolute;
+    bottom:10px;
+    left:10px;
+}
+.answer-btn-wrapper:hover{
+    background-color: rgba(0,0,0,0.02);
+    border-radius:30px;
+}
+.answer-icon{
+    font-size: 25px;
+    color: #329bff;
+    float: left;
+    padding-right: 3px;
+}
+.question-card{
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,.125);
 }

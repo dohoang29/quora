@@ -11,35 +11,36 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/font-awesome.css" />
     <link rel="stylesheet" type="text/css" href="/css/MenuBar.css" />
-    <link rel="stylesheet" type="text/css" href="/css/answerPageDsgn.css" />
-    <link rel="stylesheet" type="text/css" href="/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="/css/feed.css" />
+    <link rel="stylesheet" type="text/css" href="/css/topicPage.css" />
   </head>
   <body>
     <div class="outer">
       <!--header-->
       <div class="container ">
         <nav class="navbar p-0">
-          <a href="#" class="navbar-brand logo">Quora</a>
+          <a href="/feed" class="navbar-brand logo">Quora</a>
           <div class="nav-item navi-button">
             <ul class="nav nav-pills">
               <li class="nav-item w-3">
-                <a href="#" class="nav-link section-link nav-active"
+                <a href="/feed" class="nav-link section-link"
                   ><i class="fa fa-file-text-o navi-icon"></i>
-                  <span class="bar">Home</span></a
+                  <span class="nav-tab">Home</span></a
                 >
               </li>
               <li class="nav-item w-3">
                 <a href="#" class="nav-link section-link"
                   ><i class="fa fa-pencil navi-icon"></i>
-                  <span class="bar">Answer</span></a
+                  <span class="nav-tab">Answer</span></a
                 >
               </li>
               <li class="nav-item w-4">
                 <a href="#" class="nav-link section-link"
                   ><i class="fa fa-bell-o navi-icon"></i>
-                  <span class="bar">Notifications</span></a
+                  <span class="nav-tab">Notifications</span></a
                 >
               </li>
             </ul>
@@ -52,26 +53,18 @@
             />
           </div>
           <div class="nav-item user-area">
-            <a
-              href="#"
-              class="nav-link"
-              data-toggle="popover"
-              data-placement="bottom"
-              title="Popover Header"
-              data-content="Some content inside"
-              ><img
-                src="/images/IMG_20150427_214234.jpg"
-                alt="avatar"
-                class="image"
-              />
-              <button
-                class="question-btn"
-                data-toggle="modal"
-                data-target="#addQuestionModal"
-              >
+            <img
+              src="/images/IMG_20150427_214234.jpg"
+              alt="avatar"
+              class="image"
+            />
+            <button
+              class="question-btn"
+              data-toggle="modal"
+              data-target="#addQuestionModal"
+            >
                 Add Question
-              </button>
-            </a>
+            </button>
           </div>
         </nav>
       </div>
@@ -80,8 +73,17 @@
         <div class="row">
             <div class="col">
                 <ul class="list-unstyled">
+                    <li class="media">
+                      <a class="topic-link" href="/feed"> 
+                        <img class="mr-2 topic-image" src="/images/feed.png"
+                        alt="Feed"/>
+                        <span class="media-body">
+                            <p class="mt-0 mb-1 topic-title fs-13"> Feed</p>
+                        </span>
+                      </a>
+                    </li>
                     <% topics.forEach((topic)=>{ %>
-                        <li class="media my-3">
+                        <li class="media">
                             <a class="topic-link" href="/topic/<%= topic._id %>">
                                 <img
                                     class="mr-2 topic-image"
@@ -89,7 +91,7 @@
                                     alt="<%= topic.title %>"
                                 />
                                 <span class="media-body">
-                                    <p class="mt-0 mb-1 topic-title"><%= topic.title %></p>
+                                    <p class="mt-0 mb-1 topic-title fs-13"><%= topic.title %></p>
                                 </span>
                             </a>
                         </li>

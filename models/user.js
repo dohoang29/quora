@@ -15,6 +15,12 @@ var userSchema = new mongoose.Schema({
       ref: "Question"
     }
   ],
+  topic: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Topic"
+    }
+  ],
   dateCreated: { type: Date, default: Date.now },
   isActive: Boolean
 });
