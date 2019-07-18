@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
     },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
-    roles: [{ type: 'String' }],
+    isAdmin: { type: Boolean, default: false },
     following: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Post"

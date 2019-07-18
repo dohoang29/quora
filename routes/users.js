@@ -171,7 +171,6 @@ router.post('/forgot', function(req, res, next) {
     });
 });
 
-
 // reset password
 router.get('/reset/:token', function(req, res) {
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
@@ -184,58 +183,56 @@ router.get('/reset/:token', function(req, res) {
 });
 
 router.post('/reset/:token', function(req, res) {
-    const {
-        password,
-        password2
-    } = req.body;
-    let errors = [];
     async.waterfall([
-        function(done) {
-            User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
-                if (!user) {
-                    req.flash('error', 'Password reset token is invalid or has expired.');
-                    return res.redirect('back');
-                }
-                if (password === password2) {
-                    user.setPassword(password, function(err) {
+            function(done) {
+                User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+                    if (!user) {
+                        req.flash('error', 'Password reset token is invalid or has expired.');
+                        return res.redirect('back');
+                    }
+                    if (req.body.password === req.body.confirm) {
+                        console.log('ok =');
+                        user.passport = req.body.password;
+                        console.log('ok1');
                         user.resetPasswordToken = undefined;
                         user.resetPasswordExpires = undefined;
+                        console.log('ok2');
                         user.save(function(err) {
                             req.logIn(user, function(err) {
                                 done(err, user);
+                                console.log('ok3');
                             });
                         });
-                    })
-                } else {
-                    req.flash("error", "Passwords do not match.");
-                    return res.redirect('back');
-                }
-            });
-        },
-        function(user, done) {
-            var smtpTransport = nodemailer.createTransport({
-                service: 'Gmail',
-                auth: {
-                    user: config.MAIL_USER,
-                    pass: config.MAIL_PASS
-                }
-            });
-            var mailOptions = {
-                to: user.email,
-                from: config.MAIL_USER,
-                subject: 'Your password has been changed',
-                text: 'Hello,\n\n' +
-                    'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
-            };
-            smtpTransport.sendMail(mailOptions, function(err) {
-                req.flash('success', 'Success! Your password has been changed.');
-                done(err);
-            });
-        }
-    ], function(err) {
-        res.redirect('/dashboard');
-    });
+
+                    } else {
+                        req.flash("error", "Passwords do not match.");
+                        return res.redirect('back');
+                    }
+                });
+            },
+            function(user, done) {
+                var smtpTransport = nodemailer.createTransport({
+                    service: 'Gmail',
+                    auth: {
+                        user: config.MAIL_USER,
+                        pass: config.MAIL_PASS
+                    }
+                });
+                var mailOptions = {
+                    to: user.email,
+                    from: config.MAIL_USER,
+                    subject: 'Your password has been changed',
+                    text: 'Hello,\n\n' +
+                        'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+                };
+                smtpTransport.sendMail(mailOptions, function(err) {
+                    req.flash('success', 'Success! Your password has been changed.');
+                    done(err);
+                });
+            }
+        ],
+        function(err) {
+            res.redirect('/dashboard');
+        });
 });
-
-
 module.exports = router;
