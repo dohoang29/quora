@@ -57,7 +57,7 @@ app.use((req,res,next)=>{
   });
 });
 
-app.use("/",indexRoutes);
+
 app.use("/feed",feedRoutes);
 app.use("/topic", topicRoutes);
 app.use("/answer",answerRoutes);
