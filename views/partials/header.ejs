@@ -11,11 +11,13 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <script src="https://cdn.ckeditor.com/ckeditor5/12.3.1/classic/ckeditor.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/font-awesome.css" />
     <link rel="stylesheet" type="text/css" href="/css/MenuBar.css" />
     <link rel="stylesheet" type="text/css" href="/css/feed.css" />
     <link rel="stylesheet" type="text/css" href="/css/topicPage.css" />
+    <link rel="stylesheet" type="text/css" href="/css/CKEditor.css">
   </head>
   <body>
     <div class="outer">
@@ -71,31 +73,5 @@
     </div>
     <div class="container area">
         <div class="row">
-            <div class="col">
-                <ul class="list-unstyled">
-                    <li class="media">
-                      <a class="topic-link" href="/feed"> 
-                        <img class="mr-2 topic-image" src="/images/feed.png"
-                        alt="Feed"/>
-                        <span class="media-body">
-                            <p class="mt-0 mb-1 topic-title fs-13"> Feed</p>
-                        </span>
-                      </a>
-                    </li>
-                    <% topics.forEach((topic)=>{ %>
-                        <li class="media">
-                            <a class="topic-link" href="/topic/<%= topic._id %>">
-                                <img
-                                    class="mr-2 topic-image"
-                                    src="<%= topic.image %>"
-                                    alt="<%= topic.title %>"
-                                />
-                                <span class="media-body">
-                                    <p class="mt-0 mb-1 topic-title fs-13"><%= topic.title %></p>
-                                </span>
-                            </a>
-                        </li>
-                    <% }) %>
-                </ul>
-            </div>
+            
 

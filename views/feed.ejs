@@ -1,4 +1,4 @@
-<% include partials/header.ejs %>
+<% include partials/header.ejs %> <% include partials/topicSideBar.ejs %>
 <div class="col-7">
   <div class="card add-question-card mb-2">
     <div class="card-body">
@@ -34,11 +34,9 @@
     <div class="card-body question-card">
       <div class="card-subtitle text-muted">
         <p class="question-topic">
-            <% question.topic.forEach((topic)=>{ %>
-                Question added · <a class="number-answer-link" href="/topic/<%= topic.id %>">
-            
-                <%= topic.title %>
-            <% }) %>
+          <% question.topic.forEach((topic)=>{ %> Question added ·
+          <a class="number-answer-link" href="/topic/<%= topic.id %>">
+            <%= topic.title %> <% }) %>
           </a>
         </p>
       </div>
@@ -50,25 +48,76 @@
       <div class="question-more-info">
         <p>
           <strong>
-            <a class="number-answer-link" href="#">
-              <%if(question.answer == null ){%>
-                <%= 0 %> 
-              <%}else{%>
-                <%=question.answer.length%>
-              <%}%>
-              Answers 
+              <% question.topic.forEach((topic)=>{ %>
+            <a class="number-answer-link" href="/answer/<%= topic.id %>/<%= question.id %>">
+              <% }) %>
+              <%if(question.answer == null ){%> <%= 0 %> <%}else{%>
+              <%=question.answer.length%> <%}%> Answers
             </a>
           </strong>
           · Last followed 10m ago
         </p>
       </div>
       <div class="answer-btn-wrapper">
-        <a href="#" class="answer-button">
-          <i class="fa fa-edit answer-icon"></i>
+        <a
+          data-toggle="collapse"
+          href="#<%= question._id %>"
+          role="button"
+          aria-expanded="false"
+          aria-controls="<%= question._id %>"
+          class="answer-button"
+        >
+          <span class="fa fa-edit answer-icon"></span>
           <strong>Answer</strong>
         </a>
       </div>
+      <div class="collapse" id="<%= question._id %>">
+        <div class="card w-100 mt-2">
+          <div class="card-header">
+            <img
+              src="/images/IMG_20150427_214234.jpg"
+              alt="avatar"
+              class="add-ans-image"
+            />
+            <div class="user-info">
+              User Name, knows 
+              <% question.topic.forEach((topic)=>{ %>
+                <a class="ans-topic-link" href="/topic/<%= topic._id %>"> 
+                  <%= topic.title %> <% }) %> 
+                </a>
+            </div>
+          </div>
+          <form class="ansForm" method="POST" action="/answer/<% question.topic.forEach((topic)=>{ %><%= topic._id %><% }) %>/<%= question._id %>">
+            <div class="add-ans-card">
+              <textarea
+                name="content"
+                class="ansEditor"
+                placeholder="Write your answer"
+              ></textarea>
+            </div>
+            <div class="card-footer text-muted">
+              <button type="submit" class="btn btn-primary add-question-button">
+                Add Answer
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary cancel-button"
+                data-toggle="collapse"
+                href="#<%= question._id %>"
+                role="button"
+                aria-expanded="false"
+                aria-controls="<%= question._id %>"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+    <% }) %>
+    <% answers.forEach((answer)=>{ %>
+      
     <% }) %>
   </div>
 </div>

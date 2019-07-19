@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Question = require("../models/question");
-const topic = require("../models/topic");
+const Answer = require("../models/answer");
 
 router.get("/", (req, res) => {
   var publicQuestion = [];
@@ -13,13 +13,19 @@ router.get("/", (req, res) => {
     }
     else{
       questions.forEach((question)=>{
-        console.log(question.privacy);
+        // console.log(question.privacy);
         if(question.privacy == "public"){
           publicQuestion.push(question);
         }
       });
-      console.log(publicQuestion);
-      res.render("feed", {questions : publicQuestion});
+      Answer.find().populate('topic').populate('question').exec((err,answers)=>{
+        if(err){
+          console.log(err);
+        }
+        else{
+          res.render("feed", {questions : publicQuestion , answers : answers});
+        }
+      })
     }
   });
   

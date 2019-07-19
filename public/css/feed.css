@@ -17,13 +17,13 @@ body{
     width:auto;
     height: 25px;
     border-radius: 2px;
+    float:left;
 }
 
 .topic-title{
     color: #666;
     margin-bottom: 0%;
     padding-top: 5px;
-    font-family:Georgia;
     display:inline-block;
 }
 .fs-13{
@@ -142,6 +142,7 @@ body{
 
 .add-question-button{
     background-color:rgb(62, 120, 173);
+    border-color: rgb(62, 120, 173);
     font-weight: bold;
 }
 
@@ -167,7 +168,7 @@ body{
 }
 
 .question-more-info p{
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     color: #949494;
 }
 
@@ -189,18 +190,9 @@ body{
 }
 .answer-button:hover{
     text-decoration: none;
-    color: #333;
+    color: #329bff;
 }
-.answer-btn-wrapper{
-    padding:10px;
-    position: absolute;
-    bottom:10px;
-    left:10px;
-}
-.answer-btn-wrapper:hover{
-    background-color: rgba(0,0,0,0.02);
-    border-radius:30px;
-}
+
 .answer-icon{
     font-size: 25px;
     color: #329bff;
@@ -208,6 +200,24 @@ body{
     padding-right: 3px;
 }
 .question-card{
-    position: relative;
     border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.add-ans-image{
+    width:auto;
+    height:40px;
+    border-radius:50%;
+    padding-right:5px;
+}
+
+.user-info{
+    width: inherit;
+    display: inline-block;
+}
+.ansForm, .ansForm textarea{
+    min-height:200px;
+}
+
+.add-ans-card{
+    min-height: 200px;
 }

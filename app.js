@@ -7,7 +7,7 @@ const passport = require("passport");
 //const LocalStrategy = require("passport-local");
 
 // const comment = require("./models/comment");
-// const answer = require("./models/answer");
+const answer = require("./models/answer");
 const Question = require("./models/question");
 // const search = require("./models/search");
 const Topic = require("./models/topic");
@@ -21,8 +21,9 @@ const indexRoutes = require("./routes/index"),
   //accountsRoutes = require("./routes/accounts"),
   //commentsRoutes = require("./routes/comments"),
   feedRoutes = require("./routes/newFeed"),
-  //searchRoutes = require("./routes/search"),
+  answerRoutes = require("./routes/answer"),
   topicRoutes = require("./routes/topics");
+
 mongoose.connect('mongodb://localhost:27017/quora', {useNewUrlParser: true});
 //mongoose.connect("mongodb+srv://hoang:Uxgyr9RspAYQkUtD@cluster0-7nvfn.mongodb.net/test");
 app.use(express.static("public"));
@@ -42,10 +43,10 @@ app.use((req,res,next)=>{
 
 app.use("/",indexRoutes);
 app.use("/feed",feedRoutes);
-app.use("/topic/", topicRoutes);
-
+app.use("/topic", topicRoutes);
+app.use("/answer",answerRoutes);
 // app.use("/search/",searchRoutes);
-// app.use("/topics/",topicsRoutes);
+
 
 
 app.listen(port, ipAdress, () => {

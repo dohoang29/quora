@@ -7,8 +7,12 @@ var answerSchema = new mongoose.Schema({
       ref: "Topic"
     }
   ],
+  question: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Question"
+  },
   url: String,
-  title: String,
+  content: String,
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
@@ -22,6 +26,7 @@ var answerSchema = new mongoose.Schema({
       ref: "Comment"
     }
   ],
+  view: Number,
   isActive: Boolean
 });
 
