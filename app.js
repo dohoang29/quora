@@ -23,8 +23,8 @@ const indexRoutes = require("./routes/index"),
   feedRoutes = require("./routes/newFeed"),
   //searchRoutes = require("./routes/search"),
   topicRoutes = require("./routes/topics");
-
-mongoose.connect("mongodb+srv://hoang:Uxgyr9RspAYQkUtD@cluster0-7nvfn.mongodb.net/test");
+mongoose.connect('mongodb://localhost:27017/quora', {useNewUrlParser: true});
+//mongoose.connect("mongodb+srv://hoang:Uxgyr9RspAYQkUtD@cluster0-7nvfn.mongodb.net/test");
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
