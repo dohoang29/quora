@@ -19,13 +19,13 @@ const ipAdress = process.env.ip || ip.address();
 const port = process.env.port || 3000;
 
 const indexRoutes = require("./routes/index"),
-  //accountsRoutes = require("./routes/accounts"),
+  userRoutes = require("./routes/users"),
   //commentsRoutes = require("./routes/comments"),
   feedRoutes = require("./routes/newFeed"),
   answerRoutes = require("./routes/answer"),
   topicRoutes = require("./routes/topics");
 
-//mongoose.connect('mongodb://localhost:27017/quora', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost:27017/quora', {useNewUrlParser: true});
 //mongoose.connect("mongodb+srv://hoang:Uxgyr9RspAYQkUtD@cluster0-7nvfn.mongodb.net/test");
 app.use(cookieParser('secret'));
 app.use(express.static("public"));
@@ -59,15 +59,15 @@ app.use((req,res,next)=>{
 
 app.use("/",indexRoutes);
 app.use("/feed",feedRoutes);
-app.use("/topic", topicRoutes);
+app.use("/topic",topicRoutes);
 app.use("/answer",answerRoutes);
 // app.use("/search/",searchRoutes);
-
+app.use('/users',userRoutes);
 app.listen(port, ipAdress, () => {
   console.log("Server is listening at " + ipAdress + ":" + port);
 });
-app.use('/', require('./routes/index.js'));
-app.use('/users', require('./routes/users.js'));
+
+
 
 
 
