@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.5/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <% include ./partials/messages %>
+            <div class="signupForm">
+                <div class="logo">
+                    <img src="http://r72.cooltext.com/rendered/cooltext330778527449687.gif "></div>
+                <div class="tagline ">
+                    <h3>
+                        The best answer to any question
+                    </h3>
+                </div>
+                <div class="signinLogin ">
+                    <div class="signup ">
+                        <div id="signup-butons ">
+                            <div>
+                                <a href="# ">
+                                    <div class="gmail ">
+
+                                        <span class="gm-connect ">Continue with Google</span></div>
+                                </a>
+                                <a href="# ">
+                                    <div class="facebook ">
+                                        <i class="fa fa-facebook-official "></i>
+                                        <span>Continue with Facebook</span></div>
+                                </a>
+                            </div>
+                            <span><a id="explanation" href="/register "><strong>Singup Now?</strong></a>. By signing up you indicate that you have read and agree to the Terms of Service and Privacy Policy.</span>
+                        </div>
+
+                    </div>
+                    <div class="login ">
+                        <div class="login-opt ">
+                            <div class="login-title ">
+                                <h5>Login</h5>
+                                <form action="/login" method="post">
+
+                                    <input class="input-email" type="text " name="email" placeholder="Email ">
+
+                                    <input class="input-pass" type="password " name="password" placeholder="Password ">
+
+                                    <a href="/forgot "><br>Forgot Password?</a>
+                                    <button class="button-login" type="submit">Login</button>
+                                </form>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="footerNav "></div>
+            </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</body>
+
+</html>

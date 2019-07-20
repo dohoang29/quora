@@ -1,0 +1,24 @@
+<% include partials/header.ejs %>
+<div class="card w-100">
+  <div class="card-body">
+    <h1><%= answer.question.title %></h1>
+  </div>
+  <div>
+    <img
+      src="/images/IMG_20150427_214234.jpg"
+      alt="avatar"
+      class="add-ans-image"
+    />
+    <div class="user-info">
+      User Name, knows <% answer.topic.forEach((topic)=>{ %>
+      <a class="ans-topic-link" href="/topic/<%= topic._id %>">
+        <%= topic.title %> <% }) %>
+      </a>
+    </div>
+  </div>
+  <div class="answer-content">
+      <%- answer.content %>
+  </div>
+</div>
+
+<% include partials/footer.ejs %>

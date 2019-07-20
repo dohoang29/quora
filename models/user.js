@@ -1,22 +1,44 @@
-var mongoose = require("mongoose");
+const mongoose = require('mongoose');
+var crypto = require("crypto");
+var options = {};
 
-var userSchema = new mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  email: String,
-  password: String,
-  level: {
-    type: String,
-    enum: ["admin", "user"]
-  },
-  following: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Post"
-    }
-  ],
-  dateCreated: { type: Date, default: Date.now },
-  isActive: Boolean
+const userSchema = new mongoose.Schema({
+    firstname: {
+        type: String,
+        required: true
+    },
+    lastname: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
+    isAdmin: { type: Boolean, default: false },
+    following: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post"
+    }],
+    topic: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Topic"
+      }
+    ],
+    dateCreated: { type: Date, default: Date.now },
+    isActive: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+
 });
 
 module.exports = mongoose.model("User", userSchema);

@@ -10,7 +10,7 @@ var commentSchema = new mongoose.Schema({
   reply: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Post"
+      ref: "Comment"
     }
   ],
   upVoted: Number,

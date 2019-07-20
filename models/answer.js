@@ -1,0 +1,33 @@
+var mongoose = require("mongoose");
+
+var answerSchema = new mongoose.Schema({
+  topic: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Topic"
+    }
+  ],
+  question: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Question"
+  },
+  url: String,
+  content: String,
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
+  dateCreated: { type: Date, default: Date.now },
+  dateModified: { type: Date, default: Date.now },
+  upVoted: Number,
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment"
+    }
+  ],
+  view: Number,
+  isActive: Boolean
+});
+
+module.exports = mongoose.model("Answer", answerSchema);

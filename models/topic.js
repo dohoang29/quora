@@ -2,16 +2,20 @@ var mongoose = require("mongoose");
 
 var topicSchema = new mongoose.Schema({
     title: String,
-    url: String,
+    image: String,
     followers:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     }],
-    posts:[{
+    answers:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Post"
+        ref: "Answer"
+    }],
+    questions:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Question"
     }],
     isActive: Boolean
 });
 
-module.exports = mongoose.model("Topic", userSchema);
+module.exports = mongoose.model("Topic", topicSchema);
