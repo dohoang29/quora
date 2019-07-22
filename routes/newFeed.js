@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Question = require("../models/question");
 const Answer = require("../models/answer");
+const { ensureAuthenticated } = require('../config/auth');
 
-router.get("/", (req, res) => {
+router.get("/",ensureAuthenticated, (req, res) => {
   var publicQuestion = [];
   var privateQuestion = [];
   var limitedQuestion = [];
@@ -25,12 +26,12 @@ router.get("/", (req, res) => {
         else{
           res.render("feed", {questions : publicQuestion , answers : answers});
         }
-      })
+      });
     }
   });
-  
-  
 });
+  
+
 router.post("/", (req, res) => {
   var topic = req.body.topic;
   var privacy = req.body.privacy;

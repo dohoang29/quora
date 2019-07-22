@@ -24,6 +24,7 @@ const indexRoutes = require("./routes/index"),
     feedRoutes = require("./routes/newFeed"),
     answerRoutes = require("./routes/answer"),
     topicRoutes = require("./routes/topics");
+
 mongoose.connect("mongodb+srv://hoan:7QF4jpNjkMaWuzaO@cluster0-7nvfn.mongodb.net/test?retryWrites=true&w=majority");
 app.use(cookieParser('secret'));
 app.use(express.static("public"));
@@ -50,18 +51,19 @@ app.use((req, res, next) => {
             res.locals.success_msg = req.flash('success_msg');
             res.locals.error_msg = req.flash('error_msg');
             res.locals.error = req.flash('error');
+            res.locals.currentUser = req.user;
             next();
         }
     });
 });
 
-app.use('/', require('./routes/index.js'));
-app.use('/users', require('./routes/users.js'));
+
+app.use('/', userRoutes);
+app.use('/', indexRoutes);
 app.use("/feed",feedRoutes);
 app.use("/topic", topicRoutes);
 app.use("/answer", answerRoutes);
-// app.use("/search/",searchRoutes);
-app.use('/', userRoutes);
+
 app.listen(port, ipAdress, () => {
   console.log("Server is listening at " + ipAdress + ":" + port);
 });
