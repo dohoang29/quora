@@ -90,7 +90,7 @@ router.post('/register', (req, res) => {
                                     'success_msg',
                                     'You are now registered and can log in'
                                 );
-                                res.redirect('/users/login');
+                                res.redirect('/login');
                             })
                             .catch(err => console.log(err));
                     });
@@ -103,8 +103,8 @@ router.post('/register', (req, res) => {
 // Login
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: '/dashboard',
-        failureRedirect: '/users/login',
+        successRedirect: '/feed',
+        failureRedirect: '/login',
         failureFlash: true
     })(req, res, next);
 });
@@ -113,7 +113,7 @@ router.post('/login', (req, res, next) => {
 router.get('/logout', (req, res) => {
     req.logout();
     req.flash('success_msg', 'You are logged out');
-    res.redirect('/users/login');
+    res.redirect('/login');
 });
 //forgot password page
 router.get('/forgot', (req, res) => res.render('forgot'));
@@ -131,7 +131,7 @@ router.post('/forgot', function(req, res, next) {
             User.findOne({ email: req.body.email }, function(err, user) {
                 if (!user) {
                     req.flash('error', 'No account with that email address exists.');
-                    return res.redirect('/users/forgot');
+                    return res.redirect('/forgot');
                 }
 
                 user.resetPasswordToken = token;
@@ -156,7 +156,7 @@ router.post('/forgot', function(req, res, next) {
                 subject: 'Quora Password Reset',
                 text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                     'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-                    'http://' + req.headers.host + '/users/reset/' + token + '\n\n' +
+                    'http://' + req.headers.host + '/reset/' + token + '\n\n' +
                     'If you did not request this, please ignore this email and your password will remain unchanged.\n'
             };
             smtpTransport.sendMail(mailOptions, function(err) {
@@ -167,7 +167,7 @@ router.post('/forgot', function(req, res, next) {
         }
     ], function(err) {
         if (err) return next(err);
-        res.redirect('/users/forgot');
+        res.redirect('/forgot');
     });
 });
 
@@ -176,7 +176,7 @@ router.get('/reset/:token', function(req, res) {
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
         if (!user) {
             req.flash('error', 'Password reset token is invalid or has expired.');
-            return res.redirect('/users/forgot');
+            return res.redirect('/forgot');
         }
         res.render('reset', { token: req.params.token });
     });
@@ -211,7 +211,7 @@ router.post('/reset/:token', function(req, res) {
                                     'success_msg',
                                     'You are now reseted password and can log in'
                                 );
-                                res.redirect('/users/login');
+                                res.redirect('/login');
                             })
 
                     } else {
@@ -220,29 +220,9 @@ router.post('/reset/:token', function(req, res) {
                     }
                 });
             },
-            function(user, done) {
-                var smtpTransport = nodemailer.createTransport({
-                    service: 'Gmail',
-                    auth: {
-                        user: config.MAIL_USER,
-                        pass: config.MAIL_PASS
-                    }
-                });
-                var mailOptions = {
-                    to: user.email,
-                    from: config.MAIL_USER,
-                    subject: 'Your password has been changed',
-                    text: 'Hello,  \n' + user.firstname +
-                        ' .This is a confirmation that the password ' + (user.passport) + ' for your account ' + user.email + ' has just been changed.\n'
-                };
-                smtpTransport.sendMail(mailOptions, function(err) {
-                    req.flash('success_msg', 'Success! Your password has been changed.');
-                    done(err);
-                });
-            }
         ],
         function(err) {
-            res.redirect('/dashboard');
+            res.redirect('/feed');
         });
 });
 
