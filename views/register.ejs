@@ -41,7 +41,7 @@
             </div>
 
             <div><strong>Signup Quora Now!</strong>
-                <form action="/users/register" method="POST">
+                <form action="/register" method="POST">
                     <input class="name" type="text" name="firstname" placeholder="Firstname">
                     <input class="name" width="10px" type="text" name="lastname" placeholder="Lastname"><br>
                     <input type="text" name="email" placeholder="Email" value="<%= typeof email != 'undefined' ? email : '' %>">
@@ -49,7 +49,7 @@
                     <input class="input-pass" type="password" name="password" placeholder="Password" value="<%= typeof password != 'undefined' ? password : '' %>">
                     <br>
                     <input class="input-repass" type="password" name="password2" placeholder="Confirm password" value="<%= typeof password2 != 'undefined' ? password2 : '' %>">
-                    <p style="color:aliceblue">Have an account?<a style="color: black" href="/users/login"><strong>Login!</strong></a></p>
+                    <p style="color:aliceblue">Have an account?<a style="color: black" href="/login"><strong>Login!</strong></a></p>
                     <button class="button-register">Register</button>
                 </form>
             </div>
