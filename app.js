@@ -25,7 +25,7 @@ const indexRoutes = require("./routes/index"),
     answerRoutes = require("./routes/answer"),
     topicRoutes = require("./routes/topics");
 
-mongoose.connect("mongodb+srv://hoan:7QF4jpNjkMaWuzaO@cluster0-7nvfn.mongodb.net/test?retryWrites=true&w=majority");
+mongoose.connect("mongodb+srv://hoang:uANMPpiOnhRKAGi6@cluster0-7nvfn.mongodb.net/test?retryWrites=true&w=majority");
 app.use(cookieParser('secret'));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
