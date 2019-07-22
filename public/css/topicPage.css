@@ -1,0 +1,38 @@
+.main-topic-img{
+    border-radius: 5px;
+    float: left;
+}
+.topic-title-wrap{
+    display: inline-block;
+    height:100px;
+    padding-left:10px;
+}
+.main-topic-title{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 45px;
+    margin-top: -10px;
+}
+
+.main-topic-link{
+    text-decoration: none;
+    color: #666;
+    padding:5px;
+
+}
+.main-topic-link.active{
+    color: #329bff;
+}
+.main-topic-link i{
+    padding-right:5px;
+    color: #329bff;
+}
+
+.main-topic-link:hover{
+    background-color:rgba(0,0,0,0.02);
+    border-radius: 20px;
+    text-decoration: none;
+    color: #329bff;
+}
+
