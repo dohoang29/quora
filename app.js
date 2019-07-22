@@ -25,8 +25,8 @@ const indexRoutes = require("./routes/index"),
   answerRoutes = require("./routes/answer"),
   topicRoutes = require("./routes/topics");
 
-mongoose.connect('mongodb://localhost:27017/quora', {useNewUrlParser: true});
-//mongoose.connect("mongodb+srv://hoang:Uxgyr9RspAYQkUtD@cluster0-7nvfn.mongodb.net/test");
+//mongoose.connect('mongodb://localhost:27017/quora', {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://hoang:4bACE4CwJJgpaZ3a@cluster0-7nvfn.mongodb.net/test?retryWrites=true&w=majority");
 app.use(cookieParser('secret'));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
