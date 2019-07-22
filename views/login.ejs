@@ -1,61 +1,55 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
-<head></head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <title>SignUp Form</title>
+</head>
 
 <body>
-    <div class="container">
-        <div class="signupForm">
-            <div class="logo"><img src="/images/logo.png"></div>
-            <div class="tagline">
-                <h3>
-                    The best answer to any question
-                </h3>
-                <% include ./partials/messages %>
-            </div>
-            <div class="signinLogin">
-                <div class="signup">
-                    <div id="signup-butons">
-                        <div>
-                            <a href="#">
-                                <div class="gmail">
-                                    <i class="fa fa-google"></i>
-                                    <span class="gm-connect">Continue with Google</span></div>
-                            </a>
-                            <a href="#">
-                                <div class="facebook">
-                                    <i class="fa fa-facebook-official"></i>
-                                    <span>Continue with Facebook</span></div>
-                            </a>
-                        </div>
-                        <span id="explanation"><a href="/users/register"><strong>Singup Now?</strong></a>. By signing up you indicate that you have read and agree to the Terms of Service and Privacy Policy.</span>
-                    </div>
-
-                </div>
-                <div class="login">
-                    <div class="login-opt">
-                        <div class="login-title"><strong>Login</strong>
-                            <form action="/users/login" method="post">
-
-                                <input width="40px" type="text" name="email" placeholder="Email">
-                                <br>
-
-                                <input class="input-pass" type="password" name="password" placeholder="Password">
-
-                                <a href="/users/forgot"><br>Forgot Password?</a>
-                                <input class="button-login" type="submit" value="Login">
-                            </form>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="footerNav"></div>
-        </div>
+    <div class="logo">
+        <img width="200px" src="/images/logo.png"></div>
+    <div class="tagline">
+        <h3>
+            The best answer to any question
+        </h3>
     </div>
+    <div id="logreg-forms">
+        <form class="form-signin" action="/login" method="post">
+            <% include ./partials/messages %>
+                <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
+                <div class="social-login">
+                    <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
+                    <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
+                </div>
+                <p style="text-align:center"> OR </p>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" name="email">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" name="password">
+
+                <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
+                <a href="/forgot" id="forgot_pswd">Forgot password?</a>
+                <hr>
+
+                <button onclick="window.location.href='/register'" class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Sign up New Account</button>
+                <p class="policy">
+                    By <strong>signing up</strong> you indicate that you have read and agree to the Terms of Service and Privacy Policy.
+                </p>
+
+        </form>
+
+
+    </div>
+
+
 </body>
 
 </html>
