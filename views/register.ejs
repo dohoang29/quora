@@ -1,34 +1,21 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-    <style>
-        .name {
-            width: 130px;
-            margin-right: 5px;
-        }
-        
-        .button-register {
-            background-color: #507cc0;
-            padding: 8px;
-            border-radius: 5px;
-        }
-        
-        .input-repass {
-            margin-top: 7px;
-        }
-        
-        form {
-            background-color: #CD5C5C;
-            width: 300px;
-            margin: auto;
-            border-radius: 5px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <title>Register Form</title>
 </head>
 
 <body>
+<<<<<<< HEAD
     <div class="container">
         <div class="signupForm">
             <div class="logo"><img src="/images/logo.png"></div>
@@ -57,6 +44,40 @@
 
             <div class="footerNav"></div>
         </div>
+=======
+
+    <div class="logo">
+        <img width="200px" src="images/logo.png"></div>
+    <div class="tagline">
+        <h3 class="title-page">
+            The best answer to any question
+        </h3>
+    </div>
+    <div id="logreg-forms">
+        <form action="/register" method="post" class="form-signup">
+            <% include ./partials/messages %>
+                <div class="social-login">
+                    <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span> </button>
+                </div>
+                <div class="social-login">
+                    <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign up with Google+</span> </button>
+                </div>
+
+                <p style="text-align:center">OR</p>
+
+                <input width="25px" type="text" id="user-name" class="form-control" placeholder="First name" name="firstname" required="" autofocus="">
+                <input width="25px" type="text" id="user-name2" class="form-control" placeholder="Last name" name="lastname" required="" autofocus="">
+                <input type="email" id="user-email" class="form-control" placeholder="Email address" required autofocus="" name="email">
+                <input type="password" id="user-pass" class="form-control" placeholder="Password must be at least 6 characters" required autofocus="" name="password">
+
+                <input type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" required autofocus="" name="password2">
+
+                <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
+                <p class="havecount">Have an account?</p><a style="color:dodgerblue " href="/login"><strong>Login!</strong></a>
+        </form>
+
+
+>>>>>>> hoan
     </div>
 </body>
 

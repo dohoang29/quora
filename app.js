@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 
 require('./config/passport')(passport); // Passport Config
+<<<<<<< HEAD
 
 const answer = require("./models/answer");
 const Question = require("./models/question");
@@ -25,8 +26,31 @@ const indexRoutes = require("./routes/index"),
     answerRoutes = require("./routes/answer"),
     topicRoutes = require("./routes/topics");
 
+<<<<<<< HEAD
+mongoose.connect('mongodb://localhost:27017/quora', { useNewUrlParser: true });
+//mongoose.connect("mongodb+srv://hoang:Uxgyr9RspAYQkUtD@cluster0-7nvfn.mongodb.net/test");
+=======
+
+const answer = require("./models/answer");
+const Question = require("./models/question");
+const Topic = require("./models/topic");
+
+const app = express();
+const ipAdress = process.env.ip || ip.address();
+const port = process.env.port || 3000;
+
+const indexRoutes = require("./routes/index"),
+    userRoutes = require("./routes/users"),
+    //commentsRoutes = require("./routes/comments"),
+    feedRoutes = require("./routes/newFeed"),
+    answerRoutes = require("./routes/answer"),
+    topicRoutes = require("./routes/topics");
+mongoose.connect("mongodb+srv://hoan:7QF4jpNjkMaWuzaO@cluster0-7nvfn.mongodb.net/test?retryWrites=true&w=majority");
+>>>>>>> hoan
+=======
 //mongoose.connect('mongodb://localhost:27017/quora', {useNewUrlParser: true});
 mongoose.connect("mongodb+srv://hoang:4bACE4CwJJgpaZ3a@cluster0-7nvfn.mongodb.net/test?retryWrites=true&w=majority");
+>>>>>>> cc1c2c322b22e67c05fd7cc43cd2f03531f90b7e
 app.use(cookieParser('secret'));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
