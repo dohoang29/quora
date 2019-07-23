@@ -7,13 +7,28 @@ const passport = require('passport');
 
 
 router.get('/', (req, res) => {
-    User.find((err, users) => {
-        if (!err) {
-            res.render("admin/list", { users: users })
-        } else {
-            console.log('Error in retrieving user list :' + err);
-        }
-    });
+    if (req.isAuthenticated()) {
+        console.log(req.session.passport.user);
+        User.findById(req.session.passport.user, (err, user) => {
+            // console.log(user);
+            if (user.role == 'admin') {
+                User.find((err, users) => {
+                    if (!err) {
+                        res.render("admin/list", { users: users })
+                    } else {
+                        console.log('Error in retrieving user list :' + err);
+                    }
+                });
+            } else {
+                console.log('not admin');
+                res.send('Acess Denied');
+            }
+        });
+
+    } else {
+        console.log('not login');
+        res.send('Acess Denied');
+    }
 });
 router.get('/add', (req, res) => {
     res.render("admin/add")
@@ -45,7 +60,7 @@ router.post('/add', (req, res) => {
     let errors = [];
     if (!firstname || !lastname || !email || !password) {
         req.flash('error', 'Please enter full feild.');
-        console.log('teof;')
+        console.log('test full field')
         res.redirect('/admin/add');
     }
     if (password.length < 6) {
@@ -75,9 +90,10 @@ router.post('/add', (req, res) => {
                 user.password = bcrypt.hashSync(req.body.password, 10);
 
                 user.save((err, user) => {
-                    if (!err)
+                    if (!err) {
+                        req.flash('success_msg', 'You are created an User');
                         res.redirect('/admin');
-                    else {
+                    } else {
                         if (err.name == 'ValidationError') {
                             handleValidationError(err, req.body);
                             res.render("user/add", {});
@@ -95,7 +111,10 @@ router.post('/', (req, res) => {
 //edit
 function updateRecord(req, res) {
     User.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, user) => {
-        if (!err) { res.redirect('/admin'); } else {
+        if (!err) {
+            req.flash('success_msg', 'You are edited user seccess');
+            res.redirect('/admin');
+        } else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
                 res.render("admin/edit", {});
@@ -108,14 +127,19 @@ function updateRecord(req, res) {
 //reset password
 router.post('/resetPassword/:id', (req, res) => {
         const {
-            password
+            password,
+            password2
         } = req.body;
         let errors = [];
+        if (password.length < 6) {
+            req.flash("error", "Password must be at least 6 characters");
+            return res.redirect('/admin');
+        }
         if (req.body.password === req.body.password2) {
             User.findOne({ _id: req.params.id }, (err, user) => {
                 user.password = bcrypt.hashSync(password, 10);
                 user.save();
-                console.log(user.password);
+                // console.log(user.password);
                 res.redirect('/admin');
                 req.flash(
                     'success_msg',
@@ -138,23 +162,11 @@ function handleValidationError(err, body) {
         }
     }
 }
-//
-
-// function resetRecord(req, res) {
-//     User.findOneAndUpdate({ _id: req.body._id }, bcrypt.hashSync(req.body.password, 10), { new: true }, (err, user) => {
-//         if (!err) { res.redirect('/admin'); } else {
-//             if (err.name == 'ValidationError') {
-//                 handleValidationError(err, req.body);
-//                 res.render("admin/resetPassword", { user: user })
-//             } else
-//                 console.log('Error during record update : ' + err);
-//         }
-//     });
-// }
 // //
 router.get('/delete/:id', (req, res) => {
     User.findByIdAndRemove(req.params.id, (err, user) => {
         if (!err) {
+            req.flash('error_msg', 'You are deleted an user');
             res.redirect('/admin');
         } else { console.log('Error in user delete :' + err); }
     });

@@ -1,10 +1,9 @@
 /* sign in FORM */
 
 body {
-    background-image: url(/images/img00.png);
+    background-image: url("/images/img00.png");
     height: 100%;
     /* Center and scale the image nicely */
-    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }

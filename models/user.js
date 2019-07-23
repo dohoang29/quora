@@ -19,19 +19,22 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    role: {
+        type: String,
+        default: "user",
+        enum: ["user", "admin"]
+    },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
-    isAdmin: { type: Boolean, default: false },
+    isBan: { type: Boolean, default: false },
     following: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Post"
     }],
-    topic: [
-      {
+    topic: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Topic"
-      }
-    ],
+    }],
     dateCreated: { type: Date, default: Date.now },
     isActive: {
         type: Boolean,
