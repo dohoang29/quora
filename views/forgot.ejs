@@ -24,7 +24,7 @@
     <div id="logreg-forms">
         <form action="/forgot" method="post" class="form-reset">
             <% include ./partials/messages %>
-                <input type="email" id="resetEmail" class="form-control" placeholder="Email address" value="<%= typeof email != 'undefined' ? email : '' %>">
+                <input name="email" type="email" id="resetEmail" class="form-control" placeholder="Email address" value="<%= typeof email != 'undefined' ? email : '' %>">
                 <button class="btn btn-primary btn-block" type="submit">Reset Password</button>
                 <a href="/login" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
         </form>

@@ -106,37 +106,27 @@ function updateRecord(req, res) {
 }
 
 //reset password
-router.post('/resetPassword', (req, res) => {
-    const {
-        password
-    } = req.body;
-    let errors = [];
-    User.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, user) => {
-        if (!err) {
-            req.flash('error', 'Password is invalid ');
-            console.log(user);
-            return res.redirect('back');
-        }
+router.post('/resetPassword/:id', (req, res) => {
+        const {
+            password
+        } = req.body;
+        let errors = [];
         if (req.body.password === req.body.password2) {
-            console.log('ok =');
-            console.log(user.password);
-            user.password = bcrypt.hashSync(req.body.password, 10);
-            console.log('password' + user.password)
-            user.save().then(user => {
-                console.log(user);
+            User.findOne({ _id: req.params.id }, (err, user) => {
+                user.password = bcrypt.hashSync(password, 10);
+                user.save();
+                console.log(user.password);
+                res.redirect('/admin');
                 req.flash(
                     'success_msg',
-                    'You are now reseted password'
-                );
-                res.redirect('/admin');
+                    'You are now reseted password')
             })
         } else {
             req.flash("error", "Passwords do not match.");
             return res.redirect('back');
         }
     })
-});
-//
+    //
 function handleValidationError(err, body) {
     for (field in err.errors) {
         switch (err.errors[field].path) {
