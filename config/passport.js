@@ -15,6 +15,9 @@ module.exports = function(passport) {
                 if (!user) {
                     return done(null, false, { message: 'That email is not registered' });
                 }
+                if (user.isBan == true) {
+                    return done(null, false, { message: 'Accout is ban, please contact admin for support' });
+                }
 
                 // Match password
                 bcrypt.compare(password, user.password, (err, isMatch) => {

@@ -1,5 +1,4 @@
-/node_modules
-
+/config/mailler.js
 # dependencies
 /node_modules
 

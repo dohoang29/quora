@@ -133,7 +133,11 @@ router.post('/forgot', function(req, res, next) {
                     req.flash('error', 'No account with that email address exists.');
                     return res.redirect('/forgot');
                 }
-
+                if (user.isBan == true) {
+                    req.flash('error', 'Accout is ban, please contact admin for support.');
+                    return res.redirect('/login');
+                    // return done(null, false, { message: 'This user is ban' });
+                }
                 user.resetPasswordToken = token;
                 user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 

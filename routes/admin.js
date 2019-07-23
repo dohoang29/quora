@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
 router.get('/add', (req, res) => {
     res.render("admin/add")
 });
-//
+// find id
 router.get('/:id', (req, res) => {
     User.findById(req.params.id, (err, user) => {
         if (!err) {
@@ -41,7 +41,44 @@ router.get('/:id', (req, res) => {
         }
     });
 });
-//
+//delete 
+router.get('/delete/:id', (req, res) => {
+    User.findByIdAndRemove(req.params.id, (err, user) => {
+        if (!err) {
+            req.flash('success_msg', 'You are deleted an user');
+            res.redirect('/admin');
+        } else { console.log('Error in user delete :' + err); }
+    });
+});
+//ban
+router.get('/ban/:id', (req, res) => {
+    User.findById(req.params.id, (err, user) => {
+        if (!err) {
+            if (user.isBan == false) {
+                user.isBan = true;
+                user.save();
+                console.log(user.isBan);
+                req.flash(
+                    'success_msg',
+                    'You are ban an user success');
+                res.redirect('/admin');
+            } else {
+                user.isBan = false;
+                user.save();
+                console.log(user.isBan);
+                console.log('test hoang');
+                req.flash(
+                    'success_msg',
+                    'You are unban an user success');
+                res.redirect('/admin');
+            }
+            // req.flash('success_msg', 'You are ban an user');
+            // res.redirect('/admin');
+        } else { console.log('Error in user ban :' + err); }
+    });
+});
+
+//reset pass
 router.get('/resetPassword/:id', (req, res) => {
     User.findById(req.params.id, (err, user) => {
         if (!err) {
@@ -112,7 +149,7 @@ router.post('/', (req, res) => {
 function updateRecord(req, res) {
     User.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, user) => {
         if (!err) {
-            req.flash('success_msg', 'You are edited user seccess');
+            req.flash('success_msg', 'You are edited user success');
             res.redirect('/admin');
         } else {
             if (err.name == 'ValidationError') {
@@ -162,14 +199,6 @@ function handleValidationError(err, body) {
         }
     }
 }
-// //
-router.get('/delete/:id', (req, res) => {
-    User.findByIdAndRemove(req.params.id, (err, user) => {
-        if (!err) {
-            req.flash('error_msg', 'You are deleted an user');
-            res.redirect('/admin');
-        } else { console.log('Error in user delete :' + err); }
-    });
-});
+// 
 
 module.exports = router;

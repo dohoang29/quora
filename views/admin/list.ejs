@@ -40,7 +40,7 @@
                                 <td>
                                     <a href="/admin/<%= user._id%>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
                                     <a href="/admin/delete/<%= user._id%> " onclick="return confirm( 'Are you sure to delete this record ?'); "><i class="fa fa-trash fa-lg " aria-hidden="true "></i></a>
-                                    <a href="/admin/ban/:_id " onclick="return confirm( 'Are you sure to ban this record ?'); "><i class="fa fa-ban fa-lg " aria-hidden="true "></i></a>
+                                    <a href="/admin/ban/<%= user._id%>"><i onclick="myFunction(this)"  class="fa fa-user fa-lg " aria-hidden="true "></i></a>
                                     <a href="/admin/resetPassword/<%= user._id%>"><i class="fa fa-key fa-lg" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
@@ -49,7 +49,11 @@
                 </table>
         </div>
     </div>
-
+    <script>
+        function myFunction(x) {
+            x.classList.toggle("fa-user-times");
+        }
+    </script>
 </body>
 
 </html>
