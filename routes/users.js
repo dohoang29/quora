@@ -194,13 +194,6 @@ router.post('/reset/:token', function(req, res) {
                         return res.redirect('back');
                     }
                     if (req.body.password === req.body.confirm) {
-
-                        console.log('ok =');
-                        // bcrypt.genSalt(10, (err, salt) => {
-                        //     bcrypt.hash(req.body.password, salt, (err, hash) => {
-                        //         req.body.passport = hash;
-                        //         console.log(hash);
-                        //         console.log(req.body.hash);
                         user.resetPasswordToken = undefined;
                         user.resetPasswordExpires = undefined;
                         user.password = bcrypt.hashSync(req.body.password, 10);
