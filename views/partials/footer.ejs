@@ -16,10 +16,11 @@
                 $(this).addClass('nav-active').parent().siblings().children().removeClass('nav-active')	
             })
         })
+        
         var allEditors = document.querySelectorAll( '.ansEditor' );
         allEditors.forEach((editor)=>{
             ClassicEditor.create(editor);
-        })
+        });
             
         </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

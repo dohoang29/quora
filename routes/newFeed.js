@@ -8,7 +8,7 @@ router.get("/",ensureAuthenticated, (req, res) => {
   var publicQuestion = [];
   var privateQuestion = [];
   var limitedQuestion = [];
-  Question.find().populate('topic').exec((err,questions)=>{
+  Question.find().sort({ dateCreated: -1}).populate('topic').exec((err,questions)=>{
     if(err){
       console.log(err);
     }
@@ -19,7 +19,7 @@ router.get("/",ensureAuthenticated, (req, res) => {
           publicQuestion.push(question);
         }
       });
-      Answer.find().populate('topic').populate('question').exec((err,answers)=>{
+      Answer.find().populate('topic').sort({ dateCreated: -1}).populate('question').exec((err,answers)=>{
         if(err){
           console.log(err);
         }
