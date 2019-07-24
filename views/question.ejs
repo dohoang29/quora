@@ -1,0 +1,137 @@
+<% include partials/header.ejs %>
+
+<div class="col-8">
+  <div class="question-page-topic">
+    <a href="#" class="badge badge-secondary">Secondary</a>
+  </div>
+  <div class="question-page-title">
+    <h1 class=" answer-detais-question "><%= question.title %></h1>
+  </div>
+  <div class="answer-btn-wrapper mb-3">
+    <a
+      data-toggle="collapse"
+      href="#<%= question._id %>"
+      role="button"
+      aria-expanded="false"
+      aria-controls="<%= question._id %>"
+      class="answer-button"
+    >
+      <span class="fa fa-edit answer-icon"></span>
+      <strong>Answer</strong>
+    </a>
+  </div>
+
+  <div class="collapse" id="<%= question._id %>">
+    <div class="card w-100 mt-2">
+      <div class="card-header">
+        <img
+          src="/images/IMG_20150427_214234.jpg"
+          alt="avatar"
+          class="add-ans-image"
+        />
+        <div class="user-info">
+          <a class="user-name-link" href="#"
+            ><%= currentUser.firstname.toUpperCase()%> <%=
+            currentUser.lastname.toUpperCase()%></a
+          >, knows <% question.topic.forEach((topic)=>{ %>
+          <a class="ans-topic-link" href="/topic/<%= topic._id %>">
+            <%= topic.title %> <% }) %>
+          </a>
+        </div>
+      </div>
+      <form
+        class="ansForm"
+        method="POST"
+        action="/answer/<% question.topic.forEach((topic)=>{ %><%= topic._id %><% }) %>/<%= question._id %>/<%= currentUser._id %>"
+      >
+        <div class="add-ans-card">
+          <textarea
+            name="content"
+            class="ansEditor"
+            placeholder="Write your answer"
+          ></textarea>
+        </div>
+        <div class="card-footer text-muted">
+          <button type="submit" class="btn btn-primary add-question-button">
+            Add Answer
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary cancel-button"
+            data-toggle="collapse"
+            href="#<%= question._id %>"
+            role="button"
+            aria-expanded="false"
+            aria-controls="<%= question._id %>"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="border-bottom my-3"></div>
+  <div class="border-bottom pb-3">
+    <strong> <%= question.answers.length %> Answers </strong>
+  </div>
+  <% answers.forEach((answer)=>{ %>
+  <div class="border-bottom">
+    <div class="answer-detais-user-info">
+      <img
+        src="/images/IMG_20150427_214234.jpg"
+        alt="avatar"
+        class="add-ans-image"
+      />
+      <div class="user-info">
+        <a class="user-name-link" href="#"
+          ><%= answer.author.firstname.toUpperCase()%> <%=
+          answer.author.lastname.toUpperCase()%></a
+        >
+        <div class="answer-time">
+          Answered <%= answer.dateCreated %>
+        </div>
+      </div>
+    </div>
+    <div class="answer-content">
+      <%- answer.content %>
+    </div>
+    <a
+      class="more-options-button"
+      href="#"
+      role="button"
+      id="dropdownMenuOptions"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+      ><i class="fas fa-ellipsis-h"></i
+    ></a>
+    <div
+      class="dropdown-menu dropdown-menu-right"
+      aria-labelledby="dropdownMenuOptions"
+    >
+      <a
+        class="dropdown-item"
+        data-toggle="collapse"
+        href="#collapseEditAnswer"
+        role="button"
+        aria-expanded="false"
+        aria-controls="collapseEditAnswer"
+        >Edit</a
+      >
+      <form
+        action="/answer/<%= answer.question._id %>/<%= answer._id %>?_method=DELETE"
+        method="post"
+      >
+        <% if(answer.isActive == false){ %>
+        <li class="dropdown-item disabled">Delete</li>
+        <% } else {%>
+        <button class="dropdown-item" type="submit">Delete</button>
+        <% } %>
+      </form>
+    </div>
+  </div>
+  <% }) %>
+</div>
+<div class="col-4">aaaaaaaaaaaaaaa</div>
+
+<% include partials/footer.ejs %>

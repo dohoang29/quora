@@ -8,14 +8,14 @@
           alt="avatar"
           class="add-ques-image"
         />
-        User Name
+        <a class="user-name-link" href="#"><%= currentUser.firstname.toUpperCase()%> <%= currentUser.lastname.toUpperCase()%></a>
       </div>
       <a
         href="#addQuestionModal"
         class="add-question-link"
         data-toggle="modal"
         data-target="#addQuestionModal"
-        ><h3 class="topic-title text-muted mt-1">
+        ><h3 class="modal-title text-muted mt-1">
           <strong>What is your question?</strong>
         </h3></a
       >
@@ -28,7 +28,7 @@
         src="/images/question-icon.png"
         alt="Question for you"
       />
-      <strong>What is your question?</strong>
+      <strong>Question for <a class="user-name-link" href="#"><%= currentUser.firstname.toUpperCase()%> <%= currentUser.lastname.toUpperCase()%></a></strong>
     </div>
     
     <% questions.forEach((question)=>{ %>
@@ -36,12 +36,12 @@
       <div class="card-subtitle text-muted">
         <p class="question-topic">
           <% question.topic.forEach((topic)=>{ %> Question added ·
-          <a class="number-answer-link" href="/topic/<%= topic.id %>">
+          <a class="number-answer-link" href="/topic/<%= topic._id %>">
             <%= topic.title %> <% }) %>
           </a>
         </p>
       </div>
-      <a class="" href="#">
+      <a href="/question/<%= question._id %>">
         <h3 class="question-title mt-1">
           <strong><%= question.title %></strong>
         </h3>
@@ -49,11 +49,9 @@
       <div class="question-more-info">
         <p>
           <strong>
-              <% question.topic.forEach((topic)=>{ %>
-            <a class="number-answer-link" href="/answer/<%= topic.id %>/<%= question.id %>">
-              <% }) %>
-              <%if(question.answer == null ){%> <%= 0 %> <%}else{%>
-              <%=question.answer.length%> <%}%> Answers
+            <a class="number-answer-link" href="/question/<%= question._id %>">
+              <%if(question.answers == null ){%> <%= 0 %> <%}else{%>
+              <%=question.answers.length%> <%}%> Answers
             </a>
           </strong>
           · Last followed 10m ago
@@ -81,14 +79,14 @@
               class="add-ans-image"
             />
             <div class="user-info">
-              User Name, knows 
+              <a class="user-name-link" href="#"><%= currentUser.firstname.toUpperCase()%> <%= currentUser.lastname.toUpperCase()%></a>, knows 
               <% question.topic.forEach((topic)=>{ %>
                 <a class="ans-topic-link" href="/topic/<%= topic._id %>"> 
                   <%= topic.title %> <% }) %> 
                 </a>
             </div>
           </div>
-          <form class="ansForm" method="POST" action="/answer/<% question.topic.forEach((topic)=>{ %><%= topic._id %><% }) %>/<%= question._id %>">
+          <form class="ansForm" method="POST" action="/answer/<% question.topic.forEach((topic)=>{ %><%= topic._id %><% }) %>/<%= question._id %>/<%= currentUser._id %>">
             <div class="add-ans-card">
               <textarea
                 name="content"

@@ -7,20 +7,20 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+const methodOverride = require("method-override");
 
 require('./config/passport')(passport); // Passport Config
 
 const answer = require("./models/answer");
 const Question = require("./models/question");
 const Topic = require("./models/topic");
-
 const app = express();
 const ipAdress = process.env.ip || ip.address();
 const port = process.env.port || 3000;
 
 const indexRoutes = require("./routes/index"),
     userRoutes = require("./routes/users"),
-    //commentsRoutes = require("./routes/comments"),
+    questionRoutes = require("./routes/question"),
     feedRoutes = require("./routes/newFeed"),
     answerRoutes = require("./routes/answer"),
     topicRoutes = require("./routes/topics");
@@ -31,6 +31,7 @@ app.use(cookieParser('secret'));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 // Express session
 app.use(
     session({
@@ -65,6 +66,7 @@ app.use("/feed", feedRoutes);
 app.use("/topic", topicRoutes);
 app.use("/answer", answerRoutes);
 app.use("/admin", adminRoutes);
+app.use("/question", questionRoutes);
 
 app.listen(port, ipAdress, () => {
     console.log("Server is listening at " + ipAdress + ":" + port);
