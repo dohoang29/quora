@@ -65,11 +65,8 @@ app.use('/', indexRoutes);
 app.use("/feed", feedRoutes);
 app.use("/topic", topicRoutes);
 app.use("/answer", answerRoutes);
-<<<<<<< HEAD
 app.use("/admin", adminRoutes);
-=======
 app.use("/question", questionRoutes);
->>>>>>> Hoang
 
 app.listen(port, ipAdress, () => {
     console.log("Server is listening at " + ipAdress + ":" + port);
