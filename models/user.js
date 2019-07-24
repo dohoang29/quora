@@ -29,7 +29,11 @@ const userSchema = new mongoose.Schema({
     isBan: { type: Boolean, default: false },
     following: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Post"
+        ref: "Question"
+    }],
+    answer: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Answer"
     }],
     topic: [{
         type: mongoose.Schema.Types.ObjectId,

@@ -6,35 +6,22 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
 
-router.get('/', (req, res) => {
-    if (req.isAuthenticated()) {
-        console.log(req.session.passport.user);
-        User.findById(req.session.passport.user, (err, user) => {
-            // console.log(user);
-            if (user.role == 'admin') {
-                User.find((err, users) => {
-                    if (!err) {
-                        res.render("admin/list", { users: users })
-                    } else {
-                        console.log('Error in retrieving user list :' + err);
-                    }
-                });
-            } else {
-                console.log('not admin');
-                res.send('Acess Denied');
-            }
-        });
+router.get('/', isLoggedInAdmin, (req, res) => {
 
-    } else {
-        console.log('not login');
-        res.send('Acess Denied');
-    }
+    User.find((err, users) => {
+        if (!err) {
+            res.render("admin/list", { users: users })
+        } else {
+            console.log('Error in retrieving user list :' + err);
+        }
+    });
 });
-router.get('/add', (req, res) => {
+
+router.get('/add', isLoggedInAdmin, (req, res) => {
     res.render("admin/add")
 });
 // find id
-router.get('/:id', (req, res) => {
+router.get('/:id', isLoggedInAdmin, (req, res) => {
     User.findById(req.params.id, (err, user) => {
         if (!err) {
             res.render("admin/edit", { user: user })
@@ -199,6 +186,24 @@ function handleValidationError(err, body) {
         }
     }
 }
-// 
+// function test login admin
+function isLoggedInAdmin(req, res, next) {
+    if (req.isAuthenticated()) {
+        console.log(req.session.passport.user);
+        User.findById(req.session.passport.user, (err, user) => {
+            // console.log(user);
+            if (user.role == 'admin') {
+                return next();
+            } else {
+                console.log('not admin');
+                res.send('Acess Denied');
+            }
+        });
 
+    } else {
+        console.log('not login');
+        res.send('Acess Denied');
+    }
+
+}
 module.exports = router;
