@@ -3,7 +3,7 @@ const router = express.Router();
 const Answer = require("../models/answer");
 const Question = require("../models/question");
 const Topic = require("../models/topic");
-
+const User = require("../models/User");
 router.get("/:answerId", (req, res) => {
   Answer.findOne({
     _id: req.params.answerId
@@ -124,6 +124,14 @@ router.post("/:topicId/:questionId/:userId", (req, res) => {
         } else {
           topic.answers.push(answer._id);
           topic.save();
+        }
+      });
+      User.findOne({ _id: userId }).exec((err, user) => {
+        if (err) {
+          console.log(err);
+        } else {
+          user.answer.push(answer._id);
+          user.save();
         }
       });
       res.redirect("/answer/" + answer._id);

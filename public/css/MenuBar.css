@@ -33,9 +33,6 @@
 .logo:hover {
   color: #b92b27;
 }
-.clearfix {
-  clear: both;
-}
 .navi-button {
   height: 50px;
   color: #999;
@@ -96,6 +93,7 @@
   height: 35px;
   width: auto;
   border-radius: 50%;
+  -webkit-appearance: none !important;
 }
 .question-btn {
   margin-left: 10px;

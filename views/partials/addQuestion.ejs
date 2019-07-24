@@ -24,7 +24,7 @@
           <span aria-hidden="true" class="custom-modal-close">&times;</span>
         </button>
       </div>
-      <form action="/feed" method="POST">
+      <form action="/feed/<%= currentUser._id %>" method="POST">
         <div class="modal-body">
           <div class="modal-section-topic">
             <div class="form-group">

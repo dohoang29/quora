@@ -17,7 +17,6 @@ router.get("/:questionId", (req, res) => {
             if (err) {
                 console.log(err);
             } else {
-              console.log(question);
               res.render("question", { question: question, answers : answers });
             }
           });
@@ -25,4 +24,16 @@ router.get("/:questionId", (req, res) => {
     });
 });
 
+router.delete("/:questionId", (req,res) =>{
+  var questionId = req.params.questionId;
+  Question.findOne({ _id: questionId },(err,question)=>{
+    if (err) {
+      console.log(err);
+    } else {
+      question.isActive = false;
+      question.save();
+      res.redirect("/feed");
+    }
+  })
+})
 module.exports = router;

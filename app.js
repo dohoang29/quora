@@ -45,7 +45,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
-    Topic.find({}, (err, topics) => {
+    Topic.find().populate("followers").populate("answers").populate("questions").exec((err, topics) => {
         if (err) {
             console.log(err);
         } else {

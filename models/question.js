@@ -7,6 +7,10 @@ var questionSchema = new mongoose.Schema({
       ref: "Topic"
     }
   ],
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
   url: String,
   title: String,
   privacy: String,
