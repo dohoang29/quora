@@ -16,7 +16,10 @@ const {
 router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
 // Register Page
 router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
-
+//profile
+router.get('/profile', function(req, res) {
+    res.render('profile.ejs');
+});
 // Register
 router.post('/register', (req, res) => {
     const {
