@@ -1,24 +1,118 @@
 <% include partials/header.ejs %>
-<div class="card w-100">
-  <div class="card-body">
-    <h1><%= answer.question.title %></h1>
+<div class="col-lg"></div>
+<div class="col-lg-8">
+  <% if(answer.isActive == false){ %>
+  <div class="alert alert-danger" role="alert">
+    Your answer is deleted !!!
+    <form
+      class="restore-answer-form"
+      action="/answer/<%= answer.question._id %>/<%= answer._id %>?_method=PUT"
+      method="post"
+    >
+      <button class="btn btn-link" type="submit">Restore Answer</button>
+    </form>
   </div>
-  <div>
-    <img
-      src="/images/IMG_20150427_214234.jpg"
-      alt="avatar"
-      class="add-ans-image"
-    />
-    <div class="user-info">
-      User Name, knows <% answer.topic.forEach((topic)=>{ %>
-      <a class="ans-topic-link" href="/topic/<%= topic._id %>">
-        <%= topic.title %> <% }) %>
+  <% } %>
+  <div class="card w-100 card-answer-detais">
+    <div class="card-body p-0">
+      <a class="answer-detais-question-link" href="/question/<%= answer.question._id %>">
+        <h1 class=" answer-detais-question "><%= answer.question.title %></h1>
       </a>
     </div>
-  </div>
-  <div class="answer-content">
+    <div class="answer-detais-user-info">
+      <img
+        src="/images/IMG_20150427_214234.jpg"
+        alt="avatar"
+        class="add-ans-image"
+      />
+      <div class="user-info">
+        <a class="user-name-link" href="#"
+          ><%= currentUser.firstname.toUpperCase()%> <%=
+          currentUser.lastname.toUpperCase()%></a
+        >, knows <% answer.topic.forEach((topic)=>{ %>
+        <a class="ans-topic-link" href="/topic/<%= topic._id %>">
+          <%= topic.title %> <% }) %>
+        </a>
+        <div class="answer-time">
+          Answered <%= answer.dateCreated %>
+        </div>
+      </div>
+    </div>
+    <div class="answer-content">
       <%- answer.content %>
+    </div>
+    <a
+      class="more-options-button"
+      href="#"
+      role="button"
+      id="dropdownMenuOptions"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+      ><i class="fas fa-ellipsis-h"></i
+    ></a>
+    <div
+      class="dropdown-menu dropdown-menu-right"
+      aria-labelledby="dropdownMenuOptions"
+    >
+      <a
+        class="dropdown-item"
+        data-toggle="collapse"
+        href="#collapseEditAnswer"
+        role="button"
+        aria-expanded="false"
+        aria-controls="collapseEditAnswer"
+        >Edit</a
+      >
+      <form
+        action="/answer/<%= answer.question._id %>/<%= answer._id %>?_method=DELETE"
+        method="post"
+      >
+        <% if(answer.isActive == false){ %>
+        <li class="dropdown-item disabled">Delete</li>
+        <% } else {%>
+        <button class="dropdown-item" type="submit">Delete</button>
+        <% } %>
+      </form>
+    </div>
+  </div>
+  <div class="collapse " id="collapseEditAnswer">
+    <div class="card w-100 card-answer-detais mt-3 p-4 card-body">
+      <form
+        class="ansForm"
+        method="POST"
+        action="/answer/<%= answer._id %>?_method=PUT"
+      >
+        <div class="add-ans-card">
+          <textarea
+            name="content"
+            class="ansEditor"
+            placeholder="Write your answer"
+          ></textarea>
+        </div>
+        <div class="card-footer text-muted">
+          <button type="submit" class="btn btn-primary add-question-button">
+            Add Answer
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary cancel-button"
+            data-toggle="collapse"
+            href="#collapseEditAnswer"
+            role="button"
+            aria-expanded="false"
+            aria-controls="collapseEditAnswer"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="card w-100 card-answer-detais mt-3 p-4">
+    <h1>About Author</h1>
   </div>
 </div>
+<div class="col-lg"></div>
 
 <% include partials/footer.ejs %>
