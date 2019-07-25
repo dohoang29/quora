@@ -15,6 +15,10 @@ router.get("/login", forwardAuthenticated, (req, res) => res.render("login"));
 // Register Page
 router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
 //profile
+//favorite
+router.get('/favorite', function(req, res) {
+    res.render('favorite.ejs')
+});
 router.get('/profile', isLoggedIn, function(req, res) {
     res.render('profile.ejs');
 });
@@ -80,9 +84,9 @@ router.post("/register", (req, res) => {
                             .then(user => {
                                 req.flash(
                                     "success_msg",
-                                    "You are now registered and can log in"
+                                    "Please choose favorite topic to Feed."
                                 );
-                                res.redirect("/login");
+                                res.redirect("/favorite");
                             })
                             .catch(err => console.log(err));
                     });
@@ -128,7 +132,6 @@ router.post('/forgot', function(req, res, next) {
                 if (user.isBan == true) {
                     req.flash('error', 'Accout is ban, please contact admin for support.');
                     return res.redirect('/login');
-                    // return done(null, false, { message: 'This user is ban' });
                 }
                 user.resetPasswordToken = token;
                 user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
