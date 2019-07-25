@@ -1,278 +1,306 @@
 body {
-  background: #fafafa;
+    background: #fafafa;
 }
+
 *:focus {
-  outline: none !important;
-  border-color: transparent !important;
-  box-shadow: 0 0 0 0 !important;
+    outline: none !important;
+    border-color: transparent !important;
+    box-shadow: 0 0 0 0 !important;
 }
 
 .w-20 {
-  width: 20%;
+    width: 20%;
 }
+
 .area {
-  padding-top: 100px;
+    padding-top: 80px;
 }
+
 .topic-image {
-  width: auto;
-  height: 25px;
-  border-radius: 2px;
-  float: left;
+    width: auto;
+    height: 25px;
+    border-radius: 2px;
+    float: left;
 }
 
 .topic-title {
-  color: #666;
-  margin-bottom: 0%;
-  padding-top: 5px;
-  display: inline-block;
+    color: #666;
+    margin-bottom: 0%;
+    padding-top: 5px;
+    display: inline-block;
 }
+
 .modal-title {
-  color: #666;
-  margin-bottom: 0%;
-  padding-top: 5px;
-  display: inline-block;
-  font-family: Georgia, "Times New Roman", Times, serif;
+    color: #666;
+    margin-bottom: 0%;
+    padding-top: 5px;
+    display: inline-block;
+    font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .fs-13 {
-  font-size: 13px;
+    font-size: 13px;
 }
+
 .topic-link {
-  width: 100%;
-  padding: 10px;
+    width: 100%;
+    padding: 10px;
 }
+
 .user-name-link {
-  text-decoration: none !important;
-  color: inherit;
+    text-decoration: none !important;
+    color: inherit;
 }
+
 .link-active {
-  background: #e6e6e6;
+    background: #e6e6e6;
 }
 
 .topic-link:hover {
-  text-decoration: none;
+    text-decoration: none;
 }
+
 .add-question-card {
-  background: #ffff;
+    background: #ffff;
 }
+
 .add-ques-image {
-  width: auto;
-  height: 25px;
-  border-radius: 50%;
+    width: auto;
+    height: 25px;
+    border-radius: 50%;
 }
+
 .add-question-link:hover {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .custom-modal-background {
-  background-color: #fafafa;
-  padding: 0%;
+    background-color: #fafafa;
+    padding: 0%;
 }
+
 .custom-modal-title {
-  height: 63px;
-  padding: 1rem;
+    height: 63px;
+    padding: 1rem;
 }
+
 .modal-title-active {
-  color: #b92b27;
-  border-bottom: 2px solid #b92b27;
+    color: #b92b27;
+    border-bottom: 2px solid #b92b27;
 }
+
 .custom-modal-close {
-  position: absolute;
-  top: 5%;
-  right: 5%;
+    position: absolute;
+    top: 5%;
+    right: 5%;
 }
 
 .modal-section-topic {
-  border-bottom: 1px solid rgb(226, 226, 226);
-  margin-bottom: 20px;
+    border-bottom: 1px solid rgb(226, 226, 226);
+    margin-bottom: 20px;
 }
+
 .modal-section-question {
-  border-bottom: 1px solid rgb(226, 226, 226);
-  margin-bottom: 20px;
+    border-bottom: 1px solid rgb(226, 226, 226);
+    margin-bottom: 20px;
 }
+
 .topic-form {
-  color: #666;
-  padding-left: 10px;
-  height: 40px;
-  border: 1px solid #fafafa;
-  border-radius: 0.2rem;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background: url(../images/arrow-down.png) no-repeat right #fafafa;
-  background-position-x: 97%;
-  background-size: 10px;
+    color: #666;
+    padding-left: 10px;
+    height: 40px;
+    border: 1px solid #fafafa;
+    border-radius: 0.2rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url(../images/arrow-down.png) no-repeat right #fafafa;
+    background-position-x: 97%;
+    background-size: 10px;
 }
 
 .custom-question-input {
-  border: 0;
-  border-radius: 0;
-  height: 60px;
-  -webkit-appearance: none;
-  padding: 0;
+    border: 0;
+    border-radius: 0;
+    height: 60px;
+    -webkit-appearance: none;
+    padding: 0;
 }
 
 .custom-question-input::-webkit-input-placeholder {
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-weight: bold;
-  font-size: 25px;
-  color: rgb(122, 122, 122);
-  overflow: visible;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight: bold;
+    font-size: 25px;
+    color: rgb(122, 122, 122);
+    overflow: visible;
 }
+
 .custom-question-input:-ms-input-placeholder {
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-weight: bold;
-  font-size: 25px;
-  color: rgb(122, 122, 122);
-  overflow: visible;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight: bold;
+    font-size: 25px;
+    color: rgb(122, 122, 122);
+    overflow: visible;
 }
+
 .custom-question-input::placeholder {
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-weight: bold;
-  font-size: 25px;
-  color: rgb(122, 122, 122);
-  overflow: visible;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight: bold;
+    font-size: 25px;
+    color: rgb(122, 122, 122);
+    overflow: visible;
 }
 
 .custom-link-input {
-  border: 0;
-  border-radius: 0;
-  height: 30px;
-  -webkit-appearance: none;
-  padding: 0;
+    border: 0;
+    border-radius: 0;
+    height: 30px;
+    -webkit-appearance: none;
+    padding: 0;
 }
+
 .cancel-button,
 .cancel-button:hover {
-  background: transparent;
-  border: 0;
-  color: #666;
+    background: transparent;
+    border: 0;
+    color: #666;
 }
+
 .cancel-button:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
+
 .modal-footer button {
-  margin: 20px;
+    margin: 20px;
 }
 
 .add-question-button {
-  background-color: rgb(62, 120, 173);
-  border-color: rgb(62, 120, 173);
-  font-weight: bold;
+    background-color: rgb(62, 120, 173);
+    border-color: rgb(62, 120, 173);
+    font-weight: bold;
 }
 
 .add-question-button:hover {
-  background-color: #b92b27;
-  border-color: #b92b27;
+    background-color: #b92b27;
+    border-color: #b92b27;
 }
 
 .question-topic {
-  margin: 0;
-  font-size: 13px;
-  color: #949494;
+    margin: 0;
+    font-size: 13px;
+    color: #949494;
 }
 
 .question-title {
-  font-size: 1.5rem;
-  width: 100%;
-  color: #333;
-  margin-bottom: 10px;
-  padding-top: 5px;
-  font-family: Georgia;
-  display: inline-block;
+    font-size: 1.5rem;
+    width: 100%;
+    color: #333;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    font-family: Georgia;
+    display: inline-block;
 }
 
 .question-more-info p {
-  margin-bottom: 20px;
-  color: #949494;
+    margin-bottom: 20px;
+    color: #949494;
 }
 
 .number-answer-link {
-  text-decoration: none;
-  color: #949494;
+    text-decoration: none;
+    color: #949494;
 }
 
 .number-answer-link:hover {
-  text-decoration: none;
-  color: #949494;
-  border-bottom: 1px solid #949494;
-  border-bottom: 1px solid;
+    text-decoration: none;
+    color: #949494;
+    border-bottom: 1px solid #949494;
+    border-bottom: 1px solid;
 }
+
 .answer-button {
-  text-decoration: none;
-  color: rgb(92, 92, 92);
-  font-size: 15px;
+    text-decoration: none;
+    color: rgb(92, 92, 92);
+    font-size: 15px;
 }
+
 .answer-button:hover {
-  text-decoration: none;
-  color: #329bff;
+    text-decoration: none;
+    color: #329bff;
 }
 
 .answer-icon {
-  font-size: 25px;
-  color: #329bff;
-  float: left;
-  padding-right: 3px;
+    font-size: 25px;
+    color: #329bff;
+    float: left;
+    padding-right: 3px;
 }
+
 .question-card {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .add-ans-image {
-  width: auto;
-  height: 40px;
-  border-radius: 50%;
-  padding-right: 5px;
-  float: left;
+    width: auto;
+    height: 40px;
+    border-radius: 50%;
+    padding-right: 5px;
+    float: left;
 }
 
 .user-info {
-  width: inherit;
-  display: inline-block;
+    width: inherit;
+    display: inline-block;
 }
+
 .ansForm,
 .ansForm textarea {
-  min-height: 200px;
+    min-height: 200px;
 }
 
 .add-ans-card {
-  min-height: 200px;
+    min-height: 200px;
 }
 
 .card-answer-detais {
-  padding: 30px;
+    padding: 30px;
 }
 
 .answer-detais-question {
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 26px;
-  font-weight: bold;
-  padding-bottom: 20px;
-  color: #333;
-  text-decoration: none;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 26px;
+    font-weight: bold;
+    padding-bottom: 20px;
+    color: #333;
+    text-decoration: none;
 }
-.answer-detais-question-link:hover{
-  text-decoration: none;
+
+.answer-detais-question-link:hover {
+    text-decoration: none;
 }
+
 .answer-detais-user-info {
-  padding-bottom: 20px;
+    padding-bottom: 20px;
 }
 
 .answer-time {
-  color: #949494;
-  font: 13px;
+    color: #949494;
+    font: 13px;
 }
 
 .more-options-button {
-  text-decoration: none;
-  color: inherit;
-  position: absolute;
-  bottom: 20px;
-  right: 30px;
-  font-size: 20px;
+    text-decoration: none;
+    color: inherit;
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    font-size: 20px;
 }
-.restore-answer-form{
+
+.restore-answer-form {
     display: inline;
 }
-.restore-answer-form button{
+
+.restore-answer-form button {
     padding: 0;
     float: right;
 }

@@ -1,41 +1,42 @@
 <link rel="stylesheet" href="css/styleProfile.css">
 <% include partials/header.ejs %>
     <% include partials/topicSideBar.ejs %>
-        <div class="col-lg-10">
-            <main>
-                <div class="row">
-                    <div class="left col-lg-4">
-                        <div class="photo-left">
-                            <img class="photo" src="https://image.noelshack.com/fichiers/2017/38/2/1505775062-1505606859-portrait-1961529-960-720.jpg" />
-                            <div class="active"></div>
+        <div class="col-lg-8 main-profile">
+            <% include ./partials/messages %>
+                <main>
+                    <div class="row">
+                        <div class="left col-lg-4">
+                            <div class="photo-left">
+                                <img class="photo" src="https://image.noelshack.com/fichiers/2017/38/2/1505775062-1505606859-portrait-1961529-960-720.jpg" />
+                                <div class="user-active"></div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="head col-lg-4">
-                        <h4 class="name">Jane Doe</h4>
-                        <p class="info">UI/UX Designer</p>
-                        <p class="info">jane.doe@gmail.com</p>
-                        <div>
-                            <span class="edit">Edit</span>
-                            <span class="edit">Change password</span></div>
-                    </div>
+                        <div class="head col-lg-4">
+                            <h4 class="name">Jane Doe</h4>
+                            <p class="info">UI/UX Designer</p>
+                            <p class="info">jane.doe@gmail.com</p>
+                            <div>
+                                <span onclick="myFunctionEdit()" class="edit">Edit</span>
+                                <span onclick="myFunctionReset()" class="edit">Change password</span></div>
+                        </div>
 
-                    <div class="stats col-lg-4">
-                        <div class="stat col-xs-4" style="padding-right: 5px;">
-                            <p class="number-stat">3,619</p>
-                            <p class="desc-stat">Followers</p>
+                        <div class="stats col-lg-4">
+                            <div class="stat col-xs-4" style="padding-right: 5px;">
+                                <p class="number-stat">3,619</p>
+                                <p class="desc-stat">Followers</p>
+                            </div>
+                            <div class="stat col-xs-4">
+                                <p class="number-stat">42</p>
+                                <p class="desc-stat">Following</p>
+                            </div>
+                            <div class="stat col-xs-4">
+                                <p class="number-stat">38</p>
+                                <p class="desc-stat">Uploads</p>
+                            </div>
                         </div>
-                        <div class="stat col-xs-4">
-                            <p class="number-stat">42</p>
-                            <p class="desc-stat">Following</p>
-                        </div>
-                        <div class="stat col-xs-4">
-                            <p class="number-stat">38</p>
-                            <p class="desc-stat">Uploads</p>
-                        </div>
-                    </div>
 
-                    <!--
+                        <!--
         <div class="social">
           <i class="fa fa-facebook-square" aria-hidden="true"></i>
           <i class="fa fa-twitter-square" aria-hidden="true"></i>
@@ -43,22 +44,96 @@
           <i class="fa fa-tumblr-square" aria-hidden="true"></i>
         </div>
 -->
-                </div>
-                <div class="right col-lg-12">
-                    <ul class="nav">
-                        <li>Profile</li>
-                        <li>Topic</li>
-                        <li>question</li>
-                        <li>aswer</li>
-                    </ul>
-                    <!--        <span class="follow">Follow</span>-->
-                    <div class="">
-                        <div class="col-md-4">
+                    </div>
+                    <div class="right col-lg-12">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="true">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " id="pills-topic-tab" data-toggle="pill" href="#pills-topic" role="tab" aria-controls="pills-topic" aria-selected="false">Topic</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-question-tab" data-toggle="pill" href="#pills-question" role="tab" aria-controls="pills-question" aria-selected="false">Question</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-answer-tab" data-toggle="pill" href="#pills-answer" role="tab" aria-controls="pills-answer" aria-selected="false">Answer</a>
+                            </li>
+                        </ul>
+                        <div id="userProfile">
+                            <form action="/profile/<%= currentUser._id%>" method="post" class="form-signup" autocomplete="off">
+                                <label class="first-name"><strong>First Name</strong></label>
+                                <input width="25px" type="text" id="user-name" class="form-control" placeholder="First name" name="firstname" value="<%=currentUser.firstname %>">
+                                <label class="last-name"><strong>Last Name</strong></label>
+                                <input width="25px" type="text" id="user-name2" class="form-control" placeholder="Last name" name="lastname" value="<%=currentUser.lastname %>">
+                                <label class="email"><strong>Email</strong></label>
+                                <input type="email" id="user-email" class="form-control" placeholder="Email address" name="email" value=" <%=currentUser.email %>">
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn user-update "><i class="fa fa-database"></i> Update</button>
+                                    <!-- <a href='#' id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a> -->
+                                </div>
+
+                            </form>
 
                         </div>
+                        <div id="userResetpassword">
+                            <form action="/profile/reset/<%= currentUser._id%>" method="post" class="form-signup" autocomplete="off">
+                                <label class="first-name"><strong>Current Password</strong></label>
+                                <input width="25px" type="password" id="user-name" class="form-control" placeholder="*********" name="password">
+                                <label class="last-name"><strong>New Password</strong></label>
+                                <input width="25px" type="password" id="user-name2" class="form-control" placeholder="" name="newPassword">
+                                <label class="email"><strong>Confirm Password</strong></label>
+                                <input type="password" id="user-email" class="form-control" placeholder="" name="newPassword2">
 
+                                <div class="form-group">
+                                    <button type="submit" class="btn user-update "><i class="fa fa-database"></i>Update</button>
+                                    <!-- <a href='#' id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a> -->
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"></div>
+                            <div class="tab-pane fade" id="pills-topic" role="tabpanel" aria-labelledby="pills-topic-tab"></div>
+                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"></div>
+                            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"></div>
+
+                        </div>
+                        <!--        <span class="follow">Follow</span>-->
+                        <div class="">
+                            <div class="col-md-4">
+
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-            </main>
+                </main>
         </div>
+        <script>
+            function myFunctionEdit() {
+                var x = document.getElementById("userProfile");
+                var y = document.getElementById("userResetpassword");
+                if (x.style.display === "block") {
+                    x.style.display = "none";
+                    y.style.display = "none";
+                } else {
+                    x.style.display = "block";
+                    y.style.display = "none";
+                }
+            }
+            //reset
+            function myFunctionReset() {
+                var x = document.getElementById("userProfile");
+                var y = document.getElementById("userResetpassword");
+                if (y.style.display === "block") {
+                    y.style.display = "none";
+                    x.style.display = "none";
+                } else {
+                    y.style.display = "block";
+                    x.style.display = "none";
+                }
+            }
+        </script>
+
         <% include partials/footer.ejs %>
