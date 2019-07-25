@@ -7,15 +7,20 @@
                     <div class="row">
                         <div class="left col-lg-4">
                             <div class="photo-left">
-                                <img class="photo" src="https://image.noelshack.com/fichiers/2017/38/2/1505775062-1505606859-portrait-1961529-960-720.jpg" />
+                                <img class="photo" type="submit" name="upload" src="https://image.noelshack.com/fichiers/2017/38/2/1505775062-1505606859-portrait-1961529-960-720.jpg" />
                                 <div class="user-active"></div>
                             </div>
                         </div>
 
                         <div class="head col-lg-4">
-                            <h4 class="name">Jane Doe</h4>
+                            <h4 class="name">
+                                <%=currentUser.lastname%>
+                                    <%=currentUser.firstname%>
+                            </h4>
                             <p class="info">UI/UX Designer</p>
-                            <p class="info">jane.doe@gmail.com</p>
+                            <p class="info">
+                                <%=currentUser.email%>
+                            </p>
                             <div>
                                 <span onclick="myFunctionEdit()" class="edit">Edit</span>
                                 <span onclick="myFunctionReset()" class="edit">Change password</span></div>

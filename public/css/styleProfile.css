@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    font: arial;
 }
 
 .main-profile {
@@ -130,35 +131,12 @@
     color: #fff;
 }
 
-
-/*
-.social {
-  margin: 5px 0 12px 0;
-  text-align: center;
-  display: inline-block;
-  font-size: 20pt;
-}
-
-.social i {
-  cursor: pointer;
-  margin: 0 15px;
-}
-*/
-
-
-/*
-
-.social i:nth-child(1)  { color: #4267b2; }
-.social i:nth-child(2)  { color: #1da1f2; }
-.social i:nth-child(3)  { color: #bd081c; }
-.social i:nth-child(4)  { color: #36465d; }
-*/
-
 .right {
     margin-top: 30px;
     margin-left: 20px;
     height: 300px;
     padding: 0 25px 0 25px !important;
+    font: arial;
 }
 
 .user-nav {
