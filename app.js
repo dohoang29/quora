@@ -8,6 +8,7 @@ const session = require('express-session');
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
+const moment = require("moment");
 
 require('./config/passport')(passport); // Passport Config
 
@@ -53,6 +54,7 @@ app.use((req, res, next) => {
             res.locals.success_msg = req.flash('success_msg');
             res.locals.error_msg = req.flash('error_msg');
             res.locals.error = req.flash('error');
+            res.locals.moment = moment;
             res.locals.currentUser = req.user;
             next();
         }

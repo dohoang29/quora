@@ -52,7 +52,6 @@ router.post("/:userId", (req, res) => {
     author: userId,
     title: question,
     privacy: privacy,
-    question: question,
     url: link,
     isActive: true
   };
@@ -79,6 +78,42 @@ router.post("/:userId", (req, res) => {
       res.redirect("/feed");
     }
   });
+});
+router.get("/:id/:status", (req,res)=>{
+  var id = req.params.id;
+  var status = req.params.status;
+  Question.findOne({ _id: id}).exec((err,question)=>{
+    if(err){
+      console.log(err);
+    } else{
+      console.log(status);
+      if (status === "upvote"){
+        question.upVoted += 1;
+        question.save();
+      }
+      count = question.upVoted.toString();
+      
+      return res.send(count);
+    }
+  })
+});
+
+router.post("/:id/act", (req,res,next)=>{
+  var action = req.body.action;
+  Question.findOne({ _id: req.params.id}).exec((err,question)=>{
+    if(err){
+      console.log(err);
+    }
+    else{
+      if(action === 'Upvote'){
+        question.upVoted += 1;
+      }
+      else{
+        question.upVoted -= 1;
+      }
+      res.send(question.upVoted);
+    }
+  })
 });
 
 module.exports = router;

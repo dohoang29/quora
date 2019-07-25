@@ -28,7 +28,7 @@ var questionSchema = new mongoose.Schema({
       ref: "User"
     }
   ],
-  upVoted: Number,
+  upVoted: { type: Number, default: 0 },
   isActive: Boolean
 });
 

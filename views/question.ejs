@@ -11,6 +11,12 @@
   <div class="question-page-title">
     <h1 class=" answer-detais-question "><%= question.title %></h1>
   </div>
+  <% if(question.url != null){ %>
+    <div class="pb-3">
+      <a href="<%=question.url%>"><i><%=question.url%></i></a>
+    </div>
+  <% } %>
+  
   <div class="answer-btn-wrapper mb-3">
     <a
       data-toggle="collapse"
@@ -92,7 +98,7 @@
           answer.author.lastname.toUpperCase()%></a
         >
         <div class="answer-time">
-          Answered <%= answer.dateCreated %>
+          Answered <%= moment(answer.dateCreated).fromNow() %>
         </div>
       </div>
     </div>
@@ -148,13 +154,13 @@
   >
   <% topics.forEach((topic)=>{ question.topic.forEach((currenttopic)=>{
   if(topic.id == currenttopic.id){ topic.questions.forEach((topicQuestion)=>{
-  if(question.id != topicQuestion.id){%>
+  if(question.id != topicQuestion.id){if(topicQuestion.isActive == true){%>
   <div class="my-3">
     <a href="/question/<%= topicQuestion._id %>"
       ><%= topicQuestion.title %></a
     >
   </div>
-  <% }})}})}) %>
+  <% }}})}})}) %>
   <a
     href="#addQuestionModal"
     class="add-question-link"

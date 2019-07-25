@@ -181,10 +181,13 @@ body {
 }
 
 .question-more-info p {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   color: #949494;
 }
-
+.upvote-follow{
+  margin-bottom: 5px;
+  color: #949494;
+}
 .number-answer-link {
   text-decoration: none;
   color: #949494;
@@ -207,10 +210,8 @@ body {
 }
 
 .answer-icon {
-  font-size: 25px;
+  font-size: 15px;
   color: #329bff;
-  float: left;
-  padding-right: 3px;
 }
 .question-card {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
@@ -245,7 +246,6 @@ body {
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 26px;
   font-weight: bold;
-  padding-bottom: 20px;
   color: #333;
   text-decoration: none;
 }

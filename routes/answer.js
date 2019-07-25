@@ -4,7 +4,8 @@ const Answer = require("../models/answer");
 const Question = require("../models/question");
 const Topic = require("../models/topic");
 const User = require("../models/User");
-router.get("/:answerId", (req, res) => {
+const { ensureAuthenticated } = require("../config/auth");
+router.get("/:answerId",ensureAuthenticated, (req, res) => {
   Answer.findOne({
     _id: req.params.answerId
   })

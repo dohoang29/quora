@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Question = require("../models/question");
 const Answer = require("../models/answer");
-
-router.get("/:questionId", (req, res) => {
+const { ensureAuthenticated } = require("../config/auth");
+router.get("/:questionId", ensureAuthenticated, (req, res) => {
   var questionId = req.params.questionId;
   Question.findOne({ _id: questionId })
     .populate("topic", "title")
@@ -13,20 +13,46 @@ router.get("/:questionId", (req, res) => {
       } else {
         Answer.find({ question: questionId })
           .populate("author")
-          .exec((err,answers) => {
+          .sort({ dateCreated: -1 })
+          .exec((err, answers) => {
             if (err) {
-                console.log(err);
+              console.log(err);
             } else {
-              res.render("question", { question: question, answers : answers });
+              res.render("question", { question: question, answers: answers });
             }
           });
       }
     });
 });
 
-router.delete("/:questionId", (req,res) =>{
+router.put("/:questionId", (req, res) => {
   var questionId = req.params.questionId;
-  Question.findOne({ _id: questionId },(err,question)=>{
+  var privacy = req.body.privacy;
+  var title = req.body.question;
+  var link = req.body.link;
+  console.log(link);
+  Question.findOne({ _id: questionId }, (err, question) => {
+    if (err) {
+      console.log(err);
+    } else {
+      if (privacy !== "") {
+        question.privacy = privacy;
+      }
+      if (title !== "") {
+        question.title = title;
+      }
+      if (link !== "") {
+        question.url = link;
+      }
+      question.save();
+      res.redirect("/feed");
+    }
+  });
+});
+
+router.delete("/:questionId", (req, res) => {
+  var questionId = req.params.questionId;
+  Question.findOne({ _id: questionId }, (err, question) => {
     if (err) {
       console.log(err);
     } else {
@@ -34,6 +60,6 @@ router.delete("/:questionId", (req,res) =>{
       question.save();
       res.redirect("/feed");
     }
-  })
-})
+  });
+});
 module.exports = router;
