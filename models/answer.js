@@ -19,7 +19,7 @@ var answerSchema = new mongoose.Schema({
   },
   dateCreated: { type: Date, default: Date.now },
   dateModified: { type: Date, default: Date.now },
-  upVoted: Number,
+  upVoted: { type: Number, default: 0 },
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,

@@ -37,11 +37,14 @@
 .logo:hover {
     color: #b92b27;
 }
+<<<<<<< HEAD
 
 .clearfix {
     clear: both;
 }
 
+=======
+>>>>>>> adb43d1590bae74deb4ab6870746d7f9be47f8a9
 .navi-button {
     height: 50px;
     color: #999;
@@ -110,10 +113,17 @@
 }
 
 .image {
+<<<<<<< HEAD
     height: 35px;
     width: auto;
     border-radius: 50%;
     -webkit-appearance: none !important;
+=======
+  height: 35px;
+  width: auto;
+  border-radius: 50%;
+  -webkit-appearance: none !important;
+>>>>>>> adb43d1590bae74deb4ab6870746d7f9be47f8a9
 }
 
 .option-profile {

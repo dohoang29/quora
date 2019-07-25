@@ -2,11 +2,21 @@
 
 <div class="col-8">
   <div class="question-page-topic">
-    <a href="#" class="badge badge-secondary">Secondary</a>
+    <%question.topic.forEach((topic)=>{%>
+    <a href="/topic/<%=topic._id%>" class="badge badge-secondary my-2"
+      ><%= topic.title %>
+    </a>
+    <%})%>
   </div>
   <div class="question-page-title">
     <h1 class=" answer-detais-question "><%= question.title %></h1>
   </div>
+  <% if(question.url != null){ %>
+    <div class="pb-3">
+      <a href="<%=question.url%>"><i><%=question.url%></i></a>
+    </div>
+  <% } %>
+  
   <div class="answer-btn-wrapper mb-3">
     <a
       data-toggle="collapse"
@@ -74,8 +84,8 @@
   <div class="border-bottom pb-3">
     <strong> <%= question.answers.length %> Answers </strong>
   </div>
-  <% answers.forEach((answer)=>{ %>
-  <div class="border-bottom">
+  <% answers.forEach((answer)=>{ if(answer.isActive == true){%>
+  <div class="border-bottom mt-3">
     <div class="answer-detais-user-info">
       <img
         src="/images/IMG_20150427_214234.jpg"
@@ -88,50 +98,78 @@
           answer.author.lastname.toUpperCase()%></a
         >
         <div class="answer-time">
-          Answered <%= answer.dateCreated %>
+          Answered <%= moment(answer.dateCreated).fromNow() %>
         </div>
       </div>
     </div>
     <div class="answer-content">
       <%- answer.content %>
     </div>
-    <a
-      class="more-options-button"
-      href="#"
-      role="button"
-      id="dropdownMenuOptions"
-      data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="false"
-      ><i class="fas fa-ellipsis-h"></i
-    ></a>
-    <div
-      class="dropdown-menu dropdown-menu-right"
-      aria-labelledby="dropdownMenuOptions"
-    >
+    <div class="more-options clearfix">
       <a
-        class="dropdown-item"
-        data-toggle="collapse"
-        href="#collapseEditAnswer"
+        href="#"
         role="button"
+        id="dropdownMenuOptions<%= answer._id %>"
+        data-toggle="dropdown"
+        aria-haspopup="true"
         aria-expanded="false"
-        aria-controls="collapseEditAnswer"
-        >Edit</a
+        ><i class="fas fa-ellipsis-h"></i>
+      </a>
+      <div
+        class="dropdown-menu"
+        aria-labelledby="dropdownMenuOptions<%= answer._id %>"
       >
-      <form
-        action="/answer/<%= answer.question._id %>/<%= answer._id %>?_method=DELETE"
-        method="post"
-      >
-        <% if(answer.isActive == false){ %>
-        <li class="dropdown-item disabled">Delete</li>
-        <% } else {%>
-        <button class="dropdown-item" type="submit">Delete</button>
+        <% if(currentUser.id == answer.author.id) { %>
+        <a
+          class="dropdown-item"
+          data-toggle="collapse"
+          href="#collapseEditAnswer"
+          role="button"
+          aria-expanded="false"
+          aria-controls="collapseEditAnswer"
+          >Edit</a
+        >
+        <form
+          action="/answer/<%= answer.question._id %>/<%= answer._id %>?_method=DELETE"
+          method="post"
+        >
+          <% if(answer.isActive == false){ %>
+          <li class="dropdown-item disabled">Delete</li>
+          <% } else {%>
+          <button class="dropdown-item" type="submit">Delete</button>
+          <% } %>
+        </form>
         <% } %>
-      </form>
+        <a class="dropdown-item" href="#">Report</a>
+      </div>
     </div>
   </div>
-  <% }) %>
+  <% }}) %>
 </div>
-<div class="col-4">aaaaaaaaaaaaaaa</div>
+<div class="col-4">
+  <strong
+    ><p class="related-question-label border-bottom py-2">
+      Related Questions
+    </p></strong
+  >
+  <% topics.forEach((topic)=>{ question.topic.forEach((currenttopic)=>{
+  if(topic.id == currenttopic.id){ topic.questions.forEach((topicQuestion)=>{
+  if(question.id != topicQuestion.id){if(topicQuestion.isActive == true){%>
+  <div class="my-3">
+    <a href="/question/<%= topicQuestion._id %>"
+      ><%= topicQuestion.title %></a
+    >
+  </div>
+  <% }}})}})}) %>
+  <a
+    href="#addQuestionModal"
+    class="add-question-link"
+    data-toggle="modal"
+    data-target="#addQuestionModal"
+    ><p class="modal-title text-muted mt-1">
+      <strong><i class="fas fa-plus"></i>Add New Question</strong>
+    </p></a
+  >
+</div>
 
 <% include partials/footer.ejs %>

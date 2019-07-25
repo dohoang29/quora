@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema({
     resetPasswordToken: String,
     resetPasswordExpires: Date,
     isBan: { type: Boolean, default: false },
+    questions: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Question"
+    }],
     following: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Question"
@@ -45,7 +49,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: false
     },
-
+    
 });
 
 module.exports = mongoose.model("User", userSchema);

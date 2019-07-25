@@ -8,6 +8,7 @@ const session = require('express-session');
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
+const moment = require("moment");
 
 require('./config/passport')(passport); // Passport Config
 
@@ -45,7 +46,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
-    Topic.find({}, (err, topics) => {
+    Topic.find().populate("followers").populate("answers").populate("questions").exec((err, topics) => {
         if (err) {
             console.log(err);
         } else {
@@ -53,6 +54,7 @@ app.use((req, res, next) => {
             res.locals.success_msg = req.flash('success_msg');
             res.locals.error_msg = req.flash('error_msg');
             res.locals.error = req.flash('error');
+            res.locals.moment = moment;
             res.locals.currentUser = req.user;
             next();
         }

@@ -1,9 +1,9 @@
 <div
   class="modal fade"
-  id="addQuestionModal"
+  id="editQuestion"
   tabindex="-1"
   role="dialog"
-  aria-labelledby="addQuestionModalTitle"
+  aria-labelledby="editQuestionTitle"
   aria-hidden="true"
 >
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -11,9 +11,9 @@
       <div class="modal-header custom-modal-background">
         <h5
           class="modal-title custom-modal-title modal-title-active"
-          id="addQuestionModalLongTitle"
+          id="editQuestionTitle"
         >
-          Add Question
+          Edit Question
         </h5>
         <button
           type="button"
@@ -24,27 +24,11 @@
           <span aria-hidden="true" class="custom-modal-close">&times;</span>
         </button>
       </div>
-      <form action="/feed/<%= currentUser._id %>" method="POST">
+      <form action="/question/<%= question._id %>?_method=PUT" method="POST">
         <div class="modal-body">
-          <div class="modal-section-topic">
-            <div class="form-group">
-              <label for="chooseTopic">Choose topic for your question:</label>
-              <select class="topic-form w-100" name="topic" id="chooseTopic">
-                <% topics.forEach((topic)=>{ %>
-                <option value="<%= topic._id %>"> <%= topic.title %></option>
-                <% }) %>
-              </select>
-            </div>
-          </div>
           <div class="modal-section-question">
             <div class="form-group">
               <div class="card-subtitle text-muted">
-                <img
-                  src="/images/IMG_20150427_214234.jpg"
-                  alt="avatar"
-                  class="add-ques-image"
-                />
-                <a class="user-name-link" href="#"><%= currentUser.firstname.toUpperCase()%> <%= currentUser.lastname.toUpperCase()%></a> askes
                 <span class="form-group">
                   <select class="topic-form w-20" id="chooseTopic" name="privacy">
                     <option value="public"> Public </option>
@@ -83,7 +67,7 @@
             Cancel
           </button>
           <button type="submit" class="btn btn-primary add-question-button">
-            Add Question
+            Edit Question
           </button>
         </div>
       </form>
