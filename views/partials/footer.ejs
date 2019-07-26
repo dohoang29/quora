@@ -5,17 +5,43 @@
     <% include addQuestion.ejs %>
     <script type="text/javascript">
         $(function(){
-            $('#voteArea').children().click(function(){
-                var questionId = $(this).attr('id');
+            var questionId = $('.voteArea').children().filter(".likebtn").attr('id');
+            $('.voteArea').children().click(function(){
+                var userId = $(this).parent().attr('id');
                 var action = $(this).attr('value');
                 var numberUpvote = "votenumber"+questionId;
+                var follownumber = "follownumber"+questionId;
                 $.ajax({
                     type: "GET",
-                    url : window.location + "/" + questionId + "/"+action,
-                    success : function(upvoteCount){
-                        console.log(numberUpvote);
-                        $("#"+numberUpvote).text(upvoteCount);
-                        
+                    url : window.location + "/" + questionId + "/"+userId+"/"+action,
+                    async: false,
+                    success : function(vote){
+                        console.log(vote.status);
+                        if(vote.status === "Downvote"){
+                            $("#"+questionId+" > span").removeClass("fas fa-thumbs-up answer-icon").addClass("fas fa-thumbs-down");
+                            $("#"+questionId+" > strong").text(vote.status);
+                            $("#"+numberUpvote).text(vote.voteCount);
+                            $("#"+questionId).attr('value',vote.status);
+                        }
+                        if(vote.status === "Upvote"){
+                            $("#"+questionId+" > span").removeClass("fas fa-thumbs-down").addClass("fas fa-thumbs-up answer-icon");
+                            $("#"+questionId+" > strong").text(vote.status);
+                            $("#"+numberUpvote).text(vote.voteCount);
+                            $("#"+questionId).attr('value',vote.status);
+                        }
+                        if(vote.status === "Unfollow"){
+                            $("#follow"+questionId+" > span").removeClass("fa fa-plus-circle answer-icon").addClass("fas fa-times-circle");
+                            $("#follow"+questionId+" > strong").text(vote.status);
+                            console.log(follownumber);
+                            $("#"+follownumber).text(vote.voteCount);
+                            $("#follow"+questionId).attr('value',vote.status);
+                        }
+                        if(vote.status === "Follow"){
+                            $("#follow"+questionId+" > span").removeClass("fas fa-times-circle").addClass("fa fa-plus-circle answer-icon");
+                            $("#follow"+questionId+" > strong").text(vote.status);
+                            $("#"+follownumber).text(vote.voteCount);
+                            $("#follow"+questionId).attr('value',vote.status);
+                        }
                     }
                 });
             });

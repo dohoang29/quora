@@ -79,41 +79,73 @@ router.post("/:userId", (req, res) => {
     }
   });
 });
-router.get("/:id/:status", (req,res)=>{
-  var id = req.params.id;
+router.get("/:questionId/:userId/:status", (req, res) => {
+  var questionId = req.params.questionId;
+  var userId = req.params.userId;
   var status = req.params.status;
-  Question.findOne({ _id: id}).exec((err,question)=>{
-    if(err){
+  var number;
+  Question.findOne({ _id: questionId }).exec((err, question) => {
+    if (err) {
       console.log(err);
-    } else{
+    } else {
       console.log(status);
-      if (status === "upvote"){
-        question.upVoted += 1;
+      if (status === "Upvote") {
+        question.upVoted.push(userId);
         question.save();
+        number = question.upVoted.length.toString();
+        status = "Downvote";
+      } else {
+        if (status === "Downvote") {
+          for (var i = 0; i < question.upVoted.length; i++) {
+            if (question.upVoted[i] == userId) {
+              question.upVoted.splice(i, 1);
+            }
+          }
+          question.save();
+          number = question.upVoted.length.toString();
+          status = "Upvote";
+        }
       }
-      count = question.upVoted.toString();
-      
+      if (status === "Follow"){
+        question.followers.push(userId);
+        question.save();
+        number = question.followers.length.toString();
+        status = "Unfollow";
+        console.log(question.followers.length);
+      } else {
+        if (status === "Unfollow") {
+          for (var i = 0; i < question.followers.length; i++) {
+            if (question.followers[i] == userId) {
+              question.followers.splice(i, 1);
+            }
+          }
+          console.log(question.followers.length);
+          question.save();
+          number = question.followers.length.toString();
+          status = "Follow";
+        }
+      }
+      count = { voteCount: number, status: status };
+
       return res.send(count);
     }
-  })
+  });
 });
 
-router.post("/:id/act", (req,res,next)=>{
+router.post("/:id/act", (req, res, next) => {
   var action = req.body.action;
-  Question.findOne({ _id: req.params.id}).exec((err,question)=>{
-    if(err){
+  Question.findOne({ _id: req.params.id }).exec((err, question) => {
+    if (err) {
       console.log(err);
-    }
-    else{
-      if(action === 'Upvote'){
+    } else {
+      if (action === "Upvote") {
         question.upVoted += 1;
-      }
-      else{
+      } else {
         question.upVoted -= 1;
       }
       res.send(question.upVoted);
     }
-  })
+  });
 });
 
 module.exports = router;

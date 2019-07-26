@@ -39,8 +39,8 @@
         ></strong
       >
     </div>
-
-    <% questions.forEach((question)=>{ if(question.isActive == true){ %>
+    <% if (questions == null){}else{ %> <% questions.forEach((question)=>{
+    if(question.isActive == true){ var flag = flagFollow = false;%>
     <div class="card-body question-card">
       <div class="card-subtitle text-muted">
         <p class="question-topic">
@@ -66,43 +66,61 @@
           · Created <%= moment(question.dateCreated).fromNow() %>
         </p>
       </div>
-      <div id="upvote-follow">
+      <div class="upvote-follow">
         Upvote ·
         <span id="votenumber<%= question._id %>" class="mr-3"
-          ><%if(question.upVoted == null ){%> <%= -1 %> <%}else{%>
-          <%=question.upVoted%> <%}%>
+          ><%if(question.upVoted == null ){%> <%= 0 %> <% }else{
+          question.upVoted.forEach((vote)=>{ if(currentUser.id == vote){ flag =
+          true; } })%> <%=question.upVoted.length%> <%}%>
         </span>
-        Follow · <%if(question.followers == null ){%> <%= 0 %> <%}else{%>
-        <%=question.followers.length%> <%}%>
+        Follow ·
+        <span id="follownumber<%= question._id %>" class="mr-3"
+          ><%if(question.followers == null ){%> <%= 0 %> <%}else{
+          question.followers.forEach((follower)=>{ if(currentUser.id ==
+          follower){ flagFollow = true; } })%> <%=question.followers.length%>
+          <%}%>
+        </span>
       </div>
       <div class="answer-btn-wrapper">
-        <div class="clearfix">
-          <a
+        <div class="clearfix mt-1">
+          <button
             data-toggle="collapse"
             href="#collapse<%= question._id %>"
             role="button"
             aria-expanded="false"
             aria-controls="collapse<%= question._id %>"
-            class="answer-button mr-2"
+            class="answer-button mr-2 btn-link btn"
           >
             <span class="fa fa-edit answer-icon"></span>
             <strong>Answer</strong>
-          </a>
-          <span id="voteArea">
-            <a  id="<%= question._id %>" value="upvote" class="answer-button mr-2">
-              <span class="fas fa-thumbs-up"></span>
-              <strong>Upvote</strong>
-            </a>
+          </button>
+          <span id="<%= currentUser._id %>" class="voteArea">
+            <button
+              id="<%= question._id %>"
+              value="<%if( flag == false){%>Upvote<%} else {%>Downvote<%}%>"
+              class="answer-button mr-2 btn-link btn likebtn"
+            >
+              <span
+                class="<%if( flag == false){%>fas fa-thumbs-up answer-icon<%} else {%>fas fa-thumbs-down<%}%>"
+              ></span>
+              <strong
+                ><%if( flag == false){%>Upvote<%} else {%>Downvote<%}%></strong
+              >
+            </button>
+            <button
+              id ="follow<%= question._id %>"
+              class="answer-button mr-2 btn-link btn"
+              value="<%if( flagFollow == false){%>Follow<%} else {%>Unfollow<%}%>"
+            >
+              <span
+                class="<%if( flagFollow == false){%>fa fa-plus-circle answer-icon<%} else {%>fas fa-times-circle<%}%>"
+              ></span>
+              <strong
+                ><%if( flagFollow == false){%>Follow<%} else
+                {%>Unfollow<%}%></strong
+              >
+            </button>
           </span>
-
-          <a href="#" id="followBtn" class="answer-button mr-2">
-            <span class="fa fa-plus-circle"></span>
-            <strong>Follow</strong>
-          </a>
-          <a href="#" id="unfollowBtn" class="answer-button mr-2">
-            <span class="fa fa-check-circle"></span>
-            <strong>Unfollow</strong>
-          </a>
           <a
             class="question-more-options"
             href="#"
@@ -185,7 +203,7 @@
         </div>
       </div>
     </div>
-    <% include partials/editQuestion.ejs %> <% }}) %> <%
+    <% include partials/editQuestion.ejs %> <% }})} %> <%
     answers.forEach((answer)=>{ %> <% }) %>
   </div>
 </div>
