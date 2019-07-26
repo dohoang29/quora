@@ -4,7 +4,7 @@ body {
 
 *:focus {
     outline: none !important;
-    border-color: transparent !important;
+    /* border-color: transparent !important; */
     box-shadow: 0 0 0 0 !important;
 }
 

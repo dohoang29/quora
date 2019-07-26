@@ -10,6 +10,9 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const multer = require('multer');
 const moment = require("moment");
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+passport.use(new GoogleStrategy());
+
 
 require('./config/passport')(passport); // Passport Config
 
@@ -41,6 +44,17 @@ app.use(
         resave: true,
         saveUninitialized: true
     })
+);
+passport.use(
+    new GoogleStrategy({
+            clientID: keys.googleClientID,
+            clientSecret: keys.googleClientSecret,
+            callbackURL: 'http://192.168.180.81:3000/auth/google/callback'
+        },
+        accessToken => {
+            console.log(accessToken);
+        }
+    )
 );
 // Passport middleware
 app.use(passport.initialize());
