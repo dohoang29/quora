@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    imageUrl: {
+        type: String,
+        default: "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
+    },
     role: {
         type: String,
         default: "user",

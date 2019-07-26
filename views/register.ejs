@@ -1,53 +1,22 @@
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <title>Register Form</title>
-</head>
-
-<body>
-
-    <div class="logo">
-        <img width="200px" src="images/logo.png"></div>
-    <div class="tagline">
-        <h3 class="title-page">
-            The best answer to any question
-        </h3>
-    </div>
+<% include partials/headerLogin.ejs %>
     <div id="logreg-forms">
-        <form action="/register" method="post" class="form-signup">
+        <form action="/register" method="post" class="form-signin">
             <% include ./partials/messages %>
+                <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign Up</h1>
                 <div class="social-login">
-                    <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span> </button>
-                </div>
-                <div class="social-login">
-                    <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign up with Google+</span> </button>
+                    <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
+                    <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
                 </div>
 
                 <p style="text-align:center">OR</p>
-
                 <input width="25px" type="text" id="user-name" class="form-control" placeholder="First name" name="firstname" required="" autofocus="">
                 <input width="25px" type="text" id="user-name2" class="form-control" placeholder="Last name" name="lastname" required="" autofocus="">
                 <input type="email" id="user-email" class="form-control" placeholder="Email address" required autofocus="" name="email">
                 <input type="password" id="user-pass" class="form-control" placeholder="Password must be at least 6 characters" required autofocus="" name="password">
 
                 <input type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" required autofocus="" name="password2">
-
                 <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
                 <p class="havecount">Have an account?</p><a style="color:dodgerblue " href="/login"><strong>Login!</strong></a>
         </form>
-
-
     </div>
-</body>
-
-</html>
+    <% include partials/footerLogin.ejs %>

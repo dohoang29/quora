@@ -8,6 +8,7 @@ const session = require('express-session');
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
+const multer = require('multer');
 const moment = require("moment");
 
 require('./config/passport')(passport); // Passport Config
@@ -26,7 +27,7 @@ const indexRoutes = require("./routes/index"),
     answerRoutes = require("./routes/answer"),
     topicRoutes = require("./routes/topics");
 adminRoutes = require("./routes/admin")
-
+    // app.use('/upload/avatar', express.static(path.join(__dirname, 'avatars')));
 mongoose.connect("mongodb+srv://hoang:uANMPpiOnhRKAGi6@cluster0-7nvfn.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true });
 app.use(cookieParser('secret'));
 app.use(express.static("public"));

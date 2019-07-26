@@ -1,17 +1,16 @@
 <div class="col">
-        <ul class="list-unstyled">
-            <li class="media">
-              <a class="topic-link" href="/feed"> 
-                <img class="mr-2 topic-image" src="/images/feed.png"
-                alt="Feed"/>
+    <ul class="list-unstyled">
+        <li class="media">
+            <a class="topic-link" href="/feed">
+                <img class="mr-2 topic-image" src="/images/feed.png" alt="Feed" />
                 <span class="media-body">
                     <p class="mt-0 mb-1 topic-title fs-13"> Feed</p>
                 </span>
-              </a>
-            </li>
-            <% topics.forEach((topic)=>{ %>
-                <li class="media">
-                    <a class="topic-link" href="/topic/<%= topic._id %>">
+            </a>
+        </li>
+        <% topics.forEach((topic)=>{ %>
+            <li class="media">
+                <a class="topic-link" href="/topic/<%= topic._id %>">
                         <img
                             class="mr-2 topic-image"
                             src="<%= topic.image %>"
@@ -21,7 +20,7 @@
                             <p class="mt-0 mb-1 topic-title fs-13"><%= topic.title %></p>
                         </span>
                     </a>
-                </li>
+            </li>
             <% }) %>
-        </ul>
-    </div>
+    </ul>
+</div>

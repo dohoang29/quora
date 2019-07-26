@@ -5,6 +5,9 @@ const passport = require("passport");
 var async = require("async");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
+var multer = require('multer');
+
+const path = require("path");
 // Load User model
 const User = require("../models/User");
 const config = require("../config/mailler");
@@ -13,101 +16,102 @@ const { forwardAuthenticated } = require("../config/auth");
 // Login Page
 router.get("/login", forwardAuthenticated, (req, res) => res.render("login"));
 // Register Page
-router.get("/register", forwardAuthenticated, (req, res) =>
-  res.render("register")
-);
-
+router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
+//profile
+//favorite
+router.get('/favorite', function(req, res) {
+    res.render('favorite.ejs')
+});
+router.get('/profile', isLoggedIn, function(req, res) {
+    res.render('profile.ejs');
+});
 // Register
 router.post("/register", (req, res) => {
-  const { firstname, lastname, email, password, password2 } = req.body;
-  let errors = [];
+    const { firstname, lastname, email, password, password2 } = req.body;
+    let errors = [];
 
-  if (!firstname || !lastname || !email || !password || !password2) {
-    errors.push({
-      msg: "Please enter all fields"
-    });
-  }
-
-  if (password != password2) {
-    errors.push({
-      msg: "Passwords do not match"
-    });
-  }
-
-  if (password.length < 6) {
-    errors.push({
-      msg: "Password must be at least 6 characters"
-    });
-  }
-
-  if (errors.length > 0) {
-    res.render("register", {
-      errors,
-      firstname,
-      lastname,
-      email,
-      password,
-      password2
-    });
-  } else {
-    User.findOne({
-      email: email
-    }).then(user => {
-      if (user) {
+    if (!firstname || !lastname || !email || !password || !password2) {
         errors.push({
-          msg: "Email already exists"
+            msg: "Please enter all fields"
         });
-        res.render("register", {
-          errors,
-          firstname,
-          lastname,
-          email,
-          password,
-          password2
+    }
+    if (password.length < 6) {
+        req.flash('error', 'Password must be at least 6 characters');
+        return res.redirect('/register');
+    }
+    if (password != password2) {
+        errors.push({
+            msg: "Passwords do not match"
         });
-      } else {
-        const newUser = new User({
-          firstname,
-          lastname,
-          email,
-          password
-        });
+    }
 
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            newUser.password = hash;
-            newUser
-              .save()
-              .then(user => {
-                req.flash(
-                  "success_msg",
-                  "You are now registered and can log in"
-                );
-                res.redirect("/login");
-              })
-              .catch(err => console.log(err));
-          });
+    if (errors.length > 0) {
+        res.render("register", {
+            errors,
+            firstname,
+            lastname,
+            email,
+            password,
+            password2
         });
-      }
-    });
-  }
+    } else {
+        User.findOne({
+            email: email
+        }).then(user => {
+            if (user) {
+                errors.push({
+                    msg: "Email already exists"
+                });
+                res.render("register", {
+                    errors,
+                    firstname,
+                    lastname,
+                    email,
+                    password,
+                    password2
+                });
+            } else {
+                const newUser = new User({
+                    firstname,
+                    lastname,
+                    email,
+                    password
+                });
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(newUser.password, salt, (err, hash) => {
+                        if (err) throw err;
+                        newUser.password = hash;
+                        newUser
+                            .save()
+                            .then(user => {
+                                req.flash(
+                                    "success_msg",
+                                    "Please choose favorite topic to Feed."
+                                );
+                                res.redirect("/favorite");
+                            })
+                            .catch(err => console.log(err));
+                    });
+                });
+            }
+        });
+    }
 });
 
 // Login
 router.post("/login", (req, res, next) => {
-  passport.authenticate("local", {
-    successRedirect: "/feed",
-    failureRedirect: "/login",
-    failureFlash: true
-  })(req, res, next);
+    passport.authenticate("local", {
+        successRedirect: "/feed",
+        failureRedirect: "/login",
+        failureFlash: true
+    })(req, res, next);
 });
 
 // Logout
 router.get("/logout", (req, res) => {
-  req.logout();
-  req.flash("success_msg", "You are logged out");
-  res.redirect("/login");
+    req.logout();
+    req.flash("success_msg", "You are logged out");
+    res.redirect("/login");
 });
 //forgot password page
 router.get("/forgot", (req, res) => res.render("forgot"));
@@ -130,7 +134,6 @@ router.post('/forgot', function(req, res, next) {
                 if (user.isBan == true) {
                     req.flash('error', 'Accout is ban, please contact admin for support.');
                     return res.redirect('/login');
-                    // return done(null, false, { message: 'This user is ban' });
                 }
                 user.resetPasswordToken = token;
                 user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
@@ -171,19 +174,18 @@ router.post('/forgot', function(req, res, next) {
 
 // reset password
 router.get("/reset/:token", function(req, res) {
-  User.findOne(
-    {
-      resetPasswordToken: req.params.token,
-      resetPasswordExpires: { $gt: Date.now() }
-    },
-    function(err, user) {
-      if (!user) {
-        req.flash("error", "Password reset token is invalid or has expired.");
-        return res.redirect("/forgot");
-      }
-      res.render("reset", { token: req.params.token });
-    }
-  );
+    User.findOne({
+            resetPasswordToken: req.params.token,
+            resetPasswordExpires: { $gt: Date.now() }
+        },
+        function(err, user) {
+            if (!user) {
+                req.flash("error", "Password reset token is invalid or has expired.");
+                return res.redirect("/forgot");
+            }
+            res.render("reset", { token: req.params.token });
+        }
+    );
 });
 
 router.post('/reset/:token', function(req, res) {
@@ -201,7 +203,7 @@ router.post('/reset/:token', function(req, res) {
                         user.resetPasswordToken = undefined;
                         user.resetPasswordExpires = undefined;
                         user.password = bcrypt.hashSync(req.body.password, 10);
-                        console.log('password' + user.password + 'and the user is' + user)
+                        // console.log('password' + user.password + 'and the user is' + user)
                         user.save()
                             .then(user => {
                                 req.flash(
@@ -222,5 +224,132 @@ router.post('/reset/:token', function(req, res) {
             res.redirect('/feed');
         });
 });
+//profile edit
+router.post('/profile/:id', (req, res) => {
+    updateRecord(req, res);
+});
 
+// find id
+router.get('/profile/:id', (req, res) => {
+    res.render("profile")
+});
+//edit
+function updateRecord(req, res) {
+
+    User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, user) => {
+        if (!err) {
+            req.flash('success_msg', 'You are updated success');
+            res.redirect('/profile');
+        } else {
+            if (err.name == 'ValidationError') {
+                handleValidationError(err, req.body);
+                res.render("profile", {});
+            } else
+                console.log('Error during update : ' + err);
+        }
+    });
+}
+//
+//profile edit
+router.post('/profile/reset/:id', (req, res) => {
+    resetPassRecord(req, res);
+});
+
+// find id
+router.get('/profile/reset/:id', (req, res) => {
+    res.render("profile")
+});
+//edit
+function resetPassRecord(req, res) {
+
+    User.findOne({ _id: req.params.id }).then(user => {
+        // Match password
+        bcrypt.compare(req.body.password, user.password, (err, isMatch, done) => {
+            if (err) throw err;
+            if (isMatch) {
+                let errors = [];
+                if (req.body.newPassword.length < 6) {
+                    req.flash("error", "Password must be at least 6 characters");
+                    return res.redirect('back');
+                }
+                if (req.body.newPassword === req.body.newPassword2) {
+                    user.password = bcrypt.hashSync(req.body.newPassword, 10);
+                    user.save().then(user => {
+                        req.flash("success_msg", "You are updated password success.");
+                        return res.redirect('back');
+                    })
+                } else {
+                    req.flash("error", "Passwords do not match.");
+                    return res.redirect('back');
+                }
+            } else {
+                req.flash("error", "Passwords current incorrect.");
+                return res.redirect('back');
+            }
+        });
+    });
+}
+//function check email
+function handleValidationError(err, body) {
+    for (field in err.errors) {
+        switch (err.errors[field].path) {
+            case 'email':
+                body['emailError'] = err.errors[field].message;
+                break;
+            default:
+                break;
+        }
+    }
+}
+//function check login
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    res.redirect('/');
+}
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './public/upload/avatar')
+    },
+    filename: function(req, file, cb) {
+        cb(null, Date.now() + "-" + file.originalname)
+    }
+})
+const fileFilter = (req, file, cb) => {
+    if (
+        file.mimetype === 'file/png' ||
+        file.mimetype === 'file/jpg' ||
+        file.mimetype === 'file/jpeg'
+    ) {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+};
+
+var upLoad = multer({ storage: storage }, { fileFilter: fileFilter });
+
+router.get('/upload/:id',
+    function(req, res) {
+        res.render('profile.ejs');
+    });
+router.post('/upload/:id', upLoad.single("file"), function(req, res) {
+    console.log(req.file);
+    const image = req.file;
+    User.findById(req.session.passport.user, (err, user) => {
+            if (image) {
+                user.imageUrl = "/upload/avatar/" + path.basename(image.path);
+            } else {
+                user.imageUrl = "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png";
+            }
+            user.save()
+                .then(user => {
+                    req.flash(
+                        "success_msg",
+                        "You are reset avatar success.")
+                    return res.redirect('/profile');
+                })
+        })
+        .catch(err => console.log(err))
+});
 module.exports = router;

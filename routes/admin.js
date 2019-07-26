@@ -189,7 +189,7 @@ function handleValidationError(err, body) {
 // function test login admin
 function isLoggedInAdmin(req, res, next) {
     if (req.isAuthenticated()) {
-        console.log(req.session.passport.user);
+        // console.log(req.session.passport.user);
         User.findById(req.session.passport.user, (err, user) => {
             // console.log(user);
             if (user.role == 'admin') {
