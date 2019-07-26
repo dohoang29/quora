@@ -137,7 +137,7 @@
 }
 
 .right {
-    margin-top: 100px;
+    margin-top: 40px;
     margin-left: 20px;
     height: 300px;
     padding: 0 25px 0 25px !important;
@@ -179,6 +179,10 @@
     transition: all .4s;
     font-family: 'Montserrat', sans-serif;
     border-radius: 3px;
+}
+
+.button-option {
+    margin-top: 10px;
 }
 
 .edit:hover {

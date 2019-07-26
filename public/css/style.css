@@ -8,6 +8,10 @@ body {
     background-size: cover;
 }
 
+.main-admin {
+    background-color: #8cd3f7 !important;
+}
+
 .logo {
     margin-top: 20px;
     text-align: center;
