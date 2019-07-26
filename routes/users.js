@@ -22,7 +22,7 @@ router.get('/register', forwardAuthenticated, (req, res) => res.render('register
 router.get('/favorite', function(req, res) {
     res.render('favorite.ejs')
 });
-router.get('/profile', isLoggedIn, function(req, res) {
+router.get('/profile/:id', isLoggedIn, function(req, res) {
     res.render('profile.ejs');
 });
 // Register

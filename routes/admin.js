@@ -10,7 +10,7 @@ router.get('/', isLoggedInAdmin, (req, res) => {
 
     User.find((err, users) => {
         if (!err) {
-            res.render("admin/list", { users: users })
+            res.render("admin/admin", { users: users })
         } else {
             console.log('Error in retrieving user list :' + err);
         }
