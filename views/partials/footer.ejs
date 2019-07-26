@@ -5,8 +5,8 @@
     <% include addQuestion.ejs %>
     <script type="text/javascript">
         $(function(){
-            var questionId = $('.voteArea').children().filter(".likebtn").attr('id');
             $('.voteArea').children().click(function(){
+                var questionId = $(this).parent().children().filter(".likebtn").attr('id');
                 var userId = $(this).parent().attr('id');
                 var action = $(this).attr('value');
                 var numberUpvote = "votenumber"+questionId;
