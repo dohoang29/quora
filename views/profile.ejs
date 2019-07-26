@@ -13,21 +13,47 @@
                         <div class="left col-lg-4">
                             <div class="photo-left">
                                 <img class="photo" src="<%= currentUser.imageUrl == null ? 'https://iupac.org/wp-content/uploads/2018/05/default-avatar.png' : currentUser.imageUrl %>" />
-                                <div class="user-active"></div>
-                                <form action="/upload/<%=currentUser.id%>" method="POST" enctype="multipart/form-data" style="position: absolute;" class="form-avatar" name="image" id="image">
-                                    <div> <input type="file" name="file" id="file">
+                                <div class="user-active">
+
+                                </div>
+                                <!-- <form action="/upload/<%=currentUser.id%>" method="POST" enctype="multipart/form-data" style="position: absolute;" class="form-avatar" name="image" id="image">
+                                    <div>
+                                        <input type="file" name="file" id="file">
                                         <button id="userResetAvatar" type="submit" class="button-upload btn btn-danger ">Upload
                                     <i class="fa fa-upload" aria-hidden="true"></i>
                             </button>
                                         <button type="submit" class="button-upload btn btn-danger ">Remove
                                     <i class="fa fa-times" aria-hidden="true"></i>
                             </button>
-                                </form>
-                                </div>
-
+                                </form> -->
 
                             </div>
+                            <span style="margin-top: 10px;" onclick="myFunctionEdit()" class="edit" data-toggle="modal" data-target="#myModal">Change profile</span>
+                            <div class="modal fade" id="myModal">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Modal Heading</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            Modal body..
+                                        </div>
+
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
 
                         <div class="head col-lg-4">
                             <h4 class="name">
