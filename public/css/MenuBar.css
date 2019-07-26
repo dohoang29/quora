@@ -104,7 +104,9 @@
     border-bottom: 2px solid #b92b27;
     border-radius: 0% !important;
 }
-
+.active{
+    background-color: transparent !important;
+}
 .image {
     height: 35px;
     width: auto;

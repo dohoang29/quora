@@ -1,5 +1,17 @@
-<% include partials/header.ejs %>
-
+<% include partials/header.ejs %> <% if(question.isActive == false) {%>
+<div class="col-8">
+  <div class="alert alert-danger" role="alert">
+    This Question is Deleted !!! 
+    <form
+      class="restore-question-form"
+      action="/question/<%=question._id%>/restore?_method=PUT"
+      method="post"
+    >
+      <button class="btn btn-link" type="submit">Restore Answer</button>
+    </form>
+  </div>
+</div>
+<% } else {%>
 <div class="col-8">
   <div class="question-page-topic">
     <%question.topic.forEach((topic)=>{%>
@@ -12,11 +24,11 @@
     <h1 class=" answer-detais-question "><%= question.title %></h1>
   </div>
   <% if(question.url != null){ %>
-    <div class="pb-3">
-      <a href="<%=question.url%>"><i><%=question.url%></i></a>
-    </div>
+  <div class="pb-3">
+    <a href="<%=question.url%>"><i><%=question.url%></i></a>
+  </div>
   <% } %>
-  
+
   <div class="answer-btn-wrapper mb-3">
     <a
       data-toggle="collapse"
@@ -146,6 +158,7 @@
   </div>
   <% }}) %>
 </div>
+<% } %>
 <div class="col-4">
   <strong
     ><p class="related-question-label border-bottom py-2">
@@ -156,9 +169,7 @@
   if(topic.id == currenttopic.id){ topic.questions.forEach((topicQuestion)=>{
   if(question.id != topicQuestion.id){if(topicQuestion.isActive == true){%>
   <div class="my-3">
-    <a href="/question/<%= topicQuestion._id %>"
-      ><%= topicQuestion.title %></a
-    >
+    <a href="/question/<%= topicQuestion._id %>"><%= topicQuestion.title %></a>
   </div>
   <% }}})}})}) %>
   <a
