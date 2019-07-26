@@ -25,6 +25,19 @@ router.get("/:questionId", ensureAuthenticated, (req, res) => {
     });
 });
 
+router.put("/:questionId/restore", (req, res) => {
+  var questionId = req.params.questionId;
+  Question.findOne({ _id: questionId }, (err, question) => {
+    if (err) {
+      console.log(err);
+    } else {
+      question.isActive = true;
+      question.save();
+      res.redirect("/question/"+questionId);
+    }
+  });
+});
+
 router.put("/:questionId", (req, res) => {
   var questionId = req.params.questionId;
   var privacy = req.body.privacy;
@@ -45,7 +58,7 @@ router.put("/:questionId", (req, res) => {
         question.url = link;
       }
       question.save();
-      res.redirect("/feed");
+      res.redirect("/question/"+questionId);
     }
   });
 });
@@ -58,7 +71,7 @@ router.delete("/:questionId", (req, res) => {
     } else {
       question.isActive = false;
       question.save();
-      res.redirect("/feed");
+      res.redirect("/question/"+questionId);
     }
   });
 });
