@@ -226,11 +226,16 @@ body {
     text-decoration: none;
     color: rgb(92, 92, 92);
     font-size: 15px;
+    padding: 0;
 }
 
 .answer-button:hover {
     text-decoration: none;
     color: #329bff;
+}
+
+.upvote-follow {
+    color: #949494;
 }
 
 .answer-icon {
@@ -315,6 +320,11 @@ body {
 
 .more-options {
     width: 100%;
+}
+
+.question-more-options {
+    float: right;
+    color: inherit;
 }
 
 .question-more-options {

@@ -28,7 +28,12 @@ var questionSchema = new mongoose.Schema({
       ref: "User"
     }
   ],
-  upVoted: { type: Number, default: 0 },
+  upVoted: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    }
+  ],
   isActive: Boolean
 });
 
