@@ -201,7 +201,12 @@ body {
 }
 
 .question-more-info p {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    color: #949494;
+}
+
+.upvote-follow {
+    margin-bottom: 5px;
     color: #949494;
 }
 
@@ -229,10 +234,8 @@ body {
 }
 
 .answer-icon {
-    font-size: 25px;
+    font-size: 15px;
     color: #329bff;
-    float: left;
-    padding-right: 3px;
 }
 
 .question-card {
@@ -269,7 +272,6 @@ body {
     font-family: Georgia, "Times New Roman", Times, serif;
     font-size: 26px;
     font-weight: bold;
-    padding-bottom: 20px;
     color: #333;
     text-decoration: none;
 }
@@ -303,4 +305,19 @@ body {
 .restore-answer-form button {
     padding: 0;
     float: right;
+}
+
+.more-options a {
+    text-decoration: none;
+    color: inherit;
+    float: right;
+}
+
+.more-options {
+    width: 100%;
+}
+
+.question-more-options {
+    float: right;
+    color: inherit;
 }

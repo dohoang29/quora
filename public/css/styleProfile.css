@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    font: arial;
 }
 
 .main-profile {
@@ -16,6 +17,7 @@
     margin-top: -100px;
     border-radius: 100px;
     border: 4px solid #fff;
+    -webkit-appearance: none !important;
 }
 
 .user-active {
@@ -130,6 +132,7 @@
     color: #fff;
 }
 
+<<<<<<< HEAD
 
 /*
 .social {
@@ -158,11 +161,14 @@
     top: 60px;
 }
 
+=======
+>>>>>>> 43c7951fd66a6a710fc3525be7b8653c4a3738b2
 .right {
     margin-top: 100px;
     margin-left: 20px;
     height: 300px;
     padding: 0 25px 0 25px !important;
+    font: arial;
 }
 
 .button-upload {

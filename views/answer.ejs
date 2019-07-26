@@ -34,7 +34,7 @@
           <%= topic.title %> <% }) %>
         </a>
         <div class="answer-time">
-          Answered <%= answer.dateCreated %>
+          Answered <%= moment(answer.dateCreated).fromNow() %>
         </div>
       </div>
     </div>

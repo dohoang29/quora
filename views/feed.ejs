@@ -8,7 +8,10 @@
           alt="avatar"
           class="add-ques-image"
         />
-        <a class="user-name-link" href="#"><%= currentUser.firstname.toUpperCase()%> <%= currentUser.lastname.toUpperCase()%></a>
+        <a class="user-name-link" href="#"
+          ><%= currentUser.firstname.toUpperCase()%> <%=
+          currentUser.lastname.toUpperCase()%></a
+        >
       </div>
       <a
         href="#addQuestionModal"
@@ -28,10 +31,16 @@
         src="/images/question-icon.png"
         alt="Question for you"
       />
-      <strong>Question for <a class="user-name-link" href="#"><%= currentUser.firstname.toUpperCase()%> <%= currentUser.lastname.toUpperCase()%></a></strong>
+      <strong
+        >Question for
+        <a class="user-name-link" href="#"
+          ><%= currentUser.firstname.toUpperCase()%> <%=
+          currentUser.lastname.toUpperCase()%></a
+        ></strong
+      >
     </div>
-    
-    <% questions.forEach((question)=>{ %>
+
+    <% questions.forEach((question)=>{ if(question.isActive == true){ %>
     <div class="card-body question-card">
       <div class="card-subtitle text-muted">
         <p class="question-topic">
@@ -54,23 +63,79 @@
               <%=question.answers.length%> <%}%> Answers
             </a>
           </strong>
-          · Last followed 10m ago
+          · Created <%= moment(question.dateCreated).fromNow() %>
         </p>
       </div>
-      <div class="answer-btn-wrapper">
-        <a
-          data-toggle="collapse"
-          href="#<%= question._id %>"
-          role="button"
-          aria-expanded="false"
-          aria-controls="<%= question._id %>"
-          class="answer-button"
-        >
-          <span class="fa fa-edit answer-icon"></span>
-          <strong>Answer</strong>
-        </a>
+      <div id="upvote-follow">
+        Upvote ·
+        <span id="votenumber<%= question._id %>" class="mr-3"
+          ><%if(question.upVoted == null ){%> <%= -1 %> <%}else{%>
+          <%=question.upVoted%> <%}%>
+        </span>
+        Follow · <%if(question.followers == null ){%> <%= 0 %> <%}else{%>
+        <%=question.followers.length%> <%}%>
       </div>
-      <div class="collapse" id="<%= question._id %>">
+      <div class="answer-btn-wrapper">
+        <div class="clearfix">
+          <a
+            data-toggle="collapse"
+            href="#collapse<%= question._id %>"
+            role="button"
+            aria-expanded="false"
+            aria-controls="collapse<%= question._id %>"
+            class="answer-button mr-2"
+          >
+            <span class="fa fa-edit answer-icon"></span>
+            <strong>Answer</strong>
+          </a>
+          <span id="voteArea">
+            <a  id="<%= question._id %>" value="upvote" class="answer-button mr-2">
+              <span class="fas fa-thumbs-up"></span>
+              <strong>Upvote</strong>
+            </a>
+          </span>
+
+          <a href="#" id="followBtn" class="answer-button mr-2">
+            <span class="fa fa-plus-circle"></span>
+            <strong>Follow</strong>
+          </a>
+          <a href="#" id="unfollowBtn" class="answer-button mr-2">
+            <span class="fa fa-check-circle"></span>
+            <strong>Unfollow</strong>
+          </a>
+          <a
+            class="question-more-options"
+            href="#"
+            role="button"
+            id="dropdownMenuOptions<%= question._id %>"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            ><i class="fas fa-ellipsis-h"></i>
+          </a>
+          <div
+            class="dropdown-menu"
+            aria-labelledby="dropdownMenuOptions<%= question._id %>"
+          >
+            <% if(currentUser.id == question.author) { %>
+            <a
+              class="dropdown-item"
+              data-toggle="modal"
+              data-target="#editQuestion"
+              >Edit</a
+            >
+            <form
+              action="/question/<%= question._id %>?_method=DELETE"
+              method="post"
+            >
+              <button class="dropdown-item" type="submit">Delete</button>
+            </form>
+            <% } %>
+            <a class="dropdown-item" href="#">Report</a>
+          </div>
+        </div>
+      </div>
+      <div class="collapse" id="collapse<%= question._id %>">
         <div class="card w-100 mt-2">
           <div class="card-header">
             <img
@@ -79,14 +144,20 @@
               class="add-ans-image"
             />
             <div class="user-info">
-              <a class="user-name-link" href="#"><%= currentUser.firstname.toUpperCase()%> <%= currentUser.lastname.toUpperCase()%></a>, knows 
-              <% question.topic.forEach((topic)=>{ %>
-                <a class="ans-topic-link" href="/topic/<%= topic._id %>"> 
-                  <%= topic.title %> <% }) %> 
-                </a>
+              <a class="user-name-link" href="#"
+                ><%= currentUser.firstname.toUpperCase()%> <%=
+                currentUser.lastname.toUpperCase()%></a
+              >, knows <% question.topic.forEach((topic)=>{ %>
+              <a class="ans-topic-link" href="/topic/<%= topic._id %>">
+                <%= topic.title %> <% }) %>
+              </a>
             </div>
           </div>
-          <form class="ansForm" method="POST" action="/answer/<% question.topic.forEach((topic)=>{ %><%= topic._id %><% }) %>/<%= question._id %>/<%= currentUser._id %>">
+          <form
+            class="ansForm"
+            method="POST"
+            action="/answer/<% question.topic.forEach((topic)=>{ %><%= topic._id %><% }) %>/<%= question._id %>/<%= currentUser._id %>"
+          >
             <div class="add-ans-card">
               <textarea
                 name="content"
@@ -114,10 +185,8 @@
         </div>
       </div>
     </div>
-    <% }) %>
-    <% answers.forEach((answer)=>{ %>
-      
-    <% }) %>
+    <% include partials/editQuestion.ejs %> <% }}) %> <%
+    answers.forEach((answer)=>{ %> <% }) %>
   </div>
 </div>
 
