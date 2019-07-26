@@ -15,13 +15,17 @@ const { forwardAuthenticated } = require("../config/auth");
 
 // Login Page
 router.get("/login", forwardAuthenticated, (req, res) => res.render("login"));
+router.get('/auth/google', passport.authenticate('google', {
+    scope: ['profile', 'email']
+}));
+router.get('/auth/google/callback', passport.authenticate('google'));
 // Register Page
 router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
-//profile
 //favorite
 router.get('/favorite', function(req, res) {
     res.render('favorite.ejs')
 });
+//profile user
 router.get('/profile/:id', isLoggedIn, function(req, res) {
     res.render('profile.ejs');
 });
@@ -225,12 +229,12 @@ router.post('/reset/:token', function(req, res) {
         });
 });
 //profile edit
-router.post('/profile/:id', (req, res) => {
+router.post('/profile/information/:id', (req, res) => {
     updateRecord(req, res);
 });
 
 // find id
-router.get('/profile/:id', (req, res) => {
+router.get('/profile/information/:id', (req, res) => {
     res.render("profile")
 });
 //edit
@@ -238,8 +242,8 @@ function updateRecord(req, res) {
 
     User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, user) => {
         if (!err) {
-            req.flash('success_msg', 'You are updated success');
-            res.redirect('/profile');
+            req.flash('success_msg', 'You are updated infor success');
+            res.redirect('/profile/:id');
         } else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
@@ -255,7 +259,6 @@ router.post('/profile/reset/:id', (req, res) => {
     resetPassRecord(req, res);
 });
 
-// find id
 router.get('/profile/reset/:id', (req, res) => {
     res.render("profile")
 });
@@ -347,7 +350,7 @@ router.post('/upload/:id', upLoad.single("file"), function(req, res) {
                     req.flash(
                         "success_msg",
                         "You are reset avatar success.")
-                    return res.redirect('/profile');
+                    return res.redirect('/profile/:id');
                 })
         })
         .catch(err => console.log(err))
