@@ -154,11 +154,19 @@
 .social i:nth-child(4)  { color: #36465d; }
 */
 
+.form-avatar {
+    top: 60px;
+}
+
 .right {
-    margin-top: 30px;
+    margin-top: 100px;
     margin-left: 20px;
     height: 300px;
     padding: 0 25px 0 25px !important;
+}
+
+.button-upload {
+    font-size: 8pt !important;
 }
 
 .user-nav {

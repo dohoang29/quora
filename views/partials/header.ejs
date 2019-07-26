@@ -52,7 +52,7 @@
           </div>
           <div class="nav-item user-area">
           <img
-              src="/images/IMG_20150427_214234.jpg"
+          src="<%= currentUser.imageUrl == null ? 'https://iupac.org/wp-content/uploads/2018/05/default-avatar.png' : currentUser.imageUrl %>" 
               alt="avatar"
               class="image"
               type="button" data-toggle="dropdown" 

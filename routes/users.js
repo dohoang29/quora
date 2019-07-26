@@ -5,6 +5,9 @@ const passport = require("passport");
 var async = require("async");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
+var multer = require('multer');
+
+const path = require("path");
 // Load User model
 const User = require("../models/User");
 const config = require("../config/mailler");
@@ -305,4 +308,49 @@ function isLoggedIn(req, res, next) {
         return next();
     res.redirect('/');
 }
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './public/upload/avatar')
+    },
+    filename: function(req, file, cb) {
+        cb(null, Date.now() + "-" + file.originalname)
+    }
+})
+const fileFilter = (req, file, cb) => {
+    if (
+        file.mimetype === 'file/png' ||
+        file.mimetype === 'file/jpg' ||
+        file.mimetype === 'file/jpeg'
+    ) {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+};
+
+var upLoad = multer({ storage: storage }, { fileFilter: fileFilter });
+
+router.get('/upload/:id',
+    function(req, res) {
+        res.render('profile.ejs');
+    });
+router.post('/upload/:id', upLoad.single("file"), function(req, res) {
+    console.log(req.file);
+    const image = req.file;
+    User.findById(req.session.passport.user, (err, user) => {
+            if (image) {
+                user.imageUrl = "/upload/avatar/" + path.basename(image.path);
+            } else {
+                user.imageUrl = "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png";
+            }
+            user.save()
+                .then(user => {
+                    req.flash(
+                        "success_msg",
+                        "You are reset avatar success.")
+                    return res.redirect('/profile');
+                })
+        })
+        .catch(err => console.log(err))
+});
 module.exports = router;
