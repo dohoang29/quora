@@ -59,7 +59,6 @@
     display: inline-block;
     margin-top: 25px;
     text-align: center;
-    border-bottom: 1px solid #ededed;
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -137,7 +136,7 @@
 }
 
 .right {
-    margin-top: 40px;
+    margin-top: 10px;
     margin-left: 20px;
     height: 300px;
     padding: 0 25px 0 25px !important;
