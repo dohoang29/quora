@@ -1,14 +1,18 @@
 {
     "name": "node_passport_login",
     "version": "2.0.0",
-    "description": "Ninja authentication with Passport",
+    "description": "Q&A app",
     "main": "app.js",
     "scripts": {
         "start": "node app.js",
         "dev": "nodemon app.js"
     },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dohoang29/quora"
+    },
     "keywords": [],
-    "author": "",
+    "author": "hoan-hoang",
     "license": "ISC",
     "dependencies": {
         "async": "^2.5.0",
@@ -16,6 +20,7 @@
         "body-parser": "^1.14.1",
         "connect-flash": "^0.1.1",
         "cookie-parser": "^1.4.3",
+        "cookie-session": "^1.3.3",
         "ejs": "^2.6.2",
         "email-verification": "^0.4.6",
         "express": "^4.17.1",

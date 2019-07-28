@@ -5,15 +5,13 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
+// const cookieSession = require('cookie-session');
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const multer = require('multer');
 const moment = require("moment");
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-passport.use(new GoogleStrategy());
-
-
+const key = require('./config/key');
 require('./config/passport')(passport); // Passport Config
 
 const answer = require("./models/answer");
@@ -30,13 +28,17 @@ const indexRoutes = require("./routes/index"),
     answerRoutes = require("./routes/answer"),
     topicRoutes = require("./routes/topics");
 adminRoutes = require("./routes/admin")
-    // app.use('/upload/avatar', express.static(path.join(__dirname, 'avatars')));
 mongoose.connect("mongodb+srv://hoang:uANMPpiOnhRKAGi6@cluster0-7nvfn.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true });
 app.use(cookieParser('secret'));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+// app.use(cookieSession({
+//     maxAge: 24 * 60 * 60 * 1000,
+//     key: [key.session.cookieKey]
+// }));
+
 // Express session
 app.use(
     session({
@@ -44,17 +46,6 @@ app.use(
         resave: true,
         saveUninitialized: true
     })
-);
-passport.use(
-    new GoogleStrategy({
-            clientID: keys.googleClientID,
-            clientSecret: keys.googleClientSecret,
-            callbackURL: 'http://192.168.180.81:3000/auth/google/callback'
-        },
-        accessToken => {
-            console.log(accessToken);
-        }
-    )
 );
 // Passport middleware
 app.use(passport.initialize());
@@ -76,7 +67,6 @@ app.use((req, res, next) => {
     });
 });
 
-
 app.use('/', userRoutes);
 app.use('/', indexRoutes);
 app.use("/feed", feedRoutes);
@@ -85,6 +75,6 @@ app.use("/answer", answerRoutes);
 app.use("/admin", adminRoutes);
 app.use("/question", questionRoutes);
 
-app.listen(port, ipAdress, () => {
+app.listen(port, () => {
     console.log("Server is listening at " + ipAdress + ":" + port);
 });

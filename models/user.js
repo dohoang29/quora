@@ -17,8 +17,9 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        required: false
     },
+    googleId: String,
     imageUrl: {
         type: String,
         default: "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"

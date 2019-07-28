@@ -6,19 +6,21 @@ var async = require("async");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
 var multer = require('multer');
-
 const path = require("path");
 // Load User model
 const User = require("../models/User");
-const config = require("../config/mailler");
 const { forwardAuthenticated } = require("../config/auth");
 
 // Login Page
 router.get("/login", forwardAuthenticated, (req, res) => res.render("login"));
 router.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile', 'email']
+    scope: ['profile','email']
 }));
-router.get('/auth/google/callback', passport.authenticate('google'));
+// hand control to passport to use code to grab profile info
+router.get('/auth/google/redirect', passport.authenticate('google'), (req, res) => {
+    // res.send(req.user);
+    res.redirect('/feed');
+});
 // Register Page
 router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
 //favorite
@@ -27,7 +29,7 @@ router.get('/favorite', function(req, res) {
 });
 //profile user
 router.get('/profile/:id', isLoggedIn, function(req, res) {
-    res.render('profile.ejs');
+    res.render('profile.ejs',{});
 });
 // Register
 router.post("/register", (req, res) => {
@@ -151,13 +153,13 @@ router.post('/forgot', function(req, res, next) {
             var smtpTransport = nodemailer.createTransport({
                 service: 'Gmail',
                 auth: {
-                    user: config.MAIL_USER,
-                    pass: config.MAIL_PASS
+                    user: config.email.MAIL_USER,
+                    pass: config.email.MAIL_PASS
                 }
             });
             var mailOptions = {
                 to: user.email,
-                from: config.MAIL_USER,
+                from: config.email.MAIL_USER,
                 subject: 'Quora Password Reset',
                 text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                     'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
