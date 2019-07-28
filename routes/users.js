@@ -7,6 +7,7 @@ var nodemailer = require("nodemailer");
 var crypto = require("crypto");
 var multer = require('multer');
 const path = require("path");
+const keyEmail = require('../config/key');
 // Load User model
 const User = require("../models/User");
 const { forwardAuthenticated } = require("../config/auth");
@@ -153,14 +154,14 @@ router.post('/forgot', function(req, res, next) {
             var smtpTransport = nodemailer.createTransport({
                 service: 'Gmail',
                 auth: {
-                    user: config.email.MAIL_USER,
-                    pass: config.email.MAIL_PASS
+                    user: keyEmail.email.MAIL_USER,
+                    pass: keyEmail.email.MAIL_PASS
                 }
             });
             var mailOptions = {
                 to: user.email,
-                from: config.email.MAIL_USER,
-                subject: 'Quora Password Reset',
+                from: keyEmail.email.MAIL_USER,
+                subject: 'Q&A Password Reset',
                 text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                     'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
                     'http://' + req.headers.host + '/reset/' + token + '\n\n' +
