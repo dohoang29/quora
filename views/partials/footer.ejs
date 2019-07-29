@@ -4,6 +4,31 @@
     <% include addQuestion.ejs %>
     <script type="text/javascript">
         $(function(){
+            $('#topicFollowArea').children().click(function(){
+                var userId = $(this).attr('userId');
+                var action = $(this).attr('value');
+                $.ajax({
+                    type: "GET",
+                    url : window.location + "/" + userId + "/" + action,
+                    async: false,
+                    success : function(follow){
+                        if(follow.status === "Unfollow"){
+                            $("#topicIcon").removeClass("fa fa-plus-circle answer-icon").addClass("fas fa-times-circle");
+                            $("#topicLabel").text(follow.status);
+                            $("#topicFollowNumber").text(follow.count);
+                            $('#topicFollowArea').children().attr('value',follow.status);
+                        }
+                        if(follow.status === "Follow"){
+                            $("#topicIcon").removeClass("fas fa-times-circle").addClass("fa fa-plus-circle answer-icon");
+                            $("#topicLabel").text(follow.status);
+                            $("#topicFollowNumber").text(follow.count);
+                            $('#topicFollowArea').children().attr('value',follow.status);
+                        }
+                    }
+                });
+            });
+        });
+        $(function(){
             $('.voteArea').children().click(function(){
                 var questionId = $(this).parent().children().filter(".likebtn").attr('id');
                 var userId = $(this).parent().attr('id');
@@ -31,7 +56,6 @@
                         if(vote.status === "Unfollow"){
                             $("#follow"+questionId+" > span").removeClass("fa fa-plus-circle answer-icon").addClass("fas fa-times-circle");
                             $("#follow"+questionId+" > strong").text(vote.status);
-                            console.log(follownumber);
                             $("#"+follownumber).text(vote.voteCount);
                             $("#follow"+questionId).attr('value',vote.status);
                         }
