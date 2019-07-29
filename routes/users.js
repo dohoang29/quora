@@ -15,7 +15,7 @@ const { forwardAuthenticated } = require("../config/auth");
 // Login Page
 router.get("/login", forwardAuthenticated, (req, res) => res.render("login"));
 router.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile','email']
+    scope: ['profile', 'email']
 }));
 // hand control to passport to use code to grab profile info
 router.get('/auth/google/redirect', passport.authenticate('google'), (req, res) => {
@@ -30,7 +30,7 @@ router.get('/favorite', function(req, res) {
 });
 //profile user
 router.get('/profile/:id', isLoggedIn, function(req, res) {
-    res.render('profile.ejs',{});
+    res.render('profile.ejs', {});
 });
 // Register
 router.post("/register", (req, res) => {
@@ -219,7 +219,6 @@ router.post('/reset/:token', function(req, res) {
                                 );
                                 res.redirect('/login');
                             })
-
                     } else {
                         req.flash("error", "Passwords do not match.");
                         return res.redirect('back');
@@ -242,7 +241,6 @@ router.get('/profile/information/:id', (req, res) => {
 });
 //edit
 function updateRecord(req, res) {
-
     User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, user) => {
         if (!err) {
             req.flash('success_msg', 'You are updated infor success');
@@ -267,32 +265,38 @@ router.get('/profile/reset/:id', (req, res) => {
 });
 //edit
 function resetPassRecord(req, res) {
-
     User.findOne({ _id: req.params.id }).then(user => {
         // Match password
-        bcrypt.compare(req.body.password, user.password, (err, isMatch, done) => {
-            if (err) throw err;
-            if (isMatch) {
-                let errors = [];
-                if (req.body.newPassword.length < 6) {
-                    req.flash("error", "Password must be at least 6 characters");
-                    return res.redirect('back');
-                }
-                if (req.body.newPassword === req.body.newPassword2) {
-                    user.password = bcrypt.hashSync(req.body.newPassword, 10);
-                    user.save().then(user => {
-                        req.flash("success_msg", "You are updated password success.");
+        if (user.googleId == null) {
+            console.log("local")
+            bcrypt.compare(req.body.password, user.password, (err, isMatch, done) => {
+                if (err) throw err;
+                if (isMatch) {
+                    let errors = [];
+                    if (req.body.newPassword.length < 6) {
+                        req.flash("error", "Password must be at least 6 characters");
                         return res.redirect('back');
-                    })
+                    }
+                    if (req.body.newPassword === req.body.newPassword2) {
+                        user.password = bcrypt.hashSync(req.body.newPassword, 10);
+                        user.save().then(user => {
+                            req.flash("success_msg", "You are updated password success.");
+                            return res.redirect('back');
+                        })
+                    } else {
+                        req.flash("error", "Passwords do not match.");
+                        return res.redirect('back');
+                    }
                 } else {
-                    req.flash("error", "Passwords do not match.");
+                    req.flash("error", "Passwords current incorrect.");
                     return res.redirect('back');
                 }
-            } else {
-                req.flash("error", "Passwords current incorrect.");
-                return res.redirect('back');
-            }
-        });
+            });
+        } else {
+            console.log("email")
+            req.flash("error", "Passwords current incorrect.");
+            return res.redirect('back');
+        }
     });
 }
 //function check email

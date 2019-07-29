@@ -30,6 +30,10 @@ body {
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }
 
+.edit-member {
+    margin-top: 60px !important;
+}
+
 #logreg-forms form {
     width: 100%;
     max-width: 410px;
@@ -104,10 +108,6 @@ body {
     margin-top: 10px;
 }
 
-#logreg-forms .facebook-btn {
-    background-color: #3C589C;
-}
-
 #logreg-forms .google-btn {
     background-color: #DF4B3B;
 }
@@ -169,13 +169,4 @@ body {
     #logreg-forms .social-btn span {
         display: inline-block;
     }
-    /*
-    #logreg-forms .facebook-btn:after {
-        content: 'Facebook';
-    }
-
-    #logreg-forms .google-btn:after {
-        content: 'Google+';
-    }
-*/
 }

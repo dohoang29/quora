@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Quora</title>
+    <title>Q&A</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
     <script src="https://cdn.ckeditor.com/ckeditor5/12.3.1/classic/ckeditor.js"></script>
 
@@ -23,7 +23,7 @@
         <!--header-->
         <div class="container ">
             <nav class="navbar p-0">
-                <a href="/feed" class="navbar-brand logo">Quora</a>
+                <a href="/feed" class="navbar-brand logo">Q&A</a>
                 <div class="nav-item navi-button">
                     <ul class="nav nav-pills">
                         <li class="nav-item w-3">
@@ -61,6 +61,8 @@
             />
                             <div class="dropdown-menu option-profile">
                                 <a class="dropdown-item" href="/profile/<%=currentUser._id%>">Manage Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/admin">Admin</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/logout">Logout</a>
                 </div>
