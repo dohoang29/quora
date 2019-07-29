@@ -11,8 +11,8 @@ module.exports = {
         MAIL_PASS: 'HHoan1998'
     },
     cloudName: {
-        cloud_name: 'code-freak',
-        api_key: '229664144827119 ',
+        cloud_name: 'assignment029',
+        api_key: '229664144827119',
         api_secret: 'lutwdSC3mQpLoqofxO8omDajcXM',
     }
 };

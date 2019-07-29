@@ -8,6 +8,7 @@ var crypto = require("crypto");
 var multer = require('multer');
 const path = require("path");
 const keyEmail = require('../config/key');
+const keyUpload = require('../config/key');
 // Load User model
 const User = require("../models/User");
 const { forwardAuthenticated } = require("../config/auth");
@@ -318,9 +319,6 @@ function isLoggedIn(req, res, next) {
     res.redirect('/');
 }
 var storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, './public/upload/avatar')
-    },
     filename: function(req, file, cb) {
         cb(null, Date.now() + "-" + file.originalname)
     }
@@ -329,37 +327,51 @@ const fileFilter = (req, file, cb) => {
     if (
         file.mimetype === 'file/png' ||
         file.mimetype === 'file/jpg' ||
-        file.mimetype === 'file/jpeg'
+        file.mimetype === 'file/jpeg' ||
+        file.mimetype === 'file/gif'
     ) {
         cb(null, true);
     } else {
         cb(null, false);
     }
 };
-
+var cloudinary = require('cloudinary');
 var upLoad = multer({ storage: storage }, { fileFilter: fileFilter });
-
+cloudinary.config({
+    cloud_name: keyUpload.cloudName.cloud_name,
+    api_key: keyUpload.cloudName.api_key,
+    api_secret: keyUpload.cloudName.api_secret
+});
 router.get('/upload/:id',
     function(req, res) {
-        res.render('profile.ejs');
+        res.render('profile');
     });
 router.post('/upload/:id', upLoad.single("file"), function(req, res) {
-    console.log(req.file);
+    var _id = req.params.id;
     const image = req.file;
-    User.findById(req.session.passport.user, (err, user) => {
-            if (image) {
-                user.imageUrl = "/upload/avatar/" + path.basename(image.path);
-            } else {
-                user.imageUrl = "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png";
-            }
-            user.save()
-                .then(user => {
-                    req.flash(
-                        "success_msg",
-                        "You are reset avatar success.")
-                    return res.redirect('/profile/:id');
-                })
-        })
-        .catch(err => console.log(err))
+    var x = cloudinary.image("image", { width: 400, crop: "scale" });
+    console.log(x)
+    console.log(x.path)
+
+    cloudinary.uploader.upload(x.path, function(result) {
+        console.log(result)
+        User.findById(req.session.passport.user, (err, user) => {
+                if (image) {
+                    user.imageUrl = result.secure_url;
+                } else {
+                    user.imageUrl = "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png";
+                }
+                user.save()
+                    .then(user => {
+                        req.flash(
+                            "success_msg",
+                            "You are reset avatar success.")
+                        return res.redirect('/profile/' + _id);
+                    })
+            })
+            .catch(err => console.log(err))
+
+    });
+
 });
 module.exports = router;
