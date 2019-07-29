@@ -34,8 +34,8 @@ router.get("/register", forwardAuthenticated, (req, res) =>
   res.render("register")
 );
 //favorite
-router.get("/favorite", function(req, res) {
-  res.render("favorite.ejs");
+router.get('/favorite', function(req, res) {
+    res.render('favorite')
 });
 //profile user
 router.get("/profile/:id", isLoggedIn, function(req, res) {
@@ -98,12 +98,46 @@ router.post("/register", (req, res) => {
           password,
           password2
         });
-      } else {
-        const newUser = new User({
-          firstname,
-          lastname,
-          email,
-          password
+    } else {
+        User.findOne({
+            email: email
+        }).then(user => {
+            if (user) {
+                errors.push({
+                    msg: "Email already exists"
+                });
+                res.render("register", {
+                    errors,
+                    firstname,
+                    lastname,
+                    email,
+                    password,
+                    password2
+                });
+            } else {
+                const newUser = new User({
+                    firstname,
+                    lastname,
+                    email,
+                    password
+                });
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(newUser.password, salt, (err, hash) => {
+                        if (err) throw err;
+                        newUser.password = hash;
+                        newUser
+                            .save()
+                            .then(user => {
+                                req.flash(
+                                    "success_msg",
+                                    "You are registed success, login Q&A now!"
+                                );
+                                res.redirect("/login");
+                            })
+                            .catch(err => console.log(err));
+                    });
+                });
+            }
         });
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(newUser.password, salt, (err, hash) => {
