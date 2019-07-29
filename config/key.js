@@ -9,5 +9,10 @@ module.exports = {
     email: {
         MAIL_USER: 'dinhhoannguyen999@gmail.com',
         MAIL_PASS: 'HHoan1998'
+    },
+    cloudName: {
+        cloud_name: 'code-freak',
+        api_key: '229664144827119 ',
+        api_secret: 'lutwdSC3mQpLoqofxO8omDajcXM',
     }
 };

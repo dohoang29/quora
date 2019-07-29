@@ -62,9 +62,11 @@
                             <div class="dropdown-menu option-profile">
                                 <a class="dropdown-item" href="/profile/<%=currentUser._id%>">Manage Profile</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/admin">Admin</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/logout">Logout</a>
+                            <% if(currentUser.role == "admin"){%>
+                                <a class="dropdown-item" href="/admin">Admin</a>
+                                <div class="dropdown-divider"></div>
+                                <%}%>
+                                    <a class="dropdown-item" href="/logout">Logout</a>
                 </div>
                 <button class="question-btn" data-toggle="modal" data-target="#addQuestionModal">
                 Add Question

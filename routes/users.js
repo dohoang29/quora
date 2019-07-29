@@ -26,7 +26,7 @@ router.get('/auth/google/redirect', passport.authenticate('google'), (req, res) 
 router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
 //favorite
 router.get('/favorite', function(req, res) {
-    res.render('favorite.ejs')
+    res.render('favorite')
 });
 //profile user
 router.get('/profile/:id', isLoggedIn, function(req, res) {
@@ -93,9 +93,9 @@ router.post("/register", (req, res) => {
                             .then(user => {
                                 req.flash(
                                     "success_msg",
-                                    "Please choose favorite topic to Feed."
+                                    "You are registed success, login Q&A now!"
                                 );
-                                res.redirect("/favorite");
+                                res.redirect("/login");
                             })
                             .catch(err => console.log(err));
                     });
