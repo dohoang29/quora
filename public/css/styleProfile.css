@@ -11,6 +11,10 @@
     position: relative;
 }
 
+.option-reset {
+    margin-top: 20px;
+}
+
 .photo {
     width: 150px;
     height: 150px;

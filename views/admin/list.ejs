@@ -82,31 +82,33 @@
                         </thead>
 
                         <tbody>
-                            <% users.forEach((user)=>{ %>
+                            <% for (var i=0; i < users.length; i++){ %>
                                 <tr style="text-align: center;">
-                                    <td></td>
-                                    <td> <img width="30px" style="border-radius: 50px;" src="<%= user.imageUrl == null ? 'https://iupac.org/wp-content/uploads/2018/05/default-avatar.png' : user.imageUrl %>" class="img-user" /></td>
                                     <td>
-                                        <%= user.firstname %>
+                                        <%= i+1 %>
+                                    </td>
+                                    <td> <img width="30px" style="border-radius: 50px;" src="<%= users[i].imageUrl == null ? 'https://iupac.org/wp-content/uploads/2018/05/default-avatar.png' : users[i].imageUrl %>" class="img-user" /></td>
+                                    <td>
+                                        <%= users[i].firstname %>
                                     </td>
                                     <td>
-                                        <%= user.lastname %>
+                                        <%= users[i].lastname %>
                                     </td>
                                     <td>
-                                        <%= user.email %>
+                                        <%= users[i].email %>
                                     </td>
                                     <td>
-                                        <%= user.role%>
+                                        <%= users[i].role%>
                                     </td>
                                     <td>
-                                        <a href="/admin/edit/<%= user.id%>" class="btn btn-sm btn-success">Edit</a>
-                                        <a href="/admin/delete/<%= user._id%> " onclick="return confirm( 'Are you sure to delete this record ?'); " class="btn btn-sm btn-danger ">Delete</a>
-                                        <a href="/admin/ban/<%= user._id%>" onclick="myFunction(this)" class="btn btn-sm btn-warning ">Ban</a>
-                                        <a href="/admin/resetPassword/<%= user.id%>" class="btn btn-sm btn-primary">Reset
+                                        <a href="/admin/edit/<%= users[i].id%>" class="btn btn-sm btn-success">Edit</a>
+                                        <a href="/admin/delete/<%= users[i]._id%> " onclick="return confirm( 'Are you sure to delete this record ?'); " class="btn btn-sm btn-danger ">Delete</a>
+                                        <a href="/admin/ban/<%= users[i]._id%>" onclick="myFunction(this)" class="btn btn-sm btn-warning ">Ban</a>
+                                        <a href="/admin/resetPassword/<%= users[i].id%>" class="btn btn-sm btn-primary">Reset
                                             Password</a>
                                     </td>
                                 </tr>
-                                <% }) %>
+                                <% } %>
                         </tbody>
                     </table>
 

@@ -4,8 +4,6 @@ const mongoose = require('mongoose');
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-
-
 router.get('/', isLoggedInAdmin, (req, res) => {
     User.find((err, users) => {
         if (!err) {
@@ -15,7 +13,6 @@ router.get('/', isLoggedInAdmin, (req, res) => {
         }
     });
 });
-
 router.get('/add', (req, res) => {
     res.render("admin")
 });
