@@ -7,21 +7,20 @@ const passport = require('passport');
 
 
 router.get('/', isLoggedInAdmin, (req, res) => {
-
     User.find((err, users) => {
         if (!err) {
-            res.render("admin/admin", { users: users })
+            res.render("admin/list", { users: users })
         } else {
             console.log('Error in retrieving user list :' + err);
         }
     });
 });
 
-router.get('/add', isLoggedInAdmin, (req, res) => {
-    res.render("admin/add")
+router.get('/add', (req, res) => {
+    res.render("admin")
 });
 // find id
-router.get('/:id', isLoggedInAdmin, (req, res) => {
+router.get('/edit/:id', (req, res) => {
     User.findById(req.params.id, (err, user) => {
         if (!err) {
             res.render("admin/edit", { user: user })
@@ -60,7 +59,7 @@ router.get('/ban/:id', (req, res) => {
                 res.redirect('/admin');
             }
             // req.flash('success_msg', 'You are ban an user');
-            // res.redirect('/admin');
+            // res.redirect('/list');
         } else { console.log('Error in user ban :' + err); }
     });
 });
@@ -85,11 +84,11 @@ router.post('/add', (req, res) => {
     if (!firstname || !lastname || !email || !password) {
         req.flash('error', 'Please enter full feild.');
         console.log('test full field')
-        res.redirect('/admin/add');
+        res.redirect('/admin');
     }
     if (password.length < 6) {
         req.flash('error', 'Password must be at least 6 characters');
-        res.redirect('/admin/add');
+        res.redirect('/admin');
     } else {
         User.findOne({
             email: email
@@ -98,7 +97,7 @@ router.post('/add', (req, res) => {
                 errors.push({
                     msg: 'Email already exists'
                 });
-                res.render('admin/add', {
+                res.render('list', {
                     errors,
                     firstname,
                     lastname,
@@ -120,7 +119,7 @@ router.post('/add', (req, res) => {
                     } else {
                         if (err.name == 'ValidationError') {
                             handleValidationError(err, req.body);
-                            res.render("user/add", {});
+                            res.render("/admin/list", {});
                         } else
                             console.log('Error during record insertion : ' + err);
                     }
@@ -129,11 +128,7 @@ router.post('/add', (req, res) => {
         })
     }
 });
-router.post('/', (req, res) => {
-    updateRecord(req, res);
-});
-//edit
-function updateRecord(req, res) {
+router.post('/edit/:id', (req, res) => {
     User.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, user) => {
         if (!err) {
             req.flash('success_msg', 'You are edited user success');
@@ -141,12 +136,12 @@ function updateRecord(req, res) {
         } else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
-                res.render("admin/edit", {});
+                res.render("/admin/list", {});
             } else
                 console.log('Error during record update : ' + err);
         }
     });
-}
+});
 
 //reset password
 router.post('/resetPassword/:id', (req, res) => {
@@ -191,7 +186,6 @@ function isLoggedInAdmin(req, res, next) {
     if (req.isAuthenticated()) {
         // console.log(req.session.passport.user);
         User.findById(req.session.passport.user, (err, user) => {
-            // console.log(user);
             if (user.role == 'admin') {
                 return next();
             } else {

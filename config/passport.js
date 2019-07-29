@@ -20,7 +20,6 @@ module.exports = function(passport) {
                 if (user.isBan == true) {
                     return done(null, false, { message: 'Accout is ban, please contact admin for support' });
                 }
-
                 // Match password
                 bcrypt.compare(password, user.password, (err, isMatch) => {
                     if (err) throw err;
@@ -61,8 +60,8 @@ passport.use(
                 console.log(profile);
                 new User({
                     googleId: profile.id,
-                    firstname: profile.name.givenName,
-                    lastname: profile.name.familyName,
+                    firstname: profile.name.familyName,
+                    lastname: profile.name.givenName,
                     email: profile._json.email,
                     imageUrl: profile._json.picture
                 }).save().then((newUser) => {
