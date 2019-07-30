@@ -1,72 +1,54 @@
 <% include ../partials/headAdmin.ejs %>
-    <!-- /. NAV TOP  -->
-    <nav class="navbar-default navbar-side" role="navigation">
-        <div class="sidebar-collapse">
-            <ul class="nav" id="main-menu">
-                <li class="text-center user-image-back">
-                    <img width="270px" style="border-radius: 135px; padding: 10px;" src="<%= currentUser.imageUrl == null ? 'https://iupac.org/wp-content/uploads/2018/05/default-avatar.png' : currentUser.imageUrl %>" class="img-responsive" />
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-desktop "></i>Dashboard</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-male "></i>Users<span class="fa arrow"></span></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-book "></i>Topic<span class="fa arrow"></span></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-edit "></i>Forms </a>
-                </li>
-
-                <li>
-                    <a href="blank.html"><i class="fa fa-table "></i>Blank Page</a>
-                </li>
-            </ul>
-
-        </div>
-
-    </nav>
     <!-- /. NAV SIDE  -->
-    <div id="page-wrapper">
-        <div id="page-inner">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Admin Dashboard</h2>
-                    <% include ../partials/messages %>
-                </div>
-            </div>
-            <hr>
+    <div class="row">
+        <div class="col-md-2">
+            <% include ../partials/leftBarAdmin.ejs %>
+        </div>
+        <div class="col-md-10">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="create-user">
-                        <a onclick="document.getElementById('createMember').style.display='block'" class="btn btn-sm btn-success add-user">Create User</a>
+                        <% include ../partials/messages %>
                     </div>
-                    <div id="createMember" class="w3-modal">
-                        <div class="w3-modal-content">
-                            <header class="w3-container w3-teal">
-                                <span onclick="document.getElementById('createMember').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                                <h2>Create User</h2>
-                            </header>
-                            <div class="w3-container">
-                                <form action="/admin/add" method="post" class="form-signup" autocomplete="off">
-                                    <input width="25px" type="text" id="user-name" class="form-control" placeholder="First name" name="firstname">
-                                    <input width="25px" type="text" id="user-name2" class="form-control" placeholder="Last name" name="lastname">
-                                    <input type="email" id="user-email" class="form-control" placeholder="Email address" name="email">
-                                    <input type="password" id="user-pass" class="form-control" placeholder="Password must be at least 6 characters" name="password">
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="create-user">
+                            <button type="button" class="btn add-member btn-primary" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-plus"></i>
+                                    Create User
+                                  </button>
 
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i>
-                                                Submit</button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Create user</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/admin/add" method="post" class="form-signup" autocomplete="off">
+                                                <input width="25px" type="text" id="user-name" class="form-control" placeholder="First name" name="firstname">
+                                                <input width="25px" type="text" id="user-name2" class="form-control" placeholder="Last name" name="lastname">
+                                                <input type="email" id="user-email" class="form-control" placeholder="Email address" name="email">
+                                                <input type="password" id="user-pass" class="form-control" placeholder="Password must be at least 6 characters" name="password">
 
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-info"><i class="fa fa-database"></i>
+                                                            Submit</button>
+
+                                                </div>
+
+                                            </form>
+                                        </div>
                                     </div>
-
-                                </form>
+                                </div>
                             </div>
-
                         </div>
-
                     </div>
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
@@ -101,19 +83,21 @@
                                         <%= users[i].role%>
                                     </td>
                                     <td>
-                                        <a href="/admin/edit/<%= users[i].id%>" class="btn btn-sm btn-success">Edit</a>
-                                        <a href="/admin/delete/<%= users[i]._id%> " onclick="return confirm( 'Are you sure to delete this record ?'); " class="btn btn-sm btn-danger ">Delete</a>
-                                        <a href="/admin/ban/<%= users[i]._id%>" onclick="myFunction(this)" class="btn btn-sm btn-warning ">Ban</a>
-                                        <a href="/admin/resetPassword/<%= users[i].id%>" class="btn btn-sm btn-primary">Reset
-                                            Password</a>
+                                        <a href="/admin/edit/<%= users[i].id%>" class="btn btn-sm btn-success add-member"><i class="fa fa-edit"></i></a>
+                                        <a href="/admin/delete/<%= users[i]._id%> " onclick="return confirm( 'Are you sure to delete this record ?'); " class="btn btn-sm btn-danger add-member"><i class="fa fa-remove"></i></a>
+                                        <a href="/admin/ban/<%= users[i]._id%>" onclick="myFunction(this)" class="btn btn-sm btn-warning add-member">
+                                            <% if(users[i].isBan == false){ %>
+                                                <i class="fa fa-ban"></i>
+                                                <%}else{%><i class="fa fa-circle"></i>
+                                                    <%}%>
+                                        </a>
+                                        <a href="/admin/resetPassword/<%= users[i].id%>" class="btn btn-sm btn-primary add-member"><i class="fa fa-cog"></i></a>
                                     </td>
                                 </tr>
                                 <% } %>
                         </tbody>
                     </table>
-
                 </div>
-
             </div>
             <!-- /. ROW  -->
             <hr />
@@ -132,6 +116,8 @@
 
         <!-- /. PAGE WRAPPER  -->
     </div>
+    </div>
+
     <script>
         function myFunction(x) {
             x.classList.toggle("fa-user-times");
