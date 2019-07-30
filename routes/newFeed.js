@@ -106,9 +106,17 @@ router.get("/:questionId/:userId/:status", (req, res) => {
           status = "Upvote";
         }
       }
-      if (status === "Follow"){
+      if (status === "Follow") {
         question.followers.push(userId);
         question.save();
+        User.findById(userId, (err, user) => {
+          if (err) {
+            console.log(err);
+          } else {
+            user.following.push(questionId);
+            user.save();
+          }
+        });
         number = question.followers.length.toString();
         status = "Unfollow";
         console.log(question.followers.length);
@@ -121,6 +129,18 @@ router.get("/:questionId/:userId/:status", (req, res) => {
           }
           console.log(question.followers.length);
           question.save();
+          User.findById(userId, (err, user) => {
+            if (err) {
+              console.log(err);
+            } else {
+              for (var i = 0; i < user.following.length; i++) {
+                if (user.following[i] == questionId) {
+                  user.following.splice(i, 1);
+                }
+              }
+              user.save();
+            }
+          });
           number = question.followers.length.toString();
           status = "Follow";
         }

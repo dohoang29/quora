@@ -89,10 +89,6 @@
     display: none;
 }
 
-#userProfile {
-    display: none;
-}
-
 .user-profile {
     background-color: #007BFF;
     border-radius: 3px;
@@ -203,4 +199,13 @@
         position: unset;
         text-align: center;
     }
+}
+
+.profile-topic-img{
+    width: auto;
+    height: 50px;
+}
+
+.profile-topic-title {
+    
 }
