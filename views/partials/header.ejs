@@ -53,12 +53,13 @@
             />
           </div>
           <div class="nav-item user-area">
-          <img
-          src="<%= currentUser.imageUrl == null ? 'https://iupac.org/wp-content/uploads/2018/05/default-avatar.png' : currentUser.imageUrl %>" 
-              alt="avatar"
-              class="image"
-              type="button" data-toggle="dropdown" 
-            />
+              <span id="avatarUserHead" data-toggle="dropdown">
+                  <% if(currentUser.imageUrl){%>
+                      <%- currentUser.imageUrl%>
+                          <%}else{%>
+                              <img src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" />
+                              <%}%>
+                          </span>
                             <div class="dropdown-menu option-profile">
                                 <a class="dropdown-item" href="/profile/<%=currentUser._id%>">Manage Profile</a>
                             <div class="dropdown-divider"></div>
