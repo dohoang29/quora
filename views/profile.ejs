@@ -7,12 +7,9 @@
                         <div class="left col-lg-4">
                             <div class="photo-left">
                                 <div id="avatarUser">
-                                    <% if(user.imageUrl){%>
-                                        <%- user.imageUrl%>
-                                            <%}else{%>
-                                                <img src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" />
-                                                <%}%>
+                                    <img class="photo" src="<%=user.imageUrl%>">
                                 </div>
+
                                 <div class="user-active"></div>
                             </div>
                             <span style="margin-top: 10px;" class="edit" data-toggle="modal" data-target="#exampleModalCenter">Change profile</span
@@ -43,15 +40,30 @@
                         </div>
                         <div class="modal-body">
                             <form action="/upload/<%=user._id%>" method="POST" enctype="multipart/form-data" class="form-avatar" name="image" id="image">
-                                <div>
-                                    <input type="file" name="file" id="file" />
+                                <div class="box">
+                                    <input type="file" id="file-input" />
+                                </div>
+                                <div class="box-2">
+                                    <div class="result"></div>
+                                    <div class=" img-result hide">
+                                        <!-- result of crop -->
+                                        <img class="cropped" src="" alt="" />
+                                    </div>
+                                </div>
+                                <!-- input file -->
+                                <div class="box">
+                                    <div class="options hide">
+                                        <label> Width</label>
+                                        <input type="number" class="img-w" value="300" min="100" max="1200" />
+                                    </div>
+                                    <!-- save btn -->
                                     <div class="button-option">
-                                        <button id="userResetAvatar" type="submit" class="button-upload btn btn-danger ">
-                          Upload
-                          <i class="fa fa-upload" aria-hidden="true"></i>
+                                        <button id="userResetAvatar" type="submit" class="button-upload save btn-upload btn-danger ">
+                          Drop
+                          <i class="fa fa-drop" aria-hidden="true"></i>
                         </button>
-                                        <button type="submit" class="button-upload btn btn-danger ">
-                          Remove
+                                        <button type="submit" class="button-upload up btn-upload btn-danger ">
+                          Up/Del
                           <i class="fa fa-times" aria-hidden="true"></i>
                         </button>
                                     </div>
@@ -59,7 +71,7 @@
                             </form>
                         </div>
                         <div style="height: 50px;" class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            <button type="button" class="btn-upload btn-secondary" data-dismiss="modal">
                     Close
                   </button>
                         </div>
@@ -284,26 +296,4 @@
     </div>
     </main>
     </div>
-    <script>
-        //reset
-        function backToProfile() {
-            var x = document.getElementById("userProfile");
-            var y = document.getElementById("userResetpassword");
-            x.style.display = "block";
-            y.style.display = "none";
-        }
-
-        function myFunctionReset() {
-            var x = document.getElementById("userProfile");
-            var y = document.getElementById("userResetpassword");
-            if (y.style.display === "block") {
-                y.style.display = "none";
-                x.style.display = "none";
-            } else {
-                y.style.display = "block";
-                x.style.display = "none";
-            }
-        }
-    </script>
-
     <% include partials/footer.ejs %>

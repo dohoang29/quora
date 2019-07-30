@@ -2,27 +2,36 @@
 <link rel="stylesheet" href="/css/style.css">
 
 <% include ../partials/headAdmin.ejs %>
-    <div class="edit-member" id="logreg-forms">
-        <h3 style="padding-left: 15px;">Edit User :
-            <%=user.firstname %>
-        </h3>
-        <form action="/admin/edit/<%= user.id%>" method="post" class="form-signup" autocomplete="off">
-            <input type="hidden" name="_id" value="<%= user._id%>">
-            <input width="25px" type="text" id="user-name" class="form-control" placeholder="First name" name="firstname" value="<%=user.firstname %>">
-            <input width="25px" type="text" id="user-name2" class="form-control" placeholder="Last name" name="lastname" value=" <%= user.lastname %>">
-            <input type="email" id="user-email" class="form-control" placeholder="Email address" name="email" value=" <%= user.email %>">
-            <input type="text" class="form-control" placeholder="Role" name="role" value="<%= user.role %>">
+    <div class="row">
+        <div class="col-md-2">
+            <% include ../partials/leftBarAdmin.ejs %>
+        </div>
+        <div class="col-md-10">
+            <div class="edit-member" id="logreg-forms">
+                <h3 style="padding-left: 15px;">Edit User :
+                    <%=user.firstname %>
+                </h3>
+                <form action="/admin/edit/<%= user.id%>" method="post" class="form-signup" autocomplete="off">
+                    <input type="hidden" name="_id" value="<%= user._id%>">
+                    <input width="25px" type="text" id="user-name" class="form-control" placeholder="First name" name="firstname" value="<%=user.firstname %>">
+                    <input width="25px" type="text" id="user-name2" class="form-control" placeholder="Last name" name="lastname" value=" <%= user.lastname %>">
+                    <input type="email" id="user-email" class="form-control" placeholder="Email address" name="email" value=" <%= user.email %>">
+                    <select name="role" class="form-control form-control-lg">
+                    <option><%= user.role %></option>
+                    <option><%= user.role == "admin" ? "user" : "admin"%></option>
+                  </select>
+                    <!-- <input type="text" class="form-control" placeholder="Role" name="role" value="<%= user.role %>"> -->
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
-                <a href='/admin' id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+                        <a href='/admin' id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
+                    </div>
+
+                </form>
+
+
             </div>
+        </div>
+        </body>
 
-        </form>
-
-
-    </div>
-
-    </body>
-
-    </html>
+        </html>

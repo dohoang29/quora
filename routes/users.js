@@ -100,45 +100,11 @@ router.post("/register", (req, res) => {
                     password2
                 });
             } else {
-                User.findOne({
-                    email: email
-                }).then(user => {
-                    if (user) {
-                        errors.push({
-                            msg: "Email already exists"
-                        });
-                        res.render("register", {
-                            errors,
-                            firstname,
-                            lastname,
-                            email,
-                            password,
-                            password2
-                        });
-                    } else {
-                        const newUser = new User({
-                            firstname,
-                            lastname,
-                            email,
-                            password
-                        });
-                        bcrypt.genSalt(10, (err, salt) => {
-                            bcrypt.hash(newUser.password, salt, (err, hash) => {
-                                if (err) throw err;
-                                newUser.password = hash;
-                                newUser
-                                    .save()
-                                    .then(user => {
-                                        req.flash(
-                                            "success_msg",
-                                            "You are registed success, login Q&A now!"
-                                        );
-                                        res.redirect("/login");
-                                    })
-                                    .catch(err => console.log(err));
-                            });
-                        });
-                    }
+                const newUser = new User({
+                    firstname,
+                    lastname,
+                    email,
+                    password
                 });
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -149,17 +115,17 @@ router.post("/register", (req, res) => {
                             .then(user => {
                                 req.flash(
                                     "success_msg",
-                                    "Please choose favorite topic to Feed."
+                                    "You are registed success, login Q&A now!"
                                 );
-                                res.redirect("/favorite");
+                                res.redirect("/login");
                             })
                             .catch(err => console.log(err));
                     });
                 });
             }
-        });
+        })
     }
-});
+})
 
 // Login
 router.post("/login", (req, res, next) => {
@@ -388,6 +354,7 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) return next();
     res.redirect("/");
 }
+//up avatar
 var storage = multer.diskStorage({
     filename: function(req, file, cb) {
         cb(null, Date.now() + "-" + file.originalname)
@@ -419,28 +386,29 @@ router.get('/upload/:id',
 router.post('/upload/:id', upLoad.single("file"), function(req, res) {
     var _id = req.params.id;
     const image = req.file;
-    console.log(image)
-    cloudinary.uploader.upload(image.path, function(result) {
-        console.log(result)
-        var nameAvatar = path.basename(result.secure_url);
-        var avatarUrl = cloudinary.image(nameAvatar, { gravity: "face", width: 200, height: 200, crop: "fill" })
-        User.findById(req.session.passport.user, (err, user) => {
-                if (image) {
-                    user.imageUrl = avatarUrl;
-                } else {
-                    user.imageUrl = "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png";
-                }
+    User.findById(req.session.passport.user, (err, user) => {
+        if (image) {
+            cloudinary.uploader.upload(image.path, function(result) {
+                user.imageUrl = result.secure_url;
+                console.log(user.imageUrl)
                 user.save()
                     .then(user => {
                         req.flash(
                             "success_msg",
-                            "You are reset avatar success.")
+                            "You are update avatar success.")
                         return res.redirect('/profile/' + _id);
                     })
             })
-            .catch(err => console.log(err))
-
-    });
-
+        } else {
+            user.imageUrl = "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png";
+            user.save()
+                .then(user => {
+                    req.flash(
+                        "success_msg",
+                        "You are remove avatar success.")
+                    return res.redirect('/profile/' + _id);
+                })
+        }
+    })
 });
 module.exports = router;

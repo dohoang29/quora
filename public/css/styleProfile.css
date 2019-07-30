@@ -201,11 +201,62 @@
     }
 }
 
-.profile-topic-img{
+.profile-topic-img {
     width: auto;
     height: 50px;
 }
 
-.profile-topic-title {
-    
+.profile-topic-title {}
+
+.result {
+    display: inline-block;
+    width: 50%;
+}
+
+.img-result {
+    height: auto;
+    width: 40%;
+    display: inline-block;
+    float: right;
+}
+
+.cropped {
+    height: auto;
+    width: 100%;
+    display: inline-block;
+}
+
+.box {
+    padding: 0.5em;
+    width: 100%;
+    margin: 0.5em;
+}
+
+.box-2 {
+    padding: 0.5em;
+}
+
+.options label,
+.options input {
+    width: 4em;
+    padding: 0.5em 1em;
+}
+
+.btn-upload {
+    background: white;
+    color: black;
+    border: 1px solid black;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    margin: 0.8em 0.3em;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
+
+img {
+    max-width: 100%;
 }
