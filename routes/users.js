@@ -349,11 +349,7 @@ router.get('/upload/:id',
 router.post('/upload/:id', upLoad.single("file"), function(req, res) {
     var _id = req.params.id;
     const image = req.file;
-    var x = cloudinary.image("image", { width: 400, crop: "scale" });
-    console.log(x)
-    console.log(x.path)
-
-    cloudinary.uploader.upload(x.path, function(result) {
+    cloudinary.uploader.upload(image.path, function(result) {
         console.log(result)
         User.findById(req.session.passport.user, (err, user) => {
                 if (image) {
