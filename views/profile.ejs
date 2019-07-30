@@ -6,80 +6,102 @@
                     <div class="row">
                         <div class="left col-lg-4">
                             <div class="photo-left">
-                                <img class="photo" src="<%= currentUser.imageUrl == null ? 'https://iupac.org/wp-content/uploads/2018/05/default-avatar.png' : currentUser.imageUrl %>" />
+                                <div id="avatarUser">
+                                    <% if(user.imageUrl){%>
+                                        <%- user.imageUrl%>
+                                            <%}else{%>
+                                                <img src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" />
+                                                <%}%>
+                                </div>
                                 <div class="user-active"></div>
                             </div>
-                            <span style="margin-top: 10px;" class="edit" data-toggle="modal" data-target="#exampleModalCenter">Change profile</span>
+                            <span style="margin-top: 10px;" class="edit" data-toggle="modal" data-target="#exampleModalCenter">Change profile</span
+          >
 
-                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalCenterTitle">
-                                                Change Avatar
-                                            </h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <div
+            class="modal fade"
+            id="exampleModalCenter"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalCenterTitle">
+                    Change Avatar
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
                     <span aria-hidden="true">&times;</span>
                             </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="/upload/<%=currentUser.id%>" method="POST" enctype="multipart/form-data" class="form-avatar" name="image" id="image">
-                                                <div>
-                                                    <input type="file" name="file" id="file" />
-                                                    <div class="button-option">
-                                                        <button id="userResetAvatar" type="submit" class="button-upload btn btn-danger ">
+                        </div>
+                        <div class="modal-body">
+                            <form action="/upload/<%=user._id%>" method="POST" enctype="multipart/form-data" class="form-avatar" name="image" id="image">
+                                <div>
+                                    <input type="file" name="file" id="file" />
+                                    <div class="button-option">
+                                        <button id="userResetAvatar" type="submit" class="button-upload btn btn-danger ">
                           Upload
                           <i class="fa fa-upload" aria-hidden="true"></i>
                         </button>
-                                                        <button type="submit" class="button-upload btn btn-danger ">
+                                        <button type="submit" class="button-upload btn btn-danger ">
                           Remove
                           <i class="fa fa-times" aria-hidden="true"></i>
                         </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div style="height: 50px;" class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    Close
-                  </button>
-                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-
-                        <div class="head col-lg-4">
-                            <h4 class="name">
-                                <%= currentUser.lastname%>
-                                    <%=currentUser.firstname%>
-                            </h4>
-                            <p class="info">UI/UX Designer</p>
-                            <p class="info">
-                                <%=currentUser.email%>
-                            </p>
-                            <div>
-
-
-                            </div>
-                        </div>
-
-                        <div class="stats col-lg-4">
-                            <div class="stat col-xs-4" style="padding-right: 5px;">
-                                <p class="number-stat">3,619</p>
-                                <p class="desc-stat">Followers</p>
-                            </div>
-                            <div class="stat col-xs-4">
-                                <p class="number-stat">42</p>
-                                <p class="desc-stat">Following</p>
-                            </div>
-                            <div class="stat col-xs-4">
-                                <p class="number-stat">38</p>
-                                <p class="desc-stat">Uploads</p>
-                            </div>
+                        <div style="height: 50px;" class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Close
+                  </button>
                         </div>
                     </div>
-                    <!--
+                </div>
+    </div>
+    </div>
+
+    <div class="head col-lg-4">
+        <h4 class="name">
+            <%= user.lastname%>
+                <%=user.firstname%>
+        </h4>
+        <p class="info">UI/UX Designer</p>
+        <p class="info">
+            <%=user.email%>
+        </p>
+        <div></div>
+    </div>
+
+    <div class="stats col-lg-4">
+        <div class="stat col-xs-4" style="padding-right: 5px;">
+            <p class="number-stat">
+                <%= user.questions.length%>
+            </p>
+            <p class="desc-stat">Questions</p>
+        </div>
+        <div class="stat col-xs-4">
+            <p class="number-stat">
+                <%= user.answer.length%>
+            </p>
+            <p class="desc-stat">Answers</p>
+        </div>
+        <div class="stat col-xs-4">
+            <p class="number-stat">
+                <%= user.following.length%>
+            </p>
+            <p class="desc-stat">Following</p>
+        </div>
+    </div>
+    </div>
+    <!--
         <div class="social">
           <i class="fa fa-facebook-square" aria-hidden="true"></i>
           <i class="fa fa-twitter-square" aria-hidden="true"></i>
@@ -87,11 +109,11 @@
           <i class="fa fa-tumblr-square" aria-hidden="true"></i>
         </div>
 -->
-                </div>
-                <div class=" mt-3">
-                    <ul class="nav nav-pills mb-3 border-bottom" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link section-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="true" onclick="myFunctionEdit()">Profile</a
+    </div>
+    <div class=" mt-3">
+        <ul class="nav nav-pills mb-3 border-bottom" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link section-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="true">Profile</a
           >
         </li>
         <li class="nav-item">
@@ -131,76 +153,129 @@
           >
         </li>
       </ul>
-      <div id="userProfile">
-        <form
-          action="/profile/information/<%= currentUser._id%>"
-          method="post"
-          class="form-signup"
-          autocomplete="off"
+      <div class="tab-content" id="pills-tabContent">
+        <div
+          class="tab-pane fade"
+          id="pills-profile"
+          role="tabpanel"
+          aria-labelledby="pills-profile-tab"
         >
-          <label class="first-name"><strong>First Name</strong></label>
-          <input
-            width="25px"
-            type="text"
-            id="user-name"
-            class="form-control"
-            placeholder="First name"
-            name="firstname"
-            value="<%=currentUser.firstname %>"
-          />
-          <label class="last-name"><strong>Last Name</strong></label>
-          <input
-            width="25px"
-            type="text"
-            id="user-name2"
-            class="form-control"
-            placeholder="Last name"
-            name="lastname"
-            value="<%=currentUser.lastname %>"
-          />
-          <label class="email"><strong>Email</strong></label>
-          <input
-            type="email"
-            class="form-control"
-            placeholder="Email address"
-            name="email"
-            value=" <%=currentUser.email %>"
-          />
+          <div id="userProfile">
+            <form
+              action="/profile/information/<%= user._id%>"
+              method="post"
+              class="form-signup"
+              autocomplete="off"
+            >
+              <label class="first-name"><strong>First Name</strong></label>
+              <input
+                width="25px"
+                type="text"
+                id="user-name"
+                class="form-control"
+                placeholder="First name"
+                name="firstname"
+                value="<%=user.firstname %>"
+              />
+              <label class="last-name"><strong>Last Name</strong></label>
+              <input
+                width="25px"
+                type="text"
+                id="user-name2"
+                class="form-control"
+                placeholder="Last name"
+                name="lastname"
+                value="<%=user.lastname %>"
+              />
+              <label class="email"><strong>Email</strong></label>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Email address"
+                name="email"
+                value=" <%=user.email %>"
+              />
 
-          <div class="form-group option-reset">
-            <button type="submit" class="btn user-update ">
-              <i class="fa fa-database"></i> Update
+              <div class="form-group option-reset">
+                <button type="submit" class="btn user-update ">
+                  <i class="fa fa-database"></i> Update
+                </button>
+                <!-- <a href='#' id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a> -->
+    </div>
+    </form>
+    <button type="menu" onclick="myFunctionReset()" class="btn  btn-link p-0 ">
+              <i class="fa fa-key"></i> Change password
             </button>
-            <span style=" font-weight: bold;">OR</span>
-            <a<button type="menu" onclick="myFunctionReset()" class="btn user-update "></a>
-                            <i class="fa fa-key"></i> Change password
-                            </button>
-                            <!-- <a href='#' id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a> -->
-                </div>
-                </form>
     </div>
     <div id="userResetpassword">
-        <form action="/profile/reset/<%= currentUser._id%>" method="post" class="form-signup" autocomplete="off">
-            <label class="first-name"><strong>Current Password</strong></label>
-            <input width="25px" type="password" class="form-control" placeholder="*********" name="password" />
-            <label class="last-name"><strong>New Password</strong></label>
+        <form action="/profile/reset/<%= user._id%>" method="post" class="form-signup" autocomplete="off">
+            <label class="first-name"><strong>Current Password</strong></label
+              >
+              <input
+                width="25px"
+                type="password"
+                class="form-control"
+                placeholder="*********"
+                name="password"
+              />
+              <label class="last-name"><strong>New Password</strong></label>
             <input width="25px" type="password" class="form-control" placeholder="" name="newPassword" />
             <label class="email"><strong>Confirm Password</strong></label>
             <input type="password" id="user-email" class="form-control" placeholder="" name="newPassword2" />
 
-            <div class="form-group">
+            <div class="form-group mb-0">
                 <button type="submit" class="btn user-update ">
-              <i class="fa fa-database"></i>Update
-            </button>
+                  <i class="fa fa-database"></i>Update
+                </button>
                 <!-- <a href='#' id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a> -->
             </div>
         </form>
+        <button onclick="backToProfile()" class="btn btn-link p-0 mt-1 ">
+              <i class="fas fa-chevron-left"></i> Back
+            </button>
     </div>
-    <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"></div>
-        <div class="tab-pane fade" id="pills-topic" role="tabpanel" aria-labelledby="pills-topic-tab"></div>
-        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"></div>
-        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"></div>
+    </div>
+    <div class="tab-pane fade" id="pills-topic" role="tabpanel" aria-labelledby="pills-topic-tab">
+        <div class="row">
+            <% user.topic.forEach((topic)=>{%>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <img class="main-topic-img profile-topic-img" src="<%= topic.image %>" alt="<%= topic.title %>" />
+                            <div>
+                                <a href="/topic/<%=topic._id%>">
+                                    <p class="m-0">
+                                        <strong class="ml-2"><%= topic.title %></strong>
+                                    </p>
+                                </a>
+                                <% var topicflag = false; if(topic.followers !=
+                    null){topic.followers.forEach((follower)=>{ if(follower ==
+                    currentUser.id){ topicflag = true; } })} %>
+                                    <% if(topicflag
+                    == false){%>
+                                        <%}else{%>
+                                            <%}%>
+                                                <div class="topicFollowArea" id="<%= topic._id %>">
+                                                    <button id="topicFollowArea<%= topic._id %>" class="main-topic-link btn btn-link" userId="<%= currentUser._id %>" value="<% if(topicflag == false){%>Follow<%}else{%>Unfollow<%}%>">
+                        <i
+                          id="topicIcon<%= topic._id %>"
+                          class="<% if(topicflag == false){%>fa fa-plus-circle answer-icon<%}else{%>fas fa-times-circle<%} %>"
+                        ></i
+                        ><strong id="topicLabel<%= topic._id %>"
+                          ><% if(topicflag ==
+                          false){%>Follow<%}else{%>Unfollow<%}%></strong
+                        >
+                      </button>
+                                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"></div>
+    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"></div>
     </div>
     <!--        <span class="follow">Follow</span>-->
     <div class="">
@@ -210,18 +285,14 @@
     </main>
     </div>
     <script>
-        function myFunctionEdit() {
+        //reset
+        function backToProfile() {
             var x = document.getElementById("userProfile");
             var y = document.getElementById("userResetpassword");
-            if (x.style.display === "block") {
-                x.style.display = "none";
-                y.style.display = "none";
-            } else {
-                x.style.display = "block";
-                y.style.display = "none";
-            }
+            x.style.display = "block";
+            y.style.display = "none";
         }
-        //reset
+
         function myFunctionReset() {
             var x = document.getElementById("userProfile");
             var y = document.getElementById("userResetpassword");

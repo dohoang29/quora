@@ -75,6 +75,6 @@ app.use("/answer", answerRoutes);
 app.use("/admin", adminRoutes);
 app.use("/question", questionRoutes);
 
-app.listen(port, ipAdress, () => {
+app.listen(port, () => {
     console.log("Server is listening at " + ipAdress + ":" + port);
 });
