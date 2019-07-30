@@ -1,26 +1,54 @@
-<div class="col">
-    <ul class="list-unstyled">
-        <li class="media">
-            <a class="topic-link" href="/feed">
-                <img class="mr-2 topic-image" src="/images/feed.png" alt="Feed" />
-                <span class="media-body">
-                    <p class="mt-0 mb-1 topic-title fs-13"> Feed</p>
-                </span>
-            </a>
-        </li>
-        <% topics.forEach((topic)=>{ %>
-            <li class="media">
-                <a class="topic-link" href="/topic/<%= topic._id %>">
-                        <img
-                            class="mr-2 topic-image"
-                            src="<%= topic.image %>"
-                            alt="<%= topic.title %>"
-                        />
-                        <span class="media-body">
-                            <p class="mt-0 mb-1 topic-title fs-13"><%= topic.title %></p>
-                        </span>
-                    </a>
-            </li>
-            <% }) %>
-    </ul>
+<div class="col-lg mobile-side-bar">
+  <ul class="list-unstyled d-none d-lg-block d-xl-block">
+    <li class="media">
+      <a class="topic-link" href="/feed">
+        <img class="mr-2 topic-image" src="/images/feed.png" alt="Feed" />
+        <span class="media-body">
+          <p class="mt-0 mb-1 topic-title fs-13">Feed</p>
+        </span>
+      </a>
+    </li>
+    <% topics.forEach((topic)=>{ %> <%var flag = false; if(currentUser.topic !=
+    null){ currentUser.topic.forEach((userTopic)=>{ if(userTopic == topic.id){
+    flag = true; } }); if(flag == true){ %>
+    <li class="media">
+      <a class="topic-link" href="/topic/<%= topic._id %>">
+        <img
+          class="mr-2 topic-image"
+          src="<%= topic.image %>"
+          alt="<%= topic.title %>"
+        />
+        <span class="media-body">
+          <p class="mt-0 mb-1 topic-title fs-13"><%= topic.title %></p>
+        </span>
+      </a>
+    </li>
+    <% }}}) %>
+  </ul>
+  <div class="owl-carousel owl-theme d-none mobile-only-block">
+    <div>
+      <a class="topic-link" href="/feed">
+        <img class="mr-2 topic-image" src="/images/feed.png" alt="Feed" />
+        <span class="media-body">
+          <p class="mt-0 mb-1 topic-title fs-13">Feed</p>
+        </span>
+      </a>
+    </div>
+    <% topics.forEach((topic)=>{ %> <%var flag = false; if(currentUser.topic !=
+    null){ currentUser.topic.forEach((userTopic)=>{ if(userTopic == topic.id){
+    flag = true; } }); if(flag == true){ %>
+    <div>
+      <a class="topic-link" href="/topic/<%= topic._id %>">
+        <img
+          class="mr-2 topic-image"
+          src="<%= topic.image %>"
+          alt="<%= topic.title %>"
+        />
+        <span class="media-body">
+          <p class="mt-0 mb-1 topic-title fs-13"><%= topic.title %></p>
+        </span>
+      </a>
+    </div>
+    <% }}}) %>
+  </div>
 </div>

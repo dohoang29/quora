@@ -4,7 +4,7 @@
   <main>
     <div class="pb-3 border-bottom">
       <div class="row">
-        <div class="left col-lg-4">
+        <div class="left col-lg-3">
           <div class="photo-left">
             <img
               class="photo"
@@ -89,28 +89,30 @@
         </div>
 
         <div class="head col-lg-4">
-          <h4 class="name">
+          <h1 class="name">
             <%= user.lastname%> <%=user.firstname%>
-          </h4>
-          <p class="info">UI/UX Designer</p>
+          </h1>
           <p class="info">
             <%=user.email%>
           </p>
-          <div></div>
         </div>
 
-        <div class="stats col-lg-4">
-          <div class="stat col-xs-4" style="padding-right: 5px;">
-            <p class="number-stat"><%= user.questions.length%></p>
-            <p class="desc-stat">Questions</p>
-          </div>
-          <div class="stat col-xs-4">
-            <p class="number-stat"><%= user.answer.length%></p>
-            <p class="desc-stat">Answers</p>
-          </div>
-          <div class="stat col-xs-4">
-            <p class="number-stat"><%= user.following.length%></p>
-            <p class="desc-stat">Following</p>
+        <div class="stats col-lg-3">
+          <div class="row">
+              <div class="col"></div>
+            <div class="stat col-lg-3 col">
+              <p class="number-stat"><%= user.questions.length%></p>
+              <p class="desc-stat">Questions</p>
+            </div>
+            <div class="stat col-lg-3 col">
+              <p class="number-stat"><%= user.answer.length%></p>
+              <p class="desc-stat">Answers</p>
+            </div>
+            <div class="stat col-lg-3 col">
+              <p class="number-stat"><%= user.following.length%></p>
+              <p class="desc-stat">Following</p>
+            </div>
+            <div class="col"></div>
           </div>
         </div>
       </div>
@@ -125,7 +127,7 @@
     </div>
     <div class=" mt-3">
       <ul
-        class="nav nav-pills mb-3 border-bottom"
+        class="nav nav-pills mb-3 border-bottom profile-infor-area"
         id="pills-tab"
         role="tablist"
       >
@@ -334,11 +336,23 @@
         </div>
         <div
           class="tab-pane fade"
-          id="pills-profile"
+          id="pills-question"
           role="tabpanel"
-          aria-labelledby="pills-profile-tab"
+          aria-labelledby="pills-question-tab"
         >
-    
+          <div class="card-columns">
+            <% user.questions.forEach((question)=>{ %>
+            <div class="card">
+              <div class="card-body">
+                <a href="/question/<%= question._id %>">
+                  <p>
+                    <strong><%= question.title %></strong>
+                  </p>
+                </a>
+              </div>
+            </div>
+            <% }) %>
+          </div>
         </div>
         <div
           class="tab-pane fade"

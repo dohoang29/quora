@@ -1,211 +1,231 @@
 .left {
-    margin-top: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    font: arial;
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font: arial;
 }
 
 .main-profile {
-    position: relative;
+  position: relative;
 }
 
 .option-reset {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .photo {
-    width: 150px;
-    height: 150px;
-    margin-top: -100px;
-    border-radius: 100px;
-    border: 4px solid #fff;
-    -webkit-appearance: none !important;
+  width: 150px;
+  height: 150px;
+  margin-top: -100px;
+  border-radius: 100px;
+  border: 4px solid #fff;
+  -webkit-appearance: none !important;
 }
 
 .user-active {
-    width: 20px;
-    height: 20px;
-    border-radius: 20px;
-    position: absolute;
-    right: calc(50% - 70px);
-    top: 25px;
-    background-color: #FFC107;
-    border: 3px solid #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  position: absolute;
+  right: calc(50% - 70px);
+  top: 25px;
+  background-color: #ffc107;
+  border: 3px solid #fff;
 }
 
-@media (max-width:990px) {
-    .active {
-        right: calc(50% - 60px);
-        top: 50px;
-    }
-}
+
 
 .name {
-    margin-top: 20px;
-    font-family: "Open Sans";
-    font-weight: 600;
-    font-size: 18pt;
-    color: black;
+  margin-top: 20px;
+  font-family: "Open Sans";
+  font-weight: 600;
+  color: black;
 }
 
 .info {
-    margin-top: -5px;
-    margin-bottom: 5px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 11pt;
-    color: #aaa;
+  margin-top: -5px;
+  margin-bottom: 5px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 11pt;
+  color: #aaa;
 }
 
 .stats {
-    padding: 0;
-    display: inline-block;
-    margin-top: 25px;
-    text-align: center;
-    font-family: 'Open Sans', sans-serif;
-}
-
-.stat {
-    padding-right: 7px;
-    float: left;
+  padding: 0;
+  display: inline-block;
+  margin-top: 25px;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
 }
 
 .number-stat {
-    padding: 0px;
-    font-size: 12pt;
-    font-weight: bold;
-    font-family: 'Open Sans', sans-serif;
-    color: rgb(25, 23, 23);
+  padding: 0px;
+  font-size: 12pt;
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+  color: rgb(25, 23, 23);
 }
 
 .desc-stat {
-    margin-top: -15px;
-    font-size: 10pt;
-    color: #007BFF;
+  margin-top: -15px;
+  font-size: 10pt;
+  color: #007bff;
 }
 
 #userResetpassword {
-    display: none;
+  display: none;
 }
 
 .user-profile {
-    background-color: #007BFF;
-    border-radius: 3px;
+  background-color: #007bff;
+  border-radius: 3px;
 }
 
 .first-nav {
-    color: #fff;
-    padding: 5px;
+  color: #fff;
+  padding: 5px;
 }
 
 #user-name {
-    color: #999;
-    margin-bottom: 10px;
+  color: #999;
+  margin-bottom: 10px;
 }
 
 .first-name {
-    margin-bottom: 1px;
+  margin-bottom: 1px;
 }
 
 #user-name2 {
-    color: #999;
-    margin-bottom: 10px;
+  color: #999;
+  margin-bottom: 10px;
 }
 
 .last-name {
-    margin-bottom: 1px;
+  margin-bottom: 1px;
 }
 
 .email {
-    margin-bottom: 1px;
+  margin-bottom: 1px;
 }
 
 #user-email {
-    color: #999;
-    margin-bottom: 10px;
+  color: #999;
+  margin-bottom: 10px;
 }
 
 .user-update {
-    background-color: #007BFF !important;
-    color: #fff !important;
+  background-color: #007bff !important;
+  color: #fff !important;
 }
 
 .form-avatar {
-    top: 60px;
+  top: 60px;
 }
 
 .right {
-    margin-top: 10px;
-    margin-left: 20px;
-    height: 300px;
-    padding: 0 25px 0 25px !important;
-    font: arial;
+  margin-top: 10px;
+  margin-left: 20px;
+  height: 300px;
+  padding: 0 25px 0 25px !important;
+  font: arial;
 }
 
 .button-upload {
-    font-size: 8pt !important;
+  font-size: 8pt !important;
 }
 
 .user-nav {
-    display: inline-flex;
+  display: inline-flex;
 }
 
 .user-nav li {
-    margin: 40px 30px 0 10px;
-    cursor: pointer;
-    font-size: 13pt;
-    text-transform: uppercase;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    color: #888;
-    list-style-type: none;
+  margin: 40px 30px 0 10px;
+  cursor: pointer;
+  font-size: 13pt;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  color: #888;
+  list-style-type: none;
 }
 
 .user-nav li:hover,
 .user-nav li:nth-child(1) {
-    color: #999;
-    border-bottom: 2px solid #999;
+  color: #999;
+  border-bottom: 2px solid #999;
 }
 
 .edit {
-    top: 35px;
-    font-size: 11pt;
-    background-color: #007BFF;
-    color: #fff;
-    padding: 3px 5px;
-    cursor: pointer;
-    transition: all .4s;
-    font-family: 'Montserrat', sans-serif;
-    border-radius: 3px;
+  top: 35px;
+  font-size: 11pt;
+  background-color: #007bff;
+  color: #fff;
+  padding: 3px 5px;
+  cursor: pointer;
+  transition: all 0.4s;
+  font-family: "Montserrat", sans-serif;
+  border-radius: 3px;
 }
 
 .button-option {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .edit:hover {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2), 0 0 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2), 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width:990px) {
-    .user-nav {
-        display: none;
+@media (max-width: 990px) {
+  .user-nav {
+    display: none;
+  }
+}
+
+.profile-topic-img {
+  width: auto;
+  height: 50px;
+}
+@media (max-width: 991px) {
+    .edit{
+        text-align: center;
+        margin-left: 0;
+        width: 200px
     }
-    .edit {
-        width: 50%;
-        margin-left: 25%;
-        display: block;
-        position: unset;
+    .head{
         text-align: center;
     }
+    .name{
+        margin-top:10px;
+    }
+    .stats{
+        text-align: center;
+    }
+    .profile-infor-area{
+        justify-content: center;
+    }
+}
+@media (min-width: 576px) {
+  .card-columns {
+    column-count: 2;
+  }
 }
 
-.profile-topic-img{
-    width: auto;
-    height: 50px;
+@media (min-width: 768px) {
+  .card-columns {
+    column-count: 3;
+  }
 }
 
-.profile-topic-title {
-    
+@media (min-width: 992px) {
+  .card-columns {
+    column-count: 4;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-columns {
+    column-count: 5;
+  }
 }
