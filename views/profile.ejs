@@ -185,7 +185,7 @@
           role="tabpanel"
           aria-labelledby="pills-profile-tab"
         >
-        <div id="userProfile">
+          <div id="userProfile">
             <form
               action="/profile/information/<%= user._id%>"
               method="post"
@@ -220,22 +220,21 @@
                 name="email"
                 value=" <%=user.email %>"
               />
-    
+
               <div class="form-group option-reset">
                 <button type="submit" class="btn user-update ">
                   <i class="fa fa-database"></i> Update
                 </button>
-                <span style=" font-weight: bold;">OR</span>
-                <a<button
-                  type="menu"
-                  onclick="myFunctionReset()"
-                  class="btn user-update "
-                ></a>
-                  <i class="fa fa-key"></i> Change password
-                </button>
                 <!-- <a href='#' id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a> -->
               </div>
             </form>
+            <button
+              type="menu"
+              onclick="myFunctionReset()"
+              class="btn  btn-link p-0 "
+            >
+              <i class="fa fa-key"></i> Change password
+            </button>
           </div>
           <div id="userResetpassword">
             <form
@@ -244,7 +243,9 @@
               class="form-signup"
               autocomplete="off"
             >
-              <label class="first-name"><strong>Current Password</strong></label>
+              <label class="first-name"
+                ><strong>Current Password</strong></label
+              >
               <input
                 width="25px"
                 type="password"
@@ -268,7 +269,7 @@
                 placeholder=""
                 name="newPassword2"
               />
-    
+
               <div class="form-group mb-0">
                 <button type="submit" class="btn user-update ">
                   <i class="fa fa-database"></i>Update
@@ -276,8 +277,8 @@
                 <!-- <a href='#' id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a> -->
               </div>
             </form>
-            <button onclick="backToProfile()" class="btn btn-link p-0 ">
-                <i class="fas fa-chevron-left"></i>Back
+            <button onclick="backToProfile()" class="btn btn-link p-0 mt-1 ">
+              <i class="fas fa-chevron-left"></i> Back
             </button>
           </div>
         </div>
@@ -287,14 +288,58 @@
           role="tabpanel"
           aria-labelledby="pills-topic-tab"
         >
-        user.topic.
+          <div class="row">
+            <% user.topic.forEach((topic)=>{%>
+            <div class="col-lg-4 col-md-6">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <img
+                    class="main-topic-img profile-topic-img"
+                    src="<%= topic.image %>"
+                    alt="<%= topic.title %>"
+                  />
+                  <div>
+                    <a href="/topic/<%=topic._id%>"
+                      ><p class="m-0">
+                        <strong class="ml-2"><%= topic.title %></strong>
+                      </p></a
+                    >
+                    <% var topicflag = false; if(topic.followers !=
+                    null){topic.followers.forEach((follower)=>{ if(follower ==
+                    currentUser.id){ topicflag = true; } })} %> <% if(topicflag
+                    == false){%><%}else{%><%}%>
+                    <div class="topicFollowArea" id="<%= topic._id %>">
+                      <button
+                        id="topicFollowArea<%= topic._id %>"
+                        class="main-topic-link btn btn-link"
+                        userId="<%= currentUser._id %>"
+                        value="<% if(topicflag == false){%>Follow<%}else{%>Unfollow<%}%>"
+                      >
+                        <i
+                          id="topicIcon<%= topic._id %>"
+                          class="<% if(topicflag == false){%>fa fa-plus-circle answer-icon<%}else{%>fas fa-times-circle<%} %>"
+                        ></i
+                        ><strong id="topicLabel<%= topic._id %>"
+                          ><% if(topicflag ==
+                          false){%>Follow<%}else{%>Unfollow<%}%></strong
+                        >
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+          </div>
         </div>
         <div
           class="tab-pane fade"
           id="pills-profile"
           role="tabpanel"
           aria-labelledby="pills-profile-tab"
-        ></div>
+        >
+    
+        </div>
         <div
           class="tab-pane fade"
           id="pills-contact"
@@ -311,7 +356,7 @@
 </div>
 <script>
   //reset
-  function backToProfile(){
+  function backToProfile() {
     var x = document.getElementById("userProfile");
     var y = document.getElementById("userResetpassword");
     x.style.display = "block";

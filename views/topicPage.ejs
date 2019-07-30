@@ -9,21 +9,22 @@
       />
       <div class="topic-title-wrap">
         <p class="main-topic-title ml-2"><%= topic.title %></p>
-        <span class="ml-2 text-muted">Follow · </span><span class="text-muted" id="topicFollowNumber"><%if(topic.followers == null){%><%= 0 %><%} else {%><%= topic.followers.length %><%}%></span>
+        <span class="ml-2 text-muted">Follow · </span><span class="text-muted" id="topicFollowNumber<%= topic._id %>"><%if(topic.followers == null){%><%= 0 %><%} else {%><%= topic.followers.length %><%}%></span>
         <% var topicflag = false; if(topic.followers !=
         null){topic.followers.forEach((follower)=>{ if(follower ==
         currentUser.id){ topicflag = true; } })} %> <% if(topicflag ==
         false){%><%}else{%><%}%>
-        <div id="topicFollowArea">
+        <div class="topicFollowArea" id="<%= topic._id %>">
           <button
+            id="topicFollowArea<%= topic._id %>"
             class="main-topic-link btn btn-link"
             userId="<%= currentUser._id %>"
             value="<% if(topicflag == false){%>Follow<%}else{%>Unfollow<%}%>"
           >
-            <i id="topicIcon"
+            <i id="topicIcon<%= topic._id %>"
               class="<% if(topicflag == false){%>fa fa-plus-circle answer-icon<%}else{%>fas fa-times-circle<%} %>"
             ></i
-            ><strong id="topicLabel"
+            ><strong id="topicLabel<%= topic._id %>"
               ><% if(topicflag == false){%>Follow<%}else{%>Unfollow<%}%></strong
             >
           </button>

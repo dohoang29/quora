@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Topic = require("../models/topic");
+const User = require("../models/User");
 const { ensureAuthenticated } = require("../config/auth");
 
 router.get("/:id", ensureAuthenticated, (req, res) => {
@@ -25,6 +26,14 @@ router.get("/:topicId/:userId/:action", (req, res) => {
       if (action === "Follow") {
         topic.followers.push(userId);
         topic.save();
+        User.findById(userId, (err, user) => {
+          if (err) {
+            console.log(err);
+          } else {
+            user.topic.push(topicId);
+            user.save();
+          }
+        });
         count = topic.followers.length.toString();
         action = "Unfollow";
       } else {
@@ -34,6 +43,18 @@ router.get("/:topicId/:userId/:action", (req, res) => {
           }
         }
         topic.save();
+        User.findById(userId, (err, user) => {
+          if (err) {
+            console.log(err);
+          } else {
+            for (var i = 0; i < user.topic.length; i++) {
+              if (user.topic[i] == topicId) {
+                user.topic.splice(i, 1);
+              }
+            }
+            user.save();
+          }
+        });
         count = topic.followers.length.toString();
         action = "Follow";
       }

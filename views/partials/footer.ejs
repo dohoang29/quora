@@ -4,25 +4,26 @@
     <% include addQuestion.ejs %>
     <script type="text/javascript">
         $(function(){
-            $('#topicFollowArea').children().click(function(){
+            $('.topicFollowArea').children().click(function(){
                 var userId = $(this).attr('userId');
                 var action = $(this).attr('value');
+                var topicId = $(this).parent().attr('id');
                 $.ajax({
                     type: "GET",
-                    url : window.location + "/" + userId + "/" + action,
+                    url : window.location.origin+ "/topic/"+ topicId + "/" + userId + "/" + action,
                     async: false,
                     success : function(follow){
                         if(follow.status === "Unfollow"){
-                            $("#topicIcon").removeClass("fa fa-plus-circle answer-icon").addClass("fas fa-times-circle");
-                            $("#topicLabel").text(follow.status);
-                            $("#topicFollowNumber").text(follow.count);
-                            $('#topicFollowArea').children().attr('value',follow.status);
+                            $("#topicIcon"+topicId).removeClass("fa fa-plus-circle answer-icon").addClass("fas fa-times-circle");
+                            $("#topicLabel"+topicId).text(follow.status);
+                            $("#topicFollowNumber"+topicId).text(follow.count);
+                            $("#topicFollowArea"+topicId).attr('value',follow.status);
                         }
                         if(follow.status === "Follow"){
-                            $("#topicIcon").removeClass("fas fa-times-circle").addClass("fa fa-plus-circle answer-icon");
-                            $("#topicLabel").text(follow.status);
-                            $("#topicFollowNumber").text(follow.count);
-                            $('#topicFollowArea').children().attr('value',follow.status);
+                            $("#topicIcon"+topicId).removeClass("fas fa-times-circle").addClass("fa fa-plus-circle answer-icon");
+                            $("#topicLabel"+topicId).text(follow.status);
+                            $("#topicFollowNumber"+topicId).text(follow.count);
+                            $("#topicFollowArea"+topicId).attr('value',follow.status);
                         }
                     }
                 });
