@@ -1,178 +1,3 @@
-<<<<<<< HEAD
-    <% include addQuestion.ejs %>
-        </div>
-    </div>
-    <script type="text/javascript">
-    $(function() {
-        $(".topicFollowArea")
-        .children()
-        .click(function() {
-            var userId = $(this).attr("userId");
-            var action = $(this).attr("value");
-            var topicId = $(this)
-            .parent()
-            .attr("id");
-            $.ajax({
-            type: "GET",
-            url:
-                window.location.origin +
-                "/topic/" +
-                topicId +
-                "/" +
-                userId +
-                "/" +
-                action,
-            async: false,
-            success: function(follow) {
-                if (follow.status === "Unfollow") {
-                $("#topicIcon" + topicId)
-                    .removeClass("fa fa-plus-circle answer-icon")
-                    .addClass("fas fa-times-circle");
-                $("#topicLabel" + topicId).text(follow.status);
-                $("#topicFollowNumber" + topicId).text(follow.count);
-                $("#topicFollowArea" + topicId).attr("value", follow.status);
-                }
-                if (follow.status === "Follow") {
-                $("#topicIcon" + topicId)
-                    .removeClass("fas fa-times-circle")
-                    .addClass("fa fa-plus-circle answer-icon");
-                $("#topicLabel" + topicId).text(follow.status);
-                $("#topicFollowNumber" + topicId).text(follow.count);
-                $("#topicFollowArea" + topicId).attr("value", follow.status);
-                }
-            }
-            });
-        });
-    });
-    $(function() {
-        $(".voteArea")
-        .children()
-        .click(function() {
-            var questionId = $(this)
-            .parent()
-            .children()
-            .filter(".likebtn")
-            .attr("id");
-            var userId = $(this)
-            .parent()
-            .attr("id");
-            var action = $(this).attr("value");
-            var numberUpvote = "votenumber" + questionId;
-            var follownumber = "follownumber" + questionId;
-            $.ajax({
-            type: "GET",
-            url: window.location + "/" + questionId + "/" + userId + "/" + action,
-            async: false,
-            success: function(vote) {
-                console.log(vote.status);
-                if (vote.status === "Downvote") {
-                $("#" + questionId + " > span")
-                    .removeClass("fas fa-thumbs-up answer-icon")
-                    .addClass("fas fa-thumbs-down");
-                $("#" + questionId + " > strong").text(vote.status);
-                $("#" + numberUpvote).text(vote.voteCount);
-                $("#" + questionId).attr("value", vote.status);
-                }
-                if (vote.status === "Upvote") {
-                $("#" + questionId + " > span")
-                    .removeClass("fas fa-thumbs-down")
-                    .addClass("fas fa-thumbs-up answer-icon");
-                $("#" + questionId + " > strong").text(vote.status);
-                $("#" + numberUpvote).text(vote.voteCount);
-                $("#" + questionId).attr("value", vote.status);
-                }
-                if (vote.status === "Unfollow") {
-                $("#follow" + questionId + " > span")
-                    .removeClass("fa fa-plus-circle answer-icon")
-                    .addClass("fas fa-times-circle");
-                $("#follow" + questionId + " > strong").text(vote.status);
-                $("#" + follownumber).text(vote.voteCount);
-                $("#follow" + questionId).attr("value", vote.status);
-                }
-                if (vote.status === "Follow") {
-                $("#follow" + questionId + " > span")
-                    .removeClass("fas fa-times-circle")
-                    .addClass("fa fa-plus-circle answer-icon");
-                $("#follow" + questionId + " > strong").text(vote.status);
-                $("#" + follownumber).text(vote.voteCount);
-                $("#follow" + questionId).attr("value", vote.status);
-                }
-            }
-            });
-        });
-    });
-    $(function() {
-        $(".topic-link")
-        .filter(function() {
-            return this.href == location.href;
-        })
-        .parent()
-        .addClass("link-active")
-        .siblings()
-        .removeClass("link-active");
-        $(".topic-link").click(function() {
-        $(this)
-            .parent()
-            .addClass("link-active")
-            .siblings()
-            .removeClass("link-active");
-        });
-    });
-    $(function() {
-        $(".nav-link")
-        .filter(function() {
-            return this.href == location.href;
-        })
-        .addClass("nav-active")
-        .parent()
-        .siblings()
-        .children()
-        .removeClass("nav-active");
-        $(".nav-link").click(function() {
-        $(this)
-            .addClass("nav-active")
-            .parent()
-            .siblings()
-            .children()
-            .removeClass("nav-active");
-        });
-    });
-
-    var allEditors = document.querySelectorAll(".ansEditor");
-    allEditors.forEach(editor => {
-        ClassicEditor.create(editor);
-    });
-    $(function() {
-        $('.owl-carousel').owlCarousel({
-            margin:10,
-            nav:false,
-            dots:false,
-            autoWidth:true,
-            responsive:{
-                0:{
-                    items:10
-                },
-                600:{
-                    items:10
-                }
-            }
-        })
-    });
-    </script>
-    <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"
-    ></script>
-    <script
-    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"
-    ></script>
-    <script src="/owlcarousel/owl.carousel.min.js"></script>
-    </body>
-</html>
-=======
 </div>
 </div>
 <% include addQuestion.ejs %>
@@ -330,10 +155,27 @@
             cropped.src = imgSrc;
             up.setAttribute('href', imgSrc);
         });
+        $(function() {
+            $('.owl-carousel').owlCarousel({
+                margin: 10,
+                nav: false,
+                dots: false,
+                autoWidth: true,
+                responsive: {
+                    0: {
+                        items: 10
+                    },
+                    600: {
+                        items: 10
+                    }
+                }
+            })
+        });
     </script>
+    </script>
+    <script src="/owlcarousel/owl.carousel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 
     </html>
->>>>>>> hoan
