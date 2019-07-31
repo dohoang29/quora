@@ -70,32 +70,6 @@
             </div>
           <a href="/feed" class="navbar-brand w-20 logo d-none mobile-only-inline m-0 pt-0">Q&A</a>
           <div class="nav-item user-area">
-<<<<<<< HEAD
-            <img
-              src="<%= currentUser.imageUrl == null ? 'https://iupac.org/wp-content/uploads/2018/05/default-avatar.png' : currentUser.imageUrl %>"
-              alt="avatar"
-              class="image d-none d-lg-inline d-xl-inline"
-              type="button"
-              data-toggle="dropdown"
-            />
-            <div class="dropdown-menu option-profile">
-              <a class="dropdown-item" href="/profile/<%=currentUser._id%>"
-                >Manage Profile</a
-              >
-              <div class="dropdown-divider"></div>
-              <% if(currentUser.role == "admin"){%>
-              <a class="dropdown-item" href="/admin">Admin</a>
-              <div class="dropdown-divider"></div>
-              <%}%>
-              <a class="dropdown-item" href="/logout">Logout</a>
-            </div>
-            <button
-              class="question-btn"
-              data-toggle="modal"
-              data-target="#addQuestionModal"
-            >
-            <i class="fas fa-plus-square d-none mobile-only-inline mr-2"></i>Add <span class="d-none d-md-inline">Question</span>
-=======
               <span id="avatarUserHead" data-toggle="dropdown">
                               <img class="image" src="<%= currentUser.imageUrl%>" />
                           </span>
@@ -110,7 +84,6 @@
                 </div>
                 <button class="question-btn" data-toggle="modal" data-target="#addQuestionModal">
                 Add Question
->>>>>>> hoan
             </button>
           </div>
         </nav>
