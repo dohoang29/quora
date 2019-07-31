@@ -1,25 +1,4 @@
 <% include partials/header.ejs %>
-<<<<<<< HEAD
-<div class="col main-profile">
-  <% include ./partials/messages %>
-  <main>
-    <div class="pb-3 border-bottom">
-      <div class="row">
-        <div class="left col-lg-3">
-          <div class="photo-left">
-            <img
-              class="photo"
-              src="<%= user.imageUrl == null ? 'https://iupac.org/wp-content/uploads/2018/05/default-avatar.png' : user.imageUrl %>"
-            />
-            <div class="user-active"></div>
-          </div>
-          <span
-            style="margin-top: 10px;"
-            class="edit"
-            data-toggle="modal"
-            data-target="#exampleModalCenter"
-            >Change profile</span
-=======
     <div class="col main-profile">
         <% include ./partials/messages %>
             <main>
@@ -34,7 +13,6 @@
                                 <div class="user-active"></div>
                             </div>
                             <span style="margin-top: 10px;" class="edit" data-toggle="modal" data-target="#exampleModalCenter">Change profile</span
->>>>>>> hoan
           >
 
           <div
@@ -102,66 +80,40 @@
     </div>
     </div>
 
-<<<<<<< HEAD
-        <div class="head col-lg-4">
-          <h1 class="name">
-            <%= user.lastname%> <%=user.firstname%>
-          </h1>
-          <p class="info">
-            <%=user.email%>
-          </p>
-        </div>
-
-        <div class="stats col-lg-3">
-          <div class="row">
-              <div class="col"></div>
-            <div class="stat col-lg-3 col">
-              <p class="number-stat"><%= user.questions.length%></p>
-              <p class="desc-stat">Questions</p>
-            </div>
-            <div class="stat col-lg-3 col">
-              <p class="number-stat"><%= user.answer.length%></p>
-              <p class="desc-stat">Answers</p>
-            </div>
-            <div class="stat col-lg-3 col">
-              <p class="number-stat"><%= user.following.length%></p>
-              <p class="desc-stat">Following</p>
-            </div>
-            <div class="col"></div>
-          </div>
-=======
     <div class="head col-lg-4">
-        <h4 class="name">
+        <h1 class="name">
             <%= user.lastname%>
                 <%=user.firstname%>
-        </h4>
-        <p class="info">UI/UX Designer</p>
+        </h1>
         <p class="info">
             <%=user.email%>
         </p>
-        <div></div>
     </div>
 
-    <div class="stats col-lg-4">
-        <div class="stat col-xs-4" style="padding-right: 5px;">
-            <p class="number-stat">
-                <%= user.questions.length%>
-            </p>
-            <p class="desc-stat">Questions</p>
+    <div class="stats col-lg-3">
+        <div class="row">
+            <div class="col"></div>
+            <div class="stat col-lg-3 col">
+                <p class="number-stat">
+                    <%= user.questions.length%>
+                </p>
+                <p class="desc-stat">Questions</p>
+            </div>
+            <div class="stat col-lg-3 col">
+                <p class="number-stat">
+                    <%= user.answer.length%>
+                </p>
+                <p class="desc-stat">Answers</p>
+            </div>
+            <div class="stat col-lg-3 col">
+                <p class="number-stat">
+                    <%= user.following.length%>
+                </p>
+                <p class="desc-stat">Following</p>
+            </div>
+            <div class="col"></div>
         </div>
-        <div class="stat col-xs-4">
-            <p class="number-stat">
-                <%= user.answer.length%>
-            </p>
-            <p class="desc-stat">Answers</p>
-        </div>
-        <div class="stat col-xs-4">
-            <p class="number-stat">
-                <%= user.following.length%>
-            </p>
-            <p class="desc-stat">Following</p>
->>>>>>> hoan
-        </div>
+    </div>
     </div>
     </div>
     <!--
@@ -174,27 +126,9 @@
 -->
     </div>
     <div class=" mt-3">
-<<<<<<< HEAD
-      <ul
-        class="nav nav-pills mb-3 border-bottom profile-infor-area"
-        id="pills-tab"
-        role="tablist"
-      >
-        <li class="nav-item">
-          <a
-            class="nav-link section-link"
-            id="pills-profile-tab"
-            data-toggle="pill"
-            href="#pills-profile"
-            role="tab"
-            aria-controls="pills-profile"
-            aria-selected="true"
-            >Profile</a
-=======
-        <ul class="nav nav-pills mb-3 border-bottom" id="pills-tab" role="tablist">
+        <ul class="nav nav-pills mb-3 border-bottom profile-infor-area" id="pills-tab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link section-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="true">Profile</a
->>>>>>> hoan
           >
         </li>
         <li class="nav-item">
@@ -352,44 +286,35 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
-              </div>
-            </div>
-            <% }) %>
-          </div>
-        </div>
-        <div
-          class="tab-pane fade"
-          id="pills-question"
-          role="tabpanel"
-          aria-labelledby="pills-question-tab"
-        >
-          <div class="card-columns">
-            <% user.questions.forEach((question)=>{ %>
-            <div class="card">
-              <div class="card-body">
-                <a href="/question/<%= question._id %>">
-                  <p>
-                    <strong><%= question.title %></strong>
-                  </p>
-                </a>
-              </div>
-            </div>
-            <% }) %>
-          </div>
-=======
-                <% }) %>
->>>>>>> hoan
         </div>
     </div>
-    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"></div>
-    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"></div>
-    </div>
-    <!--        <span class="follow">Follow</span>-->
-    <div class="">
-        <div class="col-md-4"></div>
-    </div>
-    </div>
-    </main>
-    </div>
-    <% include partials/footer.ejs %>
+    <% }) %>
+        </div>
+        </div>
+        <div class="tab-pane fade" id="pills-question" role="tabpanel" aria-labelledby="pills-question-tab">
+            <div class="card-columns">
+                <% user.questions.forEach((question)=>{ %>
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="/question/<%= question._id %>">
+                                <p>
+                                    <strong><%= question.title %></strong>
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+        </div>
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"></div>
+        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"></div>
+        </div>
+        <!--        <span class="follow">Follow</span>-->
+        <div class="">
+            <div class="col-md-4"></div>
+        </div>
+        </div>
+        </main>
+        </div>
+        <% include partials/footer.ejs %>
