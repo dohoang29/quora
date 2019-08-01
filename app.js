@@ -5,6 +5,15 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
+const io = require('socket.io')(app);
+//create socket 
+io.on('connection', function(socket) {
+    console.log('Welcome to server chat');
+
+    socket.on('send', function(data) {
+        io.sockets.emit('send', data);
+    });
+});
 // const cookieSession = require('cookie-session');
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
@@ -75,6 +84,6 @@ app.use("/answer", answerRoutes);
 app.use("/admin", adminRoutes);
 app.use("/question", questionRoutes);
 
-app.listen(port,ipAdress, () => {
+app.listen(port, ipAdress, () => {
     console.log("Server is listening at " + ipAdress + ":" + port);
 });

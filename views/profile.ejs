@@ -39,81 +39,81 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="/upload/<%=user._id%>" method="POST" enctype="multipart/form-data" class="form-avatar" name="image" id="image">
-                                <div class="box">
-                                    <input type="file" id="file-input" />
+                            <div class="box">
+                                <input type="file" id="file-input" />
+                            </div>
+                            <div class="box-2">
+                                <div class="result"></div>
+                                <div class=" img-result hide">
+                                    <!-- result of crop -->
+                                    <form action="/upload/<%=user._id%>" method="POST" enctype="multipart/form-data" class="form-avatar" name="image" id="image">
+                                        <img type="file" class="cropped" id="imageSrc" src="" alt="" />
+                                        </button>
+                                        <button type="submit" class="button-upload up btn-upload btn-danger ">
+                        Up/Del
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                      </button>
+                                    </form>
                                 </div>
-                                <div class="box-2">
-                                    <div class="result"></div>
-                                    <div class=" img-result hide">
-                                        <!-- result of crop -->
-                                        <img class="cropped" src="" alt="" />
-                                    </div>
+                            </div>
+                            <!-- input file -->
+                            <div class="box">
+                                <div class="options hide">
+                                    <label> Width</label>
+                                    <input type="number" class="img-w" value="300" min="100" max="1200" />
                                 </div>
-                                <!-- input file -->
-                                <div class="box">
-                                    <div class="options hide">
-                                        <label> Width</label>
-                                        <input type="number" class="img-w" value="300" min="100" max="1200" />
-                                    </div>
-                                    <!-- save btn -->
-                                    <div class="button-option">
-                                        <button id="userResetAvatar" type="submit" class="button-upload save btn-upload btn-danger ">
+                                <!-- save btn -->
+                                <div class="button-option">
+                                    <button id="userResetAvatar" type="submit" class="button-upload save btn-upload btn-danger ">
                           Drop
                           <i class="fa fa-drop" aria-hidden="true"></i>
-                        </button>
-                                        <button type="submit" class="button-upload up btn-upload btn-danger ">
-                          Up/Del
-                          <i class="fa fa-times" aria-hidden="true"></i>
-                        </button>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                         <div style="height: 50px;" class="modal-footer">
                             <button type="button" class="btn-upload btn-secondary" data-dismiss="modal">
                     Close
                   </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-    </div>
-    </div>
 
-    <div class="head col-lg-4">
-        <h1 class="name">
-            <%= user.lastname%>
-                <%=user.firstname%>
-        </h1>
-        <p class="info">
-            <%=user.email%>
-        </p>
-    </div>
+                <div class="head col-lg-4">
+                    <h1 class="name">
+                        <%= user.lastname%>
+                            <%=user.firstname%>
+                    </h1>
+                    <p class="info">
+                        <%=user.email%>
+                    </p>
+                </div>
 
-    <div class="stats col-lg-3">
-        <div class="row">
-            <div class="col"></div>
-            <div class="stat col-lg-3 col">
-                <p class="number-stat">
-                    <%= user.questions.length%>
-                </p>
-                <p class="desc-stat">Questions</p>
-            </div>
-            <div class="stat col-lg-3 col">
-                <p class="number-stat">
-                    <%= user.answer.length%>
-                </p>
-                <p class="desc-stat">Answers</p>
-            </div>
-            <div class="stat col-lg-3 col">
-                <p class="number-stat">
-                    <%= user.following.length%>
-                </p>
-                <p class="desc-stat">Following</p>
-            </div>
-            <div class="col"></div>
-        </div>
-    </div>
+                <div class="stats col-lg-3">
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="stat col-lg-3 col">
+                            <p class="number-stat">
+                                <%= user.questions.length%>
+                            </p>
+                            <p class="desc-stat">Questions</p>
+                        </div>
+                        <div class="stat col-lg-3 col">
+                            <p class="number-stat">
+                                <%= user.answer.length%>
+                            </p>
+                            <p class="desc-stat">Answers</p>
+                        </div>
+                        <div class="stat col-lg-3 col">
+                            <p class="number-stat">
+                                <%= user.following.length%>
+                            </p>
+                            <p class="desc-stat">Following</p>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </div>
     </div>
     </div>
     <!--
