@@ -35,3 +35,24 @@
     color: #329bff;
 }
 
+@media (max-width:600px){
+    .topic-title-wrap{
+        height:auto;
+    }
+    .topic-title-wrap span{
+        font-size:15px;
+    }
+    .main-topic-title{
+        font-size:15px;
+        margin:0;
+    }
+    .main-topic-img{
+        width:auto;
+        height: 70px;
+    }
+    .main-topic-link{
+        font-size:15px;
+        padding:0;
+        padding-left:5px;
+    }
+}

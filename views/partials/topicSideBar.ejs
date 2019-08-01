@@ -1,7 +1,7 @@
 <div class="col-lg mobile-side-bar">
   <ul class="list-unstyled d-none d-lg-block d-xl-block">
     <li class="media">
-      <a class="topic-link" href="/feed">
+      <a class="topic-link border-radius-10 shadow-card" href="/feed">
         <img class="mr-2 topic-image" src="/images/feed.png" alt="Feed" />
         <span class="media-body">
           <p class="mt-0 mb-1 topic-title fs-13">Feed</p>
@@ -12,7 +12,7 @@
     null){ currentUser.topic.forEach((userTopic)=>{ if(userTopic == topic.id){
     flag = true; } }); if(flag == true){ %>
     <li class="media">
-      <a class="topic-link" href="/topic/<%= topic._id %>">
+      <a class="topic-link border-radius-10 shadow-card shadow-card" href="/topic/<%= topic._id %>">
         <img
           class="mr-2 topic-image"
           src="<%= topic.image %>"
@@ -25,9 +25,9 @@
     </li>
     <% }}}) %>
   </ul>
-  <div class="owl-carousel owl-theme d-none mobile-only-block">
+  <div class="carousel d-none mobile-only-block">
     <div>
-      <a class="topic-link" href="/feed">
+      <a class="topic-link border-radius-10 shadow-card" href="/feed">
         <img class="mr-2 topic-image" src="/images/feed.png" alt="Feed" />
         <span class="media-body">
           <p class="mt-0 mb-1 topic-title fs-13">Feed</p>
@@ -38,7 +38,7 @@
     null){ currentUser.topic.forEach((userTopic)=>{ if(userTopic == topic.id){
     flag = true; } }); if(flag == true){ %>
     <div>
-      <a class="topic-link" href="/topic/<%= topic._id %>">
+      <a class="topic-link border-radius-10 shadow-card" href="/topic/<%= topic._id %>">
         <img
           class="mr-2 topic-image"
           src="<%= topic.image %>"
