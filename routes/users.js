@@ -391,22 +391,22 @@ router.post('/upload/:id', upLoad.single("file"), function(req, res) {
             cloudinary.uploader.upload(image, function(result) {
                 user.imageUrl = result.secure_url;
                 user.save()
-                    // .then(user => {
-                    //     req.flash(
-                    //         "success_msg",
-                    //         "You are update avatar success.")
-                    //     return res.redirect('/profile/' + _id);
-                    // })
+                    .then(user => {
+                        req.flash(
+                            "success_msg",
+                            "You are update avatar success.")
+                        return res.redirect('/profile/' + _id);
+                    })
             })
         } else {
             user.imageUrl = "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png";
             user.save()
-                // .then(user => {
-                //     req.flash(
-                //         "success_msg",
-                //         "You are remove avatar success.")
-                //     return res.redirect('/profile/' + _id);
-                // })
+                .then(user => {
+                    req.flash(
+                        "success_msg",
+                        "You are remove avatar success.")
+                    return res.redirect('/profile/' + _id);
+                })
         }
     })
 });

@@ -54,6 +54,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: false
     },
+    notifi: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Notifi"
+    }],
 });
 
 module.exports = mongoose.model("User", userSchema);
