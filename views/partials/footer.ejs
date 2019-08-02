@@ -172,6 +172,7 @@
             cropper = "";
 
         // on change show image with crop options
+        if(upload != null){
         upload.addEventListener("change", e => {
             if (e.target.files.length) {
                 const reader = new FileReader();
@@ -185,7 +186,7 @@
                         result.appendChild(img);
                         save.classList.remove("hide");
                         options.classList.remove("hide");
-                        cropper = new Cropper(img);
+                        cropper = new Cropper(img,{aspectRatio: 1 / 1});
                     }
                 };
                 reader.readAsDataURL(e.target.files[0]);
@@ -229,7 +230,7 @@
 
             })
         });
-
+      }
         $(function() {
             $(".carousel").slick({
                 infinite: false,

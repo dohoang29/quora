@@ -42,6 +42,7 @@ router.put("/:questionId/:answerId/", (req, res) => {
         if (err) {
             console.log(err);
         } else {
+<<<<<<< HEAD
             answer.isActive = true;
             answer.save();
             Question.findOne({ "_id": questionId }).exec((err, question) => {
@@ -53,6 +54,19 @@ router.put("/:questionId/:answerId/", (req, res) => {
                     res.redirect("/answer/" + answer._id);
                 }
             });
+=======
+          question.answers.push(answer._id);
+          var flag = false;
+          question.followers.forEach(follower => {
+            if(follower == userId){
+              flag = true; 
+            }
+          });
+          if(flag == false){
+            question.followers.push(userId);
+          }
+          question.save();
+>>>>>>> 488288aa7108991cf5cfce3e7e7176b8ae2db427
         }
     })
 });
