@@ -1,36 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Q&A</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
     <script src="https://cdn.ckeditor.com/ckeditor5/12.3.1/classic/ckeditor.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.4/cropper.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.4/cropper.min.css"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.4/cropper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="/css/MenuBar.css" />
     <link rel="stylesheet" type="text/css" href="/css/feed.css" />
     <link rel="stylesheet" type="text/css" href="/css/topicPage.css" />
     <link rel="stylesheet" type="text/css" href="/css/CKEditor.css" />
-    <link rel="stylesheet" href="/owlcarousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="/owlcarousel/owl.theme.default.min.css">
     <link rel="stylesheet" href="/css/styleProfile.css" />
-</head>
+  </head>
 
-<body>
+  <body>
+      <div class="sideBar container d-none mobile-only-block" id="sideBarArea">
+        <button id="sideBarCloseBtn" class="sideBarClose my-1 btn btn-link"><i class="fas fa-times"></i></button>
+        <div class="sideBar-image-wrapper my-3">
+          <img class="sideBar-image" src="<%= currentUser.imageUrl%>" />
+        </div>
+        <div class="sideBar-name-wrapper border-bottom">
+          <h1 class="my-3"><%=currentUser.firstname%></h1>
+        </div>
+        <div class="sideBar-profile-wrapper my-3">
+          <a class="sideBar-profile " href="/profile/<%=currentUser._id%>">
+            <i class="fas fa-address-card mr-1"></i> Manage Profile</a
+          >
+          <% if(currentUser.role == "admin"){%>
+          <a class="sideBar-profile my-3" href="/admin"
+            ><i class="fas fa-user-shield mr-1"></i> Admin</a
+          >
+
+          <%}%>
+          <a class="sideBar-profile mt-2" href="/logout"
+            ><i class="fas fa-sign-out-alt mr-1"></i>Logout</a
+          >
+        </div>
+      </div>
+
     <div class="outer">
-        <!--header-->
-        <div class="container">
-            <nav class="navbar p-0">
-                <a href="/feed" class="navbar-brand logo d-none d-lg-block d-xl-block">Q&A</a>
-                <div class="nav-item navi-button d-none d-lg-block d-xl-block">
-                    <ul class="nav nav-pills">
-                        <li class="nav-item w-3">
-                            <a href="/feed" class="nav-link section-link"><i class="far fa-file-alt navi-icon"></i>
+      <!--header-->
+      <div class="container">
+        <nav class="navbar p-0">
+          <a href="/feed" class="navbar-brand logo d-none d-lg-block d-xl-block"
+            >Q&A</a
+          >
+          <div class="nav-item navi-button d-none d-lg-block d-xl-block">
+            <ul class="nav nav-pills">
+              <li class="nav-item w-3">
+                <a href="/feed" class="nav-link section-link"
+                  ><i class="far fa-file-alt navi-icon"></i>
                   <span class="nav-tab">Home</span></a
                 >
               </li>
@@ -48,41 +86,61 @@
               </li>
             </ul>
           </div>
-          <div class="form-inline my-2 my-lg-0 search-area d-none d-lg-block d-xl-block">
+          <div
+            class="form-inline my-2 my-lg-0 search-area d-none d-lg-block d-xl-block"
+          >
             <input
               type="text"
               placeholder="&#xf002;   Search Quora"
               class="search-box form-control mr-sm-2 fa"
             />
           </div>
-          <div class="w-20 d-none mobile-only-inline">
-              <button class="question-btn"> <i class="fas fa-search mr-2"></i>Search</button> 
-            </div>
-          <a href="/feed" class="navbar-brand w-20 logo d-none mobile-only-inline m-0 pt-0">Q&A</a>
-                            <div class="nav-item user-area">
-                                <span id="avatarUserHead" data-toggle="dropdown">
-                              <img class="image" src="<%= currentUser.imageUrl%>" />
-                          </span>
-                                <div class="dropdown-menu option-profile">
-                                    <a class="dropdown-item" href="/profile/<%=currentUser._id%>">Manage Profile</a>
-                                    <div class="dropdown-divider"></div>
-                                    <% if(currentUser.role == "admin"){%>
-                                        <a class="dropdown-item" href="/admin">Admin</a>
-                                        <div class="dropdown-divider"></div>
-                                        <%}%>
-                                            <a class="dropdown-item" href="/logout">Logout</a>
-                                </div>
-                                <button class="question-btn" data-toggle="modal" data-target="#addQuestionModal">
-                Add Question
+          <div class="w-20 w-20-mobile d-none mobile-only-inline">
+            <button class="question-btn">
+              <i class="fas fa-search mr-2"></i>Search
             </button>
-                            </div>
-            </nav>
+          </div>
+          <a
+            href="/feed"
+            class="navbar-brand w-20 w-20-mobile logo d-none mobile-only-inline m-0 pt-0"
+            >Q&A</a
+          >
+          <div class="nav-item user-area w-20-mobile">
+            <span
+              class="d-none d-lg-inline d-xl-inline"
+              id="avatarUserHead"
+              data-toggle="dropdown"
+            >
+              <img class="image" src="<%= currentUser.imageUrl%>" />
+            </span>
+            <div class="dropdown-menu option-profile">
+              <a class="dropdown-item" href="/profile/<%=currentUser._id%>"
+                >Manage Profile</a
+              >
+              <div class="dropdown-divider"></div>
+              <% if(currentUser.role == "admin"){%>
+              <a class="dropdown-item" href="/admin">Admin</a>
+              <div class="dropdown-divider"></div>
+              <%}%>
+              <a class="dropdown-item" href="/logout">Logout</a>
             </div>
-        </div>
-        <div class="mobile-nav d-none mobile-only-block">
-            <ul class="nav nav-pills justify-content-center">
-                <li class="nav-item">
-                    <a href="/feed" class="nav-link section-link"><i class="far fa-file-alt navi-icon"></i>
+            <button
+              class="question-btn shadow-card "
+              data-toggle="modal"
+              data-target="#addQuestionModal"
+            >
+              <i class="fas fa-plus-square d-none mobile-only-inline mr-1"></i>
+              Add <span class="d-none d-md-inline">Question</span>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="mobile-nav d-none mobile-only-block">
+      <ul class="nav nav-pills justify-content-center">
+        <li class="nav-item">
+          <a href="/feed" class="nav-link section-link"
+            ><i class="far fa-file-alt navi-icon"></i>
             <span class="nav-tab">Home</span></a
           >
         </li>
@@ -97,6 +155,11 @@
             ><i class="fas fa-bell navi-icon"></i>
             <span class="nav-tab">Notifications</span></a
           >
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-link p-0" type="button" id="sideBarButton" value="close">
+            <img class="image" src="<%= currentUser.imageUrl%>" />
+          </button>
         </li>
       </ul>
     </div>

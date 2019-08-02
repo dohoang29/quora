@@ -1,5 +1,5 @@
 <% include partials/header.ejs %> <% if(question.isActive == false) {%>
-<div class="col-8">
+<div class="col-lg-8" style="margin-top: -40px;">
   <div class="alert alert-danger" role="alert">
     This Question is Deleted !!! 
     <form
@@ -12,7 +12,7 @@
   </div>
 </div>
 <% } else {%>
-<div class="col-8">
+<div class="col-lg-8 question-area" style="margin-top: -40px;">
   <div class="question-page-topic">
     <%question.topic.forEach((topic)=>{%>
     <a href="/topic/<%=topic._id%>" class="badge badge-secondary my-2"
@@ -159,7 +159,7 @@
   <% }}) %>
 </div>
 <% } %>
-<div class="col-4">
+<div class="col-lg-4 d-none d-lg-block">
   <strong
     ><p class="related-question-label border-bottom py-2">
       Related Questions

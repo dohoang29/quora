@@ -1,6 +1,6 @@
 <% include partials/header.ejs %> <% include partials/topicSideBar.ejs %>
 <div class="col-lg-7 p-0">
-  <div class="card add-question-card mb-2">
+  <div class="card add-question-card mb-2 border-radius-10 shadow-card">
     <div class="card-body">
       <div class="card-subtitle text-muted">
         <img
@@ -8,7 +8,7 @@
           alt="avatar"
           class="add-ques-image"
         />
-        <a class="user-name-link" href="#"
+        <a class="user-name-link" href="/profile/<%= currentUser._id%>"
           ><%= currentUser.firstname.toUpperCase()%> <%=
           currentUser.lastname.toUpperCase()%></a
         >
@@ -24,16 +24,16 @@
       >
     </div>
   </div>
-  <div class="card mb-3">
+  <div class="card mb-3 border-radius-10">
     <div class="card-header">
       <img
         class="mr-2 topic-image"
         src="/images/question-icon.png"
         alt="Question for you"
       />
-      <strong
+      <strong class="hintLabel"
         >Question for
-        <a class="user-name-link" href="#"
+        <a class="user-name-link" href="/profile/<%= currentUser._id%>"
           ><%= currentUser.firstname.toUpperCase()%> <%=
           currentUser.lastname.toUpperCase()%></a
         ></strong
@@ -162,7 +162,7 @@
               class="add-ans-image"
             />
             <div class="user-info">
-              <a class="user-name-link" href="#"
+              <a class="user-name-link" href="/profile/<%= currentUser._id%>"
                 ><%= currentUser.firstname.toUpperCase()%> <%=
                 currentUser.lastname.toUpperCase()%></a
               >, knows <% question.topic.forEach((topic)=>{ %>
