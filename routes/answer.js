@@ -109,11 +109,11 @@ router.post("/:topicId/:questionId/:userId", (req, res) => {
           question.answers.push(answer._id);
           var flag = false;
           question.followers.forEach(follower => {
-            if(follower._id == userId){
+            if(follower == userId){
               flag = true; 
             }
           });
-          if(flag){
+          if(flag == false){
             question.followers.push(userId);
           }
           question.save();
