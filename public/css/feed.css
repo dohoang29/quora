@@ -9,9 +9,9 @@ body {
 }
 @media (min-width: 992px) {
   .shadow-card:hover {
-    -webkit-box-shadow: 0px 0px 8px 3px rgba(56,56,56,0.15);
-    -moz-box-shadow: 0px 0px 8px 3px rgba(56,56,56,0.15);
-    box-shadow: 0px 0px 8px 3px rgba(56,56,56,0.15);
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(56, 56, 56, 0.15);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(56, 56, 56, 0.15);
+    box-shadow: 0px 0px 8px 3px rgba(56, 56, 56, 0.15);
   }
   .border-radius-10 {
     border-radius: 10px;
@@ -152,12 +152,14 @@ body {
 .custom-question-input {
   border: 0;
   border-radius: 0;
-  height: 60px;
   -webkit-appearance: none;
   padding: 0;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-weight: bold;
   font-size: 25px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  resize: none;
 }
 
 .custom-question-input::-webkit-input-placeholder {
@@ -165,7 +167,6 @@ body {
   font-weight: bold;
   font-size: 25px;
   color: rgb(122, 122, 122);
-  overflow: visible;
 }
 
 .custom-question-input:-ms-input-placeholder {
@@ -173,7 +174,6 @@ body {
   font-weight: bold;
   font-size: 25px;
   color: rgb(122, 122, 122);
-  overflow: visible;
 }
 
 .custom-question-input::placeholder {
@@ -181,7 +181,6 @@ body {
   font-weight: bold;
   font-size: 25px;
   color: rgb(122, 122, 122);
-  overflow: visible;
 }
 
 .custom-link-input {
@@ -365,35 +364,80 @@ body {
   float: right;
   color: inherit;
 }
-@media (max-width: 600px){
-    .w-20-mobile {
-        width: 33.33%;
-      }
-    .user-area button{
-        float:right;
-    }
-    .question-btn{
-        margin-left:0;
-    }
-    .modal-title{
-        font-size: 20px;
-    }
-    .question-title {
-        font-size: 20px;
-    }
-    .hintLabel{
-        font-size: 12px;
-    }
-    .topic-form{
-        width: 80px;
-    }
-    .custom-question-input::-webkit-input-placeholder {
-        font-size: 20px;
-      }
-      .custom-question-input:-ms-input-placeholder {
-        font-size: 20px;
-      }
-      .custom-question-input::placeholder {
-        font-size: 20px;
-      }
+.restore-question-form {
+  float: right;
+  max-height: 24px;
+  padding: 0;
+}
+.restore-question-form button {
+  max-height: 24px;
+  padding: 0;
+  float: right;
+}
+
+@media (max-width: 992px) {
+  .mt-negative-40 {
+    margin-top: -40px;
+  }
+}
+@media (max-width: 600px) {
+  .w-20-mobile {
+    width: 33.33%;
+  }
+  .user-area button {
+    float: right;
+  }
+  .question-btn {
+    margin-left: 0;
+  }
+  .modal-title {
+    font-size: 20px;
+  }
+  .question-title {
+    font-size: 20px;
+  }
+  .hintLabel {
+    font-size: 12px;
+  }
+  .topic-form {
+    width: 80px;
+  }
+  .custom-question-input{
+    font-size: 20px;
+  }
+  .custom-question-input::-webkit-input-placeholder {
+    font-size: 20px;
+  }
+  .custom-question-input:-ms-input-placeholder {
+    font-size: 20px;
+  }
+  .custom-question-input::placeholder {
+    font-size: 20px;
+  }
+  .alert {
+    font-size: 15px;
+  }
+  .alert button {
+    font-size: 15px;
+  }
+}
+@media (max-width: 400px) {
+  .alert {
+    font-size: 11px;
+  }
+  .alert button {
+    font-size: 11px;
+  }
+  .custom-question-input{
+    font-size: 15px;
+  }
+  .custom-question-input::-webkit-input-placeholder {
+    font-size: 15px;
+  }
+  .custom-question-input:-ms-input-placeholder {
+    font-size: 15px;
+  }
+  .custom-question-input::placeholder {
+    font-size: 15px;
+  }
 }
