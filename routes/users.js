@@ -11,6 +11,7 @@ const keyEmail = require('../config/key');
 const keyUpload = require('../config/key');
 // Load User model
 const User = require("../models/User");
+const Search = require("../models/Search");
 const { forwardAuthenticated } = require("../config/auth");
 
 // Login Page
@@ -113,11 +114,22 @@ router.post("/register", (req, res) => {
                         newUser
                             .save()
                             .then(user => {
-                                req.flash(
-                                    "success_msg",
-                                    "You are registed success, login Q&A now!"
-                                );
-                                res.redirect("/login");
+                                var newUser = {
+                                    name: user.firstname+" "+user.lastname,
+                                    user: user._id
+                                };
+                                Search.create(newUser,(err,user)=>{
+                                    if(err){
+                                        console.log(err);
+                                    }
+                                    else{
+                                        req.flash(
+                                            "success_msg",
+                                            "You are registed success, login Q&A now!"
+                                        );
+                                        res.redirect("/login");
+                                    }
+                                })
                             })
                             .catch(err => console.log(err));
                     });
