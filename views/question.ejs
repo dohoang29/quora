@@ -1,18 +1,18 @@
 <% include partials/header.ejs %> <% if(question.isActive == false) {%>
-<div class="col-lg-8" style="margin-top: -40px;">
-  <div class="alert alert-danger" role="alert">
+<div class="col-lg-8 mt-negative-40">
+  <div class="alert alert-danger " role="alert">
     This Question is Deleted !!! 
     <form
       class="restore-question-form"
       action="/question/<%=question._id%>/restore?_method=PUT"
       method="post"
     >
-      <button class="btn btn-link" type="submit">Restore Answer</button>
+      <button class="btn btn-link" type="submit">Restore Question</button>
     </form>
   </div>
 </div>
 <% } else {%>
-<div class="col-lg-8 question-area" style="margin-top: -40px;">
+<div class="col-lg-8 mt-negative-40" >
   <div class="question-page-topic">
     <%question.topic.forEach((topic)=>{%>
     <a href="/topic/<%=topic._id%>" class="badge badge-secondary my-2"

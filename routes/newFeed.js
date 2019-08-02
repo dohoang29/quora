@@ -75,7 +75,7 @@ router.post("/:userId", (req, res) => {
           user.save();
         }
       });
-      res.redirect("/feed");
+      res.redirect("/question/"+question._id);
     }
   });
 });
