@@ -26,38 +26,51 @@ router.get('/edit/:id', (req, res) => {
 });
 //delete 
 router.get('/delete/:id', (req, res) => {
-    User.findByIdAndRemove(req.params.id, (err, user) => {
-        if (!err) {
-            req.flash('success_msg', 'You are deleted an user');
+    User.findById(req.params.id, (err, user) => {
+        if (user.email == "1611134@hcmut.edu.vn") {
+            req.flash('success_msg', 'Not delete admin Hoan');
             res.redirect('/admin');
-        } else { console.log('Error in user delete :' + err); }
-    });
+        } else {
+            User.findByIdAndRemove(req.params.id, (err, user) => {
+                if (!err) {
+                    req.flash('success_msg', 'You are deleted an user');
+                    res.redirect('/admin');
+                } else { console.log('Error in user delete :' + err); }
+            });
+        }
+    })
+
 });
 //ban
 router.get('/ban/:id', (req, res) => {
     User.findById(req.params.id, (err, user) => {
-        if (!err) {
-            if (user.isBan == false) {
-                user.isBan = true;
-                user.save();
-                console.log(user.isBan);
-                req.flash(
-                    'success_msg',
-                    'You are ban an user success');
-                res.redirect('/admin');
-            } else {
-                user.isBan = false;
-                user.save();
-                console.log(user.isBan);
-                console.log('test hoang');
-                req.flash(
-                    'success_msg',
-                    'You are unban an user success');
-                res.redirect('/admin');
-            }
-            // req.flash('success_msg', 'You are ban an user');
-            // res.redirect('/list');
-        } else { console.log('Error in user ban :' + err); }
+        if (user.email == "1611134@hcmut.edu.vn") {
+            req.flash('success_msg', 'Not ban Admin Hoan');
+            res.redirect('/admin');
+        } else {
+            if (!err) {
+                if (user.isBan == false) {
+                    user.isBan = true;
+                    user.save();
+                    console.log(user.isBan);
+                    req.flash(
+                        'success_msg',
+                        'You are ban an user success');
+                    res.redirect('/admin');
+                } else {
+                    user.isBan = false;
+                    user.save();
+                    console.log(user.isBan);
+                    console.log('test hoang');
+                    req.flash(
+                        'success_msg',
+                        'You are unban an user success');
+                    res.redirect('/admin');
+                }
+                // req.flash('success_msg', 'You are ban an user');
+                // res.redirect('/list');
+            } else { console.log('Error in user ban :' + err); }
+        }
     });
 });
 
