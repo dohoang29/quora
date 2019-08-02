@@ -256,7 +256,7 @@
 .options label,
 .options input {
     width: 4em;
-    padding: 0.5em 1em;
+    padding: 0.5em 0.5em;
 }
 
 .btn-upload {
