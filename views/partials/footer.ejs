@@ -122,6 +122,7 @@
             cropper = '';
 
         // on change show image with crop options
+        if(upload){
         upload.addEventListener('change', (e) => {
             if (e.target.files.length) {
                 const reader = new FileReader();
@@ -136,14 +137,19 @@
                         save.classList.remove('hide');
                         options.classList.remove('hide');
                         cropper = new Cropper(img);
+                        console.log(img)
                     }
                 };
                 reader.readAsDataURL(e.target.files[0]);
             }
         });
+    }
         // save on click
+        if(save){
+            console.log('test');
         save.addEventListener('click', (e) => {
             e.preventDefault();
+            console.log('test2');
             // get result to data uri
             let imgSrc = cropper.getCroppedCanvas({
                 width: img_w.value // input value
@@ -154,7 +160,8 @@
             // show image cropped
             cropped.src = imgSrc;
             up.setAttribute('href', imgSrc);
-        });
+        })
+    }
         $(function() {
             $('.owl-carousel').owlCarousel({
                 margin: 10,
