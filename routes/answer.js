@@ -4,6 +4,7 @@ const Answer = require("../models/answer");
 const Question = require("../models/question");
 const Topic = require("../models/topic");
 const User = require("../models/User");
+const Noti = require("../models/notifi");
 const { ensureAuthenticated } = require("../config/auth");
 router.get("/:answerId", ensureAuthenticated, (req, res) => {
     Answer.findOne({
@@ -42,7 +43,6 @@ router.put("/:questionId/:answerId/", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-<<<<<<< HEAD
             answer.isActive = true;
             answer.save();
             Question.findOne({ "_id": questionId }).exec((err, question) => {
@@ -54,19 +54,6 @@ router.put("/:questionId/:answerId/", (req, res) => {
                     res.redirect("/answer/" + answer._id);
                 }
             });
-=======
-          question.answers.push(answer._id);
-          var flag = false;
-          question.followers.forEach(follower => {
-            if(follower == userId){
-              flag = true; 
-            }
-          });
-          if(flag == false){
-            question.followers.push(userId);
-          }
-          question.save();
->>>>>>> 488288aa7108991cf5cfce3e7e7176b8ae2db427
         }
     })
 });
@@ -119,16 +106,41 @@ router.post("/:topicId/:questionId/:userId", (req, res) => {
                     console.log(err);
                 } else {
                     question.answers.push(answer._id);
-                    var flag = false;
-                    question.followers.forEach(follower => {
-                        if (follower._id == userId) {
-                            flag = true;
-                        }
-                    });
-                    if (flag) {
-                        question.followers.push(userId);
+                    var newNoti = {
+                        questionId: question._id,
+                        author: userId,
+                        title: question.title
                     }
-                    question.save();
+                    Noti.create(newNoti, (err, noti) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            question.followers.forEach(follower => {
+                                var flag = false;
+                                if (follower == userId) {
+                                    flag = true;
+                                }
+                                if (flag == false) {
+                                    question.followers.push(userId);
+                                }
+                                question.save();
+                                User.findById(follower, (err, user) => {
+                                    if (err) {
+                                        console.log(err);
+                                    } else {
+                                        console.log("hi");
+                                        user.notifi.push(noti._id);
+                                        if (user.notifi.length > 25) {
+                                            user.notifi.shift();
+                                        }
+                                        user.save();
+                                    }
+                                })
+                            });
+                        }
+                    })
+
+
                 }
             });
             Topic.findOne({ _id: topicId }).exec((err, topic) => {
