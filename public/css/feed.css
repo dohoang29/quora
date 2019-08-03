@@ -93,13 +93,21 @@ body {
 }
 
 .modal-title {
-    color: #666;
+    color: #fff;
+    margin-left: 10px;
     margin-bottom: 0%;
-    padding-top: 5px;
-    display: inline-block;
+    padding: 5px;
+    display: block;
+    font-size: 15pt;
+    text-align: center;
     font-family: Georgia, "Times New Roman", Times, serif;
 }
-
+.modal-upload{
+    background-color :#007bff;
+}
+.close-upload{
+    color: #f3f3f8;
+}
 .fs-13 {
     font-size: 13px;
 }
@@ -432,7 +440,7 @@ body {
         margin-left: 0;
     }
     .modal-title {
-        font-size: 20px;
+        font-size: 18px;
     }
     .question-title {
         font-size: 20px;

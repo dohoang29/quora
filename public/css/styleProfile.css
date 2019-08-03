@@ -14,7 +14,9 @@
 .option-reset {
     margin-top: 20px;
 }
-
+#loadingAvatar{
+display: none;
+}
 .photo {
     width: 150px;
     height: 150px;
@@ -174,13 +176,17 @@
 .edit:hover {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2), 0 0 15px rgba(0, 0, 0, 0.2);
 }
-
+#userCropAvatar{
+    display: none;
+}
 @media (max-width: 990px) {
     .user-nav {
         display: none;
     }
 }
-
+#userCropAvatar{
+    display: none;
+}
 .profile-topic-img {
     width: auto;
     height: 50px;
