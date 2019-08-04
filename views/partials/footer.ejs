@@ -159,6 +159,19 @@
                 x.style.display = "none";
             }
         }
+        function  myFunctionCrop(){
+          var z = document.getElementById("userResetAvatar")
+          var t = document.getElementById("userCropAvatar");
+            z.style.display ="none";
+            t.style.display ="inline-block";
+          }
+          function myFunctionUp(){
+            var z = document.getElementById("submitPicture")
+          var t = document.getElementById("loadingAvatar");
+            z.style.display ="none";
+            t.style.display ="inline-block";
+          }
+         
         // vars
         let result = document.querySelector(".result"),
             img_result = document.querySelector(".img-result"),
@@ -342,22 +355,21 @@
                 noti.push("<%= currentUser.notifi[i] %>");
                 "<%}%>"
                 console.log(noti);
-                $.ajax({
-                    type: "POST",
-                    async: false,
-                    data: {
-                        data: noti
-                    },
-                    url: window.location.origin + "/feed/notification",
-                    success: function(result) {
+                // $.ajax({
+                //     type: "POST",
+                //     async: false,
+                //     data: {
+                //         data: noti
+                //     },
+                //     url: window.location.origin + "/feed/notification",
+                //     success: function(result) {
 
-                    },
+                //     },
                     // complete: function(notifi) {
                     //     $('.notifiAvatar').append("<span>You are reset avatar success!</span>");
                     // }
                 })
 
-            })
         });
     </script>
 

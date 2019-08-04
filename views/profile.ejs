@@ -30,13 +30,13 @@
           >
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalCenterTitle">
+                <div class="modal-header modal-upload">
+                  <p class="modal-title" id="exampleModalCenterTitle">
                     Change Avatar
-                  </h5>
+                </p>
                   <button
                     type="button"
-                    class="close"
+                    class="close close-upload"
                     data-dismiss="modal"
                     aria-label="Close"
                   >
@@ -75,32 +75,32 @@
                     </div>
                     <!-- save btn -->
                     <div class="button-option">
-                      <button
+                      <button  onclick="myFunctionCrop()"
                         id="userResetAvatar"
                         type="submit"
                         class="button-upload save btn-upload btn-danger "
                       >
-                        Drop
-                        <i class="fa fa-drop" aria-hidden="true"></i>
+                        Crop
+                        <i class="fa fa-crop" aria-hidden="true"></i>
                       </button>
                       <button
+                      id="userCropAvatar"
+                      class="button-upload save btn-upload btn-danger "
+                    >
+                      Cropped
+                      <i class="fa fa-check" aria-hidden="true"></i>
+                    </button>
+                  
+                      <button onclick="myFunctionUp()"
                         id="submitPicture"
                         class="button-upload up btn-upload btn-danger "
                       >
                         Up/Del
                         <i class="fa fa-times" aria-hidden="true"></i>
                       </button>
+                      <img width="100px" id="loadingAvatar" src="/images/giphy-load.gif">
                     </div>
                   </div>
-                </div>
-                <div style="height: 50px;" class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn-upload btn-secondary"
-                    data-dismiss="modal"
-                  >
-                    Close
-                  </button>
                 </div>
               </div>
             </div>
@@ -278,7 +278,7 @@
                 width="25px"
                 type="password"
                 class="form-control"
-                placeholder="*********"
+                placeholder="*****************************"
                 name="password"
               />
               <label class="last-name"><strong>New Password</strong></label>

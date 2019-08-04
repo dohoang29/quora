@@ -13,7 +13,6 @@ router.get("/:id", ensureAuthenticated, (req, res) => {
     }
   });
 });
-
 router.get("/:topicId/:userId/:action", (req, res) => {
   var topicId = req.params.topicId;
   var userId = req.params.userId;

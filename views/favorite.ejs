@@ -1,246 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Choose your favorite topic</title>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/styleFavorite.css">
+    <link rel="stylesheet" href="css/styleFavorite.css" />
+  </head>
 
-
-</head>
-
-<body>
-
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <iv class="span12">
-
-                <div class="page-header">
-                    <img width=120px src="/images/logo.png">
-                    <p>Please choose at least 5 topic to login</p>
-                </div>
-
-                <div class="carousel slide" id="myCarousel">
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <ul class="thumbnails">
-                                <li class="span3 topic">
-                                    <div class="thumbnail">
-                                        <a href="#"><img src="https://source.unsplash.com/360x240/?phone"></a>
-                                    </div>
-                                    <div class="caption">
-                                        <h4>Technology</h4>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked>
-                                            <label class="custom-control-label" for="defaultChecked2">Choose</label>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="span3 topic">
-                                    <div class="thumbnail">
-                                        <a href="#"><img src="https://source.unsplash.com/360x240/?food"></a>
-                                    </div>
-                                    <div class="caption">
-                                        <h4>Food</h4>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="defaultInline1">
-                                            <label class="custom-control-label" for="defaultInline1">Choose</label>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="span3 topic">
-                                    <div class="thumbnail">
-                                        <a href="#"><img src="https://source.unsplash.com/360x240/?book"></a>
-                                    </div>
-                                    <div class="caption">
-                                        <h4>Books</h4>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="defaultInline2">
-                                            <label class="custom-control-label" for="defaultInline2">Choose</label>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="span3 topic">
-                                    <div class="thumbnail">
-                                        <a href="#"><img src="https://source.unsplash.com/360x240/?movies"></a>
-                                    </div>
-                                    <div class="caption">
-                                        <h4>Movies</h4>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="defaultInlin3">
-                                            <label class="custom-control-label" for="defaultInline3">Choose</label>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="span3 topic">
-                                    <div class="thumbnail">
-                                        <a href="#"><img src="https://source.unsplash.com/360x240/?girl"></a>
-                                    </div>
-                                    <div class="caption">
-                                        <h4>Beautiful Girl</h4>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="defaultInline4">
-                                            <label class="custom-control-label" for="defaultInline4">Choose</label>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <!--                            ul2-->
-                            <ul class="thumbnails">
-                                <li class="span3 topic">
-                                    <div class="thumbnail">
-                                        <a href="#"><img src="https://source.unsplash.com/360x240/?science"></a>
-                                    </div>
-                                    <div class="caption">
-                                        <h4>Science</h4>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="defaultInline5">
-                                            <label class="custom-control-label" for="defaultInline5">Choose</label>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="span3 topic">
-                                    <div class="thumbnail">
-                                        <a href="#"><img src="https://source.unsplash.com/360x240/?history"></a>
-                                    </div>
-                                    <div class="caption">
-                                        <h4>History</h4>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="defaultInlin6">
-                                            <label class="custom-control-label" for="defaultInline6">Choose</label>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="span3 topic">
-                                    <div class="thumbnail">
-                                        <a href="#"><img src="https://source.unsplash.com/360x240/?bussiness"></a>
-                                    </div>
-                                    <div class="caption">
-                                        <h4>Bussiness</h4>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="defaultInline7">
-                                            <label class="custom-control-label" for="defaultInline7">Choose</label>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="span3 topic">
-                                    <div class="thumbnail">
-                                        <a href="#"><img src="https://source.unsplash.com/360x240/?travel"></a>
-                                    </div>
-                                    <div class="caption">
-                                        <h4>Visitng & Travel</h4>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="defaultInline8">
-                                            <label class="custom-control-label" for="defaultInline8">Choose</label>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="span3 topic">
-                                    <div class="thumbnail">
-                                        <a href="#"><img src="https://source.unsplash.com/360x240/?design"></a>
-                                    </div>
-                                    <div class="caption">
-                                        <h4>Design</h4>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="defaultInline9">
-                                            <label class="custom-control-label" for="defaultInline9">Choose</label>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <!--                            ul3-->
-                            <ul class="thumbnails">
-                                <li class="span3 topic">
-                                    <div class="thumbnail">
-                                        <a href="#"><img src="https://source.unsplash.com/360x240/?fashion"></a>
-                                    </div>
-                                    <div class="caption">
-                                        <h4>Fashion</h4>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="defaultInline10">
-                                            <label class="custom-control-label" for="defaultInline10">Choose</label>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="span3 topic">
-                                    <div class="thumbnail">
-                                        <a href="#"><img src="https://source.unsplash.com/360x240/?messi"></a>
-                                    </div>
-                                    <div class="caption">
-                                        <h4>Sports</h4>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="defaultInline11">
-                                            <label class="custom-control-label" for="defaultInline12">Choose</label>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="span3 topic">
-                                    <div class="thumbnail">
-                                        <a href="#"><img src="https://source.unsplash.com/360x240/?education"></a>
-                                    </div>
-                                    <div class="caption">
-                                        <h4>Education</h4>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="defaultInline13">
-                                            <label class="custom-control-label" for="defaultInline13">Choose</label>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="span3 topic">
-                                    <div class="thumbnail">
-                                        <a href="#"><img src="https://source.unsplash.com/360x240/?marketing"></a>
-                                    </div>
-                                    <div class="caption">
-                                        <h4>Marketing</h4>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="defaultInline15">
-                                            <label class="custom-control-label" for="defaultInline15">Choose</label>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="span3 topic">
-                                    <div class="thumbnail">
-                                        <a href="#"><img src="https://source.unsplash.com/360x240/?developer"></a>
-                                    </div>
-                                    <div class="caption">
-                                        <h4>Developer</h4>
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="defaultInline16">
-                                            <label class="custom-control-label" for="defaultInline16">Choose</label>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="control-box">
-                            <a data-slide="next" href="/feed" class="carousel-control right">›</a>
-                        </div>
-                        <!-- /.control-box -->
-
-                    </div>
-                    <!-- /#myCarousel -->
-                </div>
-                <!-- /.span12 -->
+  <body>
+        <div class="head-favo">
+                <h3>Q&A</h3>
+                <p>Please choose at least 5 topic to login</p>
+              </div>
+        
+    <div class="container container-all">
+            <% include ./partials/messages %>
+            <form action="/favorite" method="post"  autocomplete="off">
+      <div class="row content-topic">
+        <% for (var i=0; i < topics.length; i++){ %>
+        <div class="col-xl-2 col-md-3 col-sm-4 col-6 topic">
+          <div class="thumbnail image-topic">
+            <a href="#"><img width="120px" src="<%=topics[i].image%>"/></a>
+          </div>
+          <div class="caption">
+            <h4><%= topics[i].title%></h4>
+            <div class="custom-control custom-checkbox">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="defaultCheck<%= i+1%>" name="<%=topics[i]._id%>""
+              />
+              <label class="custom-control-label" for="defaultCheck<%= i+1%>"
+                >Choose</label
+              >
+            </div>
+          </div>
         </div>
-        <!-- /.row -->
+        <% } %>
+      </div>
+      <button class="next-feed" type="submit">Next</button>
+    </form>
     </div>
-    <div class="footer">
-    </div>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js'></script>
-
-
-
-
-
-
-</body>
-
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+  </body>
 </html>
