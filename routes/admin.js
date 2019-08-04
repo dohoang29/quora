@@ -28,7 +28,7 @@ router.get('/edit/:id', (req, res) => {
 router.get('/delete/:id', (req, res) => {
     User.findById(req.params.id, (err, user) => {
         if (user.email == "1611134@hcmut.edu.vn") {
-            req.flash('success_msg', 'Not delete admin Hoan');
+            req.flash('success_msg', 'Can not delete admin Hoan');
             res.redirect('/admin');
         } else {
             User.findByIdAndRemove(req.params.id, (err, user) => {
@@ -45,7 +45,7 @@ router.get('/delete/:id', (req, res) => {
 router.get('/ban/:id', (req, res) => {
     User.findById(req.params.id, (err, user) => {
         if (user.email == "1611134@hcmut.edu.vn") {
-            req.flash('success_msg', 'Not ban Admin Hoan');
+            req.flash('success_msg', 'Can not ban Admin Hoan');
             res.redirect('/admin');
         } else {
             if (!err) {

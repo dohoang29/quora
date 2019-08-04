@@ -171,7 +171,7 @@
             z.style.display ="none";
             t.style.display ="inline-block";
           }
-          loadingAvatar
+         
         // vars
         let result = document.querySelector(".result"),
             img_result = document.querySelector(".img-result"),
@@ -292,22 +292,21 @@
                 noti.push("<%= currentUser.notifi[i] %>");
                 "<%}%>"
                 console.log(noti);
-                $.ajax({
-                    type: "POST",
-                    async: false,
-                    data: {
-                        data: noti
-                    },
-                    url: window.location.origin + "/feed/notification",
-                    success: function(result) {
+                // $.ajax({
+                //     type: "POST",
+                //     async: false,
+                //     data: {
+                //         data: noti
+                //     },
+                //     url: window.location.origin + "/feed/notification",
+                //     success: function(result) {
 
-                    },
+                //     },
                     // complete: function(notifi) {
                     //     $('.notifiAvatar').append("<span>You are reset avatar success!</span>");
                     // }
                 })
 
-            })
         });
     </script>
 

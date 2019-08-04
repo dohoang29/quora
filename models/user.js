@@ -54,6 +54,11 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: false
     },
+    isLoginFirst:{
+        type: Boolean,
+        required: true,
+        default: true
+    },
     notifi: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Notifi"
