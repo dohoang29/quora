@@ -2,10 +2,6 @@ var mongoose = require("mongoose");
 
 var searchSchema = new mongoose.Schema({
   name: String,
-  answer: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Answer"
-  },
   topic: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Topic"

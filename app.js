@@ -29,7 +29,9 @@ const indexRoutes = require("./routes/index"),
     feedRoutes = require("./routes/newFeed"),
     answerRoutes = require("./routes/answer"),
     topicRoutes = require("./routes/topics");
-adminRoutes = require("./routes/admin")
+    searchRoutes = require("./routes/search")
+    adminRoutes = require("./routes/admin")
+
 mongoose.connect("mongodb+srv://hoang:uANMPpiOnhRKAGi6@cluster0-7nvfn.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true });
 app.use(cookieParser('secret'));
 app.use(express.static("public"));
@@ -76,7 +78,7 @@ app.use("/topic", topicRoutes);
 app.use("/answer", answerRoutes);
 app.use("/admin", adminRoutes);
 app.use("/question", questionRoutes);
-
+app.use("/search", searchRoutes);
 app.listen(port, () => {
     console.log("Server is listening at " + ipAdress + ":" + port);
 });

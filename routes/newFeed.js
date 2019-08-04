@@ -4,6 +4,7 @@ const Question = require("../models/question");
 const Answer = require("../models/answer");
 const Topic = require("../models/topic");
 const User = require("../models/User");
+const Search = require("../models/Search");
 const { ensureAuthenticated } = require("../config/auth");
 
 router.get("/", ensureAuthenticated, (req, res) => {
@@ -75,6 +76,11 @@ router.post("/:userId", (req, res) => {
           user.save();
         }
       });
+      var searchQuestion = {
+        name: question.title,
+        question: question._id
+      };
+      Search.create(searchQuestion);
       res.redirect("/question/"+question._id);
     }
   });

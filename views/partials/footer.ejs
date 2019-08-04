@@ -269,6 +269,19 @@
                 .find("[autofocus]")
                 .focus();
         });
+        $("#searchBox").keyup(function search(){
+            if($(this).val() != null || $(this).val() != ""){
+              var value = $(this).val();
+              $.ajax({
+                type: "GET",
+                url: window.location.origin +"/search/"+value,
+                async:false,
+                success: function(result) {
+                  
+                }
+              });
+            }
+          });
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
