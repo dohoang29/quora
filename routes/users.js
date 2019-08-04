@@ -331,8 +331,16 @@ function updateRecord(req, res) {
         res.redirect("/profile/" + req.params.id);
       } else {
         if (err.name == "ValidationError") {
-          handleValidationError(err, req.body);
-          res.render("profile", {});
+          Search.find({ user: user._id }, (err, search) => {
+            if (err) {
+              console.log(err);
+            } else {
+              search.name = user.firstname + " " + user.lastname;
+              search.save();
+              handleValidationError(err, req.body);
+              res.render("profile", {});
+            }
+          });
         } else console.log("Error during update : " + err);
       }
     }

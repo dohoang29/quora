@@ -53,6 +53,12 @@ router.put("/:questionId", (req, res) => {
       }
       if (title !== "") {
         question.title = title;
+        Search.find({ question: question._id }, (err, search) => {
+          if(err){console.log(err)}else{
+            search.name = title;
+            search.save();
+          }
+        });
       }
       if (link !== "") {
         question.url = link;
