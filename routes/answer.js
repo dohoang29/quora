@@ -101,11 +101,12 @@ router.post("/:topicId/:questionId/:userId", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            Question.findOne({ _id: questionId }).exec((err, question) => {
+            Question.findById(questionId).exec((err, question) => {
                 if (err) {
                     console.log(err);
                 } else {
                     question.answers.push(answer._id);
+                    question.save();
                     var newNoti = {
                         questionId: question._id,
                         author: userId,

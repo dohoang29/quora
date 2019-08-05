@@ -1,5 +1,6 @@
 </div>
 </div>
+
 <% include addQuestion.ejs %>
     <script type="text/javascript">
         $(function() {
@@ -349,41 +350,83 @@
         });
         //notification
         $(function() {
-            $("#submitNoti").click(function() {
+            $(".submitNoti").click(function() {
                 var noti = [];
                 "<% for(var i =0;i<currentUser.notifi.length;i++){%>"
                 noti.push("<%= currentUser.notifi[i] %>");
                 "<%}%>"
                 console.log(noti);
-                // $.ajax({
-                //     type: "POST",
-                //     async: false,
-                //     data: {
-                //         data: noti
-                //     },
-                //     url: window.location.origin + "/feed/notification",
-                //     success: function(result) {
+                $(".noti-user").empty();
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                     data: {data : noti},
+                     url: window.location.origin + "/noti",
+                     success: function(results) {
+                        if(results != ""){
+                            results.forEach(result=>{
+                                $(".noti-user").append("<li class='urlNoti'> <img class='imageMember' src='"+result.author.imageUrl+"'><a class='dropdown-item noti-content' href='/question/"+result.questionId._id+"'><strong>"+result.author.firstname+"</strong> has added a new answer in <strong>"+result.title+"</strong></a><p>"+result.creationDate+"</p></li><div class='dropdown-divider'></div>");
+                            })
+                        }
+                        else{
 
-                //     },
-                    // complete: function(notifi) {
-                    //     $('.notifiAvatar').append("<span>You are reset avatar success!</span>");
-                    // }
-                })
+                        }
+                     },
+                });
 
-        });
-        $("#searchBox").keyup(function search(){
-            if($(this).val() != null || $(this).val() != ""){
+        })});
+        $(".search-box").focus(function(){
+          $(".searchResult").show();
+          $(".dim").css("display","block");
+          $(".dim").animate({opacity: "0.7"});
+          $(this).keyup(function search(){
+            $(".loading").show();
+            if($(this).val() != ""){
               var value = $(this).val();
               $.ajax({
                 type: "GET",
                 url: window.location.origin +"/search/"+value,
                 async:false,
-                success: function(result) {
-                  
+                success: function(results) {
+                  $(".searchResult").empty();
+                  results.forEach((result)=>{
+                    if(result.user != null){
+                      $(".searchResult").append("<a href='/profile/"+result.user+"' class='search-result-item'><div class='border-bottom p-2 text-dark '><span class='text-muted'>User: </span>"+result.name+" <i class='fas fa-chevron-right text-muted search-arrow'></i></div></a>")
+                    }
+                    if(result.question != null){
+                      $(".searchResult").append("<a href='/question/"+result.question+"' class='search-result-item'><div class='border-bottom p-2 text-dark '><span class='text-muted'>Question: </span>"+result.name+" <i class='fas fa-chevron-right text-muted search-arrow'></i></div></a>")
+                    }
+                    if(result.topic != null){
+                      $(".searchResult").append("<a href='/topic/"+result.topic+"' class='search-result-item'><div class='border-bottom p-2 text-dark '><span class='text-muted'>Topic: </span>"+result.name+" <i class='fas fa-chevron-right text-muted search-arrow'></i></div></a>")
+                    }
+                  })
                 }
               });
             }
           });
+        });
+        $(".search-box").blur(function(){
+          $(".searchResult").delay("fast").fadeOut();
+          $(".dim").animate({opacity: "0"});
+          $(".dim").css("display","none");
+        });
+        $("#startSearch").click(function(){
+            $("#searchBar").animate({
+                left: "0px"
+            });
+            $("#mobileSearchBox").animate({
+                left: "0px"
+            });
+        });
+        $("#searchBackBtn").click(function(){
+            $("#searchBar").animate({
+                left: "-1024px"
+            });
+            $("#mobileSearchBox").animate({
+                left: "-1024px"
+            });
+        })
+        
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
