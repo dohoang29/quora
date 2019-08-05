@@ -5,6 +5,7 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const Search = require("../models/Search");
+var Question = require("../models/question");
 router.get("/", isLoggedInAdmin, (req, res) => {
   User.find((err, users) => {
     if (!err) {
@@ -14,8 +15,19 @@ router.get("/", isLoggedInAdmin, (req, res) => {
     }
   });
 });
+//posts manage
+router.get("/posts", isLoggedInAdmin, (req, res) => {
+  Question.find((err, questions) => {
+    if (!err) {
+      res.render("admin/posts", { questions: questions });
+    } else {
+      console.log("Error in retrieving topics list :" + err);
+    }
+  })
+});
+//
 router.get("/add", (req, res) => {
-  res.render("admin");
+  res.render("list");
 });
 // find id
 router.get("/edit/:id", (req, res) => {

@@ -1,0 +1,74 @@
+<% include ../partials/headAdmin.ejs %>
+<link rel="stylesheet" href="/css/styleTopics.css" />
+    <!-- /. NAV SIDE  -->
+    <div class="row">
+        <div class="col-md-12">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-4">
+                        <% include ../partials/messages %>
+                    </div>
+                </div>
+                <div class="box postManage">
+                        <!-- Box Head -->
+                        <div class="box-head">
+                           
+                            <div class="right">
+                                <label>search by</label>
+                                <input type="text" class="field small-field">
+                                <input type="submit" class="button" value="search">
+                            </div>
+                        </div>
+                        <!-- End Box Head -->	
+    
+                        <!-- Table -->
+                        <div class="table">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    
+                                    <th>Question</th>
+                                    <th>Date Add</th>
+                                    <th>Author</th>
+                                    <th>Control</th>
+                                   
+                                </tr>
+                                <tbody>
+                                        <% questions.forEach((question)=>{ %>
+                                <tr>
+                                    
+                                    <td><a href="#"><%= question.title%></a></td>
+                                    <td><%= question.dateCreated%></td>
+                                   <td><%= question.author%></td>
+                                    <td><a href="/admin/delete/<%=question._id%> " onclick="return confirm( 'Are you sure to delete this record ?');" ><i class="fa fa-remove"></i></a> Or <a href="#" ><i class="fa fa-ban"></i></a></td>
+                                </tr>
+                                <% }) %>
+                            </tbody></table>
+                            
+                            
+                            <!-- Pagging -->
+                            <div class="pagging">
+                                <div class="left">Showing 1-12 of 44</div>
+                                <div class="right">
+                                    <a href="#">Previous</a>
+                                    <a href="#">1</a>
+                                    <a href="#">2</a>
+                                    <a href="#">3</a>
+                                    <a href="#">4</a>
+                                    <a href="#">245</a>
+                                    <span>...</span>
+                                    <a href="#">Next</a>
+                                    <a href="#">View all</a>
+                                </div>
+                            </div>
+                            <!-- End Pagging -->
+                            
+                        </div>
+                        <!-- Table -->
+                        
+                    </div>
+                </div>
+                </div>
+                </div>
+            </body>
+
+            </html>

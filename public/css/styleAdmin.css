@@ -9,18 +9,24 @@
 .head-chil {
    display: inline;
 }
-.option-admin{
-    margin-left:90% !important;
-}
 .create-user {
-    margin-bottom: 10px;
+    margin-top:20px;
+    padding-left: 22px;
 }
+/* #logoutAdmin{
+    margin-left: 70% !important;
+} */
 .name-user{
     text-align: center;
 }
 .list-user{
-    margin-left: 15px;
+    padding: 20px 20px 20px 40px;
+
 }
+.footer-admin{
+    padding: 20px;
+}
+
 .add-member {
     border-radius: 5px;
 }
@@ -28,7 +34,7 @@
 .logo-admin {
     font-size: 20pt;
     font-weight: bold;
-    margin-left: 40px;
+    margin-left: 20px;
     color: #c04240 !important;
 }
 
@@ -52,13 +58,15 @@
     z-index: 2;
 }
 .edit-admin{
-    margin : 30px 0 0 20% !important;
     background-color: #d0f1e3 !important;
 }
 #user-name {
     width: 49%;
     float: left;
     margin-bottom: 4px;
+}
+.modal-create{
+    margin-left: 12px;
 }
 
 #user-name2 {

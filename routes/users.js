@@ -28,8 +28,17 @@ router.get(
   "/auth/google/redirect",
   passport.authenticate("google"),
   (req, res) => {
-    // res.send(req.user);
-    res.redirect("/feed");
+    if (req.user.isLoginFirst == true) {
+      Topic.find((err, topics) => {
+        if (!err) {
+          res.render("favorite", { topics: topics });
+        } else {
+          console.log("Error in retrieving topics list :" + err);
+        }
+      });
+    } else {
+      res.redirect("/feed");
+    }
   }
 );
 // Register Page
