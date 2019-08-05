@@ -33,6 +33,7 @@
                             </tr>
                             <tbody>
                                 <% questions.forEach((question)=>{ %>
+
                                     <tr>
 
                                         <td>
@@ -41,10 +42,10 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <%= question.dateCreated%>
+                                            <%= moment(question.dateCreated).fromNow()%>
                                         </td>
                                         <td>
-                                            <%= question.author%>
+                                            <%= question.author.lastname %>
                                         </td>
                                         <td><a href="#" onclick="return confirm( 'Are you sure to delete this record ?');"><i class="fa fa-remove"></i></a> Or <a href="/admin/ban/questions/<%=question._id%>"><i class="fa fa-ban"></i></a></td>
                                     </tr>

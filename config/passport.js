@@ -4,9 +4,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const key = require('./key');
-// Load User model
 const User = require('../models/User');
-
 module.exports = function(passport) {
     passport.use(
         new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
@@ -52,8 +50,8 @@ passport.use(
         callbackURL: '/auth/google/redirect'
     }, (accessToken, refreshToken, profile, done) => {
         // check if user already exists in our own db
-        User.findOne({googleId: profile.id}).then((currentUser) => {
-            if(currentUser){
+        User.findOne({ googleId: profile.id }).then((currentUser) => {
+            if (currentUser) {
                 done(null, currentUser);
             } else {
                 // if not, create user in our db

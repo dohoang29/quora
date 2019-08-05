@@ -18,7 +18,7 @@ router.get("/", isLoggedInAdmin, (req, res) => {
 });
 //posts manage
 router.get("/posts", isLoggedInAdmin, (req, res) => {
-    Question.find((err, questions) => {
+    Question.find().populate("author").exec((err, questions) => {
         if (err) {
             console.log(err);
         } else {
