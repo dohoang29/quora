@@ -18,16 +18,15 @@ router.get("/", isLoggedInAdmin, (req, res) => {
 });
 //posts manage
 router.get("/posts", isLoggedInAdmin, (req, res) => {
-        Question.find((err, questions) => {
-            if (!err) {
-                res.render("admin/posts", { questions: questions });
-
-            } else {
-                console.log(err);
-            }
-        });
+    Question.find((err, questions) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("admin/posts", { questions: questions });
+        }
     })
-    //ban questions
+});
+//ban questions
 router.get("/ban/questions/:id", (req, res) => {
     Question.findById(req.params.id, (err, question) => {
         if (!err) {
