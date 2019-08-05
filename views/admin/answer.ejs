@@ -25,28 +25,36 @@
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
 
-                                <th>Question</th>
+                                <th>Answer</th>
                                 <th>Date Add</th>
                                 <th>Author</th>
+                                <th>Topic</th>
+                                <th>Question</th>
                                 <th>Control</th>
 
                             </tr>
                             <tbody>
-                                <% questions.forEach((question)=>{ %>
+                                <% answers.forEach((answer)=>{ %>
                                     <tr>
 
                                         <td>
                                             <a href="#">
-                                                <%= question.title%>
+                                                <%= answer.content%>
                                             </a>
                                         </td>
                                         <td>
-                                            <%= question.dateCreated%>
+                                            <%= answer.dateCreated%>
                                         </td>
                                         <td>
-                                            <%= question.author%>
+                                            <%= answer.author%>
                                         </td>
-                                        <td><a href="#" onclick="return confirm( 'Are you sure to delete this record ?');"><i class="fa fa-remove"></i></a> Or <a href="/admin/ban/questions/<%=question._id%>"><i class="fa fa-ban"></i></a></td>
+                                        <td>
+                                            <%= answer.topic%>
+                                        </td>
+                                        <td>
+                                            <%= answer.question%>
+                                        </td>
+                                        <td><a href="#" onclick="return confirm( 'Are you sure to delete this record ?');"><i class="fa fa-remove"></i></a> Or <a href="/admin/ban/answers/<%=answer._id%>"><i class="fa fa-ban"></i></a></td>
                                     </tr>
                                     <% }) %>
                             </tbody>

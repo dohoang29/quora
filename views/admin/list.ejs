@@ -8,7 +8,7 @@
                         <% include ../partials/messages %>
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="create-user">
@@ -47,53 +47,53 @@
                         </div>
                     </div>
                     <div class="col-md-12 list-user">
-                    <table class="table table-striped table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th class="name-user">List</th>
-                                <th class="name-user">Avatar</th>
-                                <th class="name-user">First Name</th>
-                                <th class="name-user">Last Name</th>
-                                <th class="name-user">Email</th>
-                                <th class="name-user">Role</th>
-                                <th class="name-user">Action</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <% for (var i=0; i < users.length; i++){ %>
-                                <tr style="text-align: center;">
-                                    <td>
-                                        <%= i+1 %>
-                                    </td>
-                                    <td> <img width="30px" style="border-radius: 50px;" src="<%= users[i].imageUrl == null ? 'https://iupac.org/wp-content/uploads/2018/05/default-avatar.png' : users[i].imageUrl %>" class="img-user" /></td>
-                                    <td>
-                                        <%= users[i].firstname %>
-                                    </td>
-                                    <td>
-                                        <%= users[i].lastname %>
-                                    </td>
-                                    <td>
-                                        <%= users[i].email %>
-                                    </td>
-                                    <td>
-                                        <%= users[i].role%>
-                                    </td>
-                                    <td>
-                                        <a href="/admin/edit/<%= users[i].id%>" class="btn btn-sm btn-success add-member"><i class="fa fa-edit"></i></a>
-                                        <a href="/admin/delete/<%= users[i]._id%> " onclick="return confirm( 'Are you sure to delete this record ?'); " class="btn btn-sm btn-danger add-member"><i class="fa fa-remove"></i></a>
-                                        <a href="/admin/ban/<%= users[i]._id%>" onclick="myFunction(this)" class="btn btn-sm btn-warning add-member">
-                                            <% if(users[i].isBan == false){ %>
-                                                <i class="fa fa-ban"></i>
-                                                <%}else{%><i class="fa fa-circle"></i>
-                                                    <%}%>
-                                        </a>
-                                        <a href="/admin/resetPassword/<%= users[i].id%>" class="btn btn-sm btn-primary add-member"><i class="fa fa-cog"></i></a>
-                                    </td>
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="name-user">List</th>
+                                    <th class="name-user">Avatar</th>
+                                    <th class="name-user">First Name</th>
+                                    <th class="name-user">Last Name</th>
+                                    <th class="name-user">Email</th>
+                                    <th class="name-user">Role</th>
+                                    <th class="name-user">Action</th>
                                 </tr>
-                                <% } %>
-                        </tbody>
-                    </table>
+                            </thead>
+
+                            <tbody>
+                                <% for (var i=0; i < users.length; i++){ %>
+                                    <tr style="text-align: center;">
+                                        <td>
+                                            <%= i+1 %>
+                                        </td>
+                                        <td> <img width="30px" style="border-radius: 50px;" src="<%= users[i].imageUrl == null ? 'https://iupac.org/wp-content/uploads/2018/05/default-avatar.png' : users[i].imageUrl %>" class="img-user" /></td>
+                                        <td>
+                                            <%= users[i].firstname %>
+                                        </td>
+                                        <td>
+                                            <%= users[i].lastname %>
+                                        </td>
+                                        <td>
+                                            <%= users[i].email %>
+                                        </td>
+                                        <td>
+                                            <%= users[i].role%>
+                                        </td>
+                                        <td>
+                                            <a href="/admin/edit/<%= users[i].id%>" class="btn btn-sm btn-success add-member"><i class="fa fa-edit"></i></a>
+                                            <a href="/admin/delete/<%= users[i]._id%> " onclick="return confirm( 'Are you sure to delete this record ?'); " class="btn btn-sm btn-danger add-member"><i class="fa fa-remove"></i></a>
+                                            <a href="/admin/ban/<%= users[i]._id%>" onclick="myFunction(this)" class="btn btn-sm btn-warning add-member">
+                                                <% if(users[i].isBan == false){ %>
+                                                    <i class="fa fa-ban"></i>
+                                                    <%}else{%><i class="fa fa-circle"></i>
+                                                        <%}%>
+                                            </a>
+                                            <a href="/admin/resetPassword/<%= users[i].id%>" class="btn btn-sm btn-primary add-member"><i class="fa fa-cog"></i></a>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
