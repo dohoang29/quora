@@ -3,7 +3,7 @@ const router = express.Router();
 const Question = require("../models/question");
 const Topic = require("../models/topic");
 const User = require("../models/user");
-const Search = require("../models/Search");
+const Search = require("../models/search");
 
 router.get("/:text",(req,res)=>{
     var value = req.params.text;

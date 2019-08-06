@@ -19,6 +19,7 @@ const answer = require("./models/answer");
 const Question = require("./models/question");
 const Topic = require("./models/topic");
 const User = require("./models/user");
+const Search = require("./models/search");
 const ipAdress = process.env.ip || ip.address();
 const port = process.env.port || 3000;
 

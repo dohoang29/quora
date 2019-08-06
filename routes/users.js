@@ -11,7 +11,7 @@ const keyEmail = require("../config/key");
 const keyUpload = require("../config/key");
 // Load User model
 const User = require("../models/user");
-const Search = require("../models/Search");
+const Search = require("../models/search");
 var Topic = require("../models/topic");
 const { forwardAuthenticated } = require("../config/auth");
 
