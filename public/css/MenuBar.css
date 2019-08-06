@@ -6,7 +6,6 @@
   width: 100%;
   height:50px;
   background: url(../images/ajax-loader.gif) 50% 50% no-repeat;
-  display: none;
 }
 .dim{
   background-color: #000000 ;

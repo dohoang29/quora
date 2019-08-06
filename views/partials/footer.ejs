@@ -1,34 +1,7 @@
 </div>
     </div>
     <% include addQuestion.ejs %>
-    <script>
-    $(function() {
-        $(".submitNoti").click(function() {
-            var noti = [];
-            "<% for(var i =0;i<currentUser.notifi.length;i++){%>"
-            noti.push("<%= currentUser.notifi[i] %>");
-            "<%}%>"
-            console.log(noti);
-            $(".noti-user").empty();
-            $.ajax({
-                type: "POST",
-                 data: {data : noti},
-                 url: window.location.origin + "/noti",
-                 success: function(results) {
-                    if(results != ""){
-                        $(".noti-user").empty();
-                        results.forEach(result=>{
-                            $(".noti-user").append("<li class='urlNoti'> <img class='imageMember' src='"+result.author.imageUrl+"'><a class='dropdown-item noti-content' href='/question/"+result.questionId._id+"'><strong>"+result.author.firstname+"</strong> has added a new answer in <strong>"+result.title+"</strong></a><p>"+moment(result.creationDate).fromNow()+"</p></li><div class='dropdown-divider'></div>");
-                        })
-                    }
-                    else{
-
-                    }
-                 },
-            });
-
-    })});
-    </script>
+    
     <script src="/js/custom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

@@ -29,7 +29,8 @@
           <div class="modal-section-topic">
             <div class="form-group">
               <label for="chooseTopic">Choose topic for your question:</label>
-              <select class="topic-form w-100" name="topic" id="chooseTopic">
+              <select class="topic-form w-100" name="topic" id="chooseTopic" required>
+                  <option value="" disabled> Choose Topic </option>
                 <% topics.forEach((topic)=>{ %>
                 <option value="<%= topic._id %>"> <%= topic.title %></option>
                 <% }) %>
@@ -46,7 +47,7 @@
                 />
                 <a class="user-name-link" href="#"><%= currentUser.firstname.toUpperCase()%> <%= currentUser.lastname.toUpperCase()%></a> askes
                 <span class="form-group">
-                  <select class="topic-form w-20" id="chooseTopic" name="privacy">
+                  <select class="topic-form w-20" id="chooseTopic" name="privacy" required>
                     <option value="public"> Public </option>
                     <option value="limited"> Limited </option>
                     <option value="private"> Private </option>
@@ -60,7 +61,7 @@
                 class="form-control custom-question-input"
                 id="addQuestion"
                 name="question"
-                placeholder='Start your question with "What", "How", "Why", etc.' autofocus
+                placeholder='Start your question with "What", "How", "Why", etc.' autofocus required
                ></textarea>
             </div>
           </div>
