@@ -79,16 +79,16 @@ router.post("/:userId", (req, res) => {
             });
             question.followers.push(userId);
             question.save();
+            var searchQuestion = {
+                name: question.title,
+                question: question._id
+            };
+            Search.create(searchQuestion);
             res.redirect("/question/" + question._id);
         }
-      });
-      var searchQuestion = {
-        name: question.title,
-        question: question._id
-      };
-      Search.create(searchQuestion);
-      res.redirect("/question/"+question._id);
     });
+});
+
 
 router.get("/:questionId/:userId/:status", (req, res) => {
     var questionId = req.params.questionId;
