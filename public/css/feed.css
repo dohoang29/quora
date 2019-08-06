@@ -29,19 +29,11 @@ body {
   padding: 0px 10px;
 }
 
-.urlNoti p {
-  font-size: 8pt;
-  color: #329bff;
-  margin-bottom: 0rem;
-  margin-left: 60px;
-}
 
 .noti-content {
-  display: inline-block;
   font-size: 10pt;
   padding: 0.25rem 0.5rem;
   clear: both;
-  width: 90%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -59,7 +51,8 @@ body {
 .imageMember {
   float: left;
   width: 10%;
-  border-radius: 15px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .area {
@@ -70,7 +63,6 @@ body {
   .area {
     padding-top: 130px;
   }
-  
 }
 
 .topic-image {
@@ -441,7 +433,6 @@ body {
 }
 
 @media (max-width: 600px) {
-  
   .w-20-mobile {
     width: 33.33%;
   }

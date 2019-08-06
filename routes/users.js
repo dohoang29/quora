@@ -173,10 +173,16 @@ router.post("/favorite", function(req, res) {
         return res.redirect("/favorite");
     } else {
         User.findById(req.user.id, (err, user) => {
-            Object.keys(req.body).forEach(key => {
-                user.topic.push(key);
-                user.save();
-            });
+            // Object.keys(req.body).forEach(key => {
+            //     user.topic.push(key);
+            // });
+            for(var i=0;i<Object.keys(req.body).length;i++){
+                user.topic.push(Object.keys(req.body)[i]);
+                Topic.findById(Object.keys(req.body)[i],(err, topic)=>{
+                    topic.followers.push(user._id);
+                    topic.save();
+                })
+            }
             user.isLoginFirst = false;
             user.save().then(user => {
                 res.redirect("/feed");
