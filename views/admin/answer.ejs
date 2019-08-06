@@ -24,12 +24,10 @@
                     <div class="table">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
-
-                                <th>Answer</th>
+                                <th width="50%">Answer</th>
                                 <th>Date Add</th>
                                 <th>Author</th>
-                                <th>Topic</th>
-                                <th>Question</th>
+                                <th  width="20%">Question</th>
                                 <th>Control</th>
 
                             </tr>
@@ -37,22 +35,19 @@
                                 <% answers.forEach((answer)=>{ %>
                                     <tr>
 
-                                        <td>
-                                            <a href="#">
-                                                <%= answer.content%>
-                                            </a>
+                                        <td>                                 
+                                              <%- answer.content%>
                                         </td>
                                         <td>
-                                            <%= answer.dateCreated%>
+                                            <%= moment(answer.dateCreated).fromNow()%>
                                         </td>
                                         <td>
-                                            <%= answer.author%>
+                                            <%= answer.author.lastname%>  <%= answer.author.firstname%>
                                         </td>
                                         <td>
-                                            <%= answer.topic%>
-                                        </td>
-                                        <td>
-                                            <%= answer.question%>
+                                            <span class="more-q">
+                                            <%= answer.question.title%>
+                                        </span>
                                         </td>
                                         <td><a href="#" onclick="return confirm( 'Are you sure to delete this record ?');"><i class="fa fa-remove"></i></a> Or <a href="/admin/ban/answers/<%=answer._id%>"><i class="fa fa-ban"></i></a></td>
                                     </tr>
@@ -85,6 +80,61 @@
             </div>
         </div>
     </div>
+    <script>
+        $( "p" ).addClass( "more");
+        $(document).ready(function() {
+            // Configure/customize these variables.
+            var showChar = 90 // How many characters are shown by default
+            var ellipsestext = "...";
+            var moretext = "more >";
+            var lesstext = "less";
+            
+        
+            $('.more').each(function() {
+                var content = $(this).html();
+         
+                if(content.length > showChar) {
+         
+                    var c = content.substr(0, showChar);
+                    var h = content.substr(showChar, content.length - showChar);
+         
+                    var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+         
+                    $(this).html(html);
+                }
+         
+            });
+            $('.more-q').each(function() {
+                var content = $(this).html();
+         
+                if(content.length > showChar) {
+         
+                    var c = content.substr(0, showChar);
+                    var h = content.substr(showChar, content.length - showChar);
+         
+                    var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+         
+                    $(this).html(html);
+                }
+         
+            });
+           
+            $(".morelink").click(function(){
+                if($(this).hasClass("less")) {
+                    $(this).removeClass("less");
+                    $(this).html(moretext);
+                } else {
+                    $(this).addClass("less");
+                    $(this).html(lesstext);
+                }
+                $(this).parent().prev().toggle();
+                $(this).prev().toggle();
+                return false;
+            });
+            
+        });
+        
+        </script>
     </body>
 
     </html>

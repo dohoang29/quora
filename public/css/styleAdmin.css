@@ -5,7 +5,10 @@
 .head-admin {
     background-color: #d0f1e3 !important;
 }
-
+/* show hide .... */
+.morecontent span {
+    display: none;
+}
 .head-chil {
    display: inline;
 }

@@ -4,8 +4,10 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const key = require('./key');
+const express = require("express");
+const router = express.Router();
+const User = require("../models/user");
 // Load User model
-const User = require('../models/User');
 
 module.exports = function(passport) {
     passport.use(

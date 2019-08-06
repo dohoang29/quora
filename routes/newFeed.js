@@ -4,7 +4,7 @@ const Question = require("../models/question");
 const Answer = require("../models/answer");
 const Topic = require("../models/topic");
 var Notifi = require('../models/notifi');
-const User = require("../models/User");
+const User = require("../models/user");
 const Search = require("../models/Search");
 const { ensureAuthenticated } = require("../config/auth");
 
