@@ -33,7 +33,7 @@
                 <div class="modal-header modal-upload">
                   <p class="modal-title" id="exampleModalCenterTitle">
                     Change Avatar
-                </p>
+                  </p>
                   <button
                     type="button"
                     class="close close-upload"
@@ -65,7 +65,8 @@
                   <div class="box">
                     <div class="options hide">
                       <label hidden> Width</label>
-                      <input hidden
+                      <input
+                        hidden
                         type="number"
                         class="img-w"
                         value="300"
@@ -75,7 +76,8 @@
                     </div>
                     <!-- save btn -->
                     <div class="button-option">
-                      <button  onclick="myFunctionCrop()"
+                      <button
+                        onclick="myFunctionCrop()"
                         id="userResetAvatar"
                         type="submit"
                         class="button-upload save btn-upload btn-danger "
@@ -84,21 +86,26 @@
                         <i class="fa fa-crop" aria-hidden="true"></i>
                       </button>
                       <button
-                      id="userCropAvatar"
-                      class="button-upload save btn-upload btn-danger "
-                    >
-                      Cropped
-                      <i class="fa fa-check" aria-hidden="true"></i>
-                    </button>
-                  
-                      <button onclick="myFunctionUp()"
+                        id="userCropAvatar"
+                        class="button-upload save btn-upload btn-danger "
+                      >
+                        Cropped
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                      </button>
+
+                      <button
+                        onclick="myFunctionUp()"
                         id="submitPicture"
                         class="button-upload up btn-upload btn-danger "
                       >
                         Up/Del
                         <i class="fa fa-times" aria-hidden="true"></i>
                       </button>
-                      <img width="100px" id="loadingAvatar" src="/images/giphy-load.gif">
+                      <img
+                        width="100px"
+                        id="loadingAvatar"
+                        src="/images/giphy-load.gif"
+                      />
                     </div>
                   </div>
                 </div>
@@ -203,6 +210,18 @@
             aria-controls="pills-answer"
             aria-selected="false"
             >Answer</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link section-link"
+            id="pills-following-tab"
+            data-toggle="pill"
+            href="#pills-following"
+            role="tab"
+            aria-controls="pills-following"
+            aria-selected="false"
+            >Following</a
           >
         </li>
       </ul>
@@ -315,7 +334,11 @@
           id="pills-topic"
           role="tabpanel"
           aria-labelledby="pills-topic-tab"
-        >
+        ><%if (user.topic.length == 0){%>
+          <div class="card alert alert-warning" role="alert">
+            You haven't followed any Topic!
+          </div>
+          <%} else {%>
           <div class="row">
             <% user.topic.forEach((topic)=>{%>
             <div class="col-lg-4 col-md-6">
@@ -359,6 +382,7 @@
             </div>
             <% }) %>
           </div>
+          <%}%>
         </div>
 
         <div
@@ -367,10 +391,58 @@
           role="tabpanel"
           aria-labelledby="pills-question-tab"
         >
+        <%if (user.questions.length == 0){%>
+          <div class="card alert alert-warning" role="alert">
+            Add your First Question now!
+          </div>
+          <%} else {%>
           <div class="card-columns">
             <% user.questions.forEach((question)=>{ %>
             <div class="card">
-              <div class="card-body">
+              <div
+                class="card-header <%if(question.isActive == false ){%>text-white bg-danger<%} else {%>text-white bg-success<%}%>"
+              >
+                <%=moment(question.dateCreated).fromNow()%>
+                <a
+                  class="question-more-options"
+                  href="#"
+                  role="button"
+                  id="dropdownMenuOptions<%= question._id %>"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  ><i class="fas fa-ellipsis-h"></i>
+                </a>
+                <div
+                  class="dropdown-menu"
+                  aria-labelledby="dropdownMenuOptions<%= question._id %>"
+                >
+                  <a
+                    class="dropdown-item"
+                    data-toggle="modal"
+                    data-target="#editQuestion"
+                    >Edit</a
+                  >
+                  <%if(question.isActive == true ){%>
+                  <form
+                    action="/question/<%= question._id %>?_method=DELETE"
+                    method="post"
+                  >
+                    <button class="dropdown-item" type="submit">Delete</button>
+                  </form>
+                  <%} else {%>
+                  <form
+                    action="/question/<%=question._id%>/restore?_method=PUT"
+                    method="post"
+                  >
+                    <button class="dropdown-item" type="submit">
+                      Restore
+                    </button>
+                  </form>
+                  <%}%>
+                </div>
+              </div>
+              <div class="card-body answer-overflow">
                 <a href="/question/<%= question._id %>">
                   <p>
                     <strong><%= question.title %></strong>
@@ -378,24 +450,92 @@
                 </a>
               </div>
             </div>
-            <% }) %>
+            <% include partials/editQuestion.ejs %><% }) %>
           </div>
+          <%}%>
         </div>
-
-        <div
-          class="tab-pane fade"
-          id="pills-question"
-          role="tabpanel"
-          aria-labelledby="pills-question-tab"
-        ></div>
         <div
           class="tab-pane fade"
           id="pills-answer"
           role="tabpanel"
           aria-labelledby="pills-answer-tab"
-        ></div>
+        >
+        <%if (user.answer.length == 0){%>
+          <div class="card alert alert-warning" role="alert">
+            Add your First Answer now!
+          </div>
+          <%} else {%>
+          <div class="card-columns">
+            <% user.answer.forEach((answer)=>{ %>
+            <div class="card">
+              <div
+                class="card-header <%if(answer.isActive == false ){%>text-white bg-danger<%} else {%>text-white bg-success<%}%>"
+              >
+                <%=moment(answer.dateCreated).fromNow()%>
+                <a
+                  class="question-more-options"
+                  href="#"
+                  role="button"
+                  id="dropdownMenuOptions<%= answer._id %>"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  ><i class="fas fa-ellipsis-h"></i>
+                </a>
+                <div
+                  class="dropdown-menu"
+                  aria-labelledby="dropdownMenuOptions<%= answer._id %>"
+                >
+                  <a
+                    class="dropdown-item"
+                    data-toggle="modal"
+                    data-target="#editAnswer<%= answer._id %>"
+                    >Edit</a
+                  >
+                  <% if(answer.isActive == true){ %>
+                  <form
+                    action="/answer/<%= answer.question._id %>/<%= answer._id %>?_method=DELETE"
+                    method="post"
+                  >
+                    <button class="dropdown-item" type="submit">Delete</button>
+                  </form>
+                  <% } else {%>
+                  <form
+                    action="/answer/<%= answer.question._id %>/<%= answer._id %>?_method=PUT"
+                    method="post"
+                  >
+                    <button class="dropdown-item" type="submit">Restore</button>
+                  </form>
+                  <%}%>
+                </div>
+              </div>
+              <div class="card-body answer-overflow">
+                <a href="/answer/<%= answer._id %>">
+                  <p>
+                    <strong><%-answer.content%></strong>
+                  </p>
+                </a>
+              </div>
+            </div>
+            <% include partials/editAnswer.ejs %><% }) %>
+          </div>
+          <%}%>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="pills-following"
+          role="tabpanel"
+          aria-labelledby="pills-following-tab"
+        >
+          <%if (user.following.length == 0){%>
+          <div class="card alert alert-warning" role="alert">
+            You haven't followed any Question!
+          </div>
+          <%}%>
+        </div>
       </div>
     </div>
   </main>
 </div>
+
 <% include partials/footer.ejs %>

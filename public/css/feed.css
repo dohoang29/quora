@@ -33,7 +33,7 @@ body {
   font-size: 8pt;
   color: #329bff;
   margin-bottom: 0rem;
-  margin-left: 50px;
+  margin-left: 60px;
 }
 
 .noti-content {
@@ -70,6 +70,7 @@ body {
   .area {
     padding-top: 130px;
   }
+  
 }
 
 .topic-image {
@@ -431,7 +432,7 @@ body {
 }
 @media (max-width: 992px) {
   .show-noti {
-    width:60%;
+    width: 60%;
     transform: translate3d(220px, 43px, 0px) !important;
   }
   .mt-negative-40 {
@@ -440,6 +441,7 @@ body {
 }
 
 @media (max-width: 600px) {
+  
   .w-20-mobile {
     width: 33.33%;
   }

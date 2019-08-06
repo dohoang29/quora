@@ -20,12 +20,6 @@ var answerSchema = new mongoose.Schema({
   dateCreated: { type: Date, default: Date.now },
   dateModified: { type: Date, default: Date.now },
   upVoted: { type: Number, default: 0 },
-  comments: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Comment"
-    }
-  ],
   view: Number,
   isActive: Boolean
 });

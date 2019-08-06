@@ -16,7 +16,6 @@ router.get("/:answerId", ensureAuthenticated, (req, res) => {
             if (err) {
                 console.log(err);
             } else {
-                console.log(answer);
                 res.render("answer", { answer: answer });
             }
         });
@@ -29,6 +28,7 @@ router.put("/:answerId", (req, res) => {
         if (err) {
             console.log(err);
         } else {
+            console.log(content);
             answer.content = content;
             answer.save();
             res.redirect("/answer/" + answer._id);
