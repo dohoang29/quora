@@ -12,11 +12,11 @@
             $(".noti-user").empty();
             $.ajax({
                 type: "POST",
-                async: false,
                  data: {data : noti},
                  url: window.location.origin + "/noti",
                  success: function(results) {
                     if(results != ""){
+                        $(".noti-user").empty();
                         results.forEach(result=>{
                             $(".noti-user").append("<li class='urlNoti'> <img class='imageMember' src='"+result.author.imageUrl+"'><a class='dropdown-item noti-content' href='/question/"+result.questionId._id+"'><strong>"+result.author.firstname+"</strong> has added a new answer in <strong>"+result.title+"</strong></a><p>"+moment(result.creationDate).fromNow()+"</p></li><div class='dropdown-divider'></div>");
                         })
