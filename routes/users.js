@@ -175,6 +175,7 @@ router.post("/favorite", function(req, res) {
         User.findById(req.user.id, (err, user) => {
             Object.keys(req.body).forEach(key => {
                 user.topic.push(key);
+                user.save();
             });
             user.isLoginFirst = false;
             user.save().then(user => {

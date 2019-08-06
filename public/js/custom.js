@@ -349,15 +349,16 @@
           $(".dim").css("display","block");
           $(".dim").animate({opacity: "0.7"});
           $(this).keyup(function search(){
+            $(".searchResult").empty();
             $(".loading").show();
             if($(this).val() != ""){
               var value = $(this).val();
               $.ajax({
                 type: "GET",
                 url: window.location.origin +"/search/"+value,
-                async:false,
                 success: function(results) {
-                  $(".searchResult").empty();
+                if(results != ""){
+                    $(".searchResult").empty();
                   results.forEach((result)=>{
                     if(result.user != null){
                       $(".searchResult").append("<a href='/profile/"+result.user+"' class='search-result-item'><div class='border-bottom p-2 text-dark '><span class='text-muted'>User: </span>"+result.name+" <i class='fas fa-chevron-right text-muted search-arrow'></i></div></a>")
@@ -369,6 +370,10 @@
                       $(".searchResult").append("<a href='/topic/"+result.topic+"' class='search-result-item'><div class='border-bottom p-2 text-dark '><span class='text-muted'>Topic: </span>"+result.name+" <i class='fas fa-chevron-right text-muted search-arrow'></i></div></a>")
                     }
                   })
+                } else {
+                    $(".searchResult").empty();
+                    $(".searchResult").append("<div class='border-bottom p-2  alert-danger  '> We can't find it! Please try another word</div>")
+                }
                 }
               });
             }
