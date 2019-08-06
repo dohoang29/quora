@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <% include partials/headerLogin.ejs %>
-    <div id="logreg-forms">
-        <form class="form-signin" action="/login" method="post">
+    <div id="logreg-forms" onload="document.formEmail.email.focus()">
+        <form class="form-signin" action="/login" method="post" name="formEmail" onsubmit="return ValidateEmail()">
             <% include ./partials/messages %>
                 <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
                 <div class="social-login">
@@ -11,7 +11,7 @@
                 <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" name="email">
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" name="password">
 
-                <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
+                <button class="btn btn-success btn-block" type="submit" onclick="return ValidateEmail(document.formEmail.email);"><i class="fas fa-sign-in-alt"></i> Sign in</button>
                 <a href="/forgot" id="forgot_pswd">Forgot password?</a>
                 <hr>
 

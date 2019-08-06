@@ -1,84 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Q&A</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
     <script src="https://cdn.ckeditor.com/ckeditor5/12.3.1/classic/ckeditor.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.4/cropper.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.4/cropper.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.4/cropper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
-    />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="/css/MenuBar.css" />
     <link rel="stylesheet" type="text/css" href="/css/topicPage.css" />
     <link rel="stylesheet" type="text/css" href="/css/CKEditor.css" />
     <link rel="stylesheet" type="text/css" href="/css/styleProfile.css" />
     <link rel="stylesheet" type="text/css" href="/css/feed.css" />
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="d-none mobile-only-block" id="mobileSearchBox">
-      <div class="outer" id="searchBar">
-        <button id="searchBackBtn" class="btn btn-link p-0 m-0 mbs-icon">
+        <div class="outer" id="searchBar">
+            <button id="searchBackBtn" class="btn btn-link p-0 m-0 mbs-icon">
           <i class="fas fa-chevron-left"
             ><span class="small-hidden"> Back</span></i
           >
         </button>
-        <div class="form-inline search-area-mobile">
-          <input
-            type="text"
-            placeholder="&#xf002;   Search Quora"
-            class="search-box form-control fa"
-          />
+            <div class="form-inline search-area-mobile">
+                <input type="text" placeholder="&#xf002;   Search Quora" class="search-box form-control fa" />
+            </div>
         </div>
-      </div>
-      <div class="container">
-        <div class=" searchResult search-result-mobile">
-          <div class="loading search-result-item"></div>
+        <div class="container">
+            <div class=" searchResult search-result-mobile">
+                <div class="loading search-result-item"></div>
+            </div>
         </div>
-      </div>
     </div>
 
     <div class="sideBar container d-none mobile-only-block" id="sideBarArea">
-      <button id="sideBarCloseBtn" class="sideBarClose my-1 btn btn-link">
+        <button id="sideBarCloseBtn" class="sideBarClose my-1 btn btn-link">
         <i class="fas fa-times"></i>
       </button>
-      <div class="sideBar-image-wrapper my-3">
-        <img class="sideBar-image" src="<%= currentUser.imageUrl%>" />
-      </div>
-      <div class="sideBar-name-wrapper border-bottom">
-        <h1 class="my-3">
-          <%=currentUser.firstname%>
-        </h1>
-      </div>
-      <div class="sideBar-profile-wrapper my-3">
-        <a class="sideBar-profile " href="/profile/<%=currentUser._id%>">
-          <i class="fas fa-address-card mr-1"></i> Manage Profile</a
-        >
-        <% if(currentUser.role == "admin"){%>
-        <a class="sideBar-profile my-3" href="/admin"
-          ><i class="fas fa-user-shield mr-1"></i> Admin</a
+        <div class="sideBar-image-wrapper my-3">
+            <img class="sideBar-image" src="<%= currentUser.imageUrl%>" />
+        </div>
+        <div class="sideBar-name-wrapper border-bottom">
+            <h1 class="my-3">
+                <%=currentUser.firstname%>
+            </h1>
+        </div>
+        <div class="sideBar-profile-wrapper my-3">
+            <a class="sideBar-profile " href="/profile/<%=currentUser._id%>">
+                <i class="fas fa-address-card mr-1"></i> Manage Profile</a>
+            <% if(currentUser.role == "admin"){%>
+                <a class="sideBar-profile my-3" href="/admin"><i class="fas fa-user-shield mr-1"></i> Admin</a
         >
 
         <%}%>
@@ -152,34 +130,28 @@
             >
               <img class="image" src="<%= currentUser.imageUrl%>" />
             </span>
-            <div class="dropdown-menu option-profile">
-              <a class="dropdown-item" href="/profile/<%=currentUser._id%>"
+            <div class="dropdown-menu option-profile p-0">
+              <a class="dropdown-item border-bottom py-2" href="/profile/<%=currentUser._id%>"
                 >Manage Profile</a
               >
-              <div class="dropdown-divider"></div>
               <% if(currentUser.role == "admin"){%>
-              <a class="dropdown-item" href="/admin">Admin</a>
-              <div class="dropdown-divider"></div>
-              <%}%>
-              <a class="dropdown-item" href="/logout">Logout</a>
-            </div>
-            <button
-              class="question-btn shadow-card "
-              data-toggle="modal"
-              data-target="#addQuestionModal"
-            >
+              <a class="dropdown-item border-bottom py-2" href="/admin">Admin</a>
+
+                <%}%>
+                    <a class="dropdown-item py-2" href="/logout">Logout</a>
+        </div>
+        <button class="question-btn shadow-card " data-toggle="modal" data-target="#addQuestionModal">
               <i class="fas fa-plus-square d-none mobile-only-inline mr-1"></i>
               Add <span class="d-none d-md-inline">Question</span>
             </button>
-          </div>
-        </nav>
-      </div>
+    </div>
+    </nav>
+    </div>
     </div>
     <div class="mobile-nav d-none mobile-only-block">
-      <ul class="nav nav-pills justify-content-center">
-        <li class="nav-item">
-          <a href="/feed" class="nav-link section-link"
-            ><i class="far fa-file-alt navi-icon"></i>
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item">
+                <a href="/feed" class="nav-link section-link"><i class="far fa-file-alt navi-icon"></i>
             <span class="nav-tab">Home</span></a
           >
         </li>
@@ -215,4 +187,3 @@
     <div class="container area">
       <div class="row main-feed">
         <div class="notifiAvatar"></div>
-      

@@ -19,25 +19,26 @@
         <p>Please choose at least one topic to login</p>
     </div>
 
-    <div class="container container-all">
+    <div class="container container-all content-topic">
         <% include ./partials/messages %>
             <form action="/favorite" method="post" autocomplete="off">
-                <div class="row content-topic">
+                <div class="row content-topic" style="position: relative;">
                     <% for (var i=0; i < topics.length; i++){ %>
                         <div class="col-xl-2 col-md-3 col-sm-4 col-6 topic">
-                            <div class="thumbnail image-topic">
+                            <div class="thumbnail image-topic ">
                                 <a href="#"><img width="120px" src="<%=topics[i].image%>"/></a>
+                                <div class="custom-control custom-checkbox choose-one">
+                                    <input type="checkbox" class="custom-control-input" id="defaultCheck<%= i+1%>" name="<%=topics[i]._id%>" "
+                  />
+                  <label class="custom-control-label check-choose " for="defaultCheck<%=i +1%>" >
+                                    </label>
+                                </div>
                             </div>
                             <div class="caption">
                                 <h4>
                                     <%= topics[i].title%>
                                 </h4>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultCheck<%= i+1%>" name="<%=topics[i]._id%>" "
-              />
-              <label class="custom-control-label " for="defaultCheck<%=i +1%>" >Choose
-                                    </label>
-                                </div>
+
                             </div>
                         </div>
                         <% } %>

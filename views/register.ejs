@@ -1,6 +1,6 @@
 <% include partials/headerLogin.ejs %>
-    <div id="logreg-forms">
-        <form action="/register" method="post" class="form-signin">
+    <div id="logreg-forms" onload="document.formEmail.email.focus()">
+        <form action="/register" method="post" class="form-signin" name="formEmail" onsubmit="return ValidateEmail()">
             <% include ./partials/messages %>
                 <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign Up</h1>
                 <input width="25px" type="text" id="user-name" class="form-control" placeholder="First name" name="firstname" required="" autofocus="">
@@ -9,7 +9,7 @@
                 <input type="password" id="user-pass" class="form-control" placeholder="Password must be at least 6 characters" required autofocus="" name="password">
 
                 <input type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" required autofocus="" name="password2">
-                <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
+                <button class="btn btn-primary btn-block" type="submit" onclick="return ValidateEmail(document.formEmail.email);"><i class="fas fa-user-plus"></i> Sign Up</button>
                 <p class="havecount">Have an account?</p><a style="color:dodgerblue " href="/login"><strong>Login!</strong></a>
         </form>
     </div>
