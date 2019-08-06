@@ -1,10 +1,10 @@
 const express = require("express");
 var router = express.Router();
 const mongoose = require("mongoose");
-const User = require("../models/User");
+const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
-const Search = require("../models/Search");
+const Search = require("../models/search");
 var Question = require("../models/question");
 var Answer = require("../models/answer");
 router.get("/", isLoggedInAdmin, (req, res) => {
@@ -50,15 +50,34 @@ router.get("/ban/questions/:id", (req, res) => {
 });
 //show answer
 router.get("/answers", isLoggedInAdmin, (req, res) => {
-    Answer.find((err, answers) => {
+    Answer.find().populate("author").populate("topic").populate("question").exec((err, answers) => {
         if (!err) {
             res.render("admin/answer", { answers: answers });
 
         } else {
             console.log(err);
         }
+    })
+});
+router.get("/ban/answers/:id", (req, res) => {
+    Answer.findById(req.params.id, (err, answer) => {
+        if (!err) {
+            if (answer.isActive === true) {
+                answer.isActive = false; 
+                answer.save();
+                req.flash("success_msg", "You are ban an answer success");
+                res.redirect("/admin/answers");
+            } else {
+                answer.isActive = true;
+                answer.save();
+                req.flash("success_msg", "You are unban an answers success");
+                res.redirect("/admin/answers");
+            }
+        } else {
+            console.log("Error in answer ban :" + err);
+        }
     });
-})
+});
 router.get("/add", (req, res) => {
     res.render("list");
 });

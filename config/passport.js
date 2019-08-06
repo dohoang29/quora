@@ -4,7 +4,11 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const key = require('./key');
-const User = require('../models/User');
+const express = require("express");
+const router = express.Router();
+const User = require("../models/user");
+// Load User model
+
 module.exports = function(passport) {
     passport.use(
         new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {

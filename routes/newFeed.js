@@ -4,8 +4,8 @@ const Question = require("../models/question");
 const Answer = require("../models/answer");
 const Topic = require("../models/topic");
 var Notifi = require('../models/notifi');
-const User = require("../models/User");
-const Search = require("../models/Search");
+const User = require("../models/user");
+const Search = require("../models/search");
 const { ensureAuthenticated } = require("../config/auth");
 
 router.get("/", ensureAuthenticated, (req, res) => {

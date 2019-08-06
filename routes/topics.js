@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Topic = require("../models/topic");
-const User = require("../models/User");
+const User = require("../models/user");
 const { ensureAuthenticated } = require("../config/auth");
 
 router.get("/:id", ensureAuthenticated, (req, res) => {
