@@ -55,7 +55,12 @@
     padding: 10px;
     margin: auto;
 }
-
+.more-ans{
+    display: block;
+    background-color: lightblue;
+  height: 70px;
+  overflow-y: scroll;
+}
 .form-control {
     position: relative;
     box-sizing: border-box;

@@ -24,7 +24,7 @@
                     <div class="table">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
-                                <th width="50%">Answer</th>
+                                <th width="40%">Answer</th>
                                 <th>Date Add</th>
                                 <th>Author</th>
                                 <th width="20%">Question</th>
@@ -35,7 +35,7 @@
                                 <% answers.forEach((answer)=>{ %>
                                     <tr>
 
-                                        <td>
+                                        <td class="more-ans">
                                             <%- answer.content%>
                                         </td>
                                         <td>
@@ -45,10 +45,9 @@
                                             <%= answer.author.lastname%>
                                                 <%= answer.author.firstname%>
                                         </td>
-                                        <td>
-                                            <span class="more-q">
+                                        <td class="more">
+                                            
                                             <%= answer.question.title%>
-                                        </span>
                                         </td>
                                         <td><a href="#" onclick="return confirm( 'Are you sure to delete this record ?');"><i class="fa fa-remove"></i></a> Or <a href="/admin/ban/answers/<%=answer._id%>"><i class="fa fa-ban"></i></a></td>
                                     </tr>
@@ -81,7 +80,7 @@
             </div>
         </div>
     </div>
-    <script>
+    <!-- <script>
         $("p").addClass("more");
         $(document).ready(function() {
             // Configure/customize these variables.
@@ -134,7 +133,7 @@
             });
 
         });
-    </script>
+    </script> -->
     </body>
 
     </html>

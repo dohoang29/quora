@@ -30,7 +30,7 @@
             <div class="form-group">
               <label for="chooseTopic">Choose topic for your question:</label>
               <select class="topic-form w-100" name="topic" id="chooseTopic" required>
-                  <option value="" disabled> Choose Topic </option>
+                  <option value=""  selected disabled> Choose Topic </option>
                 <% topics.forEach((topic)=>{ %>
                 <option value="<%= topic._id %>"> <%= topic.title %></option>
                 <% }) %>
@@ -68,7 +68,7 @@
           <div class="modal-section-link">
             <textarea
               type="url"
-              class="form-control fa custom-link-input"
+              class="form-control fa custom-link-input test-link"
               id="addLink"
               name="link"
               style="resize:none;"
@@ -84,7 +84,7 @@
           >
             Cancel
           </button>
-          <button type="submit" class="btn btn-primary add-question-button">
+          <button type="submit"  onclick="return ValidURL(document.link);"class="btn btn-primary add-question-button">
             Add Question
           </button>
         </div>
@@ -92,3 +92,15 @@
     </div>
   </div>
 </div>
+<script>
+function ValidURL(link) {
+    var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
+    if(!link.value.match(regex)) {
+      alert("Please enter valid URL.");
+      return false;
+    } else {
+      return true;
+    }
+  }</script>
+
+}
