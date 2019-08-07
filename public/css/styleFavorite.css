@@ -4,14 +4,26 @@ body {
 }
 
 .content-topic {
-    margin-top: -8px;
+    margin-top: 50px;
     background-color: #fff;
 }
 
 .container-all {
+    margin-top:50px;
     background-color: #fff;
     max-width: 700px;
     border: black;
+}
+
+.instruc {
+    width: 100%;
+    z-index: 9999;
+    font-weight: bold;
+    position: fixed;
+    top: 15px;
+    font-size: 1.25rem;
+    color: #b92b27;
+    text-align: center;
 }
 
 .check-choose {
@@ -31,13 +43,12 @@ body {
 }
 
 .next-feed {
+    font-size: 10pt;
     border: 0;
     background-color: #b92b27;
     color: #fff;
     border-radius: 3px;
     float: right;
-    margin-bottom: 10px;
-    margin-right: 3%;
 }
 
 img {
