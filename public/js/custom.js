@@ -1,5 +1,311 @@
 $(function() {
-    $('.lazy').Lazy();
+  $.getDocHeight = function() {
+    return Math.max(
+      $(document).height(),
+      $(window).height(),
+      /* For opera: */
+      document.documentElement.clientHeight
+    );
+  };
+  $(window).scroll(function() {
+    if ($(window).scrollTop() + $(window).height() == $.getDocHeight()) {
+      var endValue = $("#showQuestion").attr("value");
+      var currentUser = $("#showQuestion").attr("userId");
+      var html = "";
+      console.log(endValue);
+      $("#showQuestion").append(
+        "<div class='loading search-result-item'></div>"
+      );
+    
+      if (endValue != undefined) {
+        $.ajax({
+          type: "GET",
+          url: window.location.origin + "/feed/" + endValue,
+          async: false,
+          success: function(data) {
+            console.log(data.questions);
+            if (data != null) {
+              if (data.questions != null) {
+                data.questions.forEach(question => {
+                  html = "";
+                  if (question.isActive == true) {
+                    var flag = (flagFollow = false);
+                    html +=
+                      "<div class='card-body question-card'><div class='card-subtitle text-muted'><p class='question-topic'>";
+                    question.topic.forEach(topic => {
+                      html +=
+                        "Question added ·" +
+                        "<a class='number-answer-link' href='/topic/" +
+                        topic._id +
+                        "'>" +
+                        topic.title +
+                        "</a>";
+                    });
+                    html +=
+                      "</p>" +
+                      "</div>" +
+                      "<a href='/question/" +
+                      question._id +
+                      "'>" +
+                      "<h3 class='question-title mt-1'>" +
+                      "<strong>" +
+                      question.title +
+                      "</strong>" +
+                      "</h3>" +
+                      "</a>" +
+                      "<div class='question-more-info'>" +
+                      "<p>" +
+                      "<strong>" +
+                      "<a class='number-answer-link' href='/question/" +
+                      question._id +
+                      "'>";
+                    if (question.answers == null) {
+                      html += "0 Answers ";
+                    } else {
+                      html += question.answers.length.toString() + " Answers ";
+                    }
+                    html +=
+                      "</a>" +
+                      "</strong>" +
+                      "· Created " +
+                      moment(question.dateCreated).fromNow() +
+                      "</p>" +
+                      "</div>" +
+                      "<div class='upvote-follow'>" +
+                      "Upvote · " +
+                      "<span id='votenumber" +
+                      question._id +
+                      "' class='mr-3'>";
+                    if (question.upVoted == null) {
+                      html += "0";
+                    } else {
+                      html += question.upVoted.length.toString();
+                      question.upVoted.forEach(vote => {
+                        if (currentUser == vote) {
+                          flag = true;
+                        }
+                      });
+                    }
+                    html +=
+                      "</span>" +
+                      "Follow · " +
+                      "<span id='follownumber" +
+                      question._id +
+                      "' class='mr-3'>";
+
+                    if (question.followers == null) {
+                      html += "0";
+                    } else {
+                      html += question.followers.length.toString();
+                      question.followers.forEach(follower => {
+                        if (currentUser == follower) {
+                          flagFollow = true;
+                        }
+                      });
+                    }
+                    html +=
+                      "</span>" +
+                      "</div>" +
+                      "<div class='answer-btn-wrapper'>" +
+                      "<div class='clearfix mt-1'>" +
+                      "<button " +
+                      "data-toggle='collapse' " +
+                      "href='#collapse" +
+                      question._id +
+                      "' " +
+                      "role='button'" +
+                      "aria-expanded='false'" +
+                      "aria-controls='collapse" +
+                      question._id +
+                      "'" +
+                      "class='answer-button mr-2 btn-link btn'" +
+                      ">" +
+                      "<span class='fa fa-edit answer-icon'></span>" +
+                      "<strong>Answer</strong>" +
+                      "</button>" +
+                      " <span id='" +
+                      currentUser +
+                      "' class='voteArea'>" +
+                      "<button " +
+                      "id='" +
+                      question._id +
+                      "' " +
+                      "value=";
+                    if (flag == false) {
+                      html += "'Upvote'";
+                    } else {
+                      html += "'Downvote'";
+                    }
+                    html +=
+                      " class='answer-button mr-2 btn-link btn likebtn'>" +
+                      "<span " +
+                      "class=";
+                    if (flag == false) {
+                      html += "'fas fa-thumbs-up answer-icon'";
+                    } else {
+                      html += "'fas fa-thumbs-down'";
+                    }
+                    html += " ></span><strong>";
+                    if (flag == false) {
+                      html += "Upvote";
+                    } else {
+                      html += "Downvote";
+                    }
+                    html +=
+                      "</strong>" +
+                      " </button>" +
+                      " <button " +
+                      "id ='follow" +
+                      question._id +
+                      "' " +
+                      "class='answer-button mr-2 btn-link btn' " +
+                      "value=";
+                    if (flagFollow == false) {
+                      html += "'Follow'";
+                    } else {
+                      html += "'Unfollow'";
+                    }
+                    html += "><span class=";
+                    if (flagFollow == false) {
+                      html += "'fa fa-plus-circle answer-icon'";
+                    } else {
+                      html += "'fas fa-times-circle'";
+                    }
+                    html += "></span><strong>";
+                    if (flagFollow == false) {
+                      html += "Follow";
+                    } else {
+                      html += "Unfollow";
+                    }
+                    html +=
+                      "</strong>" +
+                      "</button>" +
+                      "</span>" +
+                      "<a " +
+                      "class='question-more-options'" +
+                      "href='#'" +
+                      "role='button'" +
+                      "id='dropdownMenuOptions" +
+                      question._id +
+                      "'" +
+                      "data-toggle='dropdown'" +
+                      "aria-haspopup='true'" +
+                      "aria-expanded='false'" +
+                      "><i class='fas fa-ellipsis-h'></i>" +
+                      "</a>" +
+                      "<div " +
+                      "class='dropdown-menu'" +
+                      "aria-labelledby='dropdownMenuOptions" +
+                      question._id +
+                      "'" +
+                      ">";
+                    if (currentUser == question.author) {
+                      html +=
+                        "<a " +
+                        " class='dropdown-item'" +
+                        "data-toggle='modal'" +
+                        "data-target='#editQuestion'" +
+                        " >Edit</a" +
+                        ">" +
+                        "<form " +
+                        "action='/question/'" +
+                        question._id +
+                        "?_method=DELETE'" +
+                        "method='post'" +
+                        ">" +
+                        "<button class='dropdown-item' type='submit'>Delete</button>" +
+                        "</form>";
+                    }
+                    html +=
+                      "<a class='dropdown-item' href='#'>Report</a>" +
+                      "</div>" +
+                      "</div>" +
+                      "</div>" +
+                      "<div class='collapse' id='collapse" +
+                      question._id +
+                      "'>" +
+                      "<div class='card w-100 mt-2'>" +
+                      "<div class='card-header'>" +
+                      " <img " +
+                      "src='/images/IMG_20150427_214234.jpg'" +
+                      " alt='avatar'" +
+                      "class='add-ans-image'" +
+                      " />" +
+                      "<div class='user-info'>" +
+                      "<a class='user-name-link' href='/profile/" +
+                      currentUser +
+                      "'" +
+                      " >" +
+                      $("#userFullName").text() +
+                      "</a" +
+                      " >, knows";
+                    question.topic.forEach(topic => {
+                      html +=
+                        "<a class='ans-topic-link' href='/topic/" +
+                        topic._id +
+                        "'>" +
+                        topic.title +
+                        "</a>";
+                    });
+                    html +=
+                      "</div>" +
+                      "</div>" +
+                      "<form " +
+                      "class='ansForm'" +
+                      "method='POST'" +
+                      "action='/answer/";
+                    question.topic.forEach(topic => {
+                      html += topic._id + "/";
+                    });
+                    html +=
+                      question._id +
+                      "/" +
+                      currentUser +
+                      "'>" +
+                      "<div class='add-ans-card'>" +
+                      "<textarea " +
+                      " name='content'" +
+                      "class='ansEditor'" +
+                      "placeholder='Write your answer'" +
+                      "></textarea>" +
+                      "</div>" +
+                      "<div class='card-footer text-muted'>" +
+                      "<button type='submit' class='btn btn-primary add-question-button'>" +
+                      "Add Answer" +
+                      "</button>" +
+                      "<button " +
+                      " type='button'" +
+                      "class='btn btn-secondary cancel-button'" +
+                      "data-toggle='collapse'" +
+                      " href='#collapse" +
+                      question._id +
+                      "'" +
+                      " role='button'" +
+                      " aria-expanded='false'" +
+                      "aria-controls='collapse" +
+                      question._id +
+                      "'" +
+                      ">" +
+                      "Cancel" +
+                      "</button>" +
+                      " </div>" +
+                      "</form>" +
+                      "</div>" +
+                      " </div>" +
+                      " </div>";
+                  }
+                  $("#showQuestion").attr("value",question.dateCreated);
+                  $("#showQuestion").append(html);
+                  
+                });
+              }
+            }
+            $(".loading").remove();
+          }
+        });
+      }
+    }
+  });
 });
 $(function() {
   $(".topicFollowArea")
@@ -45,7 +351,7 @@ $(function() {
 $(function() {
   $(".voteArea")
     .children()
-    .click(function() {
+    .on("click", function() {
       var questionId = $(this)
         .parent()
         .children()

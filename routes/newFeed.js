@@ -6,15 +6,19 @@ const Topic = require("../models/topic");
 var Notifi = require('../models/notifi');
 const User = require("../models/user");
 const Search = require("../models/search");
+const moment = require("moment");
 const { ensureAuthenticated } = require("../config/auth");
 
 router.get("/", ensureAuthenticated, (req, res) => {
     var publicQuestion = [];
     var privateQuestion = [];
     var limitedQuestion = [];
+    var endValue = null;
     Question.find()
         .sort({ dateCreated: -1 })
         .populate("topic")
+        .populate("author")
+        .limit(5)
         .exec((err, questions) => {
             if (err) {
                 console.log(err);
@@ -23,6 +27,7 @@ router.get("/", ensureAuthenticated, (req, res) => {
                     // console.log(question.privacy);
                     if (question.privacy == "public") {
                         publicQuestion.push(question);
+                        endValue = question.dateCreated;
                     }
                 });
                 Answer.find()
@@ -35,27 +40,71 @@ router.get("/", ensureAuthenticated, (req, res) => {
                         } else {
                             res.render("feed", {
                                 questions: publicQuestion,
-                                answers: answers
+                                answers: answers,
+                                endValue: endValue
                             });
                         }
                     });
             }
         });
 });
-
+router.get("/:endques", ensureAuthenticated, (req, res) => {
+    var publicQuestion = [];
+    var privateQuestion = [];
+    var limitedQuestion = [];
+    var time = req.params.endques * 1;
+    var endValue = null;
+    console.log(time);
+    Question.find({dateCreated: { $lt: time }})
+        .sort({ dateCreated: -1 })
+        .populate("topic")
+        .populate("author")
+        .limit(5)
+        .exec((err, questions) => {
+            if (err) {
+                console.log(err);
+            } else {
+                questions.forEach(question => {
+                    // console.log(question.privacy);
+                    if (question.privacy == "public") {
+                        publicQuestion.push(question);
+                        endValue = question.dateCreated;
+                    }
+                });
+                Answer.find()
+                    .populate("topic")
+                    .sort({ dateCreated: -1 })
+                    .populate("question")
+                    .exec((err, answers) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            res.send({
+                                questions: publicQuestion,
+                                answers: answers,
+                                endValue: endValue
+                            });
+                        }
+                    });
+            }
+        });
+});
 router.post("/:userId", (req, res) => {
     var userId = req.params.userId;
     var topic = req.body.topic;
     var privacy = req.body.privacy;
     var question = req.body.question;
     var link = req.body.link;
+    var time = new Date().getTime();
     var newQuestion = {
         topic: topic,
         author: userId,
         title: question,
         privacy: privacy,
         url: link,
-        isActive: true
+        isActive: true,
+        dateCreated: time,
+        dateModified: time
     };
     Question.create(newQuestion, (err, question) => {
         if (err) {

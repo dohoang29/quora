@@ -90,12 +90,15 @@ router.post("/:topicId/:questionId/:userId", (req, res) => {
     var userId = req.params.userId;
     var content = req.body.content;
     var isActive = true;
+    var time = new Date().getTime();
     var newAnswer = {
         topic: topicId,
         question: questionId,
         content: content,
         author: userId,
-        isActive: isActive
+        isActive: isActive,
+        dateCreated: time,
+        dateModified: time
     };
     Answer.create(newAnswer, (err, answer) => {
         if (err) {

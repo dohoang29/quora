@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-
 var questionSchema = new mongoose.Schema({
   topic: [
     {
@@ -14,8 +13,8 @@ var questionSchema = new mongoose.Schema({
   url: String,
   title: String,
   privacy: String,
-  dateCreated: { type: Date, default: Date.now },
-  dateModified: { type: Date, default: Date.now },
+  dateCreated: { type: Number },
+  dateModified: { type: Number  },
   answers: [
     {
       type: mongoose.Schema.Types.ObjectId,

@@ -11,7 +11,7 @@ var notiSchema = mongoose.Schema({
     },
     title: String,
     creationDate: {
-        type: 'Date',
+        type: Date,
         default: Date.now
     },
     isRead: false,
