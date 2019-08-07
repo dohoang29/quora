@@ -23,8 +23,10 @@
     </div>
 
     <div class="container container-all content-topic">
-        <% include ./partials/messages %>
-            <form action="/favorite" method="post" autocomplete="off">
+        <div style="margin-top: 20px;">
+                <% include ./partials/messages %>
+        </div>
+        <form action="/favorite" method="post" autocomplete="off">
                 <div class="row content-topic" style="position: relative;">
                     <% for (var i=0; i < topics.length; i++){ %>
                         <div class="col-xl-2 col-md-3 col-sm-4 col-6 topic">
