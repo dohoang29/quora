@@ -43,13 +43,12 @@ body {
 }
 
 .next-feed {
+    font-size: 10pt;
     border: 0;
     background-color: #b92b27;
     color: #fff;
     border-radius: 3px;
     float: right;
-    margin-bottom: 10px;
-    margin-right: 3%;
 }
 
 img {
