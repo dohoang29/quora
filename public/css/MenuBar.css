@@ -157,6 +157,7 @@
     height: 35px;
     width: auto;
     border-radius: 50%;
+    cursor: pointer;
     -webkit-appearance: none !important;
 }
 

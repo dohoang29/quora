@@ -51,7 +51,12 @@
   font-size: 11pt;
   color: #aaa;
 }
-
+#userResetAvatar{
+  display: none;
+}
+#upPicture{
+  display: none;
+}
 .stats {
   padding: 0;
   display: inline-block;
@@ -73,9 +78,16 @@
   font-size: 10pt;
   color: #007bff;
 }
-
+.box-reset{
+    float: left;
+    width: 45%;
+    padding: 0px;
+  
+}
 #userResetpassword {
-  display: none;
+  display: inline-block;
+  /* max-width: 500px; */
+  margin-left: 20px;
 }
 
 .user-profile {
@@ -91,11 +103,12 @@
 #user-name {
   margin-bottom: 10px;
 }
-
+.cur-password{
+  margin-bottom: 10px;
+}
 .first-name {
   margin-bottom: 1px;
 }
-
 #user-name2 {
   margin-bottom: 10px;
 }
@@ -116,7 +129,9 @@
   background-color: #007bff !important;
   color: #fff !important;
 }
-
+.user-reset{
+  margin-top:10px;
+}
 .form-avatar {
   top: 60px;
 }

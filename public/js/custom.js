@@ -156,6 +156,15 @@ function myFunctionReset() {
     x.style.display = "none";
   }
 }
+//
+function functionUp(){
+  var x = document.getElementById("userResetAvatar");
+  var y= document.getElementById("submitPicture");
+  var z = document.getElementById("upPicture");
+  x.style.display = "inline";
+  y.style.display = "none";
+  z.style.display = "inline";
+}
 function myFunctionCrop() {
   var z = document.getElementById("userResetAvatar");
   var t = document.getElementById("userCropAvatar");

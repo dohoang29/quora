@@ -12,46 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/styleAdmin.css" />
-    <script>
-            $(document).ready(function() {
-                // Configure/customize these variables.
-                var showChar = 100;  // How many characters are shown by default
-                var ellipsestext = "...";
-                var moretext = "more >";
-                var lesstext = "less";
-                
-            
-                $('.more').each(function() {
-                    var content = $(this).html();
-             
-                    if(content.length > showChar) {
-             
-                        var c = content.substr(0, showChar);
-                        var h = content.substr(showChar, content.length - showChar);
-             
-                        var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
-             
-                        $(this).html(html);
-                    }
-             
-                });
-               
-                $(".morelink").click(function(){
-                    if($(this).hasClass("less")) {
-                        $(this).removeClass("less");
-                        $(this).html(moretext);
-                    } else {
-                        $(this).addClass("less");
-                        $(this).html(lesstext);
-                    }
-                    $(this).parent().prev().toggle();
-                    $(this).prev().toggle();
-                    return false;
-                });
-                
-            });
-            
-            </script>
+   
 </head>
 
 <body>

@@ -9,6 +9,14 @@
 .morecontent span {
     display: none;
 }
+.search-admin{
+    background-color: #007bff !important;
+}
+.b-search{
+    border: 0;
+    border-radius: 2px;
+    padding: 5px;
+}
 .head-chil {
    display: inline;
 }

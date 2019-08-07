@@ -45,7 +45,7 @@
                 </div>
                 <div class="modal-body">
                   <div class="box">
-                    <input type="file" id="file-input" />
+                    <input  onclick="functionUp()" type="file" id="file-input" />
                   </div>
                   <div class="box-2">
                     <div class="result"></div>
@@ -94,11 +94,19 @@
                       </button>
 
                       <button
+                      onclick="myFunctionUp()"
+                      id="upPicture"
+                      class="button-upload up btn-upload btn-danger "
+                    >
+                      Upload
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                      <button
                         onclick="myFunctionUp()"
                         id="submitPicture"
                         class="button-upload up btn-upload btn-danger "
                       >
-                        Up/Del
+                        Delete
                         <i class="fa fa-times" aria-hidden="true"></i>
                       </button>
                       <img
@@ -225,18 +233,18 @@
           >
         </li>
       </ul>
-      <div class="tab-content" id="pills-tabContent">
+      <div class="tab-content container" id="pills-tabContent">
         <div
           class="tab-pane fade"
           id="pills-profile"
           role="tabpanel"
           aria-labelledby="pills-profile-tab"
         >
-          <div id="userProfile">
+          <div id="userProfile" class="box-reset">
             <form
               action="/profile/information/<%= user._id%>"
               method="post"
-              class="form-signup"
+              class="form-signup "
               autocomplete="off"
             >
               <label class="first-name"><strong>First Name</strong></label>
@@ -270,20 +278,15 @@
 
               <div class="form-group option-reset">
                 <button type="submit" class="btn user-update ">
-                  <i class="fa fa-database"></i> Update
+                  <i class="fa fa-user"></i> Update
                 </button>
                 <!-- <a href='#' id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a> -->
               </div>
             </form>
-            <button
-              type="menu"
-              onclick="myFunctionReset()"
-              class="btn  btn-link p-0 "
-            >
-              <i class="fa fa-key"></i> Change password
-            </button>
           </div>
-          <div id="userResetpassword">
+         
+          
+          <div id="userResetpassword" class="box-reset">
             <form
               action="/profile/reset/<%= user._id%>"
               method="post"
@@ -296,15 +299,15 @@
               <input
                 width="25px"
                 type="password"
-                class="form-control"
-                placeholder="*****************************"
+                class="form-control cur-password"
+                placeholder="Enter current password!"
                 name="password"
               />
               <label class="last-name"><strong>New Password</strong></label>
               <input
                 width="25px"
                 type="password"
-                class="form-control"
+                class="form-control cur-password"
                 placeholder=""
                 name="newPassword"
               />
@@ -312,21 +315,19 @@
               <input
                 type="password"
                 id="user-email"
-                class="form-control"
+                class="form-control cur-password"
                 placeholder=""
                 name="newPassword2"
               />
 
               <div class="form-group mb-0">
-                <button type="submit" class="btn user-update ">
-                  <i class="fa fa-database"></i>Update
+                <button type="submit" class="btn user-update user-reset ">
+                  <i class="fa fa-key"></i> Reset
                 </button>
                 <!-- <a href='#' id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a> -->
               </div>
             </form>
-            <button onclick="backToProfile()" class="btn btn-link p-0 mt-1 ">
-              <i class="fas fa-chevron-left"></i> Back
-            </button>
+            
           </div>
         </div>
         <div
@@ -334,7 +335,8 @@
           id="pills-topic"
           role="tabpanel"
           aria-labelledby="pills-topic-tab"
-        ><%if (user.topic.length == 0){%>
+        >
+          <%if (user.topic.length == 0){%>
           <div class="card alert alert-warning" role="alert">
             You haven't followed any Topic!
           </div>
@@ -391,7 +393,7 @@
           role="tabpanel"
           aria-labelledby="pills-question-tab"
         >
-        <%if (user.questions.length == 0){%>
+          <%if (user.questions.length == 0){%>
           <div class="card alert alert-warning" role="alert">
             Add your First Question now!
           </div>
@@ -460,7 +462,7 @@
           role="tabpanel"
           aria-labelledby="pills-answer-tab"
         >
-        <%if (user.answer.length == 0){%>
+          <%if (user.answer.length == 0){%>
           <div class="card alert alert-warning" role="alert">
             Add your First Answer now!
           </div>
