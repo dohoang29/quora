@@ -157,7 +157,7 @@
           <i class="fa fa-tumblr-square" aria-hidden="true"></i>
         </div>
 -->
-
+    <% if (currentUser.id == user.id  ){%>
     <div class=" mt-3">
       <ul
         class="nav nav-pills mb-3 border-bottom profile-infor-area"
@@ -334,7 +334,8 @@
           id="pills-topic"
           role="tabpanel"
           aria-labelledby="pills-topic-tab"
-        ><%if (user.topic.length == 0){%>
+        >
+          <%if (user.topic.length == 0){%>
           <div class="card alert alert-warning" role="alert">
             You haven't followed any Topic!
           </div>
@@ -391,7 +392,7 @@
           role="tabpanel"
           aria-labelledby="pills-question-tab"
         >
-        <%if (user.questions.length == 0){%>
+          <%if (user.questions.length == 0){%>
           <div class="card alert alert-warning" role="alert">
             Add your First Question now!
           </div>
@@ -460,7 +461,7 @@
           role="tabpanel"
           aria-labelledby="pills-answer-tab"
         >
-        <%if (user.answer.length == 0){%>
+          <%if (user.answer.length == 0){%>
           <div class="card alert alert-warning" role="alert">
             Add your First Answer now!
           </div>
@@ -531,10 +532,34 @@
           <div class="card alert alert-warning" role="alert">
             You haven't followed any Question!
           </div>
+          <%} else {%>
+          <div class="card-columns following-columns">
+            <% user.following.forEach((question)=>{%>
+            <div class="card">
+              <div class="card-header">
+                <form
+                  action="/profile/<%=user._id%>/<%=question._id%>?_method=PUT%>"
+                  method="post"
+                >
+                  <button type="submit" class="answer-button mr-2 btn-link btn">
+                    <span class="fas fa-times-circle" ></span>
+                    <strong>Unfollow</strong>
+                  </button>
+                </form>
+              </div>
+              <div class="card-body">
+                <a href="/question/<%=question._id%>">
+                  <strong><%= question.title%></strong>
+                </a>
+              </div>
+            </div>
+            <%})%>
+          </div>
           <%}%>
         </div>
       </div>
     </div>
+    <%}%>
   </main>
 </div>
 

@@ -12,6 +12,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.4/cropper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="/css/MenuBar.css" />
@@ -87,15 +89,13 @@
                   <span class="nav-tab">Answer</span></a
                 >
               </li>
-              <li  data-toggle="dropdown" class="nav-item submitNoti w-4" value="<%= currentUser._id%>">
-                <a href="#" class="nav-link section-link"
+              <li  class="nav-item w-4">
+                <a  data-toggle="dropdown" id="notiDropdown"  aria-haspopup="true" aria-expanded="false" value="<%= currentUser._id%>" class="nav-link section-link submitNoti"
                   ><i class="fas fa-bell navi-icon"></i>
                   <span class="nav-tab">Notifications</span></a
                 >
-                <div class="dropdown-menu show-noti p-1">
-                  <div class="noti-user p-0">
-                      
-                  </div>
+                <div class="dropdown-menu show-noti noti-user p-1" aria-labelledby="notiDropdown">
+
                 </div>
               </li>
             </ul>
@@ -161,15 +161,13 @@
             <span class="nav-tab">Answer</span></a
           >
         </li>
-        <li data-toggle="dropdown" class="nav-item submitNoti">
-            <a href="#" class="nav-link section-link"
+        <li  class="nav-item ">
+            <a id="mobileNotiDropdown" aria-haspopup="true" aria-expanded="false" value="<%= currentUser._id%>"  class="nav-link section-link submitNoti" data-toggle="dropdown"
               ><i class="fas fa-bell navi-icon"></i>
               <span class="nav-tab">Notifications</span></a
             >
-            <div class="dropdown-menu show-noti">
-              <ul class="noti-user">
-                
-              </ul>
+            <div class="dropdown-menu show-noti noti-user" aria-labelledby="mobileNotiDropdown">
+
             </div>
         <li class="nav-item">
           <button

@@ -41,7 +41,7 @@
     </div>
     <% if (questions == null){}else{ %> <% questions.forEach((question)=>{
     if(question.isActive == true){ var flag = flagFollow = false;%>
-    <div class="card-body question-card">
+    <div class="card-body question-card lazy">
       <div class="card-subtitle text-muted">
         <p class="question-topic">
           <% question.topic.forEach((topic)=>{ %> Question added ·

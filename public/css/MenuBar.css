@@ -92,7 +92,7 @@
     padding: 0%;
     height: 43px;
     margin-left: 20px;
-    color: #666;
+    color: #666 !important;
 }
 
 .search-area {
@@ -144,6 +144,7 @@
 }
 
 .nav-active {
+    background-color: transparent !important;
     color: #b92b27 !important;
     border-bottom: 2px solid #b92b27;
     border-radius: 0% !important;

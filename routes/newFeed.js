@@ -74,6 +74,7 @@ router.post("/:userId", (req, res) => {
                     console.log(err);
                 } else {
                     user.questions.push(question._id);
+                    user.following.push(question._id);
                     user.save();
                 }
             });

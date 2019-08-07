@@ -1,4 +1,7 @@
 $(function() {
+    $('.lazy').Lazy();
+});
+$(function() {
   $(".topicFollowArea")
     .children()
     .click(function() {
