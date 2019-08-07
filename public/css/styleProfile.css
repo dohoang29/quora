@@ -198,6 +198,9 @@
 .card-columns {
   column-count: 4;
 }
+.following-columns{
+  column-count: 3;
+}
 @media (max-width: 990px) {
   .user-nav {
     display: none;
@@ -233,6 +236,9 @@
   .card-columns {
     column-count: 3;
   }
+  .following-columns{
+    column-count: 2;
+  }
 }
 
 @media (max-width: 576px) {
@@ -244,6 +250,9 @@
 @media (max-width: 768px) {
   .card-columns {
     column-count: 2;
+  }
+  .following-columns{
+    column-count: 1;
   }
 }
 

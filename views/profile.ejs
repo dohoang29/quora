@@ -165,7 +165,7 @@
           <i class="fa fa-tumblr-square" aria-hidden="true"></i>
         </div>
 -->
-
+    <% if (currentUser.id == user.id  ){%>
     <div class=" mt-3">
       <ul
         class="nav nav-pills mb-3 border-bottom profile-infor-area"
@@ -533,10 +533,34 @@
           <div class="card alert alert-warning" role="alert">
             You haven't followed any Question!
           </div>
+          <%} else {%>
+          <div class="card-columns following-columns">
+            <% user.following.forEach((question)=>{%>
+            <div class="card">
+              <div class="card-header">
+                <form
+                  action="/profile/<%=user._id%>/<%=question._id%>?_method=PUT%>"
+                  method="post"
+                >
+                  <button type="submit" class="answer-button mr-2 btn-link btn">
+                    <span class="fas fa-times-circle" ></span>
+                    <strong>Unfollow</strong>
+                  </button>
+                </form>
+              </div>
+              <div class="card-body">
+                <a href="/question/<%=question._id%>">
+                  <strong><%= question.title%></strong>
+                </a>
+              </div>
+            </div>
+            <%})%>
+          </div>
           <%}%>
         </div>
       </div>
     </div>
+    <%}%>
   </main>
 </div>
 
