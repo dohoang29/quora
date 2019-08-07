@@ -8,7 +8,7 @@
           alt="avatar"
           class="add-ques-image"
         />
-        <a class="user-name-link fs-13" href="/profile/<%= currentUser._id%>"
+        <a id="userFullName" class="user-name-link fs-13" href="/profile/<%= currentUser._id%>"
           ><%= currentUser.firstname.toUpperCase()%> <%=
           currentUser.lastname.toUpperCase()%></a
         >
@@ -24,7 +24,12 @@
       >
     </div>
   </div>
-  <div class="card mb-3 border-radius-10">
+  <div
+    class="card mb-3 border-radius-10"
+    value="<%= endValue%>"
+    id="showQuestion"
+    userId="<%=currentUser._id%>"
+  >
     <div class="card-header">
       <img
         class="mr-2 topic-image"
@@ -41,7 +46,7 @@
     </div>
     <% if (questions == null){}else{ %> <% questions.forEach((question)=>{
     if(question.isActive == true){ var flag = flagFollow = false;%>
-    <div class="card-body question-card lazy">
+    <div class="card-body question-card ">
       <div class="card-subtitle text-muted">
         <p class="question-topic">
           <% question.topic.forEach((topic)=>{ %> Question added ·
@@ -108,7 +113,7 @@
               >
             </button>
             <button
-              id ="follow<%= question._id %>"
+              id="follow<%= question._id %>"
               class="answer-button mr-2 btn-link btn"
               value="<%if( flagFollow == false){%>Follow<%} else {%>Unfollow<%}%>"
             >
@@ -135,7 +140,7 @@
             class="dropdown-menu"
             aria-labelledby="dropdownMenuOptions<%= question._id %>"
           >
-            <% if(currentUser.id == question.author) { %>
+            <% if(currentUser.id == question.author.id) { %>
             <a
               class="dropdown-item"
               data-toggle="modal"
@@ -203,9 +208,10 @@
         </div>
       </div>
     </div>
-    <% include partials/editQuestion.ejs %> <% }})} %> <%
-    answers.forEach((answer)=>{ %> <% }) %>
+    <% include partials/editQuestion.ejs %>
+    <% }})} %>
   </div>
+  
 </div>
 <div class="col-lg"></div>
 

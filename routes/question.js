@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Question = require("../models/question");
 const Answer = require("../models/answer");
+const Search = require("../models/search");
+
 const { ensureAuthenticated } = require("../config/auth");
 router.get("/:questionId", ensureAuthenticated, (req, res) => {
   var questionId = req.params.questionId;
@@ -33,7 +35,7 @@ router.put("/:questionId/restore", (req, res) => {
     } else {
       question.isActive = true;
       question.save();
-      res.redirect("/question/"+questionId);
+      res.redirect("/question/" + questionId);
     }
   });
 });
@@ -53,9 +55,12 @@ router.put("/:questionId", (req, res) => {
       }
       if (title !== "") {
         question.title = title;
-        Search.find({ question: question._id }, (err, search) => {
-          if(err){console.log(err)}else{
+        Search.findOne({ question: question._id }, (err, search) => {
+          if (err) {
+            console.log(err);
+          } else {
             search.name = title;
+            console.log(search);
             search.save();
           }
         });
@@ -64,7 +69,7 @@ router.put("/:questionId", (req, res) => {
         question.url = link;
       }
       question.save();
-      res.redirect("/question/"+questionId);
+      res.redirect("/question/" + questionId);
     }
   });
 });
@@ -77,7 +82,7 @@ router.delete("/:questionId", (req, res) => {
     } else {
       question.isActive = false;
       question.save();
-      res.redirect("/question/"+questionId);
+      res.redirect("/question/" + questionId);
     }
   });
 });

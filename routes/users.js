@@ -376,7 +376,7 @@ function updateRecord(req, res) {
         res.redirect("/profile/" + req.params.id);
       } else {
         if (err.name == "ValidationError") {
-          Search.find({ user: user._id }, (err, search) => {
+          Search.findOne({ user: user._id }, (err, search) => {
             if (err) {
               console.log(err);
             } else {

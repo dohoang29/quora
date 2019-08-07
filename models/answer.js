@@ -17,8 +17,8 @@ var answerSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   },
-  dateCreated: { type: Date, default: Date.now },
-  dateModified: { type: Date, default: Date.now },
+  dateCreated: { type: Number },
+  dateModified: { type: Number },
   upVoted: { type: Number, default: 0 },
   view: Number,
   isActive: Boolean
