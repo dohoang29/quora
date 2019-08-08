@@ -7,6 +7,9 @@
   height:50px;
   background: url(../images/ajax-loader.gif) 50% 50% no-repeat;
 }
+.feedLoading{
+  display: none;
+}
 .dim{
   background-color: #000000 ;
   opacity: 0;

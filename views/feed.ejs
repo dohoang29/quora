@@ -89,12 +89,13 @@
       <div class="answer-btn-wrapper">
         <div class="clearfix mt-1">
           <button
+            id="showAnswercollapse<%= question._id %>"
             data-toggle="collapse"
             href="#collapse<%= question._id %>"
             role="button"
             aria-expanded="false"
             aria-controls="collapse<%= question._id %>"
-            class="answer-button mr-2 btn-link btn"
+            class="answer-button mr-2 btn-link btn showAnswer"
           >
             <span class="fa fa-edit answer-icon"></span>
             <strong>Answer</strong>
@@ -103,7 +104,7 @@
             <button
               id="<%= question._id %>"
               value="<%if( flag == false){%>Upvote<%} else {%>Downvote<%}%>"
-              class="answer-button mr-2 btn-link btn likebtn"
+              class="answer-button mr-2 btn-link btn actionbtn likebtn"
             >
               <span
                 class="<%if( flag == false){%>fas fa-thumbs-up answer-icon<%} else {%>fas fa-thumbs-down<%}%>"
@@ -114,7 +115,7 @@
             </button>
             <button
               id="follow<%= question._id %>"
-              class="answer-button mr-2 btn-link btn"
+              class="answer-button mr-2 btn-link btn actionbtn"
               value="<%if( flagFollow == false){%>Follow<%} else {%>Unfollow<%}%>"
             >
               <span
@@ -185,6 +186,7 @@
               <textarea
                 name="content"
                 class="ansEditor"
+                id="ansEditorcollapse<%=question._id%>"
                 placeholder="Write your answer"
               ></textarea>
             </div>
@@ -198,6 +200,7 @@
                 data-toggle="collapse"
                 href="#collapse<%= question._id %>"
                 role="button"
+                id="cancelcollapse<%= question._id %>"
                 aria-expanded="false"
                 aria-controls="collapse<%= question._id %>"
               >
@@ -211,7 +214,7 @@
     <% include partials/editQuestion.ejs %>
     <% }})} %>
   </div>
-  
+  <div class='loading search-result-item' id="feedLoading"></div>
 </div>
 <div class="col-lg"></div>
 

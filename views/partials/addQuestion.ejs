@@ -29,8 +29,13 @@
           <div class="modal-section-topic">
             <div class="form-group">
               <label for="chooseTopic">Choose topic for your question:</label>
-              <select class="topic-form w-100" name="topic" id="chooseTopic" required>
-                  <option value=""  selected disabled> Choose Topic </option>
+              <select
+                class="topic-form w-100"
+                name="topic"
+                id="chooseTopic"
+                required
+              >
+                <option value="" selected disabled> Choose Topic </option>
                 <% topics.forEach((topic)=>{ %>
                 <option value="<%= topic._id %>"> <%= topic.title %></option>
                 <% }) %>
@@ -45,9 +50,18 @@
                   alt="avatar"
                   class="add-ques-image"
                 />
-                <a class="user-name-link" href="#"><%= currentUser.firstname.toUpperCase()%> <%= currentUser.lastname.toUpperCase()%></a> askes
+                <a class="user-name-link" href="#"
+                  ><%= currentUser.firstname.toUpperCase()%> <%=
+                  currentUser.lastname.toUpperCase()%></a
+                >
+                askes
                 <span class="form-group">
-                  <select class="topic-form w-20" id="chooseTopic" name="privacy" required>
+                  <select
+                    class="topic-form w-20"
+                    id="chooseTopic"
+                    name="privacy"
+                    required
+                  >
                     <option value="public"> Public </option>
                     <option value="limited"> Limited </option>
                     <option value="private"> Private </option>
@@ -61,8 +75,10 @@
                 class="form-control custom-question-input"
                 id="addQuestion"
                 name="question"
-                placeholder='Start your question with "What", "How", "Why", etc.' autofocus required
-               ></textarea>
+                placeholder='Start your question with "What", "How", "Why", etc.'
+                autofocus
+                required
+              ></textarea>
             </div>
           </div>
           <div class="modal-section-link">
@@ -84,7 +100,11 @@
           >
             Cancel
           </button>
-          <button type="submit"  onclick="return ValidURL(document.link);"class="btn btn-primary add-question-button">
+          <button
+            type="submit"
+            onclick="return ValidURL(document.link);"
+            class="btn btn-primary add-question-button"
+          >
             Add Question
           </button>
         </div>
@@ -93,14 +113,13 @@
   </div>
 </div>
 <script>
-function ValidURL(link) {
+  function ValidURL(link) {
     var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
-    if(!link.value.match(regex)) {
+    if (!link.value.match(regex)) {
       alert("Please enter valid URL.");
       return false;
     } else {
       return true;
     }
-  }</script>
-
-}
+  }
+</script>
