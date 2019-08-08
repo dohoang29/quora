@@ -198,7 +198,7 @@
   right:5px;
 }
 .search-result-item{
-  position: relative;
+  position: relative !important;
 }
 #mobileSearchBox{
   z-index: 9999;
@@ -213,6 +213,7 @@
 #searchBar{
   left: -1024px;
 }
+
 @media (max-width: 1200px){
   .search-result{
     transform: translate3d(460px,57px,0px);
