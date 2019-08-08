@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const Search = require("../models/search");
 var Question = require("../models/question");
+var Report = require("../models/report");
 var Answer = require("../models/answer");
 router.get("/", isLoggedInAdmin, (req, res) => {
     User.find((err, users) => {
@@ -63,7 +64,7 @@ router.get("/ban/answers/:id", (req, res) => {
     Answer.findById(req.params.id, (err, answer) => {
         if (!err) {
             if (answer.isActive === true) {
-                answer.isActive = false; 
+                answer.isActive = false;
                 answer.save();
                 req.flash("success_msg", "You are ban an answer success");
                 res.redirect("/admin/answers");
@@ -144,6 +145,7 @@ router.get("/resetPassword/:id", (req, res) => {
         }
     });
 });
+
 //add user new
 router.post("/add", (req, res) => {
     const { firstname, lastname, email, password } = req.body;

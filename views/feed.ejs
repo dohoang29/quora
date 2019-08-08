@@ -1,38 +1,27 @@
-<% include partials/header.ejs %> <% include partials/topicSideBar.ejs %>
-<div class="col-lg-7 p-0">
-  <div class="card add-question-card mb-2 border-radius-10 shadow-card">
-    <div class="card-body p-3">
-      <div class="card-subtitle text-muted">
-        <img
-          src="<%=currentUser.imageUrl%>"
-          alt="avatar"
-          class="add-ques-image"
-        />
-        <a class="user-name-link fs-13" href="/profile/<%= currentUser._id%>"
-          ><%= currentUser.firstname.toUpperCase()%> <%=
-          currentUser.lastname.toUpperCase()%></a
-        >
-      </div>
-      <a
-        href="#addQuestionModal"
-        class="add-question-link"
-        data-toggle="modal"
-        data-target="#addQuestionModal"
-        ><h3 class="modal-title text-muted mt-1">
-          <strong>What is your question?</strong>
-        </h3></a
-      >
-    </div>
-  </div>
-  <div class="card mb-3 border-radius-10">
-    <div class="card-header">
-      <img
-        class="mr-2 topic-image"
-        src="/images/question-icon.png"
-        alt="Question for you"
-      />
-      <strong class="hintLabel"
-        >Question for
+<% include partials/header.ejs %>
+    <% include partials/topicSideBar.ejs %>
+        <div class="col-lg-7 p-0">
+            <div class="card add-question-card mb-2 border-radius-10 shadow-card">
+                <div class="card-body p-3">
+                    <div class="card-subtitle text-muted">
+                        <img src="<%=currentUser.imageUrl%>" alt="avatar" class="add-ques-image" />
+                        <a class="user-name-link fs-13" href="/profile/<%= currentUser._id%>">
+                            <%= currentUser.firstname.toUpperCase()%>
+                                <%=
+          currentUser.lastname.toUpperCase()%>
+                        </a>
+                    </div>
+                    <a href="#addQuestionModal" class="add-question-link" data-toggle="modal" data-target="#addQuestionModal">
+                        <h3 class="modal-title text-muted mt-1">
+                            <strong>What is your question?</strong>
+                        </h3>
+                    </a>
+                </div>
+            </div>
+            <div class="card mb-3 border-radius-10">
+                <div class="card-header">
+                    <img class="mr-2 topic-image" src="/images/question-icon.png" alt="Question for you" />
+                    <strong class="hintLabel">Question for
         <a class="user-name-link" href="/profile/<%= currentUser._id%>"
           ><%= currentUser.firstname.toUpperCase()%> <%=
           currentUser.lastname.toUpperCase()%></a
@@ -53,48 +42,38 @@
       <a href="/question/<%= question._id %>">
         <h3 class="question-title mt-1">
           <strong><%= question.title %></strong>
-        </h3>
-      </a>
-      <div class="question-more-info">
-        <p>
-          <strong>
+                    </h3>
+                    </a>
+                    <div class="question-more-info">
+                        <p>
+                            <strong>
             <a class="number-answer-link" href="/question/<%= question._id %>">
               <%if(question.answers == null ){%> <%= 0 %> <%}else{%>
               <%=question.answers.length%> <%}%> Answers
             </a>
-          </strong>
-          · Created <%= moment(question.dateCreated).fromNow() %>
-        </p>
-      </div>
-      <div class="upvote-follow">
-        Upvote ·
-        <span id="votenumber<%= question._id %>" class="mr-3"
-          ><%if(question.upVoted == null ){%> <%= 0 %> <% }else{
+          </strong> · Created
+                            <%= moment(question.dateCreated).fromNow() %>
+                        </p>
+                    </div>
+                    <div class="upvote-follow">
+                        Upvote ·
+                        <span id="votenumber<%= question._id %>" class="mr-3"><%if(question.upVoted == null ){%> <%= 0 %> <% }else{
           question.upVoted.forEach((vote)=>{ if(currentUser.id == vote){ flag =
           true; } })%> <%=question.upVoted.length%> <%}%>
-        </span>
-        Follow ·
-        <span id="follownumber<%= question._id %>" class="mr-3"
-          ><%if(question.followers == null ){%> <%= 0 %> <%}else{
+        </span> Follow ·
+                        <span id="follownumber<%= question._id %>" class="mr-3"><%if(question.followers == null ){%> <%= 0 %> <%}else{
           question.followers.forEach((follower)=>{ if(currentUser.id ==
           follower){ flagFollow = true; } })%> <%=question.followers.length%>
           <%}%>
         </span>
-      </div>
-      <div class="answer-btn-wrapper">
-        <div class="clearfix mt-1">
-          <button
-            data-toggle="collapse"
-            href="#collapse<%= question._id %>"
-            role="button"
-            aria-expanded="false"
-            aria-controls="collapse<%= question._id %>"
-            class="answer-button mr-2 btn-link btn"
-          >
+                    </div>
+                    <div class="answer-btn-wrapper">
+                        <div class="clearfix mt-1">
+                            <button data-toggle="collapse" href="#collapse<%= question._id %>" role="button" aria-expanded="false" aria-controls="collapse<%= question._id %>" class="answer-button mr-2 btn-link btn">
             <span class="fa fa-edit answer-icon"></span>
             <strong>Answer</strong>
           </button>
-          <span id="<%= currentUser._id %>" class="voteArea">
+                            <span id="<%= currentUser._id %>" class="voteArea">
             <button
               id="<%= question._id %>"
               value="<%if( flag == false){%>Upvote<%} else {%>Downvote<%}%>"
@@ -103,8 +82,7 @@
               <span
                 class="<%if( flag == false){%>fas fa-thumbs-up answer-icon<%} else {%>fas fa-thumbs-down<%}%>"
               ></span>
-              <strong
-                ><%if( flag == false){%>Upvote<%} else {%>Downvote<%}%></strong
+                            <strong><%if( flag == false){%>Upvote<%} else {%>Downvote<%}%></strong
               >
             </button>
             <button
@@ -149,7 +127,7 @@
               <button class="dropdown-item" type="submit">Delete</button>
             </form>
             <% } %>
-            <a class="dropdown-item" href="#">Report</a>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModalReportCenter">Report</a>
           </div>
         </div>
       </div>

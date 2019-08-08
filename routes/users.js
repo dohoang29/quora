@@ -143,8 +143,11 @@ router.post("/register", (req, res) => {
         });
     }
 });
-
-// Login
+//report
+router.post("/report", (req, res) => {
+        console.log(req.body);
+    })
+    // Login
 router.post("/login", (req, res, next) => {
     passport.authenticate("local", {
         successRedirect: "/favorite",
@@ -176,9 +179,9 @@ router.post("/favorite", function(req, res) {
             // Object.keys(req.body).forEach(key => {
             //     user.topic.push(key);
             // });
-            for(var i=0;i<Object.keys(req.body).length;i++){
+            for (var i = 0; i < Object.keys(req.body).length; i++) {
                 user.topic.push(Object.keys(req.body)[i]);
-                Topic.findById(Object.keys(req.body)[i],(err, topic)=>{
+                Topic.findById(Object.keys(req.body)[i], (err, topic) => {
                     topic.followers.push(user._id);
                     topic.save();
                 })
