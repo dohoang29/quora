@@ -561,68 +561,9 @@ if (save) {
     cropped.src = imgSrc;
     up.setAttribute("href", imgSrc);
   });
-  //post form
-  $(function() {
-    $("#submitPicture").click(function() {
-      var avatar = {
-        imgSrc: $("#imageCropped").attr("src")
-      };
-      var idUser = $("#imageCropped").attr("value");
-      $.ajax({
-        type: "post",
-        async: false,
-        data: avatar,
-        url: window.location.origin + "/upload/" + idUser,
-        success: function() {
-          location.reload();
-        }
-        // complete: function(notifi) {
-        //     $('.notifiAvatar').append("<span>You are reset avatar success!</span>");
-        // }
-      });
-    });
-  });
-  if (upload != null) {
-    upload.addEventListener("change", e => {
-      if (e.target.files.length) {
-        const reader = new FileReader();
-        reader.onload = e => {
-          if (e.target.result) {
-            let img = document.createElement("img");
-            img.id = "image";
-            img.src = e.target.result;
-            result.innerHTML = "";
-            // append new image
-            result.appendChild(img);
-            save.classList.remove("hide");
-            options.classList.remove("hide");
-            cropper = new Cropper(img, {
-              aspectRatio: 1 / 1
-            });
-          }
-        };
-        reader.readAsDataURL(e.target.files[0]);
-      }
-    });
-    // save on click
-    save.addEventListener("click", e => {
-      e.preventDefault();
-      // get result to data uri
-      let imgSrc = cropper
-        .getCroppedCanvas({
-          width: img_w.value // input value
-        })
-        .toDataURL();
-      // remove hide class of img
-      cropped.classList.remove("hide");
-      img_result.classList.remove("hide");
-      // show image cropped
-      cropped.src = imgSrc;
-      up.setAttribute("href", imgSrc);
-    });
     //post form
     $(function() {
-      $("#submitPicture").click(function() {
+      $(".upPicture").click(function() {
         var avatar = {
           imgSrc: $("#imageCropped").attr("src")
         };
@@ -641,7 +582,6 @@ if (save) {
         });
       });
     });
-  }
 }
 $(function() {
   $(".carousel").slick({
