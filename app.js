@@ -20,8 +20,7 @@ const Question = require("./models/question");
 const Topic = require("./models/topic");
 const User = require("./models/user");
 const Search = require("./models/search");
-const ipAdress = process.env.ip || ip.address();
-const port = process.env.port || 3000;
+const port = process.env.port || 80;
 
 const indexRoutes = require("./routes/index"),
     userRoutes = require("./routes/users"),
@@ -85,5 +84,5 @@ app.get('*',function(req,res){
     res.render("404.ejs");
 });
 app.listen(port, () => {
-    console.log("Server is listening at " + ipAdress + ":" + port);
+    console.log("Server is listening at:" + port);
 });
