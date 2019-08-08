@@ -197,7 +197,7 @@
   top:10px;
   right:5px;
 }
-.search-result-item{
+.search-result-item>div{
   position: relative !important;
 }
 #mobileSearchBox{

@@ -81,6 +81,9 @@ app.use("/admin", adminRoutes);
 app.use("/question", questionRoutes);
 app.use("/search", searchRoutes);
 app.use("/noti",notiRoutes);
+app.get('*',function(req,res){
+    res.render("404.ejs");
+});
 app.listen(port, () => {
     console.log("Server is listening at " + ipAdress + ":" + port);
 });
