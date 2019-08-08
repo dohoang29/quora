@@ -10,10 +10,10 @@ const path = require("path");
 const keyEmail = require("../config/key");
 const keyUpload = require("../config/key");
 // Load User model
+const Question = require("../models/question");
 const User = require("../models/user");
 const Search = require("../models/search");
 var Topic = require("../models/topic");
-const Question = require("../models/question");
 const { forwardAuthenticated } = require("../config/auth");
 
 // Login Page
@@ -46,6 +46,16 @@ router.get(
 router.get("/register", forwardAuthenticated, (req, res) =>
   res.render("register")
 );
+//feed
+// router.get("/feed",(req,res)=>{
+//     User.findById(req.user._id,(err,user)=>{
+//         if(user.topic == ""){
+//             res.redirect("/favorite")
+//         }else{
+//            return true;
+//         }
+//     })
+// })
 //profile user
 router.get("/profile/:id", isLoggedIn, function(req, res) {
   var userId = req.params.id;
@@ -173,7 +183,20 @@ router.post("/register", (req, res) => {
     });
   }
 });
-
+//report
+router.post("/report/:questionId", (req, res) => {
+  console.log(req.body);
+  console.log(req.params.questionId)
+  Question.findById(req.params.questionId, (err, question) => {
+      console.log(question)
+      console.log(question.report)
+    question.report.push(req.body.content);
+    question.userReport.push(req.user._id);
+    question.save().then(user => {
+      res.redirect("/feed");
+    });
+  });
+});
 // Login
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", {
@@ -203,9 +226,6 @@ router.post("/favorite", function(req, res) {
     return res.redirect("/favorite");
   } else {
     User.findById(req.user.id, (err, user) => {
-      // Object.keys(req.body).forEach(key => {
-      //     user.topic.push(key);
-      // });
       for (var i = 0; i < Object.keys(req.body).length; i++) {
         user.topic.push(Object.keys(req.body)[i]);
         Topic.findById(Object.keys(req.body)[i], (err, topic) => {

@@ -50,7 +50,9 @@
     margin-left: 20px;
     color: #c04240 !important;
 }
-
+.box-admin{
+    background-color: #007bff !important;
+}
 .form-signup {
     width: 100%;
     max-width: 500px;
@@ -62,6 +64,13 @@
     background-color: lightblue;
   height: 70px;
   overflow-y: scroll;
+}
+.search-admin{
+    color: #007bff;
+    background-color: #fff;
+    border: 0;
+    padding: 4px;
+    border-radius: 3px solid #007bff;
 }
 .form-control {
     position: relative;
