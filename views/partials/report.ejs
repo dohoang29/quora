@@ -1,0 +1,14 @@
+<!-- The Modal -->
+<div class="modal fade" id="myModalReportCenter" tabindex="-1" role="dialog" aria-labelledby="myModalReportCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="/report/<%= question._id %>" method="post">
+                    <textarea class="form-control form-control-sm mb-3" rows="3" name="content" placeholder="Your report!"></textarea>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

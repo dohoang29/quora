@@ -11,11 +11,11 @@
                 </div>
                 <div class="box postManage">
                     <!-- Box Head -->
-                    <div class="box-head">
+                    <div class="box-head box-admin">
                         <div class="right">
                             <label>search by</label>
-                            <input type="text" class="field small-field">
-                            <input type="submit" class="button" value="search">
+                            <input type="text" class="field small-field ">
+                            <input type="submit" class="button search-admin" value="search">
                         </div>
                     </div>
                     <!-- End Box Head -->
@@ -25,10 +25,11 @@
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
 
-                                <th width="70%">Question</th>
-                                <th>Date Add</th>
-                                <th>Author</th>
-                                <th>Control</th>
+                                <th width="50%">Question</th>
+                                <th width="10%">Date Add</th>
+                                <th width="10%">Author</th>
+                                <th width="20%">Report</th>
+                                <th width="10%">Control</th>
 
                             </tr>
                             <tbody>
@@ -45,6 +46,7 @@
                                             <%= question.author.lastname%>
                                                 <%= question.author.firstname%>
                                         </td>
+                                        <td class="more"><%= question.report%> </td>
                                         <td><a href="#" onclick="return confirm( 'Are you sure to delete this record ?');"><i class="fa fa-remove"></i></a> Or <a href="/admin/ban/questions/<%=question._id%>"><i class="fa fa-ban"></i></a></td>
                                     </tr>
                                     <% }) %>

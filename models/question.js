@@ -34,6 +34,13 @@ var questionSchema = new mongoose.Schema({
       ref: "User"
     }
   ],
+  report: Array,
+  userReport: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    }
+  ],
   isActive: Boolean
 });
 
