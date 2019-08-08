@@ -570,7 +570,6 @@ if (save) {
         var idUser = $("#imageCropped").attr("value");
         $.ajax({
           type: "post",
-          async: false,
           data: avatar,
           url: window.location.origin + "/upload/" + idUser,
           success: function() {
