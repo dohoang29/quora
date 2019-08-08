@@ -63,6 +63,10 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Notifi"
     }],
+    notifiRead:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Notifi"
+    }]
 });
 
 module.exports = mongoose.model("User", userSchema);

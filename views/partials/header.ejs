@@ -83,19 +83,13 @@
                   <span class="nav-tab">Home</span></a
                 >
               </li>
-              <li class="nav-item w-3">
-                <a href="#" class="nav-link section-link"
-                  ><i class="fas fa-pen navi-icon"></i>
-                  <span class="nav-tab">Answer</span></a
-                >
-              </li>
               <li  class="nav-item w-4">
                 <a  data-toggle="dropdown" id="notiDropdown"  aria-haspopup="true" aria-expanded="false" value="<%= currentUser._id%>" class="nav-link section-link submitNoti"
                   ><i class="fas fa-bell navi-icon"></i>
-                  <span class="nav-tab">Notifications</span></a
+                  <span class="nav-tab">Notifications <%if(currentUser.notifi == null){%><%}else{%><span class="badge badge-danger"><%= currentUser.notifi.length %></span><%}%></span></a
                 >
                 <div class="dropdown-menu show-noti noti-user p-1" aria-labelledby="notiDropdown">
-
+                  
                 </div>
               </li>
             </ul>
@@ -155,16 +149,10 @@
             <span class="nav-tab">Home</span></a
           >
         </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link section-link"
-            ><i class="fas fa-pen navi-icon"></i>
-            <span class="nav-tab">Answer</span></a
-          >
-        </li>
         <li  class="nav-item ">
             <a id="mobileNotiDropdown" aria-haspopup="true" aria-expanded="false" value="<%= currentUser._id%>"  class="nav-link section-link submitNoti" data-toggle="dropdown"
               ><i class="fas fa-bell navi-icon"></i>
-              <span class="nav-tab">Notifications</span></a
+              <span class="nav-tab">Notifications <span class="badge badge-danger">9</span></span></a
             >
             <div class="dropdown-menu show-noti noti-user" aria-labelledby="mobileNotiDropdown">
 

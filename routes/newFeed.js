@@ -11,8 +11,6 @@ const { ensureAuthenticated } = require("../config/auth");
 
 router.get("/", ensureAuthenticated, (req, res) => {
   var publicQuestion = [];
-  var privateQuestion = [];
-  var limitedQuestion = [];
   var endValue = null;
   User.findById(req.user._id, (err, user) => {
     Question.find({ topic: { $in: user.topic } })
@@ -118,16 +116,35 @@ router.post("/:userId", (req, res) => {
         if (err) {
           console.log(err);
         } else {
+          let flag = false;
           topic.questions.push(question._id);
+          for(var i=0;i<topic.followers.length;i++){
+            if(topic.followers[i] == userId){
+                flag = true;
+            }
+          };
+          if(flag == false){
+            topic.followers.push(userId);
+          }
           topic.save();
+
         }
       });
       User.findOne({ _id: userId }).exec((err, user) => {
         if (err) {
           console.log(err);
         } else {
+          let flag = false;
           user.questions.push(question._id);
           user.following.push(question._id);
+          for(var i=0;i<user.topic.length;i++){
+            if(user.topic[i] == topic){
+                flag = true;
+            }
+          };
+          if(flag == false){
+            user.topic.push(topic);
+          }
           user.save();
         }
       });

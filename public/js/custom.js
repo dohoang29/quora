@@ -16,7 +16,7 @@ $(function() {
       if (endValue != undefined) {
         $.ajax({
           type: "GET",
-          url: window.location.origin + "/feed/" + endValue,
+          url: window.location+ "/" + endValue,
           async: false,
           success: function(data) {
             if (data != null) {
