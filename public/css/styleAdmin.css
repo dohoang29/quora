@@ -16,6 +16,8 @@
     border: 0;
     border-radius: 2px;
     padding: 5px;
+    background-color: #fff;
+    color: #007bff;
 }
 .head-chil {
    display: inline;
