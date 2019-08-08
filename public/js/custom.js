@@ -16,7 +16,7 @@ $(function() {
       if (endValue != undefined) {
         $.ajax({
           type: "GET",
-          url: window.location+ "/" + endValue,
+          url: window.location + "/" + endValue,
           async: false,
           success: function(data) {
             if (data != null) {
@@ -26,10 +26,12 @@ $(function() {
                   if (question.isActive == true) {
                     var flag = (flagFollow = false);
                     html +=
-                      "<div class='card-body question-card'><div class='card-subtitle text-muted'><p class='question-topic'>";
+                      "<div class='card-body question-card'><div class='card-subtitle text-muted'><p class='question-topic fs-12'>";
                     question.topic.forEach(topic => {
                       html +=
-                        "Question added ·" +
+                        "Created " +
+                        moment(question.dateCreated).fromNow() +
+                        " · " +
                         "<a class='number-answer-link' href='/topic/" +
                         topic._id +
                         "'>" +
@@ -51,7 +53,7 @@ $(function() {
                       "<div class='question-more-info'>" +
                       "<p>" +
                       "<strong>" +
-                      "<a class='number-answer-link' href='/question/" +
+                      "<a class='number-answer-link fs-13' href='/question/" +
                       question._id +
                       "'>";
                     if (question.answers == null) {
@@ -62,49 +64,28 @@ $(function() {
                     html +=
                       "</a>" +
                       "</strong>" +
-                      "· Created " +
-                      moment(question.dateCreated).fromNow() +
                       "</p>" +
                       "</div>" +
-                      "<div class='upvote-follow'>" +
-                      "Upvote · " +
-                      "<span id='votenumber" +
-                      question._id +
-                      "' class='mr-3'>";
-                    if (question.upVoted == null) {
-                      html += "0";
-                    } else {
-                      html += question.upVoted.length.toString();
-                      question.upVoted.forEach(vote => {
-                        if (currentUser == vote) {
-                          flag = true;
-                        }
-                      });
-                    }
-                    html +=
-                      "</span>" +
-                      "Follow · " +
-                      "<span id='follownumber" +
-                      question._id +
-                      "' class='mr-3'>";
+                      "<div class='upvote-follow'>";
 
-                    if (question.followers == null) {
-                      html += "0";
-                    } else {
-                      html += question.followers.length.toString();
-                      question.followers.forEach(follower => {
-                        if (currentUser == follower) {
-                          flagFollow = true;
-                        }
-                      });
-                    }
+                    question.upVoted.forEach(vote => {
+                      if (currentUser == vote) {
+                        flag = true;
+                      }
+                    });
+
+                    question.followers.forEach(follower => {
+                      if (currentUser == follower) {
+                        flagFollow = true;
+                      }
+                    });
+
                     html +=
                       "</span>" +
                       "</div>" +
                       "<div class='answer-btn-wrapper'>" +
                       "<div class='clearfix mt-1'>" +
-                      "<button " +
-                      "data-toggle='collapse' " +
+                      "<button data-toggle='collapse' " +
                       "href='#collapse" +
                       question._id +
                       "' " +
@@ -114,9 +95,11 @@ $(function() {
                       question._id +
                       "'" +
                       "class='answer-button mr-2 btn-link btn showAnswer'" +
-                      "id='showAnswercollapse"+question._id+"'"
+                      "id='showAnswercollapse" +
+                      question._id +
+                      "'" +
                       ">" +
-                      "<span class='fa fa-edit answer-icon'></span>" +
+                      "<span class='fa fa-edit answer-icon fs-13'></span>" +
                       "<strong> Answer</strong>" +
                       "</button>" +
                       " <span id='" +
@@ -133,7 +116,7 @@ $(function() {
                       html += "'Downvote'";
                     }
                     html +=
-                      " class='answer-button mr-2 btn-link btn actionbtn likebtn'>" +
+                      " class='answer-button mr-2 btn-link btn actionbtn likebtn fs-13'>" +
                       "<span " +
                       "class=";
                     if (flag == false) {
@@ -143,18 +126,26 @@ $(function() {
                     }
                     html += " ></span><strong>";
                     if (flag == false) {
-                      html += " Upvote";
+                      html += " Upvote ";
                     } else {
-                      html += " Downvote";
+                      html += " Downvote ";
                     }
                     html +=
-                      "</strong>" +
+                    "</strong>" +"<span id='votenumber" + question._id + "'>";
+                    if (question.upVoted == null) {
+                      html += " · 0 ";
+                    } else {
+                      html += " . "+question.upVoted.length.toString() + " </span>";
+                    }
+
+                    html +=
+                      
                       " </button>" +
                       " <button " +
                       "id ='follow" +
                       question._id +
                       "' " +
-                      "class='answer-button mr-2 btn-link btn actionbtn' " +
+                      "class='answer-button mr-2 btn-link btn actionbtn fs-13' " +
                       "value=";
                     if (flagFollow == false) {
                       html += "'Follow'";
@@ -169,12 +160,21 @@ $(function() {
                     }
                     html += "></span><strong>";
                     if (flagFollow == false) {
-                      html += " Follow";
+                      html += " Follow ";
                     } else {
-                      html += " Unfollow";
+                      html += " Unfollow ";
                     }
                     html +=
-                      "</strong>" +
+                    "</strong>" + "<span id='follownumber" +
+                      question._id +
+                      "' class='mr-3'>";
+                    if (question.followers == null) {
+                      html += " · 0 ";
+                    } else {
+                      html += " · "+ question.followers.length.toString() + " </span>";
+                    }
+                    html +=
+                      
                       "</button>" +
                       "</span>" +
                       "<a " +
@@ -277,8 +277,8 @@ $(function() {
                       "class='btn btn-secondary cancel-button'" +
                       "id='cancelcollapse" +
                       question._id +
-                      "'";
-                    "data-toggle='collapse'" +
+                      "'" +
+                      "data-toggle='collapse'" +
                       " href='#collapse" +
                       question._id +
                       "'" +
@@ -448,23 +448,29 @@ $(function() {
     var editor = "ansEditor" + quesId;
     // $(".add-ans-card").empty();
     // $(".add-ans-card").append("<textarea class='ansEditor' id='"+editor+"' name='content' placeholder='Write your answer...'></textarea>");
-    
-        $(this).removeClass("showAnswer");
-    
-    ClassicEditor.create(document.querySelector("#" + editor)).then(
-        
-    )
+    $(this).removeClass("showAnswer");
+    ClassicEditor.create(document.querySelector("#" + editor));
   });
   $("#showQuestion").on("click", ".cancel-button", function() {
     var editor = "ansEditor" + $(this).attr("aria-controls");
-    var showAnswer = "showAnswer"+$(this).attr("aria-controls");
-    $("#"+showAnswer).addClass("showAnswer");
-    $(this).parent().parent().children().filter(".add-ans-card").empty();
-    $(this).parent().parent().children().filter(".add-ans-card").append(
-      "<textarea class='ansEditor' id='" +
-        editor +
-        "' name='content' placeholder='Write your answer...'></textarea>"
-    )
+    var showAnswer = "showAnswer" + $(this).attr("aria-controls");
+    $("#" + showAnswer).addClass("showAnswer");
+    $(this)
+      .parent()
+      .parent()
+      .children()
+      .filter(".add-ans-card")
+      .empty();
+    $(this)
+      .parent()
+      .parent()
+      .children()
+      .filter(".add-ans-card")
+      .append(
+        "<textarea class='ansEditor' id='" +
+          editor +
+          "' name='content' placeholder='Write your answer...'></textarea>"
+      );
   });
 });
 
@@ -547,7 +553,6 @@ if (save) {
   console.log("test");
   save.addEventListener("click", e => {
     e.preventDefault();
-    console.log("test2");
     // get result to data uri
     let imgSrc = cropper
       .getCroppedCanvas({
@@ -561,26 +566,26 @@ if (save) {
     cropped.src = imgSrc;
     up.setAttribute("href", imgSrc);
   });
-    //post form
-    $(function() {
-      $(".upPicture").click(function() {
-        var avatar = {
-          imgSrc: $("#imageCropped").attr("src")
-        };
-        var idUser = $("#imageCropped").attr("value");
-        $.ajax({
-          type: "post",
-          data: avatar,
-          url: window.location.origin + "/upload/" + idUser,
-          success: function() {
-            location.reload();
-          }
-          // complete: function(notifi) {
-          //     $('.notifiAvatar').append("<span>You are reset avatar success!</span>");
-          // }
-        });
+  //post form
+  $(function() {
+    $(".upPicture").click(function() {
+      var avatar = {
+        imgSrc: $("#imageCropped").attr("src")
+      };
+      var idUser = $("#imageCropped").attr("value");
+      $.ajax({
+        type: "post",
+        data: avatar,
+        url: window.location.origin + "/upload/" + idUser,
+        success: function() {
+          location.reload();
+        }
+        // complete: function(notifi) {
+        //     $('.notifiAvatar').append("<span>You are reset avatar success!</span>");
+        // }
       });
     });
+  });
 }
 $(function() {
   $(".carousel").slick({

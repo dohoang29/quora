@@ -96,6 +96,7 @@
     height: 43px;
     margin-left: 20px;
     color: #666 !important;
+    cursor:pointer;
 }
 
 .search-area {
@@ -186,7 +187,7 @@
   z-index: 1000;
   top: 0px;
   left: 0px;
-  transform: translate3d(530px,57px,0px);
+  transform: translate3d(495px,57px,0px);
   will-change: transform;
   width: 333px;
   background-color: #ffffff;
@@ -199,6 +200,15 @@
 }
 .search-result-item>div{
   position: relative !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+}
+.search-result-item{
+  height: 39px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
 }
 #mobileSearchBox{
   z-index: 9999;

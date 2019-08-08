@@ -4,6 +4,7 @@ const Topic = require("../models/topic");
 const User = require("../models/user");
 const Question = require("../models/question");
 const Answer = require("../models/answer");
+const Search = require("../models/search");
 const { ensureAuthenticated } = require("../config/auth");
 
 router.get("/:id", ensureAuthenticated, (req, res) => {
@@ -98,6 +99,18 @@ router.get("/:id/:endques", (req, res) => {
     }
   });
 });
+// router.post("/addSearch",(req,res)=>{
+//   Topic.find().exec((err,topics)=>{
+//     topics.forEach(topic=>{
+//       var search = {
+//         name : topic.title,
+//         topic : topic._id
+//       }
+//       Search.create(search);
+//     });
+//     res.send("oke");
+//   })
+// })
 router.get("/:topicId/:userId/:action", (req, res) => {
   var topicId = req.params.topicId;
   var userId = req.params.userId;

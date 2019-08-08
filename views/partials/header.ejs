@@ -86,10 +86,10 @@
               <li  class="nav-item w-4">
                 <a  data-toggle="dropdown" id="notiDropdown"  aria-haspopup="true" aria-expanded="false" value="<%= currentUser._id%>" class="nav-link section-link submitNoti"
                   ><i class="fas fa-bell navi-icon"></i>
-                  <span class="nav-tab">Notifications <%if(currentUser.notifi == null){%><%}else{%><span class="badge badge-danger"><%= currentUser.notifi.length %></span><%}%></span></a
+                  <span class="nav-tab">Notifications <%if(currentUser.notifi == 0){%><%}else{%><span class="badge badge-danger"><%= currentUser.notifi.length %></span><%}%></span></a
                 >
                 <div class="dropdown-menu show-noti noti-user p-1" aria-labelledby="notiDropdown">
-                  
+
                 </div>
               </li>
             </ul>
