@@ -9,7 +9,7 @@ router.post("/", (req, res) => {
     .populate("questionId")
     .populate("author")
     .sort({ creationDate: -1 })
-    .limit(25)
+    .limit(10)
     .exec((err,noti)=>{
         res.send(noti);
     })

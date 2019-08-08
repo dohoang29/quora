@@ -1,0 +1,189 @@
+<div
+    class="card mb-3 border-radius-10"
+    value="<%= endValue%>"
+    id="showQuestion"
+    userId="<%=currentUser._id%>"
+  >
+    <div class="card-header">
+      <img
+        class="mr-2 topic-image"
+        src="/images/question-icon.png"
+        alt="Question for you"
+      />
+      <strong class="hintLabel"
+        >Question for
+        <a class="user-name-link" href="/profile/<%= currentUser._id%>"
+          ><%= currentUser.firstname.toUpperCase()%> <%=
+          currentUser.lastname.toUpperCase()%></a
+        ></strong
+      >
+    </div>
+    <% if (questions == null){}else{ %> <% questions.forEach((question)=>{
+    if(question.isActive == true){ var flag = flagFollow = false;%>
+    <div class="card-body question-card ">
+      <div class="card-subtitle text-muted">
+        <p class="question-topic">
+          <% question.topic.forEach((topic)=>{ %> Question added ·
+          <a class="number-answer-link" href="/topic/<%= topic._id %>">
+            <%= topic.title %> <% }) %>
+          </a>
+        </p>
+      </div>
+      <a href="/question/<%= question._id %>">
+        <h3 class="question-title mt-1">
+          <strong><%= question.title %></strong>
+                    </h3>
+                    </a>
+                    <div class="question-more-info">
+                        <p>
+                            <strong>
+            <a class="number-answer-link" href="/question/<%= question._id %>">
+              <%if(question.answers == null ){%> <%= 0 %> <%}else{%>
+              <%=question.answers.length%> <%}%> Answers
+            </a>
+          </strong> · Created
+                            <%= moment(question.dateCreated).fromNow() %>
+                        </p>
+                    </div>
+                    <div class="upvote-follow">
+                        Upvote ·
+                        <span id="votenumber<%= question._id %>" class="mr-3"><%if(question.upVoted == null ){%> <%= 0 %> <% }else{
+          question.upVoted.forEach((vote)=>{ if(currentUser.id == vote){ flag =
+          true; } })%> <%=question.upVoted.length%> <%}%>
+        </span> Follow ·
+                        <span id="follownumber<%= question._id %>" class="mr-3"><%if(question.followers == null ){%> <%= 0 %> <%}else{
+          question.followers.forEach((follower)=>{ if(currentUser.id ==
+          follower){ flagFollow = true; } })%> <%=question.followers.length%>
+          <%}%>
+        </span>
+      </div>
+      <div class="answer-btn-wrapper">
+        <div class="clearfix mt-1">
+          <button
+            id="showAnswercollapse<%= question._id %>"
+            data-toggle="collapse"
+            href="#collapse<%= question._id %>"
+            role="button"
+            aria-expanded="false"
+            aria-controls="collapse<%= question._id %>"
+            class="answer-button mr-2 btn-link btn showAnswer"
+          >
+            <span class="fa fa-edit answer-icon"></span>
+            <strong>Answer</strong>
+          </button>
+                            <span id="<%= currentUser._id %>" class="voteArea">
+            <button
+              id="<%= question._id %>"
+              value="<%if( flag == false){%>Upvote<%} else {%>Downvote<%}%>"
+              class="answer-button mr-2 btn-link btn actionbtn likebtn"
+            >
+              <span
+                class="<%if( flag == false){%>fas fa-thumbs-up answer-icon<%} else {%>fas fa-thumbs-down<%}%>"
+              ></span>
+                            <strong><%if( flag == false){%>Upvote<%} else {%>Downvote<%}%></strong
+              >
+            </button>
+            <button
+              id="follow<%= question._id %>"
+              class="answer-button mr-2 btn-link btn actionbtn"
+              value="<%if( flagFollow == false){%>Follow<%} else {%>Unfollow<%}%>"
+            >
+              <span
+                class="<%if( flagFollow == false){%>fa fa-plus-circle answer-icon<%} else {%>fas fa-times-circle<%}%>"
+              ></span>
+              <strong
+                ><%if( flagFollow == false){%>Follow<%} else
+                {%>Unfollow<%}%></strong
+              >
+            </button>
+          </span>
+          <a
+            class="question-more-options"
+            href="#"
+            role="button"
+            id="dropdownMenuOptions<%= question._id %>"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            ><i class="fas fa-ellipsis-h"></i>
+          </a>
+          <div
+            class="dropdown-menu"
+            aria-labelledby="dropdownMenuOptions<%= question._id %>"
+          >
+            <% if(currentUser.id == question.author.id) { %>
+            <a
+              class="dropdown-item"
+              data-toggle="modal"
+              data-target="#editQuestion"
+              >Edit</a
+            >
+            <form
+              action="/question/<%= question._id %>?_method=DELETE"
+              method="post"
+            >
+              <button class="dropdown-item" type="submit">Delete</button>
+            </form>
+            <% } %>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModalReportCenter">Report</a>
+          </div>
+        </div>
+      </div>
+      <div class="collapse" id="collapse<%= question._id %>">
+        <div class="card w-100 mt-2">
+          <div class="card-header">
+            <img
+              src="/images/IMG_20150427_214234.jpg"
+              alt="avatar"
+              class="add-ans-image"
+            />
+            <div class="user-info">
+              <a class="user-name-link" href="/profile/<%= currentUser._id%>"
+                ><%= currentUser.firstname.toUpperCase()%> <%=
+                currentUser.lastname.toUpperCase()%></a
+              >, knows <% question.topic.forEach((topic)=>{ %>
+              <a class="ans-topic-link" href="/topic/<%= topic._id %>">
+                <%= topic.title %> <% }) %>
+              </a>
+            </div>
+          </div>
+          <form
+            class="ansForm"
+            method="POST"
+            action="/answer/<% question.topic.forEach((topic)=>{ %><%= topic._id %><% }) %>/<%= question._id %>/<%= currentUser._id %>"
+          >
+            <div class="add-ans-card">
+              <textarea
+                name="content"
+                class="ansEditor"
+                id="ansEditorcollapse<%=question._id%>"
+                placeholder="Write your answer"
+              ></textarea>
+            </div>
+            <div class="card-footer text-muted">
+              <button type="submit" class="btn btn-primary add-question-button">
+                Add Answer
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary cancel-button"
+                data-toggle="collapse"
+                href="#collapse<%= question._id %>"
+                role="button"
+                id="cancelcollapse<%= question._id %>"
+                aria-expanded="false"
+                aria-controls="collapse<%= question._id %>"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <% include editQuestion.ejs %>
+    <%include report.ejs %>
+    <% }})} %> <%
+    answers.forEach((answer)=>{ %> <% }) %>
+  </div>
+  <div class='loading search-result-item' id="feedLoading"></div>
