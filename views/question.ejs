@@ -69,7 +69,7 @@
         <div class="add-ans-card">
           <textarea
             name="content"
-            class="ansEditor"
+            class="ansEditorpage"
             placeholder="Write your answer"
           ></textarea>
         </div>
@@ -134,13 +134,11 @@
         <% if(currentUser.id == answer.author.id) { %>
         <a
           class="dropdown-item"
-          data-toggle="collapse"
-          href="#collapseEditAnswer"
-          role="button"
-          aria-expanded="false"
-          aria-controls="collapseEditAnswer"
+          data-toggle="modal"
+          data-target="#editAnswer<%= answer._id %>"
           >Edit</a
         >
+ 
         <form
           action="/answer/<%= answer.question._id %>/<%= answer._id %>?_method=DELETE"
           method="post"
@@ -152,10 +150,11 @@
           <% } %>
         </form>
         <% } %>
-        <a class="dropdown-item" href="#">Report</a>
+        
       </div>
     </div>
   </div>
+  <% include partials/editAnswer.ejs %>
   <% }}) %>
 </div>
 <% } %>
@@ -171,6 +170,7 @@
   <div class="my-3">
     <a href="/question/<%= topicQuestion._id %>"><%= topicQuestion.title %></a>
   </div>
+  
   <% }}})}})}) %>
   <a
     href="#addQuestionModal"

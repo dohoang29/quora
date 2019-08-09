@@ -473,6 +473,10 @@ $(function() {
       );
   });
 });
+var allEditors = document.querySelectorAll(".ansEditorpage");
+allEditors.forEach(editor => {
+  ClassicEditor.create(editor);
+});
 
 function backToProfile() {
   var x = document.getElementById("userProfile");
