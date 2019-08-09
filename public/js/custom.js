@@ -371,7 +371,7 @@ $(function() {
       success: function(vote) {
         console.log(vote.status);
         if (vote.status === "Downvote") {
-          $("#" + questionId + " > span")
+          $("#" + questionId).children().filter(".fas")
             .removeClass("fas fa-thumbs-up answer-icon")
             .addClass("fas fa-thumbs-down");
           $("#" + questionId + " > strong").text(vote.status);
@@ -379,7 +379,7 @@ $(function() {
           $("#" + questionId).attr("value", vote.status);
         }
         if (vote.status === "Upvote") {
-          $("#" + questionId + " > span")
+          $("#" + questionId).children().filter(".fas")
             .removeClass("fas fa-thumbs-down")
             .addClass("fas fa-thumbs-up answer-icon");
           $("#" + questionId + " > strong").text(vote.status);
@@ -387,7 +387,7 @@ $(function() {
           $("#" + questionId).attr("value", vote.status);
         }
         if (vote.status === "Unfollow") {
-          $("#follow" + questionId + " > span")
+          $("#follow" + questionId).children().filter(".fa")
             .removeClass("fa fa-plus-circle answer-icon")
             .addClass("fas fa-times-circle");
           $("#follow" + questionId + " > strong").text(vote.status);
@@ -395,7 +395,7 @@ $(function() {
           $("#follow" + questionId).attr("value", vote.status);
         }
         if (vote.status === "Follow") {
-          $("#follow" + questionId + " > span")
+          $("#follow" + questionId).children().filter(".fas")
             .removeClass("fas fa-times-circle")
             .addClass("fa fa-plus-circle answer-icon");
           $("#follow" + questionId + " > strong").text(vote.status);

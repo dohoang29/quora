@@ -83,6 +83,6 @@ app.use("/noti",notiRoutes);
 app.get('*',function(req,res){
     res.render("404.ejs");
 });
-app.listen(port, () => {
+app.listen(port,ip.address, () => {
     console.log("Server is listening at:" + port);
 });
