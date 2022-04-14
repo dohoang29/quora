@@ -15,7 +15,7 @@
     "author": "hoan-hoang",
     "license": "ISC",
     "dependencies": {
-        "async": "^2.5.0",
+        "async": "^3.2.2",
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.14.1",
         "cloudinary": "^1.14.0",
